@@ -1,0 +1,116 @@
+/* ------------------------------------ */
+/* Setting Page Header Content : Start here */
+/* ------------------------------------ */
+
+.header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 4rem;
+  max-height: 4rem;
+  padding: 0 0.5rem;
+  background-color: var(--primary_bg1);
+  /* border: 0.1rem solid black; */
+}
+
+.header h1 {
+  color: var(--primary_txt1);
+  font-size: 1.6rem;
+  font-family: var(--chatting_font);
+  font-weight: bolder;
+  word-spacing: 0.5rem;
+  letter-spacing: 0.1rem;
+  word-spacing: -0.4rem;
+}
+
+/* ------------------------------------ */
+/* Setting Page Header Content : End here */
+/* ------------------------------------ */
+
+/* ------------------------------------ */
+/* Setting Page Body Content : Start here */
+/* ------------------------------------ */
+
+.body {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: calc(93vh - 3.3rem - 4rem);
+  /* border: 0.1rem solid red; */
+}
+
+.body .settingItem_cover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  overflow-y: scroll;
+  /* border: 0.1rem solid red; */
+}
+.body .settingItem_cover::-webkit-scrollbar {
+  width: 0.1rem;
+  background-color: transparent;
+}
+
+.body .settingItem_cover::-webkit-scrollbar-thumb {
+  border-radius: 2rem;
+  background-color: white;
+}
+
+.body .settingItem_cover::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.body .settingItem_cover > span {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  width: 100%;
+  height: fit-content;
+  max-height: 10rem;
+  padding: 0rem 1.5rem 0.5rem 0rem;
+  border-bottom: 0.2rem solid lightgrey;
+  /* border: 0.1rem solid black; */
+}
+.body .settingItem_cover > span strong {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 0.9rem;
+  font-family: var(--header_font);
+}
+.body .settingItem_cover > span button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.15rem;
+  font-family: var(--chatting_font);
+  margin-left: 1rem;
+  border: none;
+  border-radius: 2rem;
+}
+.body .settingItem_cover > span button:hover {
+  background-color: rgba(211, 211, 211, 0.5);
+}
+
+.body .settingItem_cover > span button.redBtn {
+  color: red;
+}
+
+.body .settingItem_cover > span button .icons {
+  font-size: 1.3rem;
+}
+.body .settingItem_cover > span button .checkIcon {
+  font-size: 1.3rem;
+  transform: translateX(2rem);
+}
+
+/* ------------------------------------ */
+/* Setting Page Body Content : End here */
+/* ------------------------------------ */

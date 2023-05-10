@@ -1,0 +1,204 @@
+/* ------------------------------------ */
+/* Search Page Header Content : Start here */
+/* ------------------------------------ */
+
+.header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 4rem;
+  max-height: 4rem;
+  padding: 0 0.5rem;
+  background-color: var(--primary_bg1);
+  /* border: 0.1rem solid black; */
+}
+.header form {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.header form label {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 95%;
+  height: 2.3rem;
+  border-radius: 5rem;
+  background-color: var(--primary_bg2);
+  border: 0.08rem solid black;
+  overflow: hidden;
+}
+.header form label .icons {
+  color: var(--primary_txt2);
+  font-size: 1.4rem;
+}
+
+.header form label input {
+  font-size: 1.3rem;
+  font-family: var(--text_font);
+  padding: 0 0.2rem;
+  width: 85%;
+  height: 80%;
+  outline: none;
+  border: transparent;
+  background-color: transparent;
+}
+
+/* ------------------------------------ */
+/* Search Page Header Content : End here */
+/* ------------------------------------ */
+
+/* ------------------------------------ */
+/* Search Page Body Content : Start here */
+/* ------------------------------------ */
+
+.body {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: calc(93vh - 3.3rem - 4rem);
+  /* border: 0.1rem solid red; */
+}
+
+.body .searchItem_cover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  /* border: 0.1rem solid red; */
+}
+.body .searchItem_cover::-webkit-scrollbar {
+  width: 0.1rem;
+  background-color: transparent;
+}
+
+.body .searchItem_cover::-webkit-scrollbar-thumb {
+  border-radius: 2rem;
+  background-color: white;
+}
+
+.body .searchItem_cover::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.body .searchItem_cover .search_items {
+  position: relative;
+  display: flex;
+  width: 98%;
+  height: 3.3rem;
+  margin: 0.1rem 0;
+  border-radius: 5rem;
+  border: 0.1rem solid rgba(0, 0, 0, 0.3);
+  background-color: rgba(34, 175, 236, 0.3);
+}
+
+.body .searchItem_cover .search_items .itemPic_cover {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 16%;
+  height: 100%;
+  /* border: 0.1rem solid yellow; */
+}
+.body .searchItem_cover .search_items .itemPic_cover .item_pic {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.7rem;
+  height: 2.7rem;
+  margin-left: 0.3rem;
+  border-radius: 50%;
+  border: 0.08rem solid rgba(0, 0, 0, 0.7);
+}
+
+.body .searchItem_cover .search_items .itemPic_cover .item_pic .icons {
+  color: whitesmoke;
+  font-size: 2.5rem;
+}
+
+.body .searchItem_cover .search_items .itemName_cover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 44%;
+  height: 100%;
+  /* border: 0.1rem solid red; */
+}
+
+.body .searchItem_cover .search_items .itemName_cover p {
+  color: var(--primary_txt2);
+  font-size: 1.3rem;
+  font-family: var(--text_font);
+  font-weight: bolder;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.body .searchItem_cover .search_items .itemName_cover .username_cover {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  width: 100%;
+  height: 50%;
+  /* border: 0.1rem solid red; */
+}
+
+.body .searchItem_cover .search_items .itemName_cover .fullname_cover {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  height: 50%;
+  /* border: 0.1rem solid red; */
+}
+.body .searchItem_cover .search_items .itemName_cover .fullname_cover p {
+  font-size: 0.9rem;
+  font-weight: normal;
+}
+
+.body .searchItem_cover .search_items .itemBtn_cover {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+  width: 40%;
+  height: 100%;
+  padding-right: 0.4rem;
+  /* border: 0.1rem solid red; */
+}
+
+.body .searchItem_cover .search_items .itemBtn_cover button {
+  position: relative;
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+  padding: 0.2rem 0.4rem;
+  border-radius: 2rem;
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  font-family: var(--text_font);
+  color: var(--primary_txt1);
+  background-color: var(--primary_bg1);
+}
+
+.body .searchItem_cover .search_items .itemBtn_cover button:hover {
+  border: 0.08rem solid rgba(0, 0, 0, 0.5);
+}
+
+/* ------------------------------------ */
+/* Search Page Body Content : End here */
+/* ------------------------------------ */

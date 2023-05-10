@@ -1,0 +1,130 @@
+/* ------------------------------------ */
+/* Home Page Header Content : Starts here */
+/* ------------------------------------ */
+
+.home_page {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 93vh;
+  /* border: 0.1rem solid red; */
+}
+
+.home_page .container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary_bg2);
+}
+
+.home_page .container .header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 40%;
+  /* border: 0.1rem solid black; */
+}
+.home_page .container .logo_cover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 15rem;
+  height: 6rem;
+  /* border: 0.1rem solid black; */
+}
+.home_page .container .logo_cover .logo {
+  width: 100%;
+  height: 100%;
+}
+
+/* ------------------------------------ */
+/* Home Page Header Content : End here */
+/* ------------------------------------ */
+
+/* ------------------------------------ */
+/* Home Page Body Content : Start here */
+/* ------------------------------------ */
+
+.home_page .container .body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 60%;
+  border-top-left-radius: 4rem;
+  border-top-right-radius: 4rem;
+  background-color: var(--primary_bg1);
+}
+
+.home_page .container .body .msg_cover {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  height: 50%;
+  /* border: 0.1rem solid black; */
+}
+
+.home_page .container .body .msg_cover h2 {
+  color: var(--primary_txt1);
+  font-family: "Raleway", sans-serif;
+  font-size: 1.5rem;
+  text-align: center;
+  white-space: pre-wrap;
+  letter-spacing: 0.2rem;
+}
+
+.home_page .container .body .btn_cover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  height: 50%;
+  /* border: 0.1rem solid black; */
+}
+
+.home_page .container .body .btn_cover .btn {
+  width: 15rem;
+  height: 2.5rem;
+  text-align: center;
+  padding-top: 0.2rem;
+  font-size: 1.3rem;
+  font-family: var(--btn_font);
+  border-radius: 5rem;
+  cursor: pointer;
+  transition: 0.1s;
+}
+
+.home_page .container .body .btn_cover .btn:nth-child(1) {
+  color: #ffffff;
+  border: 0.1rem solid white;
+  background-color: rgba(8, 78, 108, 0.5);
+}
+.home_page .container .body .btn_cover .btn:nth-child(1):hover {
+  color: white;
+  background-color: rgba(8, 78, 108, 0.92);
+  border: 0.1rem solid white;
+}
+
+.home_page .container .body .btn_cover .btn:nth-child(2) {
+  color: black;
+  background-color: var(--primary_bg2);
+  border: 0.1rem solid black;
+}
+.home_page .container .body .btn_cover .btn:nth-child(2):hover {
+  color: #ffffff;
+  border: 0.1rem solid white;
+  background-color: rgba(8, 78, 108, 0.92);
+}
+
+/* ------------------------------------ */
+/* Home Page Body Content : Ends here */
+/* ------------------------------------ */

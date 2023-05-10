@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Amaranth&family=Exo+2&family=Bruno+Ace&family=Raleway&family=Roboto+Slab&family=Montserrat:wght@700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary_bg1: #22afec;
+  --primary_bg2: #eeeeee;
+  --primary_txt1: #ffffff;
+  --primary_txt2: #000000;
+  --badge_color: whitesmoke;
+  --text_font: "Exo 2", sans-serif;
+  --logo_font: "Bruno Ace", cursive;
+  --btn_font: "Roboto Slab", serif;
+  --chat_font: "Roboto Slab", serif;
+  --chatting_font: "Amaranth", sans-serif;
+  --header_font: "Montserrat", sans-serif;
+}

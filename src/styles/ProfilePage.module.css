@@ -1,0 +1,320 @@
+.profile_page {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 93vh;
+  /* border: 0.1rem solid red; */
+}
+
+.profile_page .container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary_bg1);
+}
+
+/* ------------------------------------ */
+/* Profile Page Header Content : Starts here */
+/* ------------------------------------ */
+
+.profile_page .container .header {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 3.8rem;
+  /* border: 0.1rem solid yellowgreen; */
+}
+
+.profile_page .header .left_cover {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 85%;
+  height: 100%;
+  gap: 0.3rem;
+  padding: 0.1rem 0.5rem;
+  /* border: 0.1rem solid black; */
+}
+
+.profile_page .header .left_cover .back_btn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  cursor: pointer;
+  /* border: 0.1rem solid black; */
+}
+
+.profile_page .header .left_cover .back_btn .icons {
+  color: var(--primary_txt1);
+  font-size: 1.8rem;
+}
+
+.profile_page .header .left_cover .name_info {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: calc(100% - 2.2rem - 1rem);
+  height: 100%;
+  /* border: 0.1rem solid red; */
+}
+
+.profile_page .header .left_cover .name_info p {
+  font-size: 1.3rem;
+  font-family: var(--text_font);
+  color: var(--primary_txt1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile_page .header .right_cover {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 15%;
+  height: 100%;
+  padding-right: 0.4rem;
+  /* border: 0.1rem solid red; */
+}
+
+.profile_page .header .right_cover .icons {
+  cursor: pointer;
+  color: var(--primary_txt1);
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+
+/* ------------------------------------ */
+/* Profile Page Header Content : End here */
+/* ------------------------------------ */
+
+/* ------------------------------------ */
+/* Profile Page Body Content : Start here */
+/* ------------------------------------ */
+
+.profile_page .container .body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(93vh - 3.8rem);
+  /* border: 0.1rem solid black; */
+}
+
+.profile_page .container .body .upper_section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 35%;
+  /* border: 0.1rem solid black; */
+}
+.profile_page .container .body .upper_section .upper_cover {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  width: 100%;
+  height: 60%;
+  padding: 0 0.5rem;
+  /* border: 0.1rem solid black; */
+}
+.upper_section .upper_cover .pic_cover {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 6.5rem;
+  height: 6.5rem;
+  border-radius: 50%;
+  border: 0.15rem solid black;
+}
+.upper_section .upper_cover .pic_cover .pic {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upper_section .upper_cover .pic_cover .icons {
+  font-size: 6.2rem;
+  color: var(--primary_bg2);
+}
+
+.upper_section .upper_cover .nameInfo_cover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 13rem;
+  height: 5rem;
+  /* border: 0.1rem solid black; */
+}
+.upper_section .upper_cover .nameInfo_cover p {
+  color: var(--primary_txt1);
+  font-size: 1.4rem;
+  font-weight: bolder;
+  font-family: var(--chat_font);
+  letter-spacing: 0.1rem;
+  word-spacing: 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.upper_section .upper_cover .nameInfo_cover p.live_status {
+  font-size: 0.8rem;
+  padding-left: 1rem;
+}
+.upper_section .upper_cover .btn_cover {
+  position: absolute;
+  display: flex;
+  bottom: 0.5rem;
+  right: 0.5rem;
+}
+.upper_section .upper_cover .btn_cover button {
+  cursor: pointer;
+  color: var(--primary_bg1);
+  font-size: 0.95rem;
+  font-weight: bolder;
+  border-radius: 3rem;
+  padding: 0.2rem 0.5rem;
+  background-color: white;
+  border: 0.08rem solid black;
+}
+.upper_section .upper_cover .btn_cover button:hover {
+  color: var(--primary_txt1);
+  background-color: var(--primary_bg1);
+  border: 0.08rem solid white;
+}
+
+.upper_section .lower_cover {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  width: 100%;
+  height: 40%;
+  /* border: 0.1rem solid black; */
+}
+.lower_cover .friStatus_cover {
+  position: relative;
+  display: flex;
+  gap: 2rem;
+}
+.lower_cover .friStatus_cover span {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0.5rem;
+  /* border-bottom: 0.08rem solid black; */
+}
+
+.lower_cover .friStatus_cover span p {
+  color: var(--primary_txt1);
+  font-size: 1.3rem;
+  font-family: var(--chat_font);
+  font-weight: bolder;
+  letter-spacing: 0.1rem;
+}
+
+.lower_cover .friStatus_cover span p:last-child {
+  font-size: 0.8rem;
+}
+
+/* ------------------------------------ */
+/* Profile Page Upers Section : Starts here */
+/* ------------------------------------ */
+
+.profile_page .container .body .lower_section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 65%;
+  gap: 1.3rem;
+  padding: 1rem 0;
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  background-color: var(--primary_bg2);
+  overflow-y: scroll;
+  /* border: 0.1rem solid black; */
+}
+.lower_section::-webkit-scrollbar {
+  width: 0.1rem;
+  background-color: transparent;
+}
+.lower_section::-webkit-scrollbar-thumb {
+  border-radius: 2rem;
+  background-color: black;
+}
+.lower_section::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.lower_section > span {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 100%;
+  height: fit-content;
+  max-height: 10rem;
+  padding: 0rem 1.5rem 0.5rem 1rem;
+  border-bottom: 0.09rem solid lightgrey;
+  /* border: 0.1rem solid black; */
+}
+.lower_section strong {
+  font-size: 0.9rem;
+  font-family: var(--header_font);
+}
+.lower_section p {
+  font-size: 0.95rem;
+  font-family: var(--btn_font);
+  padding-left: 0.2rem;
+  white-space: pre-wrap;
+  border-left: 0.2rem solid var(--primary_bg1);
+}
+.lower_section .logOutBtn_cover {
+  justify-self: flex-end;
+  align-self: flex-end;
+  border-bottom: none;
+}
+.lower_section .logOutBtn_cover button {
+  color: red;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  border-radius: 1rem;
+  width: fit-content;
+  padding: 0.2rem 0.5rem;
+  border: none;
+}
+.lower_section .logOutBtn_cover button:hover {
+  border: 0.09rem solid red;
+}
+
+.lower_section .logOutBtn_cover button .icons {
+  font-size: 1.3rem;
+}
+.lower_section .QrCode_cover {
+  flex-direction: row;
+  /* align-items: center; */
+  justify-content: space-between;
+}
+.lower_section .QrCode_cover .icons {
+  display: flex;
+  font-size: 4rem;
+  right: 0;
+}
+
+/* ------------------------------------ */
+/* Profile Page Body Content : End here */
+/* ------------------------------------ */
