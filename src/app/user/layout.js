@@ -12,10 +12,19 @@ import { VscBellDot } from "react-icons/vsc";
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 const UserLayout = ({ children }) => {
   const [menuIndex, set_menuIndex] = useState(0);
   const pathname = usePathname();
+
+  useEffect(() => {
+    let theme = localStorage.getItem("theme") || "light";
+
+    theme === "light"
+      ? document.body.classList.remove("darkTheme")
+      : document.body.classList.add("darkTheme");
+  }, []);
 
   // console.log("next : " + pathname);
 
@@ -108,6 +117,7 @@ const UserLayout = ({ children }) => {
       </>
     );
   }
+
   return (
     <>
       <div className={style.chats_page}>
