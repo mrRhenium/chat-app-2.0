@@ -23,10 +23,9 @@ const ProfilePage = () => {
   return (
     <>
       {showPopUP ? (
-        <PopUpComponent
-          children={<LogOutComponent closePopUp={closePopUp} />}
-          closePopUp={closePopUp}
-        />
+        <PopUpComponent closePopUp={closePopUp}>
+          <LogOutComponent closePopUp={closePopUp} />
+        </PopUpComponent>
       ) : null}
 
       <div className={style.profile_page}>

@@ -22,16 +22,15 @@ const Setting = () => {
   return (
     <>
       {popUpMsg === "logOut" ? (
-        <PopUpComponent
-          children={<LogOutComponent closePopUp={closePopUp} />}
-          closePopUp={closePopUp}
-        />
+        <PopUpComponent closePopUp={closePopUp}>
+          <LogOutComponent closePopUp={closePopUp} />
+        </PopUpComponent>
       ) : null}
+
       {popUpMsg === "deleteAc" ? (
-        <PopUpComponent
-          children={<DeleteAcComponent closePopUp={closePopUp} />}
-          closePopUp={closePopUp}
-        />
+        <PopUpComponent closePopUp={closePopUp}>
+          <DeleteAcComponent closePopUp={closePopUp} />
+        </PopUpComponent>
       ) : null}
 
       <section className={style.header}>

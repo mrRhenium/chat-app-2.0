@@ -23,10 +23,9 @@ const Chats = () => {
   return (
     <>
       {showPopUp ? (
-        <PopUpComponent
-          children={<PicComponent closePopUp={closePopUp} />}
-          closePopUp={closePopUp}
-        />
+        <PopUpComponent closePopUp={closePopUp}>
+          <PicComponent closePopUp={closePopUp} />
+        </PopUpComponent>
       ) : null}
 
       {/* Chats page Header Part Starts */}
