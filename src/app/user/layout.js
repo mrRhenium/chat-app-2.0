@@ -13,11 +13,16 @@ import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
-const Layout = ({ children }) => {
+const UserLayout = ({ children }) => {
   const [menuIndex, set_menuIndex] = useState(0);
   const pathname = usePathname();
 
-  console.log("next : " + pathname);
+  // console.log("next : " + pathname);
+
+  // if (pathname === "/user/chats") () => set_menuIndex(0);
+  // else if (pathname === "/user/search") () => set_menuIndex(1);
+  // else if (pathname === "/user/notification") () => set_menuIndex(2);
+  // else if (pathname === "/user/setting") () => set_menuIndex(3);
 
   if (
     pathname === "/user/chats" ||
@@ -112,4 +117,4 @@ const Layout = ({ children }) => {
   );
 };
 
-export default Layout;
+export default UserLayout;

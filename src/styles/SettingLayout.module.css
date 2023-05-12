@@ -1,0 +1,121 @@
+/* ------------------------------------ */
+/* SettingLayout Page : Start here */
+/* ------------------------------------ */
+
+.settingLayout_page {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 93vh;
+  /* border: 0.1rem solid red; */
+}
+
+.settingLayout_page .container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+/* ------------------------------------ */
+/* SettingLayout Page Header Content : Start here */
+/* ------------------------------------ */
+
+.settingLayout_page .container .header {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 3.8rem;
+  background-color: var(--primary_bg1);
+  /* border: 0.1rem solid yellowgreen; */
+}
+
+.settingLayout_page .header .header_cover {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  gap: 0.3rem;
+  padding: 0.1rem 0.5rem;
+  /* border: 0.1rem solid black; */
+}
+
+.settingLayout_page .header .header_cover .back_btn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  cursor: pointer;
+  /* border: 0.1rem solid black; */
+}
+
+.settingLayout_page .header .header_cover .back_btn .icons {
+  color: var(--primary_txt1);
+  font-size: 1.8rem;
+}
+
+.settingLayout_page .header .header_cover .name_info {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  height: 100%;
+  /* border: 0.1rem solid red; */
+}
+
+.settingLayout_page .header .header_cover .name_info strong {
+  position: relative;
+  display: flex;
+  gap: 0.5rem;
+  color: var(--primary_txt1);
+  font-size: 1.3rem;
+  font-family: var(--chatting_font);
+  letter-spacing: 0.2rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.settingLayout_page .header .header_cover .name_info strong .icons {
+  font-size: 1.5rem;
+}
+
+/* ------------------------------------ */
+/* SettingLayout Page Header Content : End here */
+/* ------------------------------------ */
+
+/* ------------------------------------ */
+/* SettingLayout Page Body Content : Start here */
+/* ------------------------------------ */
+
+.settingLayout_page .container .body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: calc(93vh - 3.8rem);
+  /* border: 0.1rem solid black; */
+}
+
+.cover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 110%;
+  background-color: var(--primary_bg2);
+  border: 0.1rem solid black;
+}
+
+/* ------------------------------------ */
+/* SettingLayout Page Body Content : End here */
+/* ------------------------------------ */
+
+/* ------------------------------------ */
+/* SettingLayout Page : End here */
+/* ------------------------------------ */

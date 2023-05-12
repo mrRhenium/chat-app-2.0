@@ -1,25 +1,39 @@
 "use client";
 
 import style from "../../../styles/Setting.module.css";
+import LogOutComponent from "@/components/LogOutComponent";
+import DeleteAcComponent from "@/components/DeleteAcComponent";
+import PopUpComponent from "@/components/PopUpComponent";
 
-import { BiLogOut } from "react-icons/bi";
-import { BiLockOpenAlt } from "react-icons/bi";
-import { BiSupport } from "react-icons/bi";
-import { BiBadgeCheck } from "react-icons/bi";
-import { FaRegUserCircle } from "react-icons/fa";
-import { FaPowerOff } from "react-icons/fa";
-import { BsSun } from "react-icons/bs";
-import { BsMoon } from "react-icons/bs";
-import { BsInfoCircle } from "react-icons/bs";
-import { MdOutlineNotificationsNone } from "react-icons/md";
+import { BiLogOut, BiLockOpenAlt, BiSupport } from "react-icons/bi";
+import { FaRegUserCircle, FaPowerOff } from "react-icons/fa";
+import { BsInfoCircle, BsSun, BsMoon } from "react-icons/bs";
 import { VscUnmute } from "react-icons/vsc";
+import { MdOutlineNotificationsNone, MdOutlineColorLens } from "react-icons/md";
+
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 const Setting = () => {
   const router = useRouter();
+  const [popUpMsg, set_popUpMsg] = useState("");
 
+  const closePopUp = () => set_popUpMsg("");
   return (
     <>
+      {popUpMsg === "logOut" ? (
+        <PopUpComponent
+          children={<LogOutComponent closePopUp={closePopUp} />}
+          closePopUp={closePopUp}
+        />
+      ) : null}
+      {popUpMsg === "deleteAc" ? (
+        <PopUpComponent
+          children={<DeleteAcComponent closePopUp={closePopUp} />}
+          closePopUp={closePopUp}
+        />
+      ) : null}
+
       <section className={style.header}>
         <h1>{`Setting & Privacy`}</h1>
       </section>
@@ -38,32 +52,45 @@ const Setting = () => {
               <FaRegUserCircle className={style.icons} />
               My profile
             </button>
-            <button className={style.redBtn}>
+            <button
+              className={style.redBtn}
+              onClick={() => {
+                set_popUpMsg("logOut");
+              }}
+            >
               <BiLogOut className={style.icons} />
               LogOut
             </button>
           </span>
 
           <span className={style.theme_cover}>
-            <strong>Theme of application</strong>
-            <button>
-              <BsSun className={style.icons} />
-              Light
-              <BiBadgeCheck className={style.checkIcon} />
-            </button>
-            <button>
-              <BsMoon className={style.icons} />
-              Dark
+            <strong>How your application look</strong>
+
+            <button
+              onClick={() => {
+                router.push("/user/setting/themes");
+              }}
+            >
+              <MdOutlineColorLens className={style.icons} />
+              Themes
             </button>
           </span>
 
           <span className={style.notiOrSound_cover}>
             <strong>How you use application</strong>
-            <button>
+            <button
+              onClick={() => {
+                router.push("/user/setting/notify");
+              }}
+            >
               <MdOutlineNotificationsNone className={style.icons} />
               Notification
             </button>
-            <button>
+            <button
+              onClick={() => {
+                router.push("/user/setting/sound");
+              }}
+            >
               <VscUnmute className={style.icons} />
               Sound
             </button>
@@ -71,7 +98,11 @@ const Setting = () => {
 
           <span className={style.privacy_cover}>
             <strong>Privacy & Security</strong>
-            <button>
+            <button
+              onClick={() => {
+                router.push("/user/setting/privacy");
+              }}
+            >
               <BiLockOpenAlt className={style.icons} />
               Private Account
             </button>
@@ -79,11 +110,19 @@ const Setting = () => {
 
           <span className={style.moreInfo_cover}>
             <strong>More Info. & Support</strong>
-            <button>
+            <button
+              onClick={() => {
+                router.push("/user/setting/help");
+              }}
+            >
               <BiSupport className={style.icons} />
               Help
             </button>
-            <button>
+            <button
+              onClick={() => {
+                router.push("/user/setting/about");
+              }}
+            >
               <BsInfoCircle className={style.icons} />
               About
             </button>
@@ -91,7 +130,12 @@ const Setting = () => {
 
           <span className={style.dangerZone_cover}>
             <strong>Danger Zone</strong>
-            <button className={style.redBtn}>
+            <button
+              className={style.redBtn}
+              onClick={() => {
+                set_popUpMsg("deleteAc");
+              }}
+            >
               <FaPowerOff className={style.icons} />
               Delete Account
             </button>

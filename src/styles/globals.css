@@ -19,3 +19,30 @@
   --chatting_font: "Amaranth", sans-serif;
   --header_font: "Montserrat", sans-serif;
 }
+
+/* :root {
+  --primary_bg1: rgb(12, 110, 152);
+  --primary_bg2: rgba(0, 0, 0, 0.8);
+  --primary_txt1: #000000;
+  --primary_txt2: #ffffff;
+  --badge_color: whitesmoke;
+  --text_font: "Exo 2", sans-serif;
+  --logo_font: "Bruno Ace", cursive;
+  --btn_font: "Roboto Slab", serif;
+  --chat_font: "Roboto Slab", serif;
+  --chatting_font: "Amaranth", sans-serif;
+  --header_font: "Montserrat", sans-serif;
+} */
+
+/* html {
+  background-color: rgba(0, 0, 0, 0.8);
+} */
+
+body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  /* border: 0.1rem solid red; */
+}

@@ -85,6 +85,7 @@
   font-family: var(--header_font);
 }
 .body .settingItem_cover > span button {
+  cursor: pointer;
   position: relative;
   display: flex;
   align-items: center;

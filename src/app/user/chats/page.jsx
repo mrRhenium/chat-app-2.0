@@ -9,12 +9,26 @@ import { RiCheckDoubleLine } from "react-icons/ri";
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+import PopUpComponent from "@/components/PopUpComponent";
+import PicComponent from "@/components/PicComponent";
 
 const Chats = () => {
   const router = useRouter();
+  const [showPopUp, set_showPopUp] = useState(0);
+
+  const closePopUp = () => set_showPopUp(0);
 
   return (
     <>
+      {showPopUp ? (
+        <PopUpComponent
+          children={<PicComponent closePopUp={closePopUp} />}
+          closePopUp={closePopUp}
+        />
+      ) : null}
+
       {/* Chats page Header Part Starts */}
       <section className={style.header}>
         <div className={style.logo_cover}>
@@ -45,9 +59,7 @@ const Chats = () => {
           <div className={style.chat_list_items}>
             <span
               className={style.chatPic_cover}
-              onClick={() => {
-                router.push("/profile/nit");
-              }}
+              onClick={() => set_showPopUp(1)}
             >
               <span className={style.chat_pic}>
                 <FaUserCircle className={style.icons} />

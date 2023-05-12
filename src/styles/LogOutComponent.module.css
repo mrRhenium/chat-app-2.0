@@ -1,0 +1,132 @@
+/* ------------------------------------ */
+/* LogOutComponent : Start here */
+/* ------------------------------------ */
+
+/* ------------------------------------ */
+/* LogOutComponent : Header Start here */
+/* ------------------------------------ */
+
+.header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: fit-content;
+  padding: 0.3rem;
+  /* border: 0.1rem solid black; */
+}
+
+.header span {
+  position: relative;
+  display: flex;
+  width: fit-content;
+  height: fit-content;
+  padding: 1rem;
+  border-radius: 50%;
+  padding-right: 1rem;
+  border: 0.09rem solid rgba(0, 0, 0, 0.5);
+  background-color: white;
+}
+
+.header span .icons {
+  color: red;
+  font-size: 3rem;
+  /* transform: translateX(-0.3rem); */
+}
+/* ------------------------------------ */
+/* LogOutComponent : Header End here */
+/* ------------------------------------ */
+
+/* ------------------------------------ */
+/* LogOutComponent : Body Start here */
+/* ------------------------------------ */
+
+.body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  height: fit-content;
+  padding: 0.3rem 0;
+  /* border: 0.1rem solid black; */
+}
+
+.body span.warnMsg {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.body span strong {
+  font-size: 1.3rem;
+  font-weight: bolder;
+  padding: 0rem 0.5rem;
+  font-family: var(--text_font);
+}
+
+.body form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.2rem 0.5rem;
+}
+
+.body form label {
+  position: relative;
+  display: flex;
+  background-color: white;
+  min-width: 50%;
+  height: 2rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  border: 0.07rem solid black;
+}
+
+.body form label input {
+  font-size: 1rem;
+  font-family: var(--chatting_btn);
+  width: 100%;
+  height: 100%;
+  padding: 0 0.8rem;
+  outline: none;
+  border: none;
+}
+
+.body form span {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.body form span button {
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bolder;
+  font-family: var(--text_font);
+  padding: 0.1rem 0.5rem;
+  border-radius: 0.5rem;
+  border: 0.08rem solid black;
+  background-color: white;
+}
+
+.body form span button:hover {
+  color: white;
+  background-color: var(--primary_bg1);
+}
+
+/* ------------------------------------ */
+/* LogOutComponent : Body End here */
+/* ------------------------------------ */
+
+/* ------------------------------------ */
+/* LogOutComponent : End here */
+/* ------------------------------------ */
