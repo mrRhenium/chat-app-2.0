@@ -10,12 +10,25 @@ import { BsQrCodeScan } from "react-icons/bs";
 import { BiBlock } from "react-icons/bi";
 import { BsShieldExclamation } from "react-icons/bs";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+import PopUpComponent from "@/components/PopUpComponent";
+import LogOutComponent from "@/components/LogOutComponent";
 
 const ProfilePage = () => {
   const router = useRouter();
+  const [showPopUP, set_showPopUP] = useState(0);
+
+  const closePopUp = () => set_showPopUP(0);
 
   return (
     <>
+      {showPopUP ? (
+        <PopUpComponent
+          children={<LogOutComponent closePopUp={closePopUp} />}
+          closePopUp={closePopUp}
+        />
+      ) : null}
+
       <div className={style.profile_page}>
         <div className={style.container}>
           {/*  */}
@@ -106,7 +119,7 @@ const ProfilePage = () => {
 
               <span className={style.logOutBtn_cover}>
                 <strong>LogOut</strong>
-                <button>
+                <button onClick={() => set_showPopUP(1)}>
                   <BiLogOut className={style.icons} />
                   LogOut
                 </button>

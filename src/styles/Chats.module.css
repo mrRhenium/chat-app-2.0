@@ -103,7 +103,8 @@
   height: 3.5rem;
   margin: 0.3rem 0;
   border-radius: 2rem;
-  border: 0.1rem solid rgba(0, 0, 0, 0.3);
+  border: 0.1rem solid var(--primary_border);
+  /* border: 0.1rem solid rgba(0, 0, 0, 0.3); */
   background-color: rgba(34, 175, 236, 0.4);
   cursor: pointer;
 }
@@ -153,6 +154,7 @@
 }
 
 .body .chatList_cover .chat_list_items .chatInfo_cover .chat_name p {
+  color: var(--primary_txt2);
   font-size: 1.3rem;
   color: --var(--primary_txt2);
   font-family: var(--text_font);
@@ -172,9 +174,10 @@
 }
 
 .body .chatList_cover .chat_list_items .chatInfo_cover .chat_msg_highlight p {
-  color: dimgray;
-  font-size: 0.8rem;
-  font-family: var(--chat_font);
+  color: var(--msg_highlight);
+  /* color: dimgray; */
+  font-size: 0.9rem;
+  font-family: var(--chatting_font);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -187,8 +190,8 @@
   .chat_msg_highlight
   .icons {
   font-size: 1.8rem;
-  color: darkblue;
-  color: whitesmoke;
+  /* color: whitesmoke; */
+  color: lime;
 }
 
 .body .chatList_cover .chat_list_items .chatBadge_cover {

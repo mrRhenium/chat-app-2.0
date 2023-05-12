@@ -31,7 +31,7 @@
   height: 2.3rem;
   border-radius: 5rem;
   background-color: var(--primary_bg2);
-  border: 0.08rem solid black;
+  border: 0.08rem solid var(--black_border);
   overflow: hidden;
 }
 .header form label .icons {
@@ -40,6 +40,7 @@
 }
 
 .header form label input {
+  color: var(--primary_txt2);
   font-size: 1.3rem;
   font-family: var(--text_font);
   padding: 0 0.2rem;
@@ -95,9 +96,9 @@
   display: flex;
   width: 98%;
   height: 3.3rem;
-  margin: 0.1rem 0;
+  margin: 0.5rem 0;
   border-radius: 5rem;
-  border: 0.1rem solid rgba(0, 0, 0, 0.3);
+  border: 0.1rem solid var(--primary_border);
   background-color: rgba(34, 175, 236, 0.3);
 }
 
@@ -196,7 +197,7 @@
 }
 
 .body .searchItem_cover .search_items .itemBtn_cover button:hover {
-  border: 0.08rem solid rgba(0, 0, 0, 0.5);
+  border: 0.08rem solid var(--primary_border);
 }
 
 /* ------------------------------------ */

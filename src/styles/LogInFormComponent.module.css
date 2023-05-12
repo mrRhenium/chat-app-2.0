@@ -30,7 +30,7 @@
   height: 2.7rem;
   border-radius: 5rem;
   background-color: rgba(34, 175, 236, 0.2);
-  border: 0.08rem solid black;
+  border: 0.08rem solid var(--black_border);
   overflow: hidden;
 }
 .form label input {
@@ -38,12 +38,15 @@
   padding: 0 0.2rem;
   outline: none;
   width: 13rem;
+  color: var(--primary_txt2);
   border: transparent;
   background-color: transparent;
 }
 .form label .input_icons {
   font-size: 1.4rem;
+  color: var(--primary_txt2);
 }
+
 .form .signIn_page_btn {
   cursor: pointer;
   color: var(--primary_txt1);
@@ -68,11 +71,12 @@
   gap: 0.5rem;
   width: 100%;
   height: 3rem;
+  color: var(--primary_txt2);
 }
 .divider span.bar {
   width: 8rem;
   height: 0.13rem;
-  background-color: black;
+  background-color: var(--primary_txt2);
 }
 
 .google_signIn_cover {
@@ -84,7 +88,7 @@
   height: 2.3rem;
   min-height: 2.3rem;
   border-radius: 5rem;
-  border: 0.08rem solid black;
+  border: 0.08rem solid var(--primary_border);
   overflow: hidden;
 }
 .google_signIn_cover button {

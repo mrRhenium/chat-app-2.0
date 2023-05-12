@@ -1,7 +1,10 @@
+"use client";
+
 import "../styles/globals.css";
 import FooterComponent from "../components/FooterComponent";
 
 import { Inter } from "next/font/google";
+import { useEffect } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -11,9 +14,17 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  useEffect(() => {
+    let theme = localStorage.getItem("theme") || "light";
+
+    theme === "light"
+      ? document.body.classList.remove("darkTheme")
+      : document.body.classList.add("darkTheme");
+  }, []);
+
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className}`}>
         {children}
         <FooterComponent />
       </body>

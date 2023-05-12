@@ -24,11 +24,11 @@
   width: 13rem;
   height: 13rem;
   background-color: rgba(0, 0, 0, 0.6);
-  border: 0.09rem solid rgba(0, 0, 0, 0.5);
+  border: 0.09rem solid var(--primary_border);
 }
 
 .header .pic_cover .icons {
-  color: var(--primary_bg2);
+  color: white;
   font-size: 7rem;
 }
 
@@ -68,6 +68,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.3rem;
+  color: var(--primary_txt2);
   font-size: 1.2rem;
   font-family: var(--text_font);
   padding: 0.1rem 0.5rem;
@@ -78,7 +79,7 @@
 
 .body .btn_cover button:hover {
   font-weight: bolder;
-  border: 0.08rem solid black;
+  border: 0.08rem solid var(--primary_border);
   /* font-size: 1.1rem; */
   /* background-color: var(--primary_bg1); */
 }

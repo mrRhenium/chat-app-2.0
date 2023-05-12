@@ -64,6 +64,7 @@
 }
 
 .body span strong {
+  color: var(--primary_txt2);
   font-size: 1.3rem;
   font-weight: bolder;
   padding: 0rem 0.5rem;

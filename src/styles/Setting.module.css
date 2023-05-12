@@ -76,25 +76,28 @@
   height: fit-content;
   max-height: 10rem;
   padding: 0rem 1.5rem 0.5rem 0rem;
-  border-bottom: 0.2rem solid lightgrey;
+  border-bottom: 0.2rem solid var(--setting_border);
   /* border: 0.1rem solid black; */
 }
 .body .settingItem_cover > span strong {
-  color: rgba(0, 0, 0, 0.5);
+  color: var(--footer_border);
   font-size: 0.9rem;
   font-family: var(--header_font);
 }
+
 .body .settingItem_cover > span button {
   cursor: pointer;
   position: relative;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  color: var(--primary_txt2);
   font-size: 1.15rem;
   font-family: var(--chatting_font);
   margin-left: 1rem;
-  border: none;
   border-radius: 2rem;
+  border: none;
+  background-color: transparent;
 }
 .body .settingItem_cover > span button:hover {
   background-color: rgba(211, 211, 211, 0.5);

@@ -7,7 +7,7 @@ import PopUpComponent from "@/components/PopUpComponent";
 
 import { BiLogOut, BiLockOpenAlt, BiSupport } from "react-icons/bi";
 import { FaRegUserCircle, FaPowerOff } from "react-icons/fa";
-import { BsInfoCircle, BsSun, BsMoon } from "react-icons/bs";
+import { BsInfoCircle } from "react-icons/bs";
 import { VscUnmute } from "react-icons/vsc";
 import { MdOutlineNotificationsNone, MdOutlineColorLens } from "react-icons/md";
 

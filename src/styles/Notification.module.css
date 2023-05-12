@@ -70,9 +70,9 @@
   display: flex;
   width: 98%;
   height: 3.3rem;
-  margin: 0.1rem 0;
+  margin: 0.5rem 0;
   border-radius: 0.5rem;
-  border: 0.1rem solid rgba(0, 0, 0, 0.3);
+  border: 0.1rem solid var(--primary_border);
   background-color: rgba(34, 175, 236, 0.3);
 }
 
@@ -93,7 +93,7 @@
   height: 2.5rem;
   margin-left: 0.3rem;
   border-radius: 0.5rem;
-  border: 0.08rem solid rgba(0, 0, 0, 0.7);
+  border: 0.08rem solid var(--primary_border);
 }
 
 .body .notifyItem_cover .notify_items .itemPic_cover .item_pic .icons {
@@ -164,13 +164,14 @@
   border-radius: 0.5rem;
   border: none;
   cursor: pointer;
+  color: var(--primary_txt2);
   font-size: 1rem;
   font-family: var(--text_font);
   background-color: var(--primary_bg2);
 }
 
 .body .notifyItem_cover .notify_items .itemBtn_cover button:hover {
-  border: 0.08rem solid rgba(0, 0, 0, 0.5);
+  border: 0.08rem solid var(--primary_border);
 }
 
 .body .notifyItem_cover .notify_items .itemBtn_cover button.accept_btn {

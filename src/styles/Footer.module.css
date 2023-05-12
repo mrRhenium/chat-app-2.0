@@ -13,13 +13,15 @@
   height: 7vh;
   margin-top: auto;
   background-color: var(--primary_bg2);
+  border-top: 0.05rem solid var(--footer_border);
   /* border: 0.1rem solid black; */
-  border-top: 0.05rem solid rgba(0, 0, 0, 0.5);
+  /* border-top: 0.05rem solid rgba(0, 0, 0, 0.5); */
 }
 
 .footer_cover strong {
   position: relative;
   display: flex;
+  color: var(--primary_txt2);
   font-size: 0.6rem;
   font-family: var(--btn_font);
   font-weight: normal;

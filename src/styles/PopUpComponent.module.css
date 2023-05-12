@@ -38,8 +38,8 @@
   padding: 0.5rem 0;
   border-radius: 1rem;
   backdrop-filter: blur(0.15rem);
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 0.1rem solid rgba(0, 0, 0, 0.5);
+  background-color: var(--pop_bg);
+  border: 0.1rem solid var(--primary_border);
 }
 
 /* ------------------------------------ */

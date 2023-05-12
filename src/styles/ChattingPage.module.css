@@ -13,7 +13,7 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  background-color: var(--primary_bg2);
+  /* background-color: var(--primary_bg2); */
   /* border: 0.1rem solid white; */
 }
 
@@ -53,7 +53,7 @@
 }
 
 .chattingPage .header .left_cover .back_btn .icons {
-  color: var(--primary_txt1);
+  color: white;
   font-size: 1.8rem;
 }
 
@@ -66,11 +66,11 @@
   min-width: 2.6rem;
   min-height: 2.6rem;
   border-radius: 50%;
-  border: 0.1rem solid var(--primary_txt1);
+  border: 0.1rem solid white;
 }
 .chattingPage .header .left_cover .pic_info .icons {
   font-size: 1.9rem;
-  color: var(--primary_txt1);
+  color: white;
 }
 
 .chattingPage .header .left_cover .name_info {
@@ -84,7 +84,7 @@
 }
 .chattingPage .header .left_cover .name_info p {
   font-family: var(--text_font);
-  color: var(--primary_txt1);
+  color: white;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -109,7 +109,7 @@
 
 .chattingPage .header .right_cover .icons {
   cursor: pointer;
-  color: var(--primary_txt1);
+  color: white;
   font-size: 2rem;
   font-weight: bolder;
 }
@@ -164,15 +164,17 @@
   padding-bottom: 0rem;
   border: 0.08rem solid rgba(0, 0, 0, 0.4);
 }
+
 .chattingPage .body .chats_cover .msg_left {
   margin-left: 0rem;
   border-top-left-radius: 0rem;
   border-top-right-radius: 1rem;
   border-bottom-left-radius: 1.5rem;
   border-bottom-right-radius: 1.5rem;
-  background-color: lightgrey;
+  background-color: var(--left_user);
   /* border: 0.09rem solid yellowgreen; */
 }
+
 .chattingPage .body .chats_cover .msg_right {
   margin-left: auto;
   border-top-left-radius: 1rem;
@@ -254,6 +256,7 @@
   width: 98%;
   height: 2.5rem;
   font-size: 1.3rem;
+  color: var(--primary_txt2);
   font-family: var(--chatting_font);
   padding: 0 1rem;
   border-radius: 2rem;

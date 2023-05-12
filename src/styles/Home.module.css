@@ -71,7 +71,7 @@
 }
 
 .home_page .container .body .msg_cover h2 {
-  color: var(--primary_txt1);
+  color: white;
   font-family: "Raleway", sans-serif;
   font-size: 1.5rem;
   text-align: center;
@@ -109,14 +109,13 @@
   background-color: rgba(8, 78, 108, 0.5);
 }
 .home_page .container .body .btn_cover .btn:nth-child(1):hover {
-  color: white;
   background-color: rgba(8, 78, 108, 0.92);
   border: 0.1rem solid white;
 }
 
 .home_page .container .body .btn_cover .btn:nth-child(2) {
   color: black;
-  background-color: var(--primary_bg2);
+  background-color: white;
   border: 0.1rem solid black;
 }
 .home_page .container .body .btn_cover .btn:nth-child(2):hover {
