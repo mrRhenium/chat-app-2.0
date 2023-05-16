@@ -1,11 +1,16 @@
 import dbConnect from "@/Database/dbCoonect";
 import User from "@/Models/users_model";
 import { NextResponse } from "next/server";
+//
+//
 
+// *****************************
+// POST Request : Start here
+// *****************************
 export async function POST(req, res) {
   // Database is Connecting.
   dbConnect();
-  // console.log("Database is Connected");
+  console.log("Database is Connected");
 
   const body = await req.json();
   const user = await User.findOne({ username: body.username });
@@ -15,4 +20,9 @@ export async function POST(req, res) {
   }
 
   return NextResponse.json({ msg: "This user is not exist!" });
+
+  // End of the Route
 }
+// *****************************
+// POST Request : End here
+// *****************************

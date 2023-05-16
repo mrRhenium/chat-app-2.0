@@ -1,32 +1,37 @@
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
-const notificationSchema = new Schema(
-  {
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
-  },
-  { timestamps: true }
-);
-
 const friendSchema = new Schema(
   {
     userId: {
       type: Schema.Types.ObjectId,
       ref: "UserData",
     },
+    username: {
+      type: String,
+      required: true,
+    },
     chatId: {
       type: Schema.Types.ObjectId,
       ref: "Chat",
     },
-    inviteBy: {
+    lastMsg: {
+      type: String,
+      default: "Empty",
+      required: true,
+    },
+    count: {
+      type: Number,
+      default: 0,
+      required: true,
+    },
+    invited: {
       type: Boolean,
       required: true,
     },
     blockStatus: {
       type: Boolean,
+      default: 0,
       required: true,
     },
   },
@@ -42,29 +47,78 @@ const userDataSchema = new Schema(
       ref: "User",
       required: true,
     },
+    name: {
+      type: String,
+      required: true,
+    },
     username: {
+      type: String,
+      required: true,
+    },
+    email: {
       type: String,
       required: true,
     },
     avtar: {
       type: String,
+      default: "image",
       required: true,
     },
     about: {
       type: String,
+      default:
+        "They there, I am using FS_Chats. This is perfect messaing platform. It is perfect for my all requirments.",
       required: true,
     },
     onlineStatus: {
       type: Boolean,
+      default: 1,
+      required: true,
+    },
+    follower: {
+      type: Number,
+      default: 0,
+      required: true,
+    },
+    following: {
+      type: Number,
+      default: 0,
+      required: true,
+    },
+    reqSendId: {
+      type: Array,
+      default: [],
+      required: true,
+    },
+    blockUserId: {
+      type: Array,
+      default: [],
+      required: true,
+    },
+    reqRecievedId: {
+      type: Array,
+      default: [],
+      required: true,
+    },
+    friendsId: {
+      type: Array,
+      default: [],
       required: true,
     },
     friends: {
       type: [friendSchema],
+      default: [],
       required: true,
     },
     notifications: {
-      type: [notificationSchema],
-      required: true,
+      notifyId: {
+        type: Schema.Types.ObjectId,
+        required: true,
+      },
+      count: {
+        type: Number,
+        default: 0,
+      },
     },
   },
   {

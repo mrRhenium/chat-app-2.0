@@ -1,8 +1,14 @@
+import { ObjectId } from "mongodb";
 import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const msgSchema = new Schema(
   {
+    indexId: {
+      type: String,
+      default: new ObjectId().toString(),
+      required: true,
+    },
     userId: {
       type: Schema.Types.ObjectId,
       ref: "User",
@@ -15,15 +21,25 @@ const msgSchema = new Schema(
       type: String,
       required: true,
     },
+    backUpMsg: {
+      type: String,
+      required: true,
+    },
+    msgStatus: {
+      type: String,
+      default: "active",
+      required: true,
+    },
     seenStauts: {
       type: Boolean,
+      default: 1,
       required: true,
     },
     time: {
       type: String,
       required: true,
     },
-    data: {
+    date: {
       type: Date,
       required: true,
     },

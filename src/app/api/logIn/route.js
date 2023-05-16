@@ -5,36 +5,104 @@ import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
+// *****************************
+// POST Request : Start here
+// *****************************
 export async function POST(req, res) {
   // console.log("Database Connecting");
   dbConnect();
   console.log("Database Connected");
 
-  const body = await req.json();
+  try {
+    //
 
-  const user = await User.findOne({ username: body.username });
-  let valid_password = user
-    ? await bcrypt.compare(body.password, user.password)
-    : false;
+    const body = await req.json();
+    const user = await User.findOne({ username: body.username });
 
-  if (!user || !valid_password) {
-    return NextResponse.json({
-      status: false,
-      msg: "Bad Credentials!",
-    });
-  }
+    let valid_password = user
+      ? await bcrypt.compare(body.password, user.password)
+      : false;
 
-  const token = jwt.sign(
-    { _id: user._id, username: user.username },
-    process.env.JWTSECRET,
-    {
-      expiresIn: "1d",
+    // if (!user) {
+    //   return NextResponse.json({
+    //     status: false,
+    //     msg: "User not found, Please!! SignIn",
+    //   });
+    // }
+
+    if (!user || !valid_password) {
+      return NextResponse.json({
+        status: false,
+        msg: "Bad Credentials!",
+      });
     }
-  );
 
-  return NextResponse.json({
-    status: true,
-    msg: "Successfully LogIn",
-    token: token,
-  });
+    if (user.logInStatus) {
+      return NextResponse.json({
+        status: false,
+        msg: "User is already loggedIn",
+      });
+    }
+
+    const token = jwt.sign(
+      { _id: user._id, username: user.username },
+      process.env.JWTSECRET,
+      {
+        expiresIn: "1d",
+      }
+    );
+
+    user.logInStatus = 1;
+    await user.save();
+
+    // console.log("token : ", token);
+
+    return NextResponse.json({
+      status: true,
+      msg: "Successfully LogIn",
+      token: token,
+    });
+
+    //
+  } catch (err) {
+    console.log(err);
+  }
 }
+// *****************************
+// POST Request : End here
+// *****************************
+
+// *****************************
+// PUT Request : End here
+// *****************************
+export async function PUT(req, res) {
+  // console.log("Database Connecting");
+  dbConnect();
+  console.log("Database Connected");
+
+  const token = req.cookies.get("token")?.value || req.headers.cookies.token;
+  const tokenData = jwt.verify(token, process.env.JWTSECRET);
+
+  try {
+    //
+
+    const selfUser = await User.findOneAndUpdate(
+      { _id: tokenData._id },
+      {
+        $set: { logInStatus: 0 },
+      }
+    );
+
+    return NextResponse.json({
+      status: true,
+      msg: "Successfully LogOut",
+    });
+
+    //
+  } catch (err) {
+    console.log(err);
+  }
+}
+// *****************************
+// PUT Request : End here
+// *****************************

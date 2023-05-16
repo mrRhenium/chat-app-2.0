@@ -21,6 +21,16 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    logInStatus: {
+      type: Boolean,
+      default: 0,
+      required: true,
+    },
+    deleted: {
+      type: Boolean,
+      default: 0,
+      required: true,
+    },
   },
   {
     timestamps: true,
