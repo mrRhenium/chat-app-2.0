@@ -14,7 +14,7 @@ import { useRouter, useParams } from "next/navigation";
 //
 //
 
-const URL = `http://localhost:3000/api/chats/`;
+const URL = `/api/chats/`;
 const fetcher = async (url) => {
   const res = await fetch(url);
   const data = await res.json();

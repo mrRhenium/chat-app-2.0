@@ -7,7 +7,7 @@ import NotifyItemComponent from "@/components/NotifyItemComponent";
 import useSWR from "swr";
 import { useState } from "react";
 
-const URL = "http://localhost:3000/api/notification";
+const URL = "/api/notification";
 const fetcher = async (url) => {
   const res = await fetch(url);
   const data = await res.json();

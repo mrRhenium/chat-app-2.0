@@ -12,7 +12,7 @@ import { BiSearchAlt2 } from "react-icons/bi";
 //
 
 // Define the Fetcher and URL of the server route
-const URL = `http://localhost:3000/api/search`;
+const URL = `/api/search`;
 const fetcher = async (url) => {
   const res = await fetch(url);
   const data = await res.json();

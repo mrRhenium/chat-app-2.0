@@ -16,7 +16,7 @@ import { BiUser } from "react-icons/bi";
 import { FaUserCircle } from "react-icons/fa";
 import { RiCheckDoubleLine } from "react-icons/ri";
 
-const URL = `http://localhost:3000/api/chatList`;
+const URL = `/api/chatList`;
 const fetcher = async (url) => {
   const res = await fetch(url);
   const data = await res.json();
