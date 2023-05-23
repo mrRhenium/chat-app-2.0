@@ -26,7 +26,9 @@ const ChattingPage = () => {
   const router = useRouter();
 
   let uName = useParams().username;
-  const { data, isLoading, mutate } = useSWR(`${URL}/${uName}`, fetcher);
+  const { data, isLoading, mutate } = useSWR(`${URL}/${uName}`, fetcher, {
+    refreshInterval: 1500,
+  });
   const list = data && data["status"] && data["data"]["message"];
   const [msgBox, set_msgBox] = useState("");
 

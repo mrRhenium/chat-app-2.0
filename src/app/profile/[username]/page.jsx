@@ -13,7 +13,7 @@ import useSWR from "swr";
 //
 //
 
-const URL = `http://localhost:3000/api/profile`;
+const URL = `/api/profile`;
 const fetcher = async (url) => {
   const res = await fetch(url);
   const data = await res.json();
@@ -43,7 +43,7 @@ const ProfilePage = () => {
             <LoadingComponent />
           ) : (
             <ProfileComponent
-              item={data["data"]}
+              item={data ? data["data"] : {}}
               msg={data["msg"]}
               status={data["status"]}
               set_showPopUP={set_showPopUP}
