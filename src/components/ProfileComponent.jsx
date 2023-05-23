@@ -38,7 +38,7 @@ const putRequest = async (action, targetUserId) => {
 
 const ProfileComponent = ({ item, set_showPopUP, msg, status }) => {
   const router = useRouter();
-  console.log(item);
+  // console.log(item);
 
   return (
     <>
