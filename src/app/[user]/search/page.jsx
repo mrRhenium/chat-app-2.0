@@ -20,7 +20,7 @@ const fetcher = async (url) => {
 };
 
 const Search = () => {
-  const { data, isLoading } = useSWR(URL, fetcher);
+  const { data, isLoading, mutate } = useSWR(URL, fetcher);
   const [list, set_list] = useState([]);
 
   //
@@ -79,7 +79,10 @@ const Search = () => {
           {isLoading ? (
             <LoadingComponent />
           ) : (
-            <SearchItemComponent list={list.length ? list : data["data"]} />
+            <SearchItemComponent
+              list={list.length ? list : data["data"]}
+              mutate={mutate}
+            />
           )}
         </div>
       </section>

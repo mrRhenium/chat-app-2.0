@@ -22,6 +22,14 @@ const fetcher = async (url) => {
 
 //
 const ProfilePage = () => {
+  useEffect(() => {
+    let theme = localStorage.getItem("theme") || "light";
+
+    theme === "light"
+      ? document.body.classList.remove("darkTheme")
+      : document.body.classList.add("darkTheme");
+  }, []);
+
   let uName = useParams().username;
 
   const [showPopUP, set_showPopUP] = useState(0);

@@ -25,7 +25,7 @@ const putRequest = async (action, targetUserId) => {
   //
 };
 
-const SearchItemComponent = ({ list }) => {
+const SearchItemComponent = ({ list, mutate }) => {
   const router = useRouter();
 
   return (
@@ -71,6 +71,7 @@ const SearchItemComponent = ({ list }) => {
                       <button
                         onClick={() => {
                           putRequest("Invite User", `${item.userId}`);
+                          mutate();
                         }}
                       >
                         Invite
@@ -91,6 +92,7 @@ const SearchItemComponent = ({ list }) => {
                           "Send-Invitation Cancelled",
                           `${item.userId}`
                         );
+                        mutate();
                       }}
                     >
                       Cancel
@@ -106,6 +108,7 @@ const SearchItemComponent = ({ list }) => {
                           "Recieved-Invitation Accepted",
                           `${item.userId}`
                         );
+                        mutate();
                       }}
                     >
                       Confirm
@@ -119,6 +122,7 @@ const SearchItemComponent = ({ list }) => {
                           "Recieved-Invitation Rejected",
                           `${item.userId}`
                         );
+                        mutate();
                       }}
                     >
                       Cancel

@@ -66,6 +66,7 @@ const NotifyItemComponent = ({ list, option, mutate }) => {
                     className={style.reject_btn}
                     onClick={() => {
                       putRequest("Send-Invitation Cancelled", item.userId);
+                      mutate();
                     }}
                   >
                     Cancel
@@ -78,6 +79,7 @@ const NotifyItemComponent = ({ list, option, mutate }) => {
                     className={style.reject_btn}
                     onClick={() => {
                       putRequest("Rejected-Invitation Deleted", item.userId);
+                      mutate();
                     }}
                   >
                     <MdOutlineDeleteOutline />
@@ -90,6 +92,7 @@ const NotifyItemComponent = ({ list, option, mutate }) => {
                   className={style.accept_btn}
                   onClick={() => {
                     putRequest("Recieved-Invitation Accepted", item.userId);
+                    mutate();
                   }}
                 >
                   Confirm
@@ -98,6 +101,7 @@ const NotifyItemComponent = ({ list, option, mutate }) => {
                   className={style.reject_btn}
                   onClick={() => {
                     putRequest("Recieved-Invitation Rejected", item.userId);
+                    mutate();
                   }}
                 >
                   Cancel
@@ -110,6 +114,7 @@ const NotifyItemComponent = ({ list, option, mutate }) => {
                   className={style.reject_btn}
                   onClick={() => {
                     putRequest("Cancel-Invitation Deleted", item.userId);
+                    mutate();
                   }}
                 >
                   <MdOutlineDeleteOutline />
