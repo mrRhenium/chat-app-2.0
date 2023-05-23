@@ -32,7 +32,11 @@ const SearchItemComponent = ({ list, mutate }) => {
     <>
       {list.map((item) => {
         return (
-          <div key={item.userId} className={style.search_items}>
+          <div
+            key={item.userId}
+            className={style.search_items}
+            onClick={() => mutate()}
+          >
             <span className={style.itemPic_cover}>
               <span
                 className={style.item_pic}

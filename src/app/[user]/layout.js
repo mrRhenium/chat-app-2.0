@@ -10,9 +10,8 @@ import { VscBellDot } from "react-icons/vsc";
 // import { MdNotifications } from "react-icons/md";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { useEffect } from "react";
 
 const UserLayout = ({ children }) => {
   const [menuIndex, set_menuIndex] = useState(0);

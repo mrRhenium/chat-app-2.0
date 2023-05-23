@@ -6,7 +6,7 @@ import LogOutComponent from "@/components/LogOutComponent";
 import LoadingComponent from "@/components/LoadingComponent";
 import ProfileComponent from "@/components/ProfileComponent";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
 
