@@ -12,7 +12,7 @@ import jwt from "jsonwebtoken";
 export async function GET(req, res) {
   // Database is Connecting.
   dbConnect();
-  console.log("Database is Connected");
+  console.log("Database is Connected : GET -> api/chatList");
 
   const token = req.cookies.get("token")?.value || req.headers.cookies.token;
   const tokenData = jwt.verify(token, process.env.JWTSECRET);
@@ -40,19 +40,29 @@ export async function GET(req, res) {
       userId: selfUser[0].userId,
       name: selfUser[0].name,
       username: selfUser[0].username,
+      avtar: selfUser[0].avtar,
       friends: selfUser[0].friends,
       notifyCount: selfUser[0].notifications.count,
     };
 
     return NextResponse.json({
       status: true,
-      msg: "Successfully send user data",
+      msg: "Successfully! : Send all user's chatlist",
       data: data,
     });
 
     //
   } catch (err) {
+    //
+
     console.log(err);
+
+    return NextResponse.json({
+      status: false,
+      msg: `ERROR! : ${err}`,
+    });
+
+    //
   }
   //
 

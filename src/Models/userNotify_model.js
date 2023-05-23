@@ -11,6 +11,18 @@ const invitationSchema = new Schema(
               type: Schema.Types.ObjectId,
               ref: "User",
             },
+            name: {
+              type: String,
+              required: true,
+            },
+            username: {
+              type: String,
+              required: true,
+            },
+            avtar: {
+              type: String,
+              required: true,
+            },
             active: {
               type: Boolean,
               default: 1,
@@ -41,6 +53,18 @@ const invitationSchema = new Schema(
             userId: {
               type: Schema.Types.ObjectId,
               ref: "User",
+            },
+            name: {
+              type: String,
+              required: true,
+            },
+            username: {
+              type: String,
+              required: true,
+            },
+            avtar: {
+              type: String,
+              required: true,
             },
             active: {
               type: Boolean,

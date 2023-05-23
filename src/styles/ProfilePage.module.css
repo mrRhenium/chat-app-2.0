@@ -298,6 +298,7 @@
   width: fit-content;
   padding: 0.2rem 0.5rem;
   border: none;
+  cursor: pointer;
   background-color: transparent;
 }
 .lower_section .logOutBtn_cover button:hover {

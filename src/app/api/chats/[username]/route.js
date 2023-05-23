@@ -15,13 +15,13 @@ export async function GET(req, context) {
   dbConnect();
   console.log("Database is Connected");
 
-  const token = req.cookies.get("token")?.value || req.headers.cookies.token;
-  const tokenData = jwt.verify(token, process.env.JWTSECRET);
-  const pUsername = context.params.username;
-  // console.log("Context : ", context);
-
   try {
     //
+
+    const token = req.cookies.get("token")?.value || req.headers.cookies.token;
+    const tokenData = jwt.verify(token, process.env.JWTSECRET);
+    const pUsername = context.params.username;
+    // console.log("Context : ", context);
 
     const selfUser = await UserData.findOne(
       {
@@ -32,12 +32,12 @@ export async function GET(req, context) {
       }
     );
 
-    // console.log("friend -> " + friend);
+    console.log("friend -> " + selfUser);
 
-    if (selfUser.friends.length == 0) {
+    if (selfUser.friends.length === 0) {
       return NextResponse.json({
         status: false,
-        msg: "Successfully user is not connected with you",
+        msg: "Successfully! : User is not connected with you",
       });
     }
 
@@ -55,13 +55,18 @@ export async function GET(req, context) {
 
     return NextResponse.json({
       status: true,
-      msg: "Successfully send Users chat!",
+      msg: "Successfully! : Send Users chat.",
       data: chats,
     });
 
     //
   } catch (err) {
     console.log(err);
+
+    return NextResponse.json({
+      status: false,
+      msg: "ERROR! : Something went wrong with Chats.",
+    });
   }
 }
 // *****************************
@@ -76,16 +81,39 @@ export async function POST(req, context) {
   dbConnect();
   console.log("Database is Connected");
 
-  const token = req.cookies.get("token")?.value || req.headers.cookies.token;
-  const tokenData = jwt.verify(token, process.env.JWTSECRET);
-  const pUsername = context.params.username;
-  // console.log("Context : ", context);
-
   try {
     //
 
+    const token = req.cookies.get("token")?.value || req.headers.cookies.token;
+    const tokenData = jwt.verify(token, process.env.JWTSECRET);
+    const pUsername = context.params.username;
+    // console.log("Context : ", context);
+
+    const selfUser = await UserData.findOne(
+      {
+        userId: tokenData._id,
+      },
+      {
+        userId: 1,
+        username: 1,
+        friends: { $elemMatch: { username: pUsername } },
+      }
+    );
+
+    // console.log(selfUser);
+
     const body = await req.json();
-    const chats = await Chat.findOne({ _id: body.chatId });
+    const chatId = selfUser.friends[0].chatId;
+    const block = selfUser.friends[0].blockStatus;
+
+    if (block) {
+      return NextResponse.json({
+        status: false,
+        msg: "Access to this user is prohibited.",
+      });
+    }
+
+    const chats = await Chat.findOne({ _id: chatId });
 
     let date = new Date();
     let tarik = date.toLocaleDateString("pt-PT");
@@ -96,8 +124,8 @@ export async function POST(req, context) {
     });
 
     chats.message.push({
-      userId: body.userId,
-      author: body.username,
+      userId: selfUser.userId,
+      author: selfUser.username,
       msg: body.message,
       backUpMsg: body.message,
       time: time,
@@ -105,7 +133,7 @@ export async function POST(req, context) {
     });
 
     await UserData.findOneAndUpdate(
-      { username: tokenData.username, [`friends.chatId`]: body.chatId },
+      { username: selfUser.username, [`friends.chatId`]: chatId },
       {
         $set: {
           [`friends.$.lastMsg`]: body.message,
@@ -114,7 +142,7 @@ export async function POST(req, context) {
     );
 
     await UserData.findOneAndUpdate(
-      { username: pUsername, [`friends.chatId`]: body.chatId },
+      { username: pUsername, [`friends.chatId`]: chatId },
       {
         $set: {
           [`friends.$.lastMsg`]: body.message,
@@ -136,6 +164,11 @@ export async function POST(req, context) {
     //
   } catch (err) {
     console.log(err);
+
+    return NextResponse.json({
+      status: false,
+      msg: "ERROR : Something went wrong with chatPost.",
+    });
   }
 
   // End of the API Routes

@@ -1,9 +1,35 @@
 "use client";
 
 import style from "../styles/LogOutComponent.module.css";
+
+import { useRouter } from "next/navigation";
 import { BiLogOut } from "react-icons/bi";
 
 const LogOutComponent = ({ closePopUp }) => {
+  const router = useRouter();
+
+  const logOut = async (e) => {
+    //
+
+    e.preventDefault();
+
+    const res = await fetch(`/api/logIn`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const resData = await res.json();
+    alert(`${resData.msg}`);
+
+    if (resData.status) {
+      document.cookie = "token=;Path=/;Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+      router.push("/logIn");
+    }
+    //
+  };
+
   return (
     <>
       {/* Header Section Start hear */}
@@ -21,10 +47,10 @@ const LogOutComponent = ({ closePopUp }) => {
         <span>
           <strong>Do you want to LogOut? </strong>
         </span>
-        <form>
+        <form onSubmit={logOut}>
           <span>
             <button onClick={() => closePopUp()}>Cancel</button>
-            <button>Confirm</button>
+            <button type="submit">Confirm</button>
           </span>
         </form>
       </section>

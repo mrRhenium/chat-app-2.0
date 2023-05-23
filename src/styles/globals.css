@@ -12,12 +12,14 @@
   --primary_txt1: #ffffff;
   --primary_txt2: #000000;
   --badge_color: whitesmoke;
+  --doubleTick: whitesmoke;
   --primary_border: rgba(0, 0, 0, 0.3);
   --msg_highlight: dimgray;
   --footer_border: rgba(0, 0, 0, 0.5);
   --black_border: black;
   --setting_border: lightgrey;
   --pop_bg: rgba(255, 255, 255, 0.1);
+  --LoadingBg: #eeeeee;
   --left_user: lightgrey;
   --text_font: "Exo 2", sans-serif;
   --logo_font: "Bruno Ace", cursive;
@@ -33,6 +35,7 @@
   --primary_bg1: rgb(9, 117, 164);
   --primary_bg2: rgba(0, 0, 0, 0.8);
   --badge_color: rgba(0, 0, 0, 0.6);
+  --doubleTick: lime;
   --primary_border: rgba(255, 255, 255, 0.5);
   --msg_highlight: rgba(0, 0, 0, 0.6);
   --footer_border: rgba(255, 255, 255, 0.5);
@@ -40,12 +43,7 @@
   --setting_border: rgba(0, 0, 0, 0.3);
   --pop_bg: rgba(0, 0, 0, 0.3);
   --left_user: dimgray;
-  /* --text_font: "Exo 2", sans-serif;
-  --logo_font: "Bruno Ace", cursive;
-  --btn_font: "Roboto Slab", serif;
-  --chat_font: "Roboto Slab", serif;
-  --chatting_font: "Amaranth", sans-serif;
-  --header_font: "Montserrat", sans-serif; */
+  --LoadingBg: transparent;
 }
 
 /* html {

@@ -8,7 +8,7 @@ import { BsInfoCircle } from "react-icons/bs";
 
 import { useRouter } from "next/navigation";
 
-const PicComponent = ({ closePopUp }) => {
+const PicComponent = ({ closePopUp, username }) => {
   const router = useRouter();
 
   return (
@@ -28,7 +28,7 @@ const PicComponent = ({ closePopUp }) => {
             close
             <CgCloseO className={style.icons} />
           </button>
-          <button onClick={() => router.push("/profile/nit")}>
+          <button onClick={() => router.push(`/profile/${username}`)}>
             more
             <BsInfoCircle className={style.icons} />
           </button>

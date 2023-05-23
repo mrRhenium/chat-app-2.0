@@ -85,12 +85,12 @@ const userDataSchema = new Schema(
       default: 0,
       required: true,
     },
-    reqSendId: {
+    blockUserId: {
       type: Array,
       default: [],
       required: true,
     },
-    blockUserId: {
+    reqSendId: {
       type: Array,
       default: [],
       required: true,

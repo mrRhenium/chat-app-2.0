@@ -1,13 +1,62 @@
+"use client";
+
 import style from "../../../styles/Search.module.css";
+import LoadingComponent from "@/components/LoadingComponent";
+import SearchItemComponent from "@/components/SearchItemComponent";
+
+import { useState } from "react";
+import useSWR from "swr";
 
 import { BiSearchAlt2 } from "react-icons/bi";
-import { FaUserCircle } from "react-icons/fa";
+//
+//
+
+// Define the Fetcher and URL of the server route
+const URL = `http://localhost:3000/api/search`;
+const fetcher = async (url) => {
+  const res = await fetch(url);
+  const data = await res.json();
+  return data;
+};
 
 const Search = () => {
+  const { data, isLoading } = useSWR(URL, fetcher);
+  const [list, set_list] = useState([]);
+
+  //
+  let searchItemSetInterval;
+  const searchUsers = async () => {
+    clearTimeout(searchItemSetInterval);
+
+    let searchItem = searchInput.value.trim();
+    const JSONdata = JSON.stringify({ search: searchItem });
+
+    searchItemSetInterval = setTimeout(async () => {
+      //
+
+      const res = await fetch("/api/search", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSONdata,
+      });
+
+      const resData = await res.json();
+
+      if (resData.status === false) alert(`${resData.msg}`);
+      else set_list(resData.data);
+
+      // console.log("Successful", resData);
+    }, 2000);
+  };
+
+  //
   return (
     <>
+      {/* Search Page : Header Componenet Start here */}
       <section className={style.header}>
-        <form action="">
+        <form>
           <label htmlFor="searchInput">
             <BiSearchAlt2 className={style.icons} />
             <input
@@ -17,32 +66,24 @@ const Search = () => {
               placeholder="search..."
               autoComplete="off"
               autoFocus
+              onChange={() => searchUsers()}
             />
           </label>
         </form>
       </section>
+      {/* Search Page : Header Componenet Start here */}
+
+      {/* Search Page : Body Componenet Start here */}
       <section className={style.body}>
         <div className={style.searchItem_cover}>
-          <div className={style.search_items}>
-            <span className={style.itemPic_cover}>
-              <span className={style.item_pic}>
-                <FaUserCircle className={style.icons} />
-              </span>
-            </span>
-            <span className={style.itemName_cover}>
-              <span className={style.username_cover}>
-                <p>savita</p>
-              </span>
-              <span className={style.fullname_cover}>
-                <p>Savita Yadav</p>
-              </span>
-            </span>
-            <span className={style.itemBtn_cover}>
-              <button>Invite</button>
-            </span>
-          </div>
+          {isLoading ? (
+            <LoadingComponent />
+          ) : (
+            <SearchItemComponent list={list.length ? list : data["data"]} />
+          )}
         </div>
       </section>
+      {/* Search Page : Body Componenet End here */}
     </>
   );
 };

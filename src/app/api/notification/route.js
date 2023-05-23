@@ -16,10 +16,11 @@ export async function GET(req, res) {
   dbConnect();
   console.log("Database is Connected");
 
+  const token = req.cookies.get("token")?.value || req.headers.cookies.token;
+  const tokenData = jwt.verify(token, process.env.JWTSECRET);
+
   try {
     //
-    const token = req.cookies.get("token")?.value || req.headers.cookies.token;
-    const tokenData = jwt.verify(token, process.env.JWTSECRET);
 
     const user = await UserData.findOne({ userId: tokenData._id });
     const notify = await UserNotify.findById({
@@ -32,7 +33,7 @@ export async function GET(req, res) {
     //
     return NextResponse.json({
       status: true,
-      msg: "Successfully send!",
+      msg: "Successfully! : Send the Notifications.",
       data: data,
     });
 
@@ -56,12 +57,13 @@ export async function PUT(req, res) {
   dbConnect();
   console.log("Database is Connected");
 
+  const token = req.cookies.get("token")?.value || req.headers.cookies.token;
+  const tokenData = jwt.verify(token, process.env.JWTSECRET);
+
   try {
     //
 
     const body = await req.json();
-    const token = req.cookies.get("token")?.value || req.headers.cookies.token;
-    const tokenData = jwt.verify(token, process.env.JWTSECRET);
 
     if (body.action === "Recieved-Invitation Accepted") {
       const selfUser = await UserData.findOne({ userId: tokenData._id });
@@ -128,7 +130,7 @@ export async function PUT(req, res) {
 
       return NextResponse.json({
         status: true,
-        msg: "Successfully Accepted the invitation",
+        msg: "Successfully! : Accepted the invitation",
       });
 
       //
@@ -170,7 +172,7 @@ export async function PUT(req, res) {
 
       return NextResponse.json({
         status: true,
-        msg: "Successfully Rejected the invitation",
+        msg: "Successfully! : Rejected the invitation",
       });
 
       //
@@ -212,7 +214,7 @@ export async function PUT(req, res) {
 
       return NextResponse.json({
         status: true,
-        msg: "Successfully Cancel the invitation",
+        msg: "Successfully! : Cancel the invitation",
       });
 
       //
@@ -238,7 +240,7 @@ export async function PUT(req, res) {
 
       return NextResponse.json({
         status: true,
-        msg: "Successfully Delete the Rejected-Invitation",
+        msg: "Successfully! : Delete the Rejected-Invitation",
       });
 
       //
@@ -260,34 +262,27 @@ export async function PUT(req, res) {
 
       return NextResponse.json({
         status: true,
-        msg: "Successfully Delete the Cancel-Invitation",
+        msg: "Successfully! : Delete the Cancel-Invitation",
       });
 
       //
     }
 
+    return NextResponse.json({
+      status: false,
+      msg: `ERROR : Some error occurs.`,
+    });
+
     //
   } catch (err) {
     console.log(err);
+
+    return NextResponse.json({
+      status: false,
+      msg: `ERROR : ${err}`,
+    });
   }
 }
 // *****************************
 // PUT Request : End here
 // *****************************
-
-/*
-nit
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDYzMGFkZWRkMTg4YmFiODkzZjRhMDEiLCJ1c2VybmFtZSI6Im5pdCIsImlhdCI6MTY4NDIxMjUxOCwiZXhwIjoxNjg0Mjk4OTE4fQ.r7DhVIlgNMAzOp3lDcH74OT0tC7gl5URN46n6D0Cx2c
-
-savi
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDYzMGFlYWRkMTg4YmFiODkzZjRhMDgiLCJ1c2VybmFtZSI6InNhdmkiLCJpYXQiOjE2ODQyMTI2MzUsImV4cCI6MTY4NDI5OTAzNX0.sZOifjfZqzp79jZezRHCG8FBusQbhoW1ZplJ8zSxsfU
-
-kavi
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDYzMGFmMmRkMTg4YmFiODkzZjRhMGYiLCJ1c2VybmFtZSI6ImthdmkiLCJpYXQiOjE2ODQyMTI3MzcsImV4cCI6MTY4NDI5OTEzN30.ustYl0ipI5r-EWb4N3GiTn3T5B5kPzgX3iMZgVhRtac
-
-rani
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDYzODRjY2Y2Y2Y2NmIxMTQwZTJjZmIiLCJ1c2VybmFtZSI6InJhbmkiLCJpYXQiOjE2ODQyNDM4NTcsImV4cCI6MTY4NDMzMDI1N30.mL1oEJKVjXYvWdot4Z2oULa-blR-d1_lYAW1clk63Yo
-
-kari
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDYzODRkYmY2Y2Y2NmIxMTQwZTJkMDIiLCJ1c2VybmFtZSI6ImthcmkiLCJpYXQiOjE2ODQyNDM5ODEsImV4cCI6MTY4NDMzMDM4MX0.N1JXYx-wU3ASbCaE0saQetubtBe8O2cMPJBV4x42dIg
-*/

@@ -26,13 +26,6 @@ const UserLayout = ({ children }) => {
       : document.body.classList.add("darkTheme");
   }, []);
 
-  // console.log("next : " + pathname);
-
-  // if (pathname === "/user/chats") () => set_menuIndex(0);
-  // else if (pathname === "/user/search") () => set_menuIndex(1);
-  // else if (pathname === "/user/notification") () => set_menuIndex(2);
-  // else if (pathname === "/user/setting") () => set_menuIndex(3);
-
   if (
     pathname === "/user/chats" ||
     pathname === "/user/notification" ||

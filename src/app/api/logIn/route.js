@@ -37,12 +37,12 @@ export async function POST(req, res) {
       });
     }
 
-    if (user.logInStatus) {
-      return NextResponse.json({
-        status: false,
-        msg: "User is already loggedIn",
-      });
-    }
+    // if (user.logInStatus) {
+    //   return NextResponse.json({
+    //     status: false,
+    //     msg: "User is already loggedIn",
+    //   });
+    // }
 
     const token = jwt.sign(
       { _id: user._id, username: user.username },
@@ -80,27 +80,34 @@ export async function PUT(req, res) {
   dbConnect();
   console.log("Database Connected");
 
-  const token = req.cookies.get("token")?.value || req.headers.cookies.token;
-  const tokenData = jwt.verify(token, process.env.JWTSECRET);
-
   try {
     //
+
+    const token = req.cookies.get("token")?.value || req.headers.cookies.token;
+    const tokenData = jwt.verify(token, process.env.JWTSECRET);
 
     const selfUser = await User.findOneAndUpdate(
       { _id: tokenData._id },
       {
-        $set: { logInStatus: 0 },
+        $set: { logInStatus: false },
       }
     );
 
+    // console.log(selfUser);
+
     return NextResponse.json({
       status: true,
-      msg: "Successfully LogOut",
+      msg: "Successfully! : LogOut",
     });
 
     //
   } catch (err) {
     console.log(err);
+
+    return NextResponse.json({
+      status: false,
+      msg: "ERROR! : Something went wrong with logOut",
+    });
   }
 }
 // *****************************
