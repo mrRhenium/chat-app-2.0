@@ -1,5 +1,9 @@
 "use client";
 
+import style from "../../../../styles/ProfilePage.module.css";
+
+import { CiMenuKebab } from "react-icons/ci";
+import { BsArrowLeft } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 
 const Picture = ({ item }) => {
