@@ -45,7 +45,7 @@ const LogInFormComponent = () => {
         //
       } else if (data.status === true) {
         document.cookie = `token=${data.token};expire;max-age=86000`;
-        router.push("/user/chats");
+        router.push("/user/chat");
         //
       }
 

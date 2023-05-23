@@ -12,7 +12,7 @@ export default function middleware(req, res) {
     if (token === null || token === undefined || token === "") {
       // User's browser doesn't have any token
       // they will redirect to home page
-      return NextResponse.redirect("https://chat-app-3-0.vercel.app/logIn");
+      return NextResponse.redirect("https://chat-app-2-0.vercel.app/logIn");
     }
 
     //

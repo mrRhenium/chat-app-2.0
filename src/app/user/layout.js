@@ -45,7 +45,7 @@ const UserLayout = ({ children }) => {
               <nav className={style.menu_bar}>
                 <ul>
                   <li>
-                    <Link href={`/user/chats`} onClick={() => set_menuIndex(0)}>
+                    <Link href={`/user/chat`} onClick={() => set_menuIndex(0)}>
                       <BsDot className={style.iconBadge} />
 
                       <FaHome
