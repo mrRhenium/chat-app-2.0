@@ -25,8 +25,14 @@ const UserLayout = ({ children }) => {
   const [menuIndex, set_menuIndex] = useState(0);
   const pathname = usePathname();
 
-  const { data } = useSWR(URL, fetcher);
-  const user = data && data["user"];
+  const { data, isLoading } = useSWR(URL, fetcher);
+  const user = data
+    ? data["user"]
+    : {
+        notifications: {
+          count: 0,
+        },
+      };
 
   useEffect(() => {
     let theme = localStorage.getItem("theme") || "light";

@@ -97,7 +97,7 @@ const ChattingPage = () => {
                   <span className={style.name_info}>
                     <p className={style.name}>{uName}</p>
                     <p className={style.live_status}>
-                      {data["onlineStatus"] ? "online" : "offline"}
+                      {data["onlineStatus"] === true ? "online" : "offline"}
                     </p>
                   </span>
                 </div>
