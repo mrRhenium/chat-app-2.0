@@ -27,13 +27,13 @@ const UserLayout = ({ children }) => {
 
   const { data } = useSWR(URL, fetcher);
   let user =
-    data != undefined
-      ? data["user"]
-      : {
+    data === undefined
+      ? {
           notifications: {
             count: 0,
           },
-        };
+        }
+      : data["user"];
 
   console.log(user);
 
