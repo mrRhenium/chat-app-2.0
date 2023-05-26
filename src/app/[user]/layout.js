@@ -14,28 +14,25 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import useSWR from "swr";
 
-const URL = `/api/data`;
-const fetcher = async (url) => {
-  const res = await fetch(url);
-  const data = await res.json();
-  return data;
-};
+// const URL = `/api/data`;
+// const fetcher = async (url) => {
+//   const res = await fetch(url);
+//   const data = await res.json();
+//   return data;
+// };
 
 const UserLayout = ({ children }) => {
   const [menuIndex, set_menuIndex] = useState(0);
   const pathname = usePathname();
 
-  const { data } = useSWR(URL, fetcher);
-  let user =
-    data === undefined
-      ? {
-          notifications: {
-            count: 0,
-          },
-        }
-      : data["user"];
+  // const { data } = useSWR(URL, fetcher);
+  let user = {
+    notifications: {
+      count: 0,
+    },
+  };
 
-  console.log(user);
+  // console.log(user);
 
   useEffect(() => {
     let theme = localStorage.getItem("theme") || "light";
