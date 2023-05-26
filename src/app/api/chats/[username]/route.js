@@ -32,7 +32,12 @@ export async function GET(req, context) {
       }
     );
 
-    console.log("friend -> " + selfUser);
+    const targetUser = await UserData.findOne(
+      { username: pUsername },
+      { onlineStatus: 1, onlineStatus: 0 }
+    );
+
+    // console.log("friend -> " + selfUser);
 
     if (selfUser.friends.length === 0) {
       return NextResponse.json({
@@ -41,6 +46,7 @@ export async function GET(req, context) {
       });
     }
 
+    // const onlineStatus = selfUser.friends[0].onlineStatus;
     const chatId = selfUser.friends[0].chatId;
     const chats = await Chat.findOne({ _id: chatId });
 
@@ -57,6 +63,7 @@ export async function GET(req, context) {
       status: true,
       msg: "Successfully! : Send Users chat.",
       data: chats,
+      onlineStatus: targetUser.onlineStatus,
     });
 
     //
@@ -117,11 +124,15 @@ export async function POST(req, context) {
 
     let date = new Date();
     let tarik = date.toLocaleDateString("pt-PT");
-    let time = date.toLocaleString("en-US", {
-      hour: "2-digit",
-      hour12: true,
-      minute: "2-digit",
-    });
+    let time = date.toLocaleString(
+      "en-US",
+      {
+        hour12: true,
+        hour: "2-digit",
+        minute: "2-digit",
+      },
+      { timeZone: "UTC" }
+    );
 
     chats.message.push({
       userId: selfUser.userId,

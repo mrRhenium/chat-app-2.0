@@ -29,6 +29,7 @@ const ChattingPage = () => {
   const { data, isLoading, mutate } = useSWR(`${URL}/${uName}`, fetcher, {
     refreshInterval: 1500,
   });
+
   const list = data && data["status"] && data["data"]["message"];
   const [msgBox, set_msgBox] = useState("");
 
@@ -41,6 +42,11 @@ const ChattingPage = () => {
     e.preventDefault();
 
     let msg = msgBox;
+    set_msgBox("");
+    msgInputBox.focus();
+
+    if (msg === "") return;
+
     const JSONdata = JSON.stringify({
       message: msg,
     });
@@ -54,10 +60,9 @@ const ChattingPage = () => {
     });
 
     const resData = await res.json();
-    set_msgBox("");
-    mutate();
-
     if (resData.status === false) alert(`${resData.msg}`);
+
+    mutate();
 
     //
   };
@@ -93,7 +98,9 @@ const ChattingPage = () => {
                   </span>
                   <span className={style.name_info}>
                     <p className={style.name}>{uName}</p>
-                    <p className={style.live_status}>(online)</p>
+                    <p className={style.live_status}>
+                      {data["onlineStatus"] ? "online" : "offline"}
+                    </p>
                   </span>
                 </div>
                 <div className={style.right_cover}>

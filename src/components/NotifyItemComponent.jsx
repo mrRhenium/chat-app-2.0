@@ -6,7 +6,7 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 //
 //
 
-const putRequest = async (action, targetUserId) => {
+const putRequest = async (action, targetUserId, mutate) => {
   //
 
   const JSONdata = JSON.stringify({
@@ -23,8 +23,8 @@ const putRequest = async (action, targetUserId) => {
   });
 
   const resData = await res.json();
-
-  alert(`${resData.msg}`);
+  if (resData.status === false) alert(`${resData.msg}`);
+  mutate();
 
   //
 };
@@ -35,11 +35,7 @@ const NotifyItemComponent = ({ list, option, mutate }) => {
     <>
       {list.map((item) => {
         return (
-          <div
-            key={item.userId}
-            className={style.notify_items}
-            onClick={() => mutate()}
-          >
+          <div key={item.userId} className={style.notify_items}>
             <span className={style.itemPic_cover}>
               <span
                 className={style.item_pic}
@@ -65,8 +61,11 @@ const NotifyItemComponent = ({ list, option, mutate }) => {
                   <button
                     className={style.reject_btn}
                     onClick={() => {
-                      putRequest("Send-Invitation Cancelled", item.userId);
-                      mutate();
+                      putRequest(
+                        "Send-Invitation Cancelled",
+                        item.userId,
+                        mutate
+                      );
                     }}
                   >
                     Cancel
@@ -78,8 +77,11 @@ const NotifyItemComponent = ({ list, option, mutate }) => {
                   <button
                     className={style.reject_btn}
                     onClick={() => {
-                      putRequest("Rejected-Invitation Deleted", item.userId);
-                      mutate();
+                      putRequest(
+                        "Rejected-Invitation Deleted",
+                        item.userId,
+                        mutate
+                      );
                     }}
                   >
                     <MdOutlineDeleteOutline />
@@ -91,8 +93,11 @@ const NotifyItemComponent = ({ list, option, mutate }) => {
                 <button
                   className={style.accept_btn}
                   onClick={() => {
-                    putRequest("Recieved-Invitation Accepted", item.userId);
-                    mutate();
+                    putRequest(
+                      "Recieved-Invitation Accepted",
+                      item.userId,
+                      mutate
+                    );
                   }}
                 >
                   Confirm
@@ -100,8 +105,11 @@ const NotifyItemComponent = ({ list, option, mutate }) => {
                 <button
                   className={style.reject_btn}
                   onClick={() => {
-                    putRequest("Recieved-Invitation Rejected", item.userId);
-                    mutate();
+                    putRequest(
+                      "Recieved-Invitation Rejected",
+                      item.userId,
+                      mutate
+                    );
                   }}
                 >
                   Cancel
@@ -113,8 +121,11 @@ const NotifyItemComponent = ({ list, option, mutate }) => {
                 <button
                   className={style.reject_btn}
                   onClick={() => {
-                    putRequest("Cancel-Invitation Deleted", item.userId);
-                    mutate();
+                    putRequest(
+                      "Cancel-Invitation Deleted",
+                      item.userId,
+                      mutate
+                    );
                   }}
                 >
                   <MdOutlineDeleteOutline />

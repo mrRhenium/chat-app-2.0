@@ -7,15 +7,26 @@ import { FaSearch } from "react-icons/fa";
 import { AiFillSetting } from "react-icons/ai";
 import { BsDot } from "react-icons/bs";
 import { VscBellDot } from "react-icons/vsc";
-// import { MdNotifications } from "react-icons/md";
+import { MdNotifications } from "react-icons/md";
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import useSWR from "swr";
+
+const URL = `/api/data`;
+const fetcher = async (url) => {
+  const res = await fetch(url);
+  const data = await res.json();
+  return data;
+};
 
 const UserLayout = ({ children }) => {
   const [menuIndex, set_menuIndex] = useState(0);
   const pathname = usePathname();
+
+  const { data } = useSWR(URL, fetcher);
+  const user = data && data["msg"];
 
   useEffect(() => {
     let theme = localStorage.getItem("theme") || "light";
@@ -77,13 +88,23 @@ const UserLayout = ({ children }) => {
                     >
                       <BsDot className={style.iconBadge} />
 
-                      <VscBellDot
-                        className={
-                          menuIndex === 2
-                            ? `${style["icons"]} ${style["active"]}`
-                            : `${style["icons"]}`
-                        }
-                      />
+                      {user.notifications.count != 0 ? (
+                        <VscBellDot
+                          className={
+                            menuIndex === 2
+                              ? `${style["icons"]} ${style["active"]}`
+                              : `${style["icons"]}`
+                          }
+                        />
+                      ) : (
+                        <MdNotifications
+                          className={
+                            menuIndex === 2
+                              ? `${style["icons"]} ${style["active"]}`
+                              : `${style["icons"]}`
+                          }
+                        />
+                      )}
                     </Link>
                   </li>
                   <li>

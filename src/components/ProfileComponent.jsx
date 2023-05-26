@@ -30,8 +30,7 @@ const putRequest = async (action, targetUserId) => {
   });
 
   const resData = await res.json();
-
-  alert(`${resData.msg}`);
+  if (resData.status === false) alert(`${resData.msg}`);
 
   //
 };

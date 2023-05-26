@@ -2,7 +2,7 @@ import style from "../styles/Search.module.css";
 import { useRouter } from "next/navigation";
 import { FaUserCircle } from "react-icons/fa";
 
-const putRequest = async (action, targetUserId) => {
+const putRequest = async (action, targetUserId, mutate) => {
   //
 
   const JSONdata = JSON.stringify({
@@ -19,8 +19,8 @@ const putRequest = async (action, targetUserId) => {
   });
 
   const resData = await res.json();
-
-  alert(`${resData.msg}`);
+  if (resData.status === false) alert(`${resData.msg}`);
+  mutate();
 
   //
 };
@@ -32,11 +32,7 @@ const SearchItemComponent = ({ list, mutate }) => {
     <>
       {list.map((item) => {
         return (
-          <div
-            key={item.userId}
-            className={style.search_items}
-            onClick={() => mutate()}
-          >
+          <div key={item.userId} className={style.search_items}>
             <span className={style.itemPic_cover}>
               <span
                 className={style.item_pic}
@@ -74,8 +70,7 @@ const SearchItemComponent = ({ list, mutate }) => {
                     <span>
                       <button
                         onClick={() => {
-                          putRequest("Invite User", `${item.userId}`);
-                          mutate();
+                          putRequest("Invite User", `${item.userId}`, mutate);
                         }}
                       >
                         Invite
@@ -94,9 +89,9 @@ const SearchItemComponent = ({ list, mutate }) => {
                       onClick={() => {
                         putRequest(
                           "Send-Invitation Cancelled",
-                          `${item.userId}`
+                          `${item.userId}`,
+                          mutate
                         );
-                        mutate();
                       }}
                     >
                       Cancel
@@ -110,9 +105,9 @@ const SearchItemComponent = ({ list, mutate }) => {
                       onClick={() => {
                         putRequest(
                           "Recieved-Invitation Accepted",
-                          `${item.userId}`
+                          `${item.userId}`,
+                          mutate
                         );
-                        mutate();
                       }}
                     >
                       Confirm
@@ -124,9 +119,9 @@ const SearchItemComponent = ({ list, mutate }) => {
                       onClick={() => {
                         putRequest(
                           "Recieved-Invitation Rejected",
-                          `${item.userId}`
+                          `${item.userId}`,
+                          mutate
                         );
-                        mutate();
                       }}
                     >
                       Cancel

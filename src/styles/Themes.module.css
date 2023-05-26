@@ -8,9 +8,9 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 2rem;
+  height: 4rem;
   padding: 0 1rem;
-  border-bottom: 0.1rem solid var(--setting_border);
+  border-bottom: 0.09rem solid var(--setting_border);
 }
 
 .appTheme_cover strong {
@@ -26,7 +26,7 @@
   justify-content: space-between;
   align-items: center;
   width: 3.3rem;
-  height: 80%;
+  height: 1.5rem;
   padding: 0 0rem;
   border-radius: 10rem;
   overflow: hidden;
@@ -45,7 +45,7 @@
 .appTheme_cover label .icons {
   position: relative;
   display: flex;
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: black;
   margin: 0 0.2rem;
   transition: all 1s;
@@ -58,8 +58,8 @@
 .appTheme_cover label span.btn_ball {
   position: absolute;
   display: flex;
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 1.7rem;
+  height: 1.7rem;
   border-radius: 50%;
   transition: all 0.5s;
   background-color: var(--primary_bg1);
