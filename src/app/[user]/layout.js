@@ -25,14 +25,17 @@ const UserLayout = ({ children }) => {
   const [menuIndex, set_menuIndex] = useState(0);
   const pathname = usePathname();
 
-  const { data, isLoading } = useSWR(URL, fetcher);
-  const user = data
-    ? data["user"]
-    : {
-        notifications: {
-          count: 0,
-        },
-      };
+  const { data } = useSWR(URL, fetcher);
+  let user =
+    data != undefined
+      ? data["user"]
+      : {
+          notifications: {
+            count: 0,
+          },
+        };
+
+  console.log(user);
 
   useEffect(() => {
     let theme = localStorage.getItem("theme") || "light";
@@ -42,12 +45,7 @@ const UserLayout = ({ children }) => {
       : document.body.classList.add("darkTheme");
   }, []);
 
-  if (
-    pathname === "/user/chats" ||
-    pathname === "/user/notification" ||
-    pathname === "/user/setting" ||
-    pathname === "/user/search"
-  ) {
+  if (pathname.includes("user")) {
     return (
       <>
         <div className={style.chats_page}>

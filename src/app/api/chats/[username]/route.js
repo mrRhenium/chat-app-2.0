@@ -34,7 +34,7 @@ export async function GET(req, context) {
 
     const targetUser = await UserData.findOne(
       { username: pUsername },
-      { onlineStatus: 1, onlineStatus: 0 }
+      { onlineStatus: 1, _id: 0 }
     );
 
     // console.log("friend -> " + selfUser);

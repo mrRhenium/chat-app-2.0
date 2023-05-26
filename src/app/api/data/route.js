@@ -18,6 +18,7 @@ export async function GET(req, res) {
       { userId: tokenData._id },
       {
         notifications: 1,
+        _id: 0,
       }
     );
 
