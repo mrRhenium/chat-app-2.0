@@ -26,7 +26,7 @@ const UserLayout = ({ children }) => {
   const pathname = usePathname();
 
   const { data } = useSWR(URL, fetcher);
-  const user = data && data["msg"];
+  const user = data && data["user"];
 
   useEffect(() => {
     let theme = localStorage.getItem("theme") || "light";

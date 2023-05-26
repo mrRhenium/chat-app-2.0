@@ -42,9 +42,6 @@ const ChattingPage = () => {
     e.preventDefault();
 
     let msg = msgBox;
-    set_msgBox("");
-    msgInputBox.focus();
-
     if (msg === "") return;
 
     const JSONdata = JSON.stringify({
@@ -61,8 +58,9 @@ const ChattingPage = () => {
 
     const resData = await res.json();
     if (resData.status === false) alert(`${resData.msg}`);
-
     mutate();
+    set_msgBox("");
+    msgInputBox.focus();
 
     //
   };
