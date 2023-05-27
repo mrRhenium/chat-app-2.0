@@ -2,7 +2,7 @@
 
 import settingStyle from "../../../../styles/SettingLayout.module.css";
 import style from "../../../../styles/Themes.module.css";
-import { BsSun, BsMoon } from "react-icons/bs";
+import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
 
 import { BsArrowLeft } from "react-icons/bs";
 import { useRouter } from "next/navigation";
@@ -62,8 +62,8 @@ const Themes = () => {
                     className={style.checkBox}
                   />
                   <span className={style.btn_ball}>
-                    <BsSun className={style.icons} />
-                    <BsMoon className={style.icons} />
+                    <BsFillSunFill className={style.icons} />
+                    <BsFillMoonFill className={style.icons} />
                   </span>
                 </label>
               </span>

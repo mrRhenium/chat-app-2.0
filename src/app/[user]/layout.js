@@ -29,6 +29,17 @@ const UserLayout = ({ children }) => {
     refreshInterval: 30000,
   });
 
+  // console.log(data);
+
+  let notifyCount = 0;
+  if (data && data["status"]) {
+    notifyCount = data["user"].notifications.count;
+  }
+
+  // data && data["status"] === false
+  //   ? console.log(`${data["msg"]}`)
+  //   : console.log("Alright " + data["user"].notifications.count);
+
   useEffect(() => {
     let theme = localStorage.getItem("theme") || "light";
 
@@ -44,17 +55,6 @@ const UserLayout = ({ children }) => {
     pathname === "/user/setting"
   ) {
     //
-
-    let notifyCount = 0;
-    // if (data && data["status"]) {
-    //   notifyCount = data["user"].notifications.count;
-    // }
-
-    console.log(data);
-
-    // data && data["status"] === false
-    //   ? console.log(`${data["msg"]}`)
-    //   : console.log("Alright " + data["user"].notifications.count);
 
     return (
       <>

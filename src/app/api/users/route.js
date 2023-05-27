@@ -1,9 +1,10 @@
 import dbConnect from "@/Database/dbCoonect";
 import UserData from "@/Models/usersData_model";
 import User from "@/Models/users_model";
-import { NextResponse } from "next/server";
 
+import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
+
 //
 //
 

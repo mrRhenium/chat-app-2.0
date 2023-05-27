@@ -5,7 +5,7 @@ const Loading = () => {
   return (
     <>
       <div className={style.loading_page}>
-        <LoadingComponent />;
+        <LoadingComponent />
       </div>
     </>
   );
