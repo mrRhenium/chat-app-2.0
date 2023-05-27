@@ -124,22 +124,13 @@ export async function POST(req, context) {
 
     let date = new Date();
     let tarik = date.toLocaleDateString("pt-PT");
-    let time = date.toLocaleString(
-      "en-US",
-      {
-        hour12: true,
-        hour: "2-digit",
-        minute: "2-digit",
-      },
-      { timeZone: "UTC" }
-    );
 
     chats.message.push({
       userId: selfUser.userId,
       author: selfUser.username,
       msg: body.message,
       backUpMsg: body.message,
-      time: time,
+      time: body.time,
       date: tarik,
     });
 

@@ -9,9 +9,16 @@ import { MdOutlineDeleteOutline } from "react-icons/md";
 const putRequest = async (action, targetUserId, mutate) => {
   //
 
+  let time = new Date().toLocaleString("en-US", {
+    hour12: true,
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
   const JSONdata = JSON.stringify({
     action: action,
     targetUserId: targetUserId,
+    time: time,
   });
 
   const res = await fetch(`/api/notification`, {

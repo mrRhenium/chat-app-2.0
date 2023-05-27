@@ -26,13 +26,9 @@ const ChattingPage = () => {
   const router = useRouter();
 
   let uName = useParams().username;
-  const { data, isLoading, mutate } = useSWR(
-    `${URL}/${uName}`,
-    fetcher
-    // {
-    //   refreshInterval: 1500,
-    // }
-  );
+  const { data, isLoading, mutate } = useSWR(`${URL}/${uName}`, fetcher, {
+    refreshInterval: 1500,
+  });
 
   let list = data && data["status"] && data["data"]["message"];
   const [msgBox, set_msgBox] = useState("");
@@ -46,22 +42,27 @@ const ChattingPage = () => {
     e.preventDefault();
     msgInputBox.focus();
 
+    let msg = msgBox;
+    let time = new Date().toLocaleString("en-US", {
+      hour12: true,
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    set_msgBox("");
+
+    if (msg === "") return;
+
     list.push({
       _id: new Date().getUTCMilliseconds() * 2804,
       author: "SelfHume",
-      msg: msgBox,
-      time: new Date().toLocaleString("en-US", {
-        hour12: true,
-        hour: "2-digit",
-        minute: "2-digit",
-      }),
+      msg: msg,
+      time: time,
     });
-
-    let msg = msgBox;
-    if (msg === "") return;
 
     const JSONdata = JSON.stringify({
       message: msg,
+      time: time,
     });
 
     const res = await fetch(`/api/chats/${uName}`, {
@@ -75,7 +76,6 @@ const ChattingPage = () => {
     const resData = await res.json();
     if (resData.status === false) alert(`${resData.msg}`);
     // mutate();
-    set_msgBox("");
     msgInputBox.focus();
 
     //

@@ -74,7 +74,14 @@ export async function PUT(req, res) {
           _id: selfUser.notifications.notifyId,
           [`invitation.recieved.active`]: true,
         },
-        { $pull: { [`invitation.recieved`]: { userId: friendUser.userId } } }
+        {
+          $pull: {
+            [`invitation.recieved`]: {
+              userId: friendUser.userId,
+              time: body.time,
+            },
+          },
+        }
       );
 
       const friendNotify = await UserNotify.findByIdAndUpdate(
@@ -82,7 +89,11 @@ export async function PUT(req, res) {
           _id: friendUser.notifications.notifyId,
           [`invitation.send.active`]: true,
         },
-        { $pull: { [`invitation.send`]: { userId: selfUser.userId } } }
+        {
+          $pull: {
+            [`invitation.send`]: { userId: selfUser.userId, time: body.time },
+          },
+        }
       );
 
       const userChat = await Chat.create({
