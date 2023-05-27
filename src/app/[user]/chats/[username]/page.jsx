@@ -40,6 +40,7 @@ const ChattingPage = () => {
   const sendChat = async (e) => {
     //
     e.preventDefault();
+    msgInputBox.focus();
 
     let msg = msgBox;
     if (msg === "") return;

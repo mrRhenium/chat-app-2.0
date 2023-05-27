@@ -38,7 +38,7 @@ const LogInFormComponent = () => {
       });
 
       const data = await result.json();
-      console.log("Successful", data);
+      // console.log("Successful", data);
 
       if (data.status === false) {
         alert(data.msg);

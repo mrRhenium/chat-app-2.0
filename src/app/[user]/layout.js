@@ -29,11 +29,14 @@ const UserLayout = ({ children }) => {
     refreshInterval: 30000,
   });
 
-  let notifyCount = data === undefined ? 0 : data["user"].notifications.count;
+  let notifyCount = 0;
+  if (data && data["status"]) {
+    notifyCount = data["user"].notifications.count;
+    console.log(data["user"]);
+  }
 
   console.log(notifyCount);
-
-  // console.log(user);
+  // console.log(data["user"]);
 
   useEffect(() => {
     let theme = localStorage.getItem("theme") || "light";
