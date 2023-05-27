@@ -26,11 +26,15 @@ const ChattingPage = () => {
   const router = useRouter();
 
   let uName = useParams().username;
-  const { data, isLoading, mutate } = useSWR(`${URL}/${uName}`, fetcher, {
-    refreshInterval: 1500,
-  });
+  const { data, isLoading, mutate } = useSWR(
+    `${URL}/${uName}`,
+    fetcher
+    // {
+    //   refreshInterval: 1500,
+    // }
+  );
 
-  const list = data && data["status"] && data["data"]["message"];
+  let list = data && data["status"] && data["data"]["message"];
   const [msgBox, set_msgBox] = useState("");
 
   useEffect(() => {
@@ -41,6 +45,17 @@ const ChattingPage = () => {
     //
     e.preventDefault();
     msgInputBox.focus();
+
+    list.push({
+      _id: new Date().getUTCMilliseconds() * 2804,
+      author: "SelfHume",
+      msg: msgBox,
+      time: new Date().toLocaleString("en-US", {
+        hour12: true,
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+    });
 
     let msg = msgBox;
     if (msg === "") return;
@@ -59,7 +74,7 @@ const ChattingPage = () => {
 
     const resData = await res.json();
     if (resData.status === false) alert(`${resData.msg}`);
-    mutate();
+    // mutate();
     set_msgBox("");
     msgInputBox.focus();
 
