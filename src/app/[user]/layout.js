@@ -14,7 +14,7 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import useSWR from "swr";
 
-const URL = `/api/data`;
+const URL = `/api/users`;
 const fetcher = async (url) => {
   const res = await fetch(url);
   const data = await res.json();
@@ -34,6 +34,10 @@ const UserLayout = ({ children }) => {
     notifyCount = data["user"].notifications.count;
     console.log(data["user"]);
   }
+
+  data && data["status"] === false
+    ? console.log(`${data["msg"]}`)
+    : console.log("Alright");
 
   console.log(notifyCount);
   // console.log(data["user"]);

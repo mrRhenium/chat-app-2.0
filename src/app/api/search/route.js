@@ -16,11 +16,11 @@ export async function GET(req, res) {
   dbConnect();
   console.log("Database is Connected : GET -> api/notification");
 
-  const token = req.cookies.get("token")?.value || req.headers.cookies.token;
-  const tokenData = jwt.verify(token, process.env.JWTSECRET);
-
   try {
     //
+
+    const token = req.cookies.get("token")?.value || req.headers.cookies.token;
+    const tokenData = jwt.verify(token, process.env.JWTSECRET);
 
     const selfUser = await UserData.findOne(
       { userId: tokenData._id },
@@ -100,11 +100,11 @@ export async function POST(req, res) {
   dbConnect();
   console.log("Database is Connected  : POST -> api/notification");
 
-  const token = req.cookies.get("token")?.value || req.headers.cookies.token;
-  const tokenData = jwt.verify(token, process.env.JWTSECRET);
-
   try {
     //
+
+    const token = req.cookies.get("token")?.value || req.headers.cookies.token;
+    const tokenData = jwt.verify(token, process.env.JWTSECRET);
 
     const body = await req.json();
     const searchItem = body.search;
@@ -197,11 +197,11 @@ export async function PUT(req, res) {
   dbConnect();
   console.log("Database is Connected : PUT -> api/notification");
 
-  const token = req.cookies.get("token")?.value || req.headers.cookies.token;
-  const tokenData = jwt.verify(token, process.env.JWTSECRET);
-
   try {
     //
+
+    const token = req.cookies.get("token")?.value || req.headers.cookies.token;
+    const tokenData = jwt.verify(token, process.env.JWTSECRET);
 
     const body = await req.json();
 
