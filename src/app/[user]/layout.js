@@ -25,6 +25,10 @@ const UserLayout = ({ children }) => {
   const [menuIndex, set_menuIndex] = useState(0);
   const pathname = usePathname();
 
+  const { data } = useSWR(URL, fetcher, {
+    refreshInterval: 30000,
+  });
+
   useEffect(() => {
     let theme = localStorage.getItem("theme") || "light";
 
@@ -40,10 +44,6 @@ const UserLayout = ({ children }) => {
     pathname === "/user/setting"
   ) {
     //
-
-    const { data } = useSWR(URL, fetcher, {
-      refreshInterval: 30000,
-    });
 
     let notifyCount = 0;
     if (data && data["status"]) {
