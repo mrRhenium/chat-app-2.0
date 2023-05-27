@@ -14,23 +14,24 @@ import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import useSWR from "swr";
 
-// const URL = `/api/data`;
-// const fetcher = async (url) => {
-//   const res = await fetch(url);
-//   const data = await res.json();
-//   return data;
-// };
+const URL = `/api/data`;
+const fetcher = async (url) => {
+  const res = await fetch(url);
+  const data = await res.json();
+  return data;
+};
 
 const UserLayout = ({ children }) => {
   const [menuIndex, set_menuIndex] = useState(0);
   const pathname = usePathname();
 
-  // const { data } = useSWR(URL, fetcher);
-  let user = {
-    notifications: {
-      count: 0,
-    },
-  };
+  const { data } = useSWR(URL, fetcher, {
+    refreshInterval: 30000,
+  });
+
+  let notifyCount = data === undefined ? 0 : data["user"].notifications.count;
+
+  console.log(notifyCount);
 
   // console.log(user);
 
@@ -42,7 +43,12 @@ const UserLayout = ({ children }) => {
       : document.body.classList.add("darkTheme");
   }, []);
 
-  if (pathname.includes("user")) {
+  if (
+    pathname === "/user/chats" ||
+    pathname === "/user/notification" ||
+    pathname === "/user/search" ||
+    pathname === "/user/setting"
+  ) {
     return (
       <>
         <div className={style.chats_page}>
@@ -89,7 +95,7 @@ const UserLayout = ({ children }) => {
                     >
                       <BsDot className={style.iconBadge} />
 
-                      {user.notifications.count != 0 ? (
+                      {notifyCount != 0 ? (
                         <VscBellDot
                           className={
                             menuIndex === 2

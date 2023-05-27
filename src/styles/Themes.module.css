@@ -23,13 +23,12 @@
   cursor: pointer;
   position: relative;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 3.3rem;
-  height: 1.5rem;
+  width: 3.5rem;
+  height: 1.6rem;
   padding: 0 0rem;
   border-radius: 10rem;
-  overflow: hidden;
+  /* overflow: hidden; */
   border: 0.09rem solid var(--black_border);
 }
 
@@ -38,31 +37,42 @@
   visibility: hidden;
 }
 
-.appTheme_cover label .checkBox:checked ~ .icons {
-  color: yellow;
-}
-
-.appTheme_cover label .icons {
+.appTheme_cover label span.btn_ball {
   position: relative;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  transform: translateX(-0.05rem);
+  transition: all 0.5s;
+  background-color: var(--primary_bg1);
+}
+
+.appTheme_cover label .checkBox:checked ~ span.btn_ball {
+  transform: translateX(1.5rem);
+}
+
+.appTheme_cover label span .icons {
+  position: relative;
+  display: block;
   font-size: 1.2rem;
-  color: black;
+  color: white;
   margin: 0 0.2rem;
   transition: all 1s;
 }
 
-.appTheme_cover label .checkBox:checked ~ span.btn_ball {
-  transform: translateX(1.79rem);
+.appTheme_cover label span .icons:last-child {
+  display: none;
 }
 
-.appTheme_cover label span.btn_ball {
-  position: absolute;
-  display: flex;
-  width: 1.7rem;
-  height: 1.7rem;
-  border-radius: 50%;
-  transition: all 0.5s;
-  background-color: var(--primary_bg1);
+.appTheme_cover label .checkBox:checked ~ span .icons:first-child {
+  display: none;
+}
+
+.appTheme_cover label .checkBox:checked ~ span .icons:last-child {
+  display: block;
 }
 
 /* ------------------------------------ */

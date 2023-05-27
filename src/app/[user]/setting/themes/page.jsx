@@ -6,15 +6,9 @@ import { BsSun, BsMoon } from "react-icons/bs";
 
 import { BsArrowLeft } from "react-icons/bs";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 
 const Themes = () => {
   const router = useRouter();
-
-  useEffect(() => {
-    let theme = localStorage.getItem("theme") || "light";
-    theme === "light" ? (themeBtn.checked = 0) : (themeBtn.checked = 1);
-  }, []);
 
   const toggleBtn = () => {
     if (themeBtn.checked) {
@@ -67,9 +61,10 @@ const Themes = () => {
                     id="themeBtn"
                     className={style.checkBox}
                   />
-                  <BsSun className={style.icons} />
-                  <BsMoon className={style.icons} />
-                  <span className={style.btn_ball}></span>
+                  <span className={style.btn_ball}>
+                    <BsSun className={style.icons} />
+                    <BsMoon className={style.icons} />
+                  </span>
                 </label>
               </span>
             </div>

@@ -46,10 +46,12 @@ const SignInFormComponent = () => {
   let checkUsernameExistance;
   const usernameChangeHandler = async () => {
     //
-    clearTimeout(checkUsernameExistance);
     let final_username = username.value.trim();
 
+    let pattern = /^\S*$/;
+
     //
+    clearTimeout(checkUsernameExistance);
     checkUsernameExistance = setTimeout(async () => {
       const result = await fetch("/api/users", {
         method: "POST",
@@ -65,9 +67,9 @@ const SignInFormComponent = () => {
       if (data.msg === "This user is not exist!") {
         set_MSG((pre) => ({
           ...pre,
-          usernameMSG: final_username.includes(" ")
-            ? "username do not contain any space"
-            : "",
+          usernameMSG: final_username.match(pattern)
+            ? ""
+            : "username do not contain any space",
         }));
       } //
       else {
@@ -76,11 +78,11 @@ const SignInFormComponent = () => {
           usernameMSG: "this username is arleady exist!",
         }));
       }
-    }, 2000);
+    }, 1000);
   };
 
   const emailChangeHandler = () => {
-    const pattern = /^[\w.+\-]+@gmail\.com$/;
+    let pattern = /^[\w.+\-]+@gmail\.com$/;
     let result = email.value.match(pattern);
 
     if (result || email.value === "") {
@@ -142,6 +144,9 @@ const SignInFormComponent = () => {
     let final_username = username.value.trim();
     let final_email = email.value.trim();
     let final_password = password.value.trim();
+
+    // let pattern = /^\S*$/;
+    // let result = final_username.match(pattern);
 
     if (MSG.fullnameMSG != "") {
       alert("Enter valid name!");

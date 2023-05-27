@@ -35,6 +35,8 @@ export async function GET(req, res) {
     } else {
       //
 
+      console.log(user);
+
       return NextResponse.json({
         status: true,
         msg: "User is Successfully Found",

@@ -37,12 +37,12 @@ export async function POST(req, res) {
       });
     }
 
-    // if (user.logInStatus) {
-    //   return NextResponse.json({
-    //     status: false,
-    //     msg: "User is already loggedIn",
-    //   });
-    // }
+    if (user.logInStatus) {
+      return NextResponse.json({
+        status: false,
+        msg: "User is already loggedIn",
+      });
+    }
 
     const token = jwt.sign(
       { _id: user._id, username: user.username },
