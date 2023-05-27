@@ -45,7 +45,7 @@ const Setting = () => {
             <strong>Your Account</strong>
             <button
               onClick={() => {
-                router.push("/profile/nit");
+                router.push("/profile/selfUser");
               }}
             >
               <FaRegUserCircle className={style.icons} />

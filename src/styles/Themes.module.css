@@ -28,8 +28,12 @@
   height: 1.6rem;
   padding: 0 0rem;
   border-radius: 10rem;
-  /* overflow: hidden; */
   border: 0.09rem solid var(--black_border);
+}
+
+.appTheme_cover label:has(> .checkBox:checked) {
+  background-color: #22afec;
+  box-shadow: 0 0 0.5rem #22afec;
 }
 
 .appTheme_cover label .checkBox {
@@ -45,13 +49,16 @@
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  transform: translateX(-0.05rem);
+  transform: translateX(-0.06rem);
   transition: all 0.5s;
+  border: 0.09rem solid white;
   background-color: var(--primary_bg1);
 }
 
 .appTheme_cover label .checkBox:checked ~ span.btn_ball {
   transform: translateX(1.5rem);
+  background-color: #22afec;
+  box-shadow: 0 0 0.5rem #22afec;
 }
 
 .appTheme_cover label span .icons {

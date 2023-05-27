@@ -2,13 +2,20 @@
 
 import settingStyle from "../../../../styles/SettingLayout.module.css";
 import style from "../../../../styles/Themes.module.css";
-import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
 
+import { BsFillSunFill, BsFillMoonFill } from "react-icons/bs";
 import { BsArrowLeft } from "react-icons/bs";
+
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const Themes = () => {
   const router = useRouter();
+
+  useEffect(() => {
+    let theme = localStorage.getItem("theme") || "light";
+    theme === "light" ? (themeBtn.checked = 0) : (themeBtn.checked = 1);
+  }, []);
 
   const toggleBtn = () => {
     if (themeBtn.checked) {

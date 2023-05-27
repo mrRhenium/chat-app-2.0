@@ -19,7 +19,10 @@ export async function GET(req, context) {
 
     const token = req.cookies.get("token")?.value || req.headers.cookies.token;
     const tokenData = jwt.verify(token, process.env.JWTSECRET);
-    const pUsername = context.params.username;
+    const pUsername =
+      context.params.username === "selfUser"
+        ? tokenData.username
+        : context.params.username;
 
     const user = await UserData.findOne(
       { username: pUsername },
@@ -49,7 +52,7 @@ export async function GET(req, context) {
 
     // console.log(selfUser);
 
-    let data = user._doc;
+    let data = user ? user._doc : {};
 
     if (!user) {
       //
