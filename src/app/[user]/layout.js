@@ -25,23 +25,6 @@ const UserLayout = ({ children }) => {
   const [menuIndex, set_menuIndex] = useState(0);
   const pathname = usePathname();
 
-  const { data } = useSWR(URL, fetcher, {
-    refreshInterval: 30000,
-  });
-
-  let notifyCount = 0;
-  if (data && data["status"]) {
-    notifyCount = data["user"].notifications.count;
-    console.log(data["user"]);
-  }
-
-  data && data["status"] === false
-    ? console.log(`${data["msg"]}`)
-    : console.log("Alright");
-
-  console.log(notifyCount);
-  // console.log(data["user"]);
-
   useEffect(() => {
     let theme = localStorage.getItem("theme") || "light";
 
@@ -56,6 +39,25 @@ const UserLayout = ({ children }) => {
     pathname === "/user/search" ||
     pathname === "/user/setting"
   ) {
+    //
+
+    const { data } = useSWR(URL, fetcher, {
+      refreshInterval: 30000,
+    });
+
+    let notifyCount = 0;
+    if (data && data["status"]) {
+      notifyCount = data["user"].notifications.count;
+      console.log(data["user"]);
+    }
+
+    data && data["status"] === false
+      ? console.log(`${data["msg"]}`)
+      : console.log("Alright");
+
+    console.log(notifyCount);
+    // console.log(data["user"]);
+
     return (
       <>
         <div className={style.chats_page}>
