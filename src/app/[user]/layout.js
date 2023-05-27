@@ -50,9 +50,11 @@ const UserLayout = ({ children }) => {
       notifyCount = data["user"].notifications.count;
     }
 
-    // data && data["status"] === false
-    //   ? console.log(`${data["msg"]}`)
-    //   : console.log("Alright " + data["user"].notifications.count);
+    console.log(data);
+
+    data && data["status"] === false
+      ? console.log(`${data["msg"]}`)
+      : console.log("Alright " + data["user"].notifications.count);
 
     return (
       <>
