@@ -16,6 +16,8 @@ export async function POST(req, res) {
   try {
     //
 
+    const prevToken =
+      req.cookies.get("token")?.value || req.headers.cookies.token;
     const body = await req.json();
     const user = await User.findOne({ username: body.username });
 
@@ -37,7 +39,7 @@ export async function POST(req, res) {
       });
     }
 
-    if (user.logInStatus) {
+    if (prevToken && user.logInStatus) {
       return NextResponse.json({
         status: false,
         msg: "User is already loggedIn",

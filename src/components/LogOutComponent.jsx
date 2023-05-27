@@ -21,7 +21,7 @@ const LogOutComponent = ({ closePopUp }) => {
     });
 
     const resData = await res.json();
-    if (resData.status === false) alert(`${resData.msg}`);
+    alert(`${resData.msg}`);
 
     if (resData.status) {
       document.cookie = "token=;Path=/;Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
