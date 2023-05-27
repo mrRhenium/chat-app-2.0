@@ -19,6 +19,17 @@ export default function middleware(req, res) {
 
     //
   } //
+  else if (req.url.includes("/logIn") || req.url.includes("/signIn")) {
+    //
+
+    if (token != null || token != undefined || token != "") {
+      return NextResponse.redirect(
+        "https://chat-app-2-0-eight.vercel.app/user/chats"
+      );
+    }
+
+    //
+  }
 
   return NextResponse.next();
 }

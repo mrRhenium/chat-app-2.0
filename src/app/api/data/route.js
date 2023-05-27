@@ -14,6 +14,7 @@ export async function GET(req, res) {
 
     const token = req.cookies.get("token")?.value || req.headers.cookies.token;
     const tokenData = jwt.verify(token, process.env.JWTSECRET);
+
     const user = await UserData.findOne(
       { userId: tokenData._id },
       {
