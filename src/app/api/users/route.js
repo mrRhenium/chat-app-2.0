@@ -80,3 +80,67 @@ export async function POST(req, res) {
 // *****************************
 // POST Request : End here
 // *****************************
+
+// *****************************
+// PUT Request : End here
+// *****************************
+export async function PUT(req, res) {
+  // console.log("Database Connecting");
+  dbConnect();
+  console.log("Database Connected");
+
+  try {
+    //
+
+    const token = req.cookies.get("token")?.value || req.headers.cookies.token;
+    const tokenData = jwt.verify(token, process.env.JWTSECRET);
+    const body = await req.json();
+
+    if (body.action === "User is online") {
+      //
+
+      await UserData.findOneAndUpdate(
+        { userId: tokenData._id },
+        {
+          $set: { onlineStatus: true },
+        }
+      );
+
+      return NextResponse.json({
+        status: true,
+        msg: "Successfully! : User is Online",
+      });
+
+      //
+    } //
+    else if (body.action === "User is offline") {
+      //
+
+      await UserData.findOneAndUpdate(
+        { userId: tokenData._id },
+        {
+          $set: { onlineStatus: false },
+        }
+      );
+
+      return NextResponse.json({
+        status: true,
+        msg: "Successfully! : User is Offline",
+      });
+
+      //
+    }
+
+    //
+  } catch (err) {
+    console.log(err);
+
+    return NextResponse.json({
+      status: false,
+      msg: "ERROR! : Something went wrong with logOut",
+    });
+  }
+}
+// *****************************
+// PUT Request : End here
+// *****************************

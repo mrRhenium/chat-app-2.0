@@ -9,9 +9,9 @@ import { BsDot } from "react-icons/bs";
 import { VscBellDot } from "react-icons/vsc";
 import { MdNotifications } from "react-icons/md";
 
-import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import useSWR from "swr";
 
 const URL = `/api/users`;
@@ -19,6 +19,26 @@ const fetcher = async (url) => {
   const res = await fetch(url);
   const data = await res.json();
   return data;
+};
+
+const putMethod = async (action) => {
+  console.log(action);
+
+  const JSONdata = JSON.stringify({
+    action: action,
+  });
+  const res = await fetch(`/api/users`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSONdata,
+  });
+
+  const resData = await res.json();
+  if (resData.status === false) alert(`${resData.msg}`);
+
+  //
 };
 
 const UserLayout = ({ children }) => {
@@ -46,6 +66,20 @@ const UserLayout = ({ children }) => {
     theme === "light"
       ? document.body.classList.remove("darkTheme")
       : document.body.classList.add("darkTheme");
+
+    //
+
+    if (document.readyState === "complete") putMethod("User is online");
+    window.addEventListener("beforeunload", () => putMethod("User is offline"));
+
+    // CleanUp function
+    return () => {
+      window.removeEventListener("beforeunload", () =>
+        putMethod("User is offline")
+      );
+    };
+
+    //
   }, []);
 
   if (

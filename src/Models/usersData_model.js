@@ -72,7 +72,7 @@ const userDataSchema = new Schema(
     },
     onlineStatus: {
       type: Boolean,
-      default: 1,
+      default: false,
       required: true,
     },
     follower: {
