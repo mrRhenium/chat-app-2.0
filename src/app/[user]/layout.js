@@ -63,11 +63,16 @@ const UserLayout = ({ children }) => {
 
     //
 
+    if (document.readyState === "complete") putMethod("User is online");
+    window.addEventListener("beforeunload", () => putMethod("User is offline"));
     document.addEventListener("visibilitychange", pageVisibility);
 
     // CleanUp function
     return () => {
       document.removeEventListener("visibilitychange", pageVisibility);
+      window.removeEventListener("beforeunload", () =>
+        putMethod("User is offline")
+      );
     };
 
     //
