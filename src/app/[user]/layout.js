@@ -22,7 +22,7 @@ const fetcher = async (url) => {
 };
 
 const putMethod = async (action) => {
-  console.log(action);
+  // console.log(action);
 
   const JSONdata = JSON.stringify({
     action: action,
@@ -78,15 +78,6 @@ const UserLayout = ({ children }) => {
     //
   }, []);
 
-  let notifyCount = 0;
-  if (data && data["status"]) {
-    notifyCount = data["user"].notifications.count;
-  }
-
-  // data && data["status"] === false
-  //   ? console.log(`${data["msg"]}`)
-  //   : console.log("Alright " + data["user"].notifications.count);
-
   if (
     pathname === "/user/chats" ||
     pathname === "/user/notification" ||
@@ -94,6 +85,15 @@ const UserLayout = ({ children }) => {
     pathname === "/user/setting"
   ) {
     //
+
+    let notifyCount = 0;
+    if (data && data["status"]) {
+      notifyCount = data["user"].notifications.count;
+    }
+
+    // data && data["status"] === false
+    //   ? console.log(`${data["msg"]}`)
+    //   : console.log("Alright " + data["user"].notifications.count);
 
     return (
       <>
