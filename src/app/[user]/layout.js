@@ -70,6 +70,10 @@ const UserLayout = ({ children }) => {
     //
 
     if (document.readyState === "complete") putMethod("User is online");
+
+    if (document.visibilityState === "hidden") putMethod("User is offline");
+    else putMethod("User is online");
+
     window.addEventListener("beforeunload", () => putMethod("User is offline"));
 
     // CleanUp function
