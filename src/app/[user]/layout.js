@@ -49,16 +49,10 @@ const UserLayout = ({ children }) => {
     refreshInterval: 30000,
   });
 
-  // console.log(data);
-
-  let notifyCount = 0;
-  if (data && data["status"]) {
-    notifyCount = data["user"].notifications.count;
-  }
-
-  // data && data["status"] === false
-  //   ? console.log(`${data["msg"]}`)
-  //   : console.log("Alright " + data["user"].notifications.count);
+  const pageVisibility = () => {
+    if (document.visibilityState === "hidden") putMethod("User is offline");
+    else putMethod("User is online");
+  };
 
   useEffect(() => {
     let theme = localStorage.getItem("theme") || "light";
@@ -69,24 +63,24 @@ const UserLayout = ({ children }) => {
 
     //
 
-    if (document.readyState === "complete") putMethod("User is online");
-
-    document.onvisibilitychange = () => {
-      if (document.visibilityState === "hidden") putMethod("User is offline");
-      else putMethod("User is online");
-    };
-
-    window.addEventListener("beforeunload", () => putMethod("User is offline"));
+    document.addEventListener("visibilitychange", pageVisibility);
 
     // CleanUp function
     return () => {
-      window.removeEventListener("beforeunload", () =>
-        putMethod("User is offline")
-      );
+      document.removeEventListener("visibilitychange", pageVisibility);
     };
 
     //
   }, []);
+
+  let notifyCount = 0;
+  if (data && data["status"]) {
+    notifyCount = data["user"].notifications.count;
+  }
+
+  // data && data["status"] === false
+  //   ? console.log(`${data["msg"]}`)
+  //   : console.log("Alright " + data["user"].notifications.count);
 
   if (
     pathname === "/user/chats" ||
