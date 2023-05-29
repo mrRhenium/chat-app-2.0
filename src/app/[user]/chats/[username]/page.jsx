@@ -28,7 +28,7 @@ const ChattingPage = () => {
 
   let uName = useParams().username;
   const { data, isLoading, mutate } = useSWR(`${URL}/${uName}`, fetcher, {
-    refreshInterval: 1500,
+    refreshInterval: 5000,
   });
 
   let list = data && data["status"] && data["data"]["message"];
