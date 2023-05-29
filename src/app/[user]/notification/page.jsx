@@ -16,7 +16,9 @@ const fetcher = async (url) => {
 
 const Notification = () => {
   const [option, set_option] = useState("Send");
-  const { data, isLoading, mutate } = useSWR(URL, fetcher);
+  const { data, isLoading, mutate } = useSWR(URL, fetcher, {
+    refreshInterval: 2000,
+  });
 
   return (
     <>

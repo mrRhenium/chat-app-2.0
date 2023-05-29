@@ -50,17 +50,17 @@ export async function GET(req, context) {
     const chatId = selfUser.friends[0].chatId;
     const chats = await Chat.findOne({ _id: chatId });
 
-    // await Chat.updateMany(
-    //   {
-    //     _id: chatId,
-    //   },
-    //   {
-    //     $set: {
-    //       [`message.$[e].seenStauts`]: true,
-    //     },
-    //   },
-    //   { arrayFilters: [{ [`e.author`]: pUsername }] }
-    // );
+    await Chat.updateMany(
+      {
+        _id: chatId,
+      },
+      {
+        $set: {
+          [`message.$[e].seenStauts`]: true,
+        },
+      },
+      { arrayFilters: [{ [`e.author`]: pUsername }] }
+    );
 
     await UserData.findOneAndUpdate(
       { userId: tokenData._id, [`friends.chatId`]: chatId },

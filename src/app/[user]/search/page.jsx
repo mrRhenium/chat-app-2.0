@@ -20,7 +20,9 @@ const fetcher = async (url) => {
 };
 
 const Search = () => {
-  const { data, isLoading, mutate } = useSWR(URL, fetcher);
+  const { data, isLoading, mutate } = useSWR(URL, fetcher, {
+    refreshInterval: 2000,
+  });
   const [list, set_list] = useState([]);
 
   //

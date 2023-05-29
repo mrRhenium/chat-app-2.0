@@ -28,7 +28,9 @@ const Chats = () => {
   const [showPopUp, set_showPopUp] = useState({ flag: 0, username: "" });
 
   // Data is fetch from the Server
-  const { data, isLoading } = useSWR(URL, fetcher);
+  const { data, isLoading } = useSWR(URL, fetcher, {
+    refreshInterval: 2000,
+  });
 
   const resMsg = data && data["msg"];
   const chatList =
