@@ -54,13 +54,13 @@ const ChattingPage = () => {
 
     if (msg === "") return;
 
-    list.push({
-      _id: new Date().getUTCMilliseconds() * 2804,
-      author: "SelfHume",
-      msg: msg,
-      time: time,
-      seenStauts: false,
-    });
+    // list.push({
+    //   _id: new Date().getUTCMilliseconds() * 2804,
+    //   author: "SelfHume",
+    //   msg: msg,
+    //   time: time,
+    //   seenStauts: false,
+    // });
 
     const JSONdata = JSON.stringify({
       message: msg,
