@@ -174,14 +174,12 @@
 .body .chatList_cover .chat_list_items .chatInfo_cover .chat_msg_highlight {
   position: relative;
   display: flex;
-  /* gap: 0.2rem; */
   align-items: center;
   width: 95%;
   height: 50%;
-  /* border: 0.1rem solid red; */
 }
 
-.body
+/* .body
   .chatList_cover
   .chat_list_items
   .chatInfo_cover
@@ -193,9 +191,7 @@
   align-items: center;
   width: 2rem;
   height: 100%;
-  /* border: 0.1rem solid red; */
 }
-
 .body
   .chatList_cover
   .chat_list_items
@@ -207,8 +203,18 @@
   align-items: center;
   width: calc(100% - 3rem);
   height: 100%;
-  /* border: 0.1rem solid red; */
 }
+.body
+.chatList_cover
+.chat_list_items
+.chatInfo_cover
+.chat_msg_highlight
+.icons {
+  font-size: 1.3rem;
+  color: var(--doubleTick);
+}
+*/
+
 .body .chatList_cover .chat_list_items .chatInfo_cover .chat_msg_highlight p {
   color: var(--msg_highlight);
   font-size: 0.9rem;
@@ -217,16 +223,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   /* border: 0.1rem solid black; */
-}
-.body
-  .chatList_cover
-  .chat_list_items
-  .chatInfo_cover
-  .chat_msg_highlight
-  .icons {
-  font-size: 1.3rem;
-  color: var(--doubleTick);
-  /* color: lime; */
 }
 
 .body .chatList_cover .chat_list_items .chatBadge_cover {

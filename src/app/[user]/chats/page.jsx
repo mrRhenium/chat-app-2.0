@@ -108,9 +108,9 @@ const Chats = () => {
                       <p>{item.username}</p>
                     </span>
                     <span className={style.chat_msg_highlight}>
-                      <span>
+                      {/* <span>
                         <RiCheckDoubleLine className={style.icons} />
-                      </span>
+                      </span> */}
                       <span>
                         <p>{item.lastMsg}</p>
                       </span>

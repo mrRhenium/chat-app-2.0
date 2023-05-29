@@ -32,7 +32,7 @@ const msgSchema = new Schema(
     },
     seenStauts: {
       type: Boolean,
-      default: 1,
+      default: false,
       required: true,
     },
     time: {

@@ -7,6 +7,7 @@ import { BsArrowLeft } from "react-icons/bs";
 import { BiUser } from "react-icons/bi";
 import { CiMenuKebab } from "react-icons/ci";
 import { MdSend } from "react-icons/md";
+import { RiCheckDoubleLine, RiCheckLine } from "react-icons/ri";
 
 import useSWR from "swr";
 import { useEffect, useRef, useState } from "react";
@@ -58,6 +59,7 @@ const ChattingPage = () => {
       author: "SelfHume",
       msg: msg,
       time: time,
+      seenStauts: false,
     });
 
     const JSONdata = JSON.stringify({
@@ -139,7 +141,19 @@ const ChattingPage = () => {
                         }
                       >
                         <p>{item.msg}</p>
-                        <p className={style.msg_time}>{item.time}</p>
+                        <p className={style.msg_time}>
+                          {item.time}
+
+                          {item.author != uName ? (
+                            item.seenStauts ? (
+                              <RiCheckDoubleLine className={style.icons} />
+                            ) : (
+                              <RiCheckLine className={style.icons} />
+                            )
+                          ) : null}
+
+                          {/*  */}
+                        </p>
                       </span>
                     );
                   })}
