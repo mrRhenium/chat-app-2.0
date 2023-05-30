@@ -27,13 +27,9 @@ const ChattingPage = () => {
   const router = useRouter();
 
   let uName = useParams().username;
-  const { data, isLoading, mutate } = useSWR(
-    `${URL}/${uName}`,
-    fetcher
-    // , {
-    //   refreshInterval: 1000,
-    // }
-  );
+  const { data, isLoading, mutate } = useSWR(`${URL}/${uName}`, fetcher, {
+    refreshInterval: 1000,
+  });
 
   let temp_list = data && data["status"] ? data["data"]["message"] : [];
 
@@ -44,7 +40,7 @@ const ChattingPage = () => {
 
   useEffect(() => {
     if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
-  });
+  }, [list]);
 
   const sendChat = async (e) => {
     //
@@ -149,33 +145,35 @@ const ChattingPage = () => {
               {/* Body Part Starts */}
               <section className={style.body}>
                 <div className={style.chats_cover} ref={chatsCover}>
-                  {list.map((item) => {
-                    return (
-                      <span
-                        key={item._id}
-                        className={
-                          item.author === uName
-                            ? style.msg_left
-                            : style.msg_right
-                        }
-                      >
-                        <p>{item.msg}</p>
-                        <p className={style.msg_time}>
-                          {item.time}
+                  {(temp_list.length >= list.length ? temp_list : list).map(
+                    (item) => {
+                      return (
+                        <span
+                          key={item._id}
+                          className={
+                            item.author === uName
+                              ? style.msg_left
+                              : style.msg_right
+                          }
+                        >
+                          <p>{item.msg}</p>
+                          <p className={style.msg_time}>
+                            {item.time}
 
-                          {item.author != uName ? (
-                            item.seenStauts ? (
-                              <RiCheckDoubleLine className={style.icons} />
-                            ) : (
-                              <RiCheckLine className={style.icons} />
-                            )
-                          ) : null}
+                            {item.author != uName ? (
+                              item.seenStauts ? (
+                                <RiCheckDoubleLine className={style.icons} />
+                              ) : (
+                                <RiCheckLine className={style.icons} />
+                              )
+                            ) : null}
 
-                          {/*  */}
-                        </p>
-                      </span>
-                    );
-                  })}
+                            {/*  */}
+                          </p>
+                        </span>
+                      );
+                    }
+                  )}
                 </div>
               </section>
               {/* Body Part Ends */}
