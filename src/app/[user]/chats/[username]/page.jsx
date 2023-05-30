@@ -27,9 +27,13 @@ const ChattingPage = () => {
   const router = useRouter();
 
   let uName = useParams().username;
-  const { data, isLoading } = useSWR(`${URL}/${uName}`, fetcher, {
-    refreshInterval: 1000,
-  });
+  const { data, isLoading, mutate } = useSWR(
+    `${URL}/${uName}`,
+    fetcher
+    // , {
+    //   refreshInterval: 1000,
+    // }
+  );
 
   let list = data && data["status"] && data["data"]["message"];
   const [msgBox, set_msgBox] = useState("");
@@ -77,7 +81,7 @@ const ChattingPage = () => {
 
     const resData = await res.json();
     if (resData.status === false) alert(`${resData.msg}`);
-
+    mutate();
     msgInputBox.focus();
 
     //
