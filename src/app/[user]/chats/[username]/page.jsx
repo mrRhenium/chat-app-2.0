@@ -31,8 +31,11 @@ const ChattingPage = () => {
     refreshInterval: 500,
   });
 
-  let list = data && data["status"] && data["data"]["message"];
   const [msgBox, set_msgBox] = useState("");
+  let temp_list = data && data["status"] ? data["data"]["message"] : [];
+
+  const [list, set_list] = useState([]);
+  temp_list.length > list.length ? set_list(temp_list) : null;
 
   useEffect(() => {
     if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
@@ -53,6 +56,17 @@ const ChattingPage = () => {
     });
 
     if (msg === "") return;
+
+    set_list((prev) => [
+      ...prev,
+      {
+        id: Date.now() * 28,
+        author: "SelfHume",
+        msg: msg,
+        time: time,
+        seenStauts: false,
+      },
+    ]);
 
     // list.push({
     //   _id: Date.now() * 28,
