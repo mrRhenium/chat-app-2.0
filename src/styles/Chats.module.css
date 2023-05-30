@@ -214,6 +214,18 @@
   color: var(--doubleTick);
 }
 */
+.body
+  .chatList_cover
+  .chat_list_items
+  .chatInfo_cover
+  .chat_msg_highlight
+  span {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: calc(100% - 3rem);
+  height: 100%;
+}
 
 .body .chatList_cover .chat_list_items .chatInfo_cover .chat_msg_highlight p {
   color: var(--msg_highlight);
