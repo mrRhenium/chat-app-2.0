@@ -27,22 +27,24 @@ const ChattingPage = () => {
   const router = useRouter();
 
   let uName = useParams().username;
-  const { data, isLoading, mutate } = useSWR(`${URL}/${uName}`, fetcher, {
-    refreshInterval: 1000,
-  });
+  const { data, isLoading, mutate } = useSWR(
+    `${URL}/${uName}`,
+    fetcher
+    // , {
+    //   refreshInterval: 1000,
+    // }
+  );
 
   let temp_list = data && data["status"] ? data["data"]["message"] : [];
 
   const [list, set_list] = useState([]);
   const [msgBox, set_msgBox] = useState("");
 
-  setInterval(() => {
-    temp_list.length > list.length ? set_list(temp_list) : null;
-  }, 1000);
+  temp_list.length > list.length ? set_list(temp_list) : null;
 
   useEffect(() => {
     if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
-  }, [list]);
+  });
 
   const sendChat = async (e) => {
     //
