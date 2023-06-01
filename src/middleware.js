@@ -18,20 +18,21 @@ export default function middleware(req, res) {
     }
 
     //
-  } //
-  // else {
-  //   //
+  }
 
-  //   if (token === null || token === undefined || token === "") {
-  //     return NextResponse.next();
-  //   } else {
-  //     return NextResponse.redirect(
-  //       "https://chat-app-2-0-eight.vercel.app/user/chats"
-  //     );
-  //   }
+  if (req.url.includes("/logIn") || req.url.includes("/signIn")) {
+    //
 
-  //   //
-  // }
+    if (token != null && token != undefined && token != "") {
+      // User's browser doesn't have any token
+      // they will redirect to home page
+      return NextResponse.redirect(
+        "https://chat-app-2-0-eight.vercel.app/user/chats"
+      );
+    }
+
+    //
+  }
 
   return NextResponse.next();
 }
