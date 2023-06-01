@@ -20,7 +20,10 @@ export default function middleware(req, res) {
     //
   }
 
-  if (req.url.includes("/logIn") || req.url.includes("/signIn")) {
+  if (
+    !req.url.includes("/api") &&
+    (req.url.includes("/logIn") || req.url.includes("/signIn"))
+  ) {
     //
 
     if (token != null && token != undefined && token != "") {
