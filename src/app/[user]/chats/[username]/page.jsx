@@ -156,7 +156,18 @@ const ChattingPage = () => {
                               : style.msg_right
                           }
                         >
-                          <p>{item.msg}</p>
+                          {item.msg.match(
+                            /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/
+                          ) ? (
+                            <p>
+                              <a href={`${item.msg}`} target="_blank">
+                                {item.msg}
+                              </a>
+                            </p>
+                          ) : (
+                            <p>{item.msg}</p>
+                          )}
+
                           <p className={style.msg_time}>
                             {item.time}
 
