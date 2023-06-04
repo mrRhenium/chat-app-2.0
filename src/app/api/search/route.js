@@ -243,6 +243,7 @@ export async function PUT(req, res) {
               name: targetUser.name,
               username: targetUser.username,
               avtar: targetUser.avtar,
+              time: body.time,
             },
           },
         }
@@ -259,6 +260,7 @@ export async function PUT(req, res) {
               name: selfUser.name,
               username: selfUser.username,
               avtar: selfUser.avtar,
+              time: body.time,
             },
           },
         }

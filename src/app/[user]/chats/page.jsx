@@ -57,13 +57,9 @@ const Chats = () => {
   });
 
   // Data is fetch from the Server
-  const { data, isLoading } = useSWR(
-    URL,
-    fetcher
-    //   , {
-    //   refreshInterval: 2000,
-    // }
-  );
+  const { data, isLoading } = useSWR(URL, fetcher, {
+    refreshInterval: 2000,
+  });
 
   // Close the PopUP component
   const closePopUp = () => set_showPopUp((prev) => ({ ...prev, flag: 0 }));

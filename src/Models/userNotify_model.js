@@ -35,11 +35,6 @@ const invitationSchema = new Schema(
             },
             time: {
               type: String,
-              default: new Date().toLocaleString("en-US", {
-                hour: "2-digit",
-                hour12: true,
-                minute: "2-digit",
-              }),
               required: true,
             },
           },
@@ -78,11 +73,6 @@ const invitationSchema = new Schema(
             },
             time: {
               type: String,
-              default: new Date().toLocaleString("en-US", {
-                hour: "2-digit",
-                hour12: true,
-                minute: "2-digit",
-              }),
               required: true,
             },
           },

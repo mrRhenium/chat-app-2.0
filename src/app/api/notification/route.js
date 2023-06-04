@@ -78,7 +78,6 @@ export async function PUT(req, res) {
           $pull: {
             [`invitation.recieved`]: {
               userId: friendUser.userId,
-              time: body.time,
             },
           },
         }
@@ -91,7 +90,7 @@ export async function PUT(req, res) {
         },
         {
           $pull: {
-            [`invitation.send`]: { userId: selfUser.userId, time: body.time },
+            [`invitation.send`]: { userId: selfUser.userId },
           },
         }
       );
