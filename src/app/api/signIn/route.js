@@ -73,6 +73,11 @@ export async function POST(req, res) {
     //
   } catch (err) {
     console.log(err);
+
+    return NextResponse.json({
+      status: false,
+      msg: "ERROR: Something went wrong",
+    });
   }
 
   // End of the Route

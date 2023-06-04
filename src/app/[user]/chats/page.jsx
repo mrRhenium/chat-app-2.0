@@ -14,7 +14,7 @@ import PicComponent from "@/components/PicComponent";
 
 import { BiUser } from "react-icons/bi";
 import { FaUserCircle } from "react-icons/fa";
-import { RiCheckDoubleLine } from "react-icons/ri";
+// import { RiCheckDoubleLine } from "react-icons/ri";
 
 const URL = `/api/chatList`;
 const fetcher = async (url) => {
@@ -23,28 +23,103 @@ const fetcher = async (url) => {
   return data;
 };
 
+const updateAvtar = async (action, targetUserId) => {
+  //
+
+  const JSONdata = JSON.stringify({
+    action: action,
+    targetUserId: targetUserId,
+  });
+
+  const res = await fetch(`/api/profile/targetUser`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSONdata,
+  });
+
+  const resData = await res.json();
+  if (resData.status === false) alert(`${resData.msg}`);
+
+  console.log(resData.msg);
+
+  //
+};
+
 const Chats = () => {
   const router = useRouter();
+  const [friendAvtar, set_friendAvtar] = useState({
+    flag: 0,
+    avtar: "",
+  });
   const [showPopUp, set_showPopUp] = useState({ flag: 0, username: "" });
 
   // Data is fetch from the Server
-  const { data, isLoading } = useSWR(URL, fetcher, {
-    refreshInterval: 2000,
-  });
+  const { data, isLoading } = useSWR(
+    URL,
+    fetcher
+    //   , {
+    //   refreshInterval: 2000,
+    // }
+  );
 
   const resMsg = data && data["msg"];
   const chatList =
     data && data["data"]["friends"].length ? data["data"]["friends"] : [];
   const selfUser = data && data["data"];
 
+  console.log(selfUser);
+
   // Close the PopUP component
   const closePopUp = () => set_showPopUp((prev) => ({ ...prev, flag: 0 }));
+
+  if (isLoading) {
+    return (
+      <>
+        <section className={style.header}>
+          <div className={style.logo_cover}>
+            <Image
+              src={img}
+              alt="app logo"
+              width={300}
+              height={300}
+              className={style.logo}
+            />
+          </div>
+          <div className={style.userProfile_cover}>
+            <span
+              className={style.user_profile}
+              onClick={() => {
+                router.push(`/profile/selfUser`);
+              }}
+            >
+              <BiUser className={style.icons} />
+            </span>
+          </div>
+        </section>
+        {/* Chats page Header Part Ends */}
+
+        {/* Chats page Body Part Starts */}
+        <section className={style.body}>
+          <div className={style.chatList_cover}>
+            <LoadingComponent />
+          </div>
+        </section>
+        {/* Chats page Body Part Ends */}
+      </>
+    );
+  }
 
   return (
     <>
       {showPopUp.flag ? (
         <PopUpComponent closePopUp={closePopUp}>
-          <PicComponent closePopUp={closePopUp} username={showPopUp.username} />
+          <PicComponent
+            closePopUp={closePopUp}
+            username={showPopUp.username}
+            avtar={friendAvtar}
+          />
         </PopUpComponent>
       ) : null}
 
@@ -62,11 +137,22 @@ const Chats = () => {
         <div className={style.userProfile_cover}>
           <span
             className={style.user_profile}
+            style={
+              selfUser.avtar === `/assets/${selfUser.userId}`
+                ? {}
+                : {
+                    backgroundImage: `url(
+                ${process.env.NEXT_PUBLIC_MEDIAURL}${selfUser.avtar}
+              )`,
+                  }
+            }
             onClick={() => {
               router.push(`/profile/${selfUser.username}`);
             }}
           >
-            <BiUser className={style.icons} />
+            {selfUser.avtar === `/assets/${selfUser.userId}` ? (
+              <BiUser className={style.icons} />
+            ) : null}
           </span>
         </div>
       </section>
@@ -75,9 +161,7 @@ const Chats = () => {
       {/* Chats page Body Part Starts */}
       <section className={style.body}>
         <div className={style.chatList_cover}>
-          {isLoading ? (
-            <LoadingComponent />
-          ) : data["status"] === false ? (
+          {data["status"] === false ? (
             alert(`${resMsg}`)
           ) : chatList.length === 0 ? (
             <>
@@ -92,12 +176,32 @@ const Chats = () => {
                 <div key={item.username} className={style.chat_list_items}>
                   <span
                     className={style.chatPic_cover}
-                    onClick={() =>
-                      set_showPopUp({ flag: 1, username: item.username })
-                    }
+                    onClick={() => {
+                      updateAvtar("Update Avtar", item.userId);
+
+                      set_showPopUp({ flag: 1, username: item.username });
+
+                      set_friendAvtar({
+                        flag: item.avtar === `/assets/${item.userId}` ? 0 : 1,
+                        avtar: `${process.env.NEXT_PUBLIC_MEDIAURL}${item.avtar}`,
+                      });
+                    }}
                   >
-                    <span className={style.chat_pic}>
-                      <FaUserCircle className={style.icons} />
+                    <span
+                      className={style.chat_pic}
+                      style={
+                        item.avtar === `/assets/${item.userId}`
+                          ? {}
+                          : {
+                              backgroundImage: `url(
+                    ${process.env.NEXT_PUBLIC_MEDIAURL}${item.avtar}
+                  )`,
+                            }
+                      }
+                    >
+                      {item.avtar === `/assets/${item.userId}` ? (
+                        <FaUserCircle className={style.icons} />
+                      ) : null}
                     </span>
                   </span>
                   <span
@@ -110,9 +214,6 @@ const Chats = () => {
                       <p>{item.username}</p>
                     </span>
                     <span className={style.chat_msg_highlight}>
-                      {/* <span>
-                        <RiCheckDoubleLine className={style.icons} />
-                      </span> */}
                       <span>
                         <p>{item.lastMsg}</p>
                       </span>

@@ -11,6 +11,10 @@ const friendSchema = new Schema(
       type: String,
       required: true,
     },
+    avtar: {
+      type: String,
+      required: true,
+    },
     chatId: {
       type: Schema.Types.ObjectId,
       ref: "Chat",

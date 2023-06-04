@@ -25,6 +25,10 @@
   height: 13rem;
   background-color: rgba(0, 0, 0, 0.6);
   border: 0.09rem solid var(--primary_border);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
 }
 
 .header .pic_cover .icons {

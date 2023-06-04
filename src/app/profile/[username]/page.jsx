@@ -33,7 +33,7 @@ const ProfilePage = () => {
   let uName = useParams().username;
 
   const [showPopUP, set_showPopUP] = useState(0);
-  const { data, isLoading } = useSWR(`${URL}/${uName}`, fetcher);
+  const { data, isLoading, mutate } = useSWR(`${URL}/${uName}`, fetcher);
 
   const closePopUp = () => set_showPopUP(0);
 
@@ -55,6 +55,7 @@ const ProfilePage = () => {
               msg={data["msg"]}
               status={data["status"]}
               set_showPopUP={set_showPopUP}
+              mutate={mutate}
             />
           )}
         </div>

@@ -8,15 +8,24 @@ import { BsInfoCircle } from "react-icons/bs";
 
 import { useRouter } from "next/navigation";
 
-const PicComponent = ({ closePopUp, username }) => {
+const PicComponent = ({ closePopUp, username, avtar }) => {
   const router = useRouter();
 
   return (
     <>
       {/* Header Section Start hear */}
       <section className={style.header}>
-        <span className={style.pic_cover}>
-          <FaUserCircle className={style.icons} />
+        <span
+          className={style.pic_cover}
+          style={
+            avtar.flag
+              ? {
+                  backgroundImage: `url(${avtar.avtar})`,
+                }
+              : {}
+          }
+        >
+          {avtar.flag ? null : <FaUserCircle className={style.icons} />}
         </span>
       </section>
       {/* Header Section End hear */}

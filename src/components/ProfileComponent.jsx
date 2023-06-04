@@ -1,14 +1,14 @@
 import style from "../styles/ProfilePage.module.css";
 
-import { BsArrowLeft } from "react-icons/bs";
-import { BsQrCodeScan } from "react-icons/bs";
-import { BsShieldExclamation } from "react-icons/bs";
-import { FaUserCircle } from "react-icons/fa";
-import { BiLogOut } from "react-icons/bi";
-import { BiBlock } from "react-icons/bi";
-import { CiMenuKebab } from "react-icons/ci";
+import { FaUserCircle, FaRegEdit } from "react-icons/fa";
+import { BiLogOut, BiBlock } from "react-icons/bi";
+import { CiMenuKebab, CiEdit } from "react-icons/ci";
+import { MdDeleteForever } from "react-icons/md";
+import { BsShieldExclamation, BsArrowLeft, BsQrCodeScan } from "react-icons/bs";
 
 import { useRouter } from "next/navigation";
+// import { useState } from "react";
+// import Image from "next/image";
 
 //
 //
@@ -35,9 +35,90 @@ const putRequest = async (action, targetUserId) => {
   //
 };
 
-const ProfileComponent = ({ item, set_showPopUP, msg, status }) => {
+const removeAvtar = async (userId, action, mutate) => {
+  //
+
+  const JSONdata = JSON.stringify({
+    action: action,
+  });
+
+  const res = await fetch(`/api/users`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSONdata,
+  });
+
+  const resData = await res.json();
+  if (resData.status === false) alert(`${resData.msg}`);
+
+  // Post Image and Avtar to Media Server
+
+  const mediaRes = await fetch(
+    `${process.env.NEXT_PUBLIC_MEDIAURL}/media/profile?userId=${userId}`,
+    {
+      method: "DELETE",
+    }
+  );
+
+  const mediaResData = await mediaRes.json();
+  if (mediaResData.status === false) alert(`${mediaResData.msg}`);
+
+  console.log("Profile Image is deleted");
+  mutate();
+  //
+};
+
+const postAvtar = async (e, userId, action, mutate) => {
+  //
+
+  let imgName = e.target.files[0].name.split(" ").join("");
+
+  const JSONdata = JSON.stringify({
+    action: action,
+    imgUrl: `/assets/${userId}/profile/${imgName}`,
+  });
+
+  const res = await fetch(`/api/users`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSONdata,
+  });
+
+  const resData = await res.json();
+  if (resData.status === false) alert(`${resData.msg}`);
+
+  // Post Image and Avtar to Media Server
+  const formData = new FormData();
+  formData.append("userId", userId);
+  formData.append("profilePic", e.target.files[0]);
+
+  // console.log(e.target.files[0]);
+
+  const mediaRes = await fetch(
+    `${process.env.NEXT_PUBLIC_MEDIAURL}/media/profile`,
+    {
+      method: "POST",
+      body: formData,
+    }
+  );
+
+  const mediaResData = await mediaRes.json();
+  if (mediaResData.status === false) alert(`${mediaResData.msg}`);
+
+  console.log("Profile Image is updated.");
+  mutate();
+
+  //
+};
+
+const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
   const router = useRouter();
-  // console.log(item);
+
+  // console.log(process.env.NEXT_PUBLIC_MEDIAURL + item.avtar);
 
   return (
     <>
@@ -76,20 +157,64 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status }) => {
                 <>
                   <div className={style.upper_cover}>
                     <span className={style.pic_cover}>
-                      <span className={style.pic}>
-                        <FaUserCircle className={style.icons} />
+                      <span
+                        className={style.pic}
+                        style={
+                          item.avtar === `/assets/${item.userId}`
+                            ? {}
+                            : {
+                                backgroundImage: `url(
+                                  ${process.env.NEXT_PUBLIC_MEDIAURL}${item.avtar}
+                                )`,
+                              }
+                        }
+                      >
+                        {item.avtar === `/assets/${item.userId}` ? (
+                          <FaUserCircle className={style.icons} />
+                        ) : null}
                       </span>
+
+                      {/*  */}
+                      {item.status === "self" ? (
+                        item.avtar === `/assets/${item.userId}` ? (
+                          <label htmlFor="profilePic" className={style.editBtn}>
+                            <input
+                              type="file"
+                              name="profilePic"
+                              id="profilePic"
+                              accept="image/*"
+                              hidden
+                              onChange={(e) =>
+                                postAvtar(
+                                  e,
+                                  item.userId,
+                                  "Update Avtar",
+                                  mutate
+                                )
+                              }
+                            />
+                            <CiEdit className={style.icons} />
+                          </label>
+                        ) : (
+                          <label
+                            className={style.removeBtn}
+                            onClick={() =>
+                              removeAvtar(item.userId, "Delete Avtar", mutate)
+                            }
+                          >
+                            <MdDeleteForever className={style.icons} />
+                          </label>
+                        )
+                      ) : null}
+
+                      {/*  */}
                     </span>
+
                     <span className={style.nameInfo_cover}>
                       <p className={style.name}>{item.name}</p>
                       <p className={style.live_status}>
                         ({item.onlineStatus ? "online" : "offline"})
                       </p>
-                    </span>
-                    <span className={style.btn_cover}>
-                      {item.status === "self" ? (
-                        <button>Edit Profile</button>
-                      ) : null}
                     </span>
                   </div>
                   <div className={style.lower_cover}>
@@ -113,7 +238,12 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status }) => {
               item.status === "blocked by you" ? null : (
                 <>
                   <span className={style.about_cover}>
-                    <strong>About</strong>
+                    <strong>
+                      About
+                      <button>
+                        <FaRegEdit className={style.icons} />
+                      </button>
+                    </strong>
                     <p>{item.about}</p>
                   </span>
 
@@ -121,7 +251,9 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status }) => {
                     <span className={style.mainInfo_cover}>
                       <strong>Account Info.</strong>
                       <p>
-                        {` Gmail-Id       :      ${item.email} \n Password      :      *********`}
+                        {` Gmail-Id        :      ${
+                          item.email.split("@")[0]
+                        } \n Password      :      *********`}
                       </p>
                     </span>
                   ) : null}

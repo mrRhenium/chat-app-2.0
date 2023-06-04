@@ -129,6 +129,40 @@ export async function PUT(req, res) {
       });
 
       //
+    } //
+    else if (body.action === "Update Avtar") {
+      await UserData.findOneAndUpdate(
+        {
+          userId: tokenData._id,
+        },
+        {
+          $set: {
+            avtar: body.imgUrl,
+          },
+        }
+      );
+
+      return NextResponse.json({
+        status: true,
+        msg: "Successfully! : Avtar is Updated.",
+      });
+    } //
+    else if (body.action == "Delete Avtar") {
+      await UserData.findOneAndUpdate(
+        {
+          userId: tokenData._id,
+        },
+        {
+          $set: {
+            avtar: `/assets/${tokenData._id}`,
+          },
+        }
+      );
+
+      return NextResponse.json({
+        status: true,
+        msg: "Successfully! : Avtar is Deleted.",
+      });
     }
 
     //

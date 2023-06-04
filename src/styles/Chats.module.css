@@ -46,6 +46,10 @@
   cursor: pointer;
   border-radius: 50%;
   border: 0.1rem solid white;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
 }
 
 .header .userProfile_cover .user_profile .icons {
@@ -134,7 +138,10 @@
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
-  /* border: 0.1rem solid white; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
 }
 
 .body .chatList_cover .chat_list_items .chatPic_cover .chat_pic .icons {

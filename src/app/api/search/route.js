@@ -302,6 +302,7 @@ export async function PUT(req, res) {
       const friend = {
         userId: friendUser.userId,
         username: friendUser.username,
+        avtar: friendUser.avtar,
         chatId: userChat._id,
         username: friendUser.username,
         invited: 0,
@@ -310,6 +311,7 @@ export async function PUT(req, res) {
       const self = {
         userId: selfUser.userId,
         username: selfUser.username,
+        avtar: selfUser.avtar,
         chatId: userChat._id,
         username: selfUser.username,
         invited: 1,

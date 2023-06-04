@@ -157,7 +157,8 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  max-width: 13.5rem;
+  /* max-width: 13.5rem; */
+  max-width: 55%;
   width: fit-content;
   height: fit-content;
   padding: 0.5rem 0.8rem;

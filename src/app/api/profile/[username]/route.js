@@ -187,7 +187,8 @@ export async function PUT(req, context) {
       });
 
       //
-    } else if (body.action === "Unblock User") {
+    } //
+    else if (body.action === "Unblock User") {
       //
 
       const selfUser = await UserData.findOneAndUpdate(
@@ -222,6 +223,34 @@ export async function PUT(req, context) {
       });
 
       //
+    } //
+    else if (body.action === "Update Avtar") {
+      //
+
+      const targetUser = await UserData.findOne(
+        { userId: body.targetUserId },
+        {
+          avtar: 1,
+        }
+      );
+
+      // console.log(targetUser);
+
+      const temp = await UserData.findOneAndUpdate(
+        { userId: tokenData._id, [`friends.userId`]: body.targetUserId },
+        {
+          $set: {
+            [`friends.$.avtar`]: targetUser.avtar,
+          },
+        }
+      );
+
+      // console.log(temp);
+
+      return NextResponse.json({
+        status: true,
+        msg: "Successfully! : Update Avtar.",
+      });
     }
 
     //

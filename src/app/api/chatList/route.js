@@ -14,11 +14,11 @@ export async function GET(req, res) {
   dbConnect();
   console.log("Database is Connected : GET -> api/chatList");
 
-  const token = req.cookies.get("token")?.value || req.headers.cookies.token;
-  const tokenData = jwt.verify(token, process.env.JWTSECRET);
-
   try {
     //
+
+    const token = req.cookies.get("token")?.value || req.headers.cookies.token;
+    const tokenData = jwt.verify(token, process.env.JWTSECRET);
 
     const selfUser = await UserData.aggregate([
       {
@@ -44,6 +44,8 @@ export async function GET(req, res) {
       friends: selfUser[0].friends,
       notifyCount: selfUser[0].notifications.count,
     };
+
+    console.log("selfUser" + selfUser);
 
     return NextResponse.json({
       status: true,
