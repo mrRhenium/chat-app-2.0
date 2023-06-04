@@ -17,7 +17,8 @@ export async function GET(req, res) {
   try {
     //
 
-    const token = req.cookies.get("token")?.value || req.headers.cookies.token;
+    const token = req.cookies.get("token")?.value;
+    // || req.headers.cookies.token;
     const tokenData = jwt.verify(token, process.env.JWTSECRET);
 
     const selfUser = await UserData.aggregate([
