@@ -49,11 +49,12 @@ const updateAvtar = async (action, targetUserId) => {
 
 const Chats = () => {
   const router = useRouter();
+
+  const [showPopUp, set_showPopUp] = useState({ flag: 0, username: "" });
   const [friendAvtar, set_friendAvtar] = useState({
     flag: 0,
     avtar: "",
   });
-  const [showPopUp, set_showPopUp] = useState({ flag: 0, username: "" });
 
   // Data is fetch from the Server
   const { data, isLoading } = useSWR(
@@ -63,13 +64,6 @@ const Chats = () => {
     //   refreshInterval: 2000,
     // }
   );
-
-  const resMsg = data && data["msg"];
-  const chatList =
-    data && data["data"]["friends"].length ? data["data"]["friends"] : [];
-  const selfUser = data && data["data"];
-
-  console.log(selfUser);
 
   // Close the PopUP component
   const closePopUp = () => set_showPopUp((prev) => ({ ...prev, flag: 0 }));
@@ -110,6 +104,13 @@ const Chats = () => {
       </>
     );
   }
+
+  const resMsg = data && data["msg"];
+  const chatList =
+    data && data["data"]["friends"].length ? data["data"]["friends"] : [];
+  const selfUser = data && data["data"];
+
+  console.log(selfUser);
 
   return (
     <>
