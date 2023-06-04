@@ -117,7 +117,7 @@ const Chats = () => {
     return;
   }
 
-  console.log(selfUser);
+  // console.log(selfUser);
 
   return (
     <>
