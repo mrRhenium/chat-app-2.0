@@ -105,140 +105,146 @@ const Chats = () => {
     );
   }
 
-  const resMsg = data && data["msg"];
-  const chatList =
-    data && data["data"]["friends"].length ? data["data"]["friends"] : [];
-  const selfUser = data && data["data"];
+  // const resMsg = data && data["msg"];
+  // const chatList =
+  //   data && data["data"]["friends"].length ? data["data"]["friends"] : [];
+  // const selfUser = data && data["data"];
 
-  console.log(selfUser);
+  // console.log(selfUser);
+
+  // return (
+  //   <>
+  //     {showPopUp.flag ? (
+  //       <PopUpComponent closePopUp={closePopUp}>
+  //         <PicComponent
+  //           closePopUp={closePopUp}
+  //           username={showPopUp.username}
+  //           avtar={friendAvtar}
+  //         />
+  //       </PopUpComponent>
+  //     ) : null}
+
+  //     {/* Chats page Header Part Starts */}
+  //     <section className={style.header}>
+  //       <div className={style.logo_cover}>
+  //         <Image
+  //           src={img}
+  //           alt="app logo"
+  //           width={300}
+  //           height={300}
+  //           className={style.logo}
+  //         />
+  //       </div>
+  //       <div className={style.userProfile_cover}>
+  //         <span
+  //           className={style.user_profile}
+  //           style={
+  //             selfUser.avtar === `/assets/${selfUser.userId}`
+  //               ? {}
+  //               : {
+  //                   backgroundImage: `url(
+  //               ${process.env.NEXT_PUBLIC_MEDIAURL}${selfUser.avtar}
+  //             )`,
+  //                 }
+  //           }
+  //           onClick={() => {
+  //             router.push(`/profile/${selfUser.username}`);
+  //           }}
+  //         >
+  //           {selfUser.avtar === `/assets/${selfUser.userId}` ? (
+  //             <BiUser className={style.icons} />
+  //           ) : null}
+  //         </span>
+  //       </div>
+  //     </section>
+  //     {/* Chats page Header Part Ends */}
+
+  //     {/* Chats page Body Part Starts */}
+  //     <section className={style.body}>
+  //       <div className={style.chatList_cover}>
+  //         {data["status"] === false ? (
+  //           alert(`${resMsg}`)
+  //         ) : chatList.length === 0 ? (
+  //           <>
+  //             <h5>
+  //               You don't have any friends, make a friend first and then enjoy
+  //               world fastest & safest messaging platform
+  //             </h5>
+  //           </>
+  //         ) : (
+  //           chatList.map((item) => {
+  //             return (
+  //               <div key={item.username} className={style.chat_list_items}>
+  //                 <span
+  //                   className={style.chatPic_cover}
+  //                   onClick={() => {
+  //                     updateAvtar("Update Avtar", item.userId);
+
+  //                     set_showPopUp({ flag: 1, username: item.username });
+
+  //                     set_friendAvtar({
+  //                       flag: item.avtar === `/assets/${item.userId}` ? 0 : 1,
+  //                       avtar: `${process.env.NEXT_PUBLIC_MEDIAURL}${item.avtar}`,
+  //                     });
+  //                   }}
+  //                 >
+  //                   <span
+  //                     className={style.chat_pic}
+  //                     style={
+  //                       item.avtar === `/assets/${item.userId}`
+  //                         ? {}
+  //                         : {
+  //                             backgroundImage: `url(
+  //                   ${process.env.NEXT_PUBLIC_MEDIAURL}${item.avtar}
+  //                 )`,
+  //                           }
+  //                     }
+  //                   >
+  //                     {item.avtar === `/assets/${item.userId}` ? (
+  //                       <FaUserCircle className={style.icons} />
+  //                     ) : null}
+  //                   </span>
+  //                 </span>
+  //                 <span
+  //                   className={style.chatInfo_cover}
+  //                   onClick={() => {
+  //                     router.push(`/user/chats/${item.username}`);
+  //                   }}
+  //                 >
+  //                   <span className={style.chat_name}>
+  //                     <p>{item.username}</p>
+  //                   </span>
+  //                   <span className={style.chat_msg_highlight}>
+  //                     <span>
+  //                       <p>{item.lastMsg}</p>
+  //                     </span>
+  //                   </span>
+  //                 </span>
+  //                 <span
+  //                   className={style.chatBadge_cover}
+  //                   onClick={() => {
+  //                     router.push(`/user/chats/${item.username}`);
+  //                   }}
+  //                 >
+  //                   {item.count === 0 ? null : (
+  //                     <span className={style.chat_badge}>
+  //                       <p>{item.count}</p>
+  //                     </span>
+  //                   )}
+  //                 </span>
+  //               </div>
+  //             );
+  //           })
+  //         )}
+  //       </div>
+  //     </section>
+  //     {/* Chats page Body Part Ends */}
+  //   </>
+  // );
 
   return (
     <>
-      {showPopUp.flag ? (
-        <PopUpComponent closePopUp={closePopUp}>
-          <PicComponent
-            closePopUp={closePopUp}
-            username={showPopUp.username}
-            avtar={friendAvtar}
-          />
-        </PopUpComponent>
-      ) : null}
-
-      {/* Chats page Header Part Starts */}
-      <section className={style.header}>
-        <div className={style.logo_cover}>
-          <Image
-            src={img}
-            alt="app logo"
-            width={300}
-            height={300}
-            className={style.logo}
-          />
-        </div>
-        <div className={style.userProfile_cover}>
-          <span
-            className={style.user_profile}
-            style={
-              selfUser.avtar === `/assets/${selfUser.userId}`
-                ? {}
-                : {
-                    backgroundImage: `url(
-                ${process.env.NEXT_PUBLIC_MEDIAURL}${selfUser.avtar}
-              )`,
-                  }
-            }
-            onClick={() => {
-              router.push(`/profile/${selfUser.username}`);
-            }}
-          >
-            {selfUser.avtar === `/assets/${selfUser.userId}` ? (
-              <BiUser className={style.icons} />
-            ) : null}
-          </span>
-        </div>
-      </section>
-      {/* Chats page Header Part Ends */}
-
-      {/* Chats page Body Part Starts */}
-      <section className={style.body}>
-        <div className={style.chatList_cover}>
-          {data["status"] === false ? (
-            alert(`${resMsg}`)
-          ) : chatList.length === 0 ? (
-            <>
-              <h5>
-                You don't have any friends, make a friend first and then enjoy
-                world fastest & safest messaging platform
-              </h5>
-            </>
-          ) : (
-            chatList.map((item) => {
-              return (
-                <div key={item.username} className={style.chat_list_items}>
-                  <span
-                    className={style.chatPic_cover}
-                    onClick={() => {
-                      updateAvtar("Update Avtar", item.userId);
-
-                      set_showPopUp({ flag: 1, username: item.username });
-
-                      set_friendAvtar({
-                        flag: item.avtar === `/assets/${item.userId}` ? 0 : 1,
-                        avtar: `${process.env.NEXT_PUBLIC_MEDIAURL}${item.avtar}`,
-                      });
-                    }}
-                  >
-                    <span
-                      className={style.chat_pic}
-                      style={
-                        item.avtar === `/assets/${item.userId}`
-                          ? {}
-                          : {
-                              backgroundImage: `url(
-                    ${process.env.NEXT_PUBLIC_MEDIAURL}${item.avtar}
-                  )`,
-                            }
-                      }
-                    >
-                      {item.avtar === `/assets/${item.userId}` ? (
-                        <FaUserCircle className={style.icons} />
-                      ) : null}
-                    </span>
-                  </span>
-                  <span
-                    className={style.chatInfo_cover}
-                    onClick={() => {
-                      router.push(`/user/chats/${item.username}`);
-                    }}
-                  >
-                    <span className={style.chat_name}>
-                      <p>{item.username}</p>
-                    </span>
-                    <span className={style.chat_msg_highlight}>
-                      <span>
-                        <p>{item.lastMsg}</p>
-                      </span>
-                    </span>
-                  </span>
-                  <span
-                    className={style.chatBadge_cover}
-                    onClick={() => {
-                      router.push(`/user/chats/${item.username}`);
-                    }}
-                  >
-                    {item.count === 0 ? null : (
-                      <span className={style.chat_badge}>
-                        <p>{item.count}</p>
-                      </span>
-                    )}
-                  </span>
-                </div>
-              );
-            })
-          )}
-        </div>
-      </section>
-      {/* Chats page Body Part Ends */}
+      <h1>Hello World</h1>
     </>
   );
 };
