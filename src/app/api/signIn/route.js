@@ -60,6 +60,7 @@ export async function POST(req, res) {
         name: user.name,
         username: user.username,
         email: user.email,
+        avtar: `/assets/${user._id}`,
         notifications: { notifyId: notify._id, count: 0 },
       });
 

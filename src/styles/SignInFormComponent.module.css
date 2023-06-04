@@ -72,6 +72,7 @@
   height: 100%;
   transition: 0.2s;
   border: transparent;
+  border-radius: 5rem;
   background-color: var(--primary_bg1);
 }
 .form .signIn_page_btn:hover {

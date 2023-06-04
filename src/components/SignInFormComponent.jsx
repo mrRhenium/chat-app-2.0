@@ -62,7 +62,7 @@ const SignInFormComponent = () => {
       });
 
       const data = await result.json();
-      console.log(data);
+      // console.log(data);
 
       if (data.msg === "This user is not exist!") {
         set_MSG((pre) => ({
@@ -190,7 +190,7 @@ const SignInFormComponent = () => {
       });
 
       const data = await result.json();
-      console.log("Successful", data);
+      // console.log("Successful", data);
 
       if (data.status === false) {
         alert(data.msg);
