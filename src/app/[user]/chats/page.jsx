@@ -112,6 +112,11 @@ const Chats = () => {
       : [];
   const selfUser = data && data["data"];
 
+  if (data && data["status"] === false) {
+    alert(data["msg"]);
+    return;
+  }
+
   console.log(selfUser);
 
   return (
