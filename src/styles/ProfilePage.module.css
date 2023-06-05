@@ -279,7 +279,11 @@
   border-bottom: 0.09rem solid lightgrey;
   /* border: 0.1rem solid black; */
 }
+
 .lower_section strong {
+  position: relative;
+  display: flex;
+  gap: 0.6rem;
   color: var(--primary_txt2);
   font-size: 0.9rem;
   font-family: var(--header_font);
@@ -292,11 +296,27 @@
   white-space: pre-wrap;
   border-left: 0.2rem solid var(--primary_bg1);
 }
+
+.lower_section .aboutEditBtn {
+  position: relative;
+  display: flex;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background: none;
+}
+
+.lower_section .aboutEditBtn {
+  font-size: 1rem;
+  color: var(--primary_txt2);
+}
+
 .lower_section .logOutBtn_cover {
   justify-self: flex-end;
   align-self: flex-end;
   border-bottom: none;
 }
+
 .lower_section .logOutBtn_cover button {
   color: red;
   font-size: 1.2rem;

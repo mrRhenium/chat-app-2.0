@@ -71,7 +71,7 @@ const userDataSchema = new Schema(
     about: {
       type: String,
       default:
-        "Hey!! there, I am using FS_Chats. This is perfect messaging platform. It is perfect for my all requirments.",
+        "Hey!! there, I am using FS_Chats. This is perfect messaging platform. I love to chat on FS_Chats. I think this is world best secure and fastest messaging platform.",
       required: true,
     },
     onlineStatus: {

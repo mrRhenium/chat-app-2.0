@@ -3,7 +3,7 @@ import style from "../styles/ProfilePage.module.css";
 import { FaUserCircle, FaRegEdit } from "react-icons/fa";
 import { BiLogOut, BiBlock } from "react-icons/bi";
 import { CiMenuKebab, CiEdit } from "react-icons/ci";
-import { MdDeleteForever } from "react-icons/md";
+// import { MdDeleteForever } from "react-icons/md";
 import { BsShieldExclamation, BsArrowLeft, BsQrCodeScan } from "react-icons/bs";
 
 import { useRouter } from "next/navigation";
@@ -35,85 +35,85 @@ const putRequest = async (action, targetUserId) => {
   //
 };
 
-const removeAvtar = async (userId, action, mutate) => {
-  //
+// const removeAvtar = async (userId, action, mutate) => {
+//   //
 
-  const JSONdata = JSON.stringify({
-    action: action,
-  });
+//   const JSONdata = JSON.stringify({
+//     action: action,
+//   });
 
-  const res = await fetch(`/api/users`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSONdata,
-  });
+//   const res = await fetch(`/api/users`, {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSONdata,
+//   });
 
-  const resData = await res.json();
-  if (resData.status === false) alert(`kya hai ye, ${resData.msg}`);
+//   const resData = await res.json();
+//   if (resData.status === false) alert(`kya hai ye, ${resData.msg}`);
 
-  // Post Image and Avtar to Media Server
+//   // Post Image and Avtar to Media Server
 
-  const mediaRes = await fetch(
-    `${process.env.NEXT_PUBLIC_MEDIAURL}/media/profile?userId=${userId}`,
-    {
-      method: "DELETE",
-    }
-  );
+//   const mediaRes = await fetch(
+//     `${process.env.NEXT_PUBLIC_MEDIAURL}/media/profile?userId=${userId}`,
+//     {
+//       method: "DELETE",
+//     }
+//   );
 
-  const mediaResData = await mediaRes.json();
-  if (mediaResData.status === false) alert(`${mediaResData.msg}`);
+//   const mediaResData = await mediaRes.json();
+//   if (mediaResData.status === false) alert(`${mediaResData.msg}`);
 
-  console.log("Profile Image is deleted");
-  mutate();
-  //
-};
+//   console.log("Profile Image is deleted");
+//   mutate();
+//   //
+// };
 
-const postAvtar = async (e, userId, action, mutate) => {
-  //
+// const postAvtar = async (e, userId, action, mutate) => {
+//   //
 
-  let imgName = e.target.files[0].name.split(" ").join("");
+//   let imgName = e.target.files[0].name.split(" ").join("");
 
-  const JSONdata = JSON.stringify({
-    action: action,
-    imgUrl: `/assets/${userId}/profile/${imgName}`,
-  });
+//   const JSONdata = JSON.stringify({
+//     action: action,
+//     imgUrl: `/assets/${userId}/profile/${imgName}`,
+//   });
 
-  const res = await fetch(`/api/users`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSONdata,
-  });
+//   const res = await fetch(`/api/users`, {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSONdata,
+//   });
 
-  const resData = await res.json();
-  if (resData.status === false) alert(`${resData.msg}`);
+//   const resData = await res.json();
+//   if (resData.status === false) alert(`${resData.msg}`);
 
-  // Post Image and Avtar to Media Server
-  const formData = new FormData();
-  formData.append("userId", userId);
-  formData.append("profilePic", e.target.files[0]);
+//   // Post Image and Avtar to Media Server
+//   const formData = new FormData();
+//   formData.append("userId", userId);
+//   formData.append("profilePic", e.target.files[0]);
 
-  // console.log(e.target.files[0]);
+//   // console.log(e.target.files[0]);
 
-  const mediaRes = await fetch(
-    `${process.env.NEXT_PUBLIC_MEDIAURL}/media/profile`,
-    {
-      method: "POST",
-      body: formData,
-    }
-  );
+//   const mediaRes = await fetch(
+//     `${process.env.NEXT_PUBLIC_MEDIAURL}/media/profile`,
+//     {
+//       method: "POST",
+//       body: formData,
+//     }
+//   );
 
-  const mediaResData = await mediaRes.json();
-  if (mediaResData.status === false) alert(`${mediaResData.msg}`);
+//   const mediaResData = await mediaRes.json();
+//   if (mediaResData.status === false) alert(`${mediaResData.msg}`);
 
-  console.log("Profile Image is updated.");
-  mutate();
+//   console.log("Profile Image is updated.");
+//   mutate();
 
-  //
-};
+//   //
+// };
 
 const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
   const router = useRouter();
@@ -240,9 +240,19 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                   <span className={style.about_cover}>
                     <strong>
                       About
-                      <button>
-                        <FaRegEdit className={style.icons} />
-                      </button>
+                      {item.status === "self" ? (
+                        <button
+                          className={style.aboutEditBtn}
+                          onClick={() => {
+                            set_showPopUP({
+                              logOutSection: 0,
+                              aboutSection: 1,
+                            });
+                          }}
+                        >
+                          <FaRegEdit className={style.icons} />
+                        </button>
+                      ) : null}
                     </strong>
                     <p>{item.about}</p>
                   </span>
@@ -275,7 +285,14 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                 {item.status === "self" ? (
                   <>
                     <strong>LogOut</strong>
-                    <button onClick={() => set_showPopUP(1)}>
+                    <button
+                      onClick={() =>
+                        set_showPopUP({
+                          logOutSection: 1,
+                          aboutSection: 0,
+                        })
+                      }
+                    >
                       <BiLogOut className={style.icons} />
                       LogOut
                     </button>

@@ -251,6 +251,23 @@ export async function PUT(req, context) {
         status: true,
         msg: "Successfully! : Update Avtar.",
       });
+    } //
+    else if (body.action === "Update About") {
+      //
+
+      await UserData.findOneAndUpdate(
+        { userId: tokenData._id },
+        {
+          $set: {
+            about: body.about,
+          },
+        }
+      );
+
+      return NextResponse.json({
+        status: true,
+        msg: "Successfully! : Update About Section.",
+      });
     }
 
     //

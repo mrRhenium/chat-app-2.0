@@ -5,6 +5,7 @@ import PopUpComponent from "@/components/PopUpComponent";
 import LogOutComponent from "@/components/LogOutComponent";
 import LoadingComponent from "@/components/LoadingComponent";
 import ProfileComponent from "@/components/ProfileComponent";
+import AboutSectionComponent from "@/components/AboutSectionComponent";
 
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
@@ -32,16 +33,33 @@ const ProfilePage = () => {
 
   let uName = useParams().username;
 
-  const [showPopUP, set_showPopUP] = useState(0);
+  const [showPopUP, set_showPopUP] = useState({
+    logOutSection: 0,
+    aboutSection: 0,
+  });
+
   const { data, isLoading, mutate } = useSWR(`${URL}/${uName}`, fetcher);
 
-  const closePopUp = () => set_showPopUP(0);
+  const closePopUp = () =>
+    set_showPopUP({
+      logOutSection: 0,
+      aboutSection: 0,
+    });
 
   return (
     <>
-      {showPopUP ? (
+      {showPopUP.logOutSection || showPopUP.aboutSection ? (
         <PopUpComponent closePopUp={closePopUp}>
-          <LogOutComponent closePopUp={closePopUp} />
+          {showPopUP.logOutSection ? (
+            <LogOutComponent closePopUp={closePopUp} />
+          ) : null}
+          {showPopUP.aboutSection ? (
+            <AboutSectionComponent
+              closePopUp={closePopUp}
+              about={data ? data["data"].about : ""}
+              mutate={mutate}
+            />
+          ) : null}
         </PopUpComponent>
       ) : null}
 
