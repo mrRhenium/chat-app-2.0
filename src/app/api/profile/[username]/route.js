@@ -259,7 +259,7 @@ export async function PUT(req, context) {
 
     return NextResponse.json({
       status: false,
-      msg: "ERROR : Something went wrong",
+      msg: "ERROR : Something went wrong" + err,
     });
 
     //
