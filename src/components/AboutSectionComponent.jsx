@@ -9,7 +9,10 @@ const AboutSectionComponent = ({ closePopUp, about, mutate }) => {
   const updateAbout = async (e) => {
     e.preventDefault();
 
-    if (about === aboutText) return;
+    if (about === aboutText) {
+      closePopUp();
+      return;
+    }
 
     if (aboutText.length > 200 || aboutText.length < 10) {
       alert("About Section limit is 10-100 characters.");
