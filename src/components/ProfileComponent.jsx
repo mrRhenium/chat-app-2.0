@@ -51,7 +51,7 @@ const removeAvtar = async (userId, action, mutate) => {
   });
 
   const resData = await res.json();
-  if (resData.status === false) alert(`${resData.msg}`);
+  if (resData.status === false) alert(`kya hai ye, ${resData.msg}`);
 
   // Post Image and Avtar to Media Server
 
@@ -175,7 +175,7 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                       </span>
 
                       {/*  */}
-                      {item.status === "self" ? (
+                      {/* {item.status === "self" ? (
                         item.avtar === `/assets/${item.userId}` ? (
                           <label htmlFor="profilePic" className={style.editBtn}>
                             <input
@@ -205,7 +205,7 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                             <MdDeleteForever className={style.icons} />
                           </label>
                         )
-                      ) : null}
+                      ) : null} */}
 
                       {/*  */}
                     </span>
