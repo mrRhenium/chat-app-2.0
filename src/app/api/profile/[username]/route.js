@@ -124,7 +124,7 @@ export async function GET(req, context) {
 
     return NextResponse.json({
       status: false,
-      msg: "ERROR : Something went wronge",
+      msg: "ERROR : Something went wrong in get->profile/route.js",
     });
   }
   //
@@ -259,7 +259,7 @@ export async function PUT(req, context) {
 
     return NextResponse.json({
       status: false,
-      msg: "ERROR : Something went wrong" + err,
+      msg: "ERROR : Something went wrong in put->profile/route.js",
     });
 
     //
