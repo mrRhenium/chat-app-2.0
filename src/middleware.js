@@ -5,6 +5,8 @@ export default function middleware(req, res) {
 
   const token = req.cookies.get("token")?.value || req.headers.cookies?.token;
 
+  if (req.url.includes("/api")) return NextResponse.next();
+
   // when user try to access secure root
   if (req.url.includes("/user") || req.url.includes("/profile")) {
     //
@@ -20,10 +22,7 @@ export default function middleware(req, res) {
     //
   }
 
-  if (
-    !req.url.includes("/api") &&
-    (req.url.includes("/logIn") || req.url.includes("/signIn"))
-  ) {
+  if (req.url.includes("/logIn") || req.url.includes("/signIn")) {
     //
 
     if (token != null && token != undefined && token != "") {
