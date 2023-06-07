@@ -56,8 +56,8 @@ const AboutSectionComponent = ({ closePopUp, about, mutate }) => {
             <textarea
               name="aboutSection"
               id="aboutSection"
-              cols="25"
-              rows="10"
+              // cols="25"
+              // rows="10"
               placeholder="Edit your about..."
               value={aboutText}
               onChange={(e) => set_aboutText(e.target.value)}
