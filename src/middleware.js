@@ -14,9 +14,7 @@ export default function middleware(req, res) {
     if (token === null || token === undefined || token === "") {
       // User's browser doesn't have any token
       // they will redirect to home page
-      return NextResponse.redirect(
-        "https://chat-app-2-0-eight.vercel.app/logIn"
-      );
+      return NextResponse.redirect(`${process.env.NEXT_PUBLIC_MAINURL}/logIn`);
     }
 
     //
@@ -29,7 +27,7 @@ export default function middleware(req, res) {
       // User's browser doesn't have any token
       // they will redirect to home page
       return NextResponse.redirect(
-        "https://chat-app-2-0-eight.vercel.app/user/chats"
+        `${process.env.NEXT_PUBLIC_MAINURL}/user/chats`
       );
     }
 

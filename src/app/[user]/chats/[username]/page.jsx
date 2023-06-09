@@ -27,7 +27,7 @@ const ChattingPage = () => {
   const router = useRouter();
 
   let uName = useParams().username;
-  const { data, isLoading, mutate } = useSWR(`${URL}/${uName}`, fetcher, {
+  const { data, isLoading } = useSWR(`${URL}/${uName}`, fetcher, {
     refreshInterval: 1000,
   });
 
@@ -40,7 +40,7 @@ const ChattingPage = () => {
 
   useEffect(() => {
     if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
-  }, [list]);
+  }, [list, data]);
 
   const sendChat = async (e) => {
     //
@@ -61,7 +61,7 @@ const ChattingPage = () => {
     set_list((prev) => [
       ...prev,
       {
-        id: Date.now() * 28,
+        _id: Date.now() * 28,
         author: "SelfHume",
         msg: msg,
         time: time,
@@ -92,7 +92,7 @@ const ChattingPage = () => {
 
     const resData = await res.json();
     if (resData.status === false) alert(`${resData.msg}`);
-    // mutate();
+
     msgInputBox.focus();
 
     //

@@ -266,7 +266,7 @@
   font-size: 1.3rem;
   color: var(--primary_txt2);
   font-family: var(--chatting_font);
-  padding: 0 0.5rem;
+  padding: 0 1rem;
   border-radius: 2rem;
   border: 0.09rem solid var(--primary_txt2);
   background-color: rgba(34, 175, 236, 0.4);

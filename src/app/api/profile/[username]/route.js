@@ -112,7 +112,7 @@ export async function GET(req, context) {
 
       return NextResponse.json({
         status: false,
-        msg: "Successfully! : Firstly send req. message",
+        msg: "This is Private Account.",
       });
 
       //
