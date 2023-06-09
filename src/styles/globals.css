@@ -19,6 +19,7 @@
   --black_border: black;
   --setting_border: lightgrey;
   --pop_bg: rgba(255, 255, 255, 0.1);
+  --active_btn_bg: rgba(0, 0, 0, 0.05);
   --LoadingBg: #eeeeee;
   --left_user: lightgrey;
   --text_font: "Exo 2", sans-serif;
@@ -42,6 +43,7 @@
   --black_border: rgba(255, 255, 255, 1);
   --setting_border: rgba(0, 0, 0, 0.3);
   --pop_bg: rgba(0, 0, 0, 0.3);
+  --active_btn_bg: rgba(255, 255, 255, 0.1);
   --left_user: dimgray;
   --LoadingBg: transparent;
 }

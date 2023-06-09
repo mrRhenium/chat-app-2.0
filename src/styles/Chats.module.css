@@ -125,8 +125,6 @@
   position: relative;
   display: flex;
   align-items: center;
-  width: 16%;
-  height: 100%;
   padding: 0rem 0.2rem;
   /* border: 0.1rem solid yellow; */
 }
@@ -153,8 +151,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 72%;
+  width: calc(100% - 3rem - 1.5rem);
   height: 100%;
+  padding: 0 0.3rem;
   /* border: 0.1rem solid yellow; */
 }
 
@@ -249,8 +248,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 12%;
-  height: 100%;
+  padding: 0 1rem;
   /* border: 0.1rem solid yellow; */
 }
 .body .chatList_cover .chat_list_items .chat_badge {

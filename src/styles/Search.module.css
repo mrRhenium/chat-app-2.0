@@ -25,7 +25,7 @@
 .header form label {
   position: relative;
   display: flex;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   align-items: center;
   width: 95%;
   height: 2.3rem;
@@ -36,19 +36,24 @@
 }
 .header form label .icons {
   color: var(--primary_txt2);
-  font-size: 1.4rem;
+  font-size: 1rem;
+  width: 3rem;
+  height: 100%;
+  padding: 0 0.2rem;
+  /* border: 0.1rem solid red; */
 }
 
 .header form label input {
   color: var(--primary_txt2);
   font-size: 1.2rem;
   font-family: var(--text_font);
-  padding: 0 0.2rem;
-  width: 85%;
-  height: 80%;
+  padding: 0 0.4rem;
+  width: calc(100% - 3rem);
+  height: 100%;
   outline: none;
   border: transparent;
   background-color: transparent;
+  /* border: 0.1rem solid red; */
 }
 
 /* ------------------------------------ */
@@ -108,8 +113,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  width: 16%;
-  height: 100%;
+  padding: 0 0.3rem;
   /* border: 0.1rem solid yellow; */
 }
 .body .searchItem_cover .search_items .itemPic_cover .item_pic {
@@ -119,7 +123,7 @@
   align-items: center;
   width: 2.5rem;
   height: 2.5rem;
-  margin-left: 0.3rem;
+  /* margin-left: 0.3rem; */
   border-radius: 50%;
   border: 0.08rem solid rgba(0, 0, 0, 0.7);
   cursor: pointer;
@@ -135,8 +139,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 44%;
+  width: calc(60% - 2.5rem);
   height: 100%;
+  padding: 0 0.3rem;
   /* border: 0.1rem solid red; */
 }
 
@@ -180,7 +185,7 @@
   gap: 0.2rem;
   width: 40%;
   height: 100%;
-  padding-right: 0.3rem;
+  padding: 0 0.3rem;
   /* border: 0.1rem solid red; */
 }
 

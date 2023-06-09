@@ -16,7 +16,7 @@
 }
 
 .header h1 {
-  color: var(--primary_txt1);
+  color: white;
   font-size: 1.6rem;
   font-family: var(--chatting_font);
   font-weight: bolder;
