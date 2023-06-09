@@ -18,14 +18,14 @@ const PicComponent = ({ closePopUp, username, avtar }) => {
         <span
           className={style.pic_cover}
           style={
-            avtar.flag
-              ? {
-                  backgroundImage: `url(${avtar.avtar})`,
+            avtar === "image"
+              ? {}
+              : {
+                  backgroundImage: `url(${avtar})`,
                 }
-              : {}
           }
         >
-          {avtar.flag ? null : <FaUserCircle className={style.icons} />}
+          {avtar === "image" ? <FaUserCircle className={style.icons} /> : null}
         </span>
       </section>
       {/* Header Section End hear */}

@@ -123,10 +123,13 @@
   align-items: center;
   width: 2.5rem;
   height: 2.5rem;
-  /* margin-left: 0.3rem; */
   border-radius: 50%;
   border: 0.08rem solid rgba(0, 0, 0, 0.7);
   cursor: pointer;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
 }
 
 .body .searchItem_cover .search_items .itemPic_cover .item_pic .icons {

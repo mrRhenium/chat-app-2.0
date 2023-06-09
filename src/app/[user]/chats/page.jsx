@@ -42,19 +42,16 @@ const updateAvtar = async (action, targetUserId) => {
   const resData = await res.json();
   if (resData.status === false) alert(`${resData.msg}`);
 
-  console.log(resData.msg);
-
+  // console.log(resData.msg);
+  // mutate();
   //
 };
 
 const Chats = () => {
   const router = useRouter();
 
+  const [friendAvtar, set_friendAvtar] = useState("");
   const [showPopUp, set_showPopUp] = useState({ flag: 0, username: "" });
-  const [friendAvtar, set_friendAvtar] = useState({
-    flag: 0,
-    avtar: "",
-  });
 
   // Data is fetch from the Server
   const { data, isLoading } = useSWR(URL, fetcher, {
@@ -123,6 +120,7 @@ const Chats = () => {
             closePopUp={closePopUp}
             username={showPopUp.username}
             avtar={friendAvtar}
+            // mutate={mutate}
           />
         </PopUpComponent>
       ) : null}
@@ -142,19 +140,17 @@ const Chats = () => {
           <span
             className={style.user_profile}
             style={
-              selfUser.avtar === `/assets/${selfUser.userId}`
+              selfUser.avtar === "image"
                 ? {}
                 : {
-                    backgroundImage: `url(
-                ${process.env.NEXT_PUBLIC_MEDIAURL}${selfUser.avtar}
-              )`,
+                    backgroundImage: `url(${selfUser.avtar})`,
                   }
             }
             onClick={() => {
               router.push(`/profile/${selfUser.username}`);
             }}
           >
-            {selfUser.avtar === `/assets/${selfUser.userId}` ? (
+            {selfUser.avtar === "image" ? (
               <BiUser className={style.icons} />
             ) : null}
           </span>
@@ -181,29 +177,23 @@ const Chats = () => {
                   <span
                     className={style.chatPic_cover}
                     onClick={() => {
+                      set_friendAvtar(item.avtar);
                       updateAvtar("Update Avtar", item.userId);
 
                       set_showPopUp({ flag: 1, username: item.username });
-
-                      set_friendAvtar({
-                        flag: item.avtar === `/assets/${item.userId}` ? 0 : 1,
-                        avtar: `${process.env.NEXT_PUBLIC_MEDIAURL}${item.avtar}`,
-                      });
                     }}
                   >
                     <span
                       className={style.chat_pic}
                       style={
-                        item.avtar === `/assets/${item.userId}`
+                        item.avtar === "image"
                           ? {}
                           : {
-                              backgroundImage: `url(
-                    ${process.env.NEXT_PUBLIC_MEDIAURL}${item.avtar}
-                  )`,
+                              backgroundImage: `url(${item.avtar})`,
                             }
                       }
                     >
-                      {item.avtar === `/assets/${item.userId}` ? (
+                      {item.avtar === "image" ? (
                         <FaUserCircle className={style.icons} />
                       ) : null}
                     </span>
@@ -245,11 +235,7 @@ const Chats = () => {
     </>
   );
 
-  // return (
-  //   <>
-  //     <h1>Hello World</h1>
-  //   </>
-  // );
+  //
 };
 
 export default Chats;

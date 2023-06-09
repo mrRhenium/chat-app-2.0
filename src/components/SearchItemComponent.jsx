@@ -46,8 +46,17 @@ const SearchItemComponent = ({ list, mutate }) => {
                 onClick={() => {
                   router.push(`/profile/${item.username}`);
                 }}
+                style={
+                  item.avtar === "image"
+                    ? {}
+                    : {
+                        backgroundImage: `url(${item.avtar})`,
+                      }
+                }
               >
-                <FaUserCircle className={style.icons} />
+                {item.avtar === "image" ? (
+                  <FaUserCircle className={style.icons} />
+                ) : null}
               </span>
             </span>
             <span className={style.itemName_cover}>

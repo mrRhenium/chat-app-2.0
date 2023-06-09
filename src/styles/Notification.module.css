@@ -126,6 +126,10 @@
   height: 2.7rem;
   border-radius: 0.5rem;
   border: 0.08rem solid var(--primary_border);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: hidden;
 }
 
 .body .notifyItem_cover .notify_items .itemPic_cover .item_pic .icons {

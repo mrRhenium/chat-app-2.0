@@ -154,7 +154,7 @@ export async function PUT(req, res) {
         },
         {
           $set: {
-            avtar: `/assets/${tokenData._id}`,
+            avtar: "image",
           },
         }
       );

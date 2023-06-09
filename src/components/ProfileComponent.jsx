@@ -1,14 +1,20 @@
 import style from "../styles/ProfilePage.module.css";
+import storage from "@/Database/firebaseConfig.js";
 
 import { FaUserCircle, FaRegEdit } from "react-icons/fa";
 import { BiLogOut, BiBlock } from "react-icons/bi";
 import { CiMenuKebab, CiEdit } from "react-icons/ci";
-// import { MdDeleteForever } from "react-icons/md";
+import { MdDeleteForever } from "react-icons/md";
 import { BsShieldExclamation, BsArrowLeft, BsQrCodeScan } from "react-icons/bs";
 
-import { useRouter } from "next/navigation";
 // import { useState } from "react";
-// import Image from "next/image";
+import { useRouter } from "next/navigation";
+import {
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+  deleteObject,
+} from "firebase/storage";
 
 //
 //
@@ -35,90 +41,101 @@ const putRequest = async (action, targetUserId) => {
   //
 };
 
-// const removeAvtar = async (userId, action, mutate) => {
-//   //
+const removeAvtar = async (action, mutate, imgUrl) => {
+  //
 
-//   const JSONdata = JSON.stringify({
-//     action: action,
-//   });
+  const JSONdata = JSON.stringify({
+    action: action,
+  });
 
-//   const res = await fetch(`/api/users`, {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSONdata,
-//   });
+  const res = await fetch(`/api/users`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSONdata,
+  });
 
-//   const resData = await res.json();
-//   if (resData.status === false) alert(`kya hai ye, ${resData.msg}`);
+  const resData = await res.json();
+  if (resData.status === false) alert(`kya hai ye, ${resData.msg}`);
 
-//   // Post Image and Avtar to Media Server
+  // Delete from firebase
+  const path = ref(storage, imgUrl);
+  deleteObject(path)
+    .then(() => {
+      console.log("Profile Image is deleted");
+      mutate();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
-//   const mediaRes = await fetch(
-//     `${process.env.NEXT_PUBLIC_MEDIAURL}/media/profile?userId=${userId}`,
-//     {
-//       method: "DELETE",
-//     }
-//   );
+  //
+};
 
-//   const mediaResData = await mediaRes.json();
-//   if (mediaResData.status === false) alert(`${mediaResData.msg}`);
+const postAvtar = async (e, userId, action, mutate) => {
+  //
 
-//   console.log("Profile Image is deleted");
-//   mutate();
-//   //
-// };
+  let imgUrl = "image";
+  let img = e.target.files[0];
+  // let imgName = e.target.files[0].name.split(" ").join("");
 
-// const postAvtar = async (e, userId, action, mutate) => {
-//   //
+  if (!img) {
+    alert("Please upload an image first!");
+  }
 
-//   let imgName = e.target.files[0].name.split(" ").join("");
+  if (img.name.includes(" ")) {
+    alert("Image name should not contain any space.");
+    return;
+  }
 
-//   const JSONdata = JSON.stringify({
-//     action: action,
-//     imgUrl: `/assets/${userId}/profile/${imgName}`,
-//   });
+  const storageRef = ref(storage, `/assets/${userId}/profile/${img.name}`);
+  const uploadTask = uploadBytesResumable(storageRef, img);
 
-//   const res = await fetch(`/api/users`, {
-//     method: "PUT",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSONdata,
-//   });
+  uploadTask.on(
+    "state_changed",
+    (snapshot) => {
+      const percent = Math.round(
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      );
 
-//   const resData = await res.json();
-//   if (resData.status === false) alert(`${resData.msg}`);
+      console.log(percent);
+    },
+    (err) => console.log(err),
+    () => {
+      // download url
+      getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
+        imgUrl = url;
+        console.log(url);
 
-//   // Post Image and Avtar to Media Server
-//   const formData = new FormData();
-//   formData.append("userId", userId);
-//   formData.append("profilePic", e.target.files[0]);
+        const JSONdata = JSON.stringify({
+          action: action,
+          imgUrl: imgUrl,
+        });
 
-//   // console.log(e.target.files[0]);
+        const res = await fetch(`/api/users`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSONdata,
+        });
 
-//   const mediaRes = await fetch(
-//     `${process.env.NEXT_PUBLIC_MEDIAURL}/media/profile`,
-//     {
-//       method: "POST",
-//       body: formData,
-//     }
-//   );
+        const resData = await res.json();
+        if (resData.status === false) alert(`${resData.msg}`);
 
-//   const mediaResData = await mediaRes.json();
-//   if (mediaResData.status === false) alert(`${mediaResData.msg}`);
+        console.log("Profile Image is updated.");
+        mutate();
+      });
+    }
+  );
 
-//   console.log("Profile Image is updated.");
-//   mutate();
-
-//   //
-// };
+  //
+};
 
 const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
   const router = useRouter();
-
-  // console.log(process.env.NEXT_PUBLIC_MEDIAURL + item.avtar);
+  // console.log(item);
 
   return (
     <>
@@ -160,23 +177,23 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                       <span
                         className={style.pic}
                         style={
-                          item.avtar === `/assets/${item.userId}`
+                          item.avtar === "image"
                             ? {}
                             : {
                                 backgroundImage: `url(
-                                  ${process.env.NEXT_PUBLIC_MEDIAURL}${item.avtar}
+                                 ${item.avtar}
                                 )`,
                               }
                         }
                       >
-                        {item.avtar === `/assets/${item.userId}` ? (
+                        {item.avtar === "image" ? (
                           <FaUserCircle className={style.icons} />
                         ) : null}
                       </span>
 
                       {/*  */}
-                      {/* {item.status === "self" ? (
-                        item.avtar === `/assets/${item.userId}` ? (
+                      {item.status === "self" ? (
+                        item.avtar === "image" ? (
                           <label htmlFor="profilePic" className={style.editBtn}>
                             <input
                               type="file"
@@ -198,14 +215,14 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                         ) : (
                           <label
                             className={style.removeBtn}
-                            onClick={() =>
-                              removeAvtar(item.userId, "Delete Avtar", mutate)
-                            }
+                            onClick={() => {
+                              removeAvtar("Delete Avtar", mutate, item.avtar);
+                            }}
                           >
                             <MdDeleteForever className={style.icons} />
                           </label>
                         )
-                      ) : null} */}
+                      ) : null}
 
                       {/*  */}
                     </span>
