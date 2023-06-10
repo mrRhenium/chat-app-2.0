@@ -17,6 +17,11 @@ const msgSchema = new Schema(
       type: String,
       required: true,
     },
+    msgType: {
+      type: String,
+      default: "text",
+      required: true,
+    },
     msg: {
       type: String,
       required: true,

@@ -40,7 +40,7 @@ const ChattingPage = () => {
 
   useEffect(() => {
     if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
-  }, [list, data]);
+  }, [list]);
 
   const sendChat = async (e) => {
     //
@@ -169,8 +169,7 @@ const ChattingPage = () => {
                           )}
 
                           <p className={style.msg_time}>
-                            {item.time}
-
+                            {`${item.date} - ${item.time}`}
                             {item.author != uName ? (
                               item.seenStauts ? (
                                 <RiCheckDoubleLine className={style.icons} />
@@ -178,7 +177,6 @@ const ChattingPage = () => {
                                 <RiCheckLine className={style.icons} />
                               )
                             ) : null}
-
                             {/*  */}
                           </p>
                         </span>

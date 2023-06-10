@@ -63,6 +63,9 @@ const NotifyItemComponent = ({ list, option, mutate }) => {
                 <p>{item.name}</p>
               </span>
             </span>
+            <span className={style.info_cover}>
+              <strong>{`${item.date} - ${item.time}`}</strong>
+            </span>
             {option === "Send" ? (
               item.active ? (
                 <span className={style.itemBtn_cover}>

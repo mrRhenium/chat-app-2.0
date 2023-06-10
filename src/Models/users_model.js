@@ -26,6 +26,11 @@ const userSchema = new Schema(
       default: 0,
       required: true,
     },
+    private: {
+      type: Boolean,
+      default: 1,
+      required: true,
+    },
     deleted: {
       type: Boolean,
       default: 0,
