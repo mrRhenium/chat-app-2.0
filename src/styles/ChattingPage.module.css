@@ -214,6 +214,8 @@
   font-size: 0.9rem;
   color: var(--primary_txt2);
   font-family: var(--chatting_font);
+  padding-left: 0.05rem;
+  border-left: 0.05rem solid var(--primary_bg1);
 }
 
 .chattingPage .body .chats_cover .msg_time .icons {
