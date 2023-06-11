@@ -22,6 +22,20 @@ const msgSchema = new Schema(
       default: "text",
       required: true,
     },
+    mediaInfo: {
+      type: {
+        type: String,
+      },
+      name: {
+        type: String,
+      },
+      size: {
+        type: String,
+      },
+      url: {
+        type: String,
+      },
+    },
     msg: {
       type: String,
       required: true,

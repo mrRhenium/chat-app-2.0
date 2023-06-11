@@ -34,7 +34,7 @@ export async function GET(req, context) {
 
     const targetUser = await UserData.findOne(
       { username: pUsername },
-      { onlineStatus: 1, _id: 0 }
+      { onlineStatus: 1, avtar: 1, _id: 0 }
     );
 
     // console.log("friend -> " + selfUser);
@@ -75,6 +75,8 @@ export async function GET(req, context) {
       status: true,
       msg: "Successfully! : Send Users chat.",
       data: chats,
+      avtar: targetUser.avtar,
+      selfId: tokenData._id,
       onlineStatus: targetUser.onlineStatus,
     });
 
@@ -142,6 +144,8 @@ export async function POST(req, context) {
       author: selfUser.username,
       msg: body.message,
       backUpMsg: body.message,
+      msgType: body.msgType,
+      mediaInfo: body.mediaInfo,
       time: body.time,
       date: tarik,
     });
