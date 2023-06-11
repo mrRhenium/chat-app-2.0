@@ -41,8 +41,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3rem;
+  height: 3rem;
   cursor: pointer;
   border-radius: 50%;
   border: 0.1rem solid white;
@@ -257,8 +257,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 1.5rem;
-  height: 1.5rem;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
   padding: 0.1rem;
   border-radius: 50%;
   background-color: var(--badge_color);

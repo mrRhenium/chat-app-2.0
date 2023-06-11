@@ -106,6 +106,10 @@
   margin-top: 0.5rem;
 }
 
+.chats_cover span > a {
+  text-decoration: none;
+}
+
 .chats_cover .mediaMsg {
   position: relative;
   display: flex;
@@ -153,7 +157,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-decoration: none;
   /* border: 0.08rem solid red; */
 }
 .mediaMsg .info_cover p:nth-child(1) {
