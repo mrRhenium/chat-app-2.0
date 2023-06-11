@@ -341,8 +341,7 @@ const ChattingPage = () => {
                           {/* Document */}
                           {media.type === "document" ? (
                             <span className={style.docItem}>
-                              <iframe src={media.src} frameborder="0"></iframe>
-                              {/* <embed src={media.src} type="application/pdf" /> */}
+                              <embed src={media.src} type="application/pdf" />
                             </span>
                           ) : null}
                         </span>

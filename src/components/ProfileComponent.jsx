@@ -174,23 +174,27 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                 <>
                   <div className={style.upper_cover}>
                     <span className={style.pic_cover}>
-                      <span
-                        className={style.pic}
-                        style={
-                          item.avtar === "image"
-                            ? {}
-                            : {
-                                backgroundImage: `url(
+                      <a
+                        href={item.avtar === "image" ? "#" : item.avtar}
+                        target="_blank"
+                      >
+                        <span
+                          className={style.pic}
+                          style={
+                            item.avtar === "image"
+                              ? {}
+                              : {
+                                  backgroundImage: `url(
                                  ${item.avtar}
                                 )`,
-                              }
-                        }
-                      >
-                        {item.avtar === "image" ? (
-                          <FaUserCircle className={style.icons} />
-                        ) : null}
-                      </span>
-
+                                }
+                          }
+                        >
+                          {item.avtar === "image" ? (
+                            <FaUserCircle className={style.icons} />
+                          ) : null}
+                        </span>
+                      </a>
                       {/*  */}
                       {item.status === "self" ? (
                         item.avtar === "image" ? (
