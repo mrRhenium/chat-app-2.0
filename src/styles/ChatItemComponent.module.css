@@ -65,7 +65,7 @@
 
 .chats_cover span > p {
   font-size: 1rem;
-  color: var(--primary_txt1);
+  color: var(--primary_txt2);
   font-family: var(--chatting_font);
   white-space: break-spaces;
   word-wrap: break-word;
