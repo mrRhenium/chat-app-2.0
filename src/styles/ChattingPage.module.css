@@ -63,8 +63,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 2.6rem;
-  min-height: 2.6rem;
+  min-width: 3rem;
+  min-height: 3rem;
   border-radius: 50%;
   border: 0.1rem solid white;
   background-position: center;
@@ -261,7 +261,7 @@
 }
 
 /* Document CSS */
-.mediaSection .upper_part .item_cover .docItem embed {
+.mediaSection .upper_part .item_cover .docItem iframe {
   position: relative;
   display: flex;
   width: 100%;

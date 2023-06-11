@@ -65,7 +65,7 @@
 
 .chats_cover span > p {
   font-size: 1rem;
-  color: var(--primary_txt2);
+  color: #000000;
   font-family: var(--chatting_font);
   white-space: break-spaces;
   word-wrap: break-word;
@@ -153,6 +153,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-decoration: none;
   /* border: 0.08rem solid red; */
 }
 .mediaMsg .info_cover p:nth-child(1) {

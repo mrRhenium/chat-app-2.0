@@ -67,7 +67,6 @@ const ChattingPage = () => {
   const sendChat = async (e) => {
     //
     e.preventDefault();
-    msgInputBox.focus();
 
     let msg = msgBox;
     set_msgBox("");
@@ -182,6 +181,7 @@ const ChattingPage = () => {
     } //
     else {
       //
+      msgInputBox.focus();
 
       if (msg === "") return;
 
@@ -217,10 +217,10 @@ const ChattingPage = () => {
       const resData = await res.json();
       if (resData.status === false) alert(`${resData.msg}`);
 
+      msgInputBox.focus();
+
       //
     }
-
-    msgInputBox.focus();
 
     //
   };
@@ -341,7 +341,8 @@ const ChattingPage = () => {
                           {/* Document */}
                           {media.type === "document" ? (
                             <span className={style.docItem}>
-                              <embed src={media.src} type="application/pdf" />
+                              <iframe src={media.src} frameborder="0"></iframe>
+                              {/* <embed src={media.src} type="application/pdf" /> */}
                             </span>
                           ) : null}
                         </span>

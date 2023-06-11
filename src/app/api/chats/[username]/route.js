@@ -150,11 +150,16 @@ export async function POST(req, context) {
       date: tarik,
     });
 
+    let lastMsg =
+      body.message === "noCapTiOn9463"
+        ? body.mediaInfo.name + " " + body.mediaInfo.size
+        : body.message;
+
     await UserData.findOneAndUpdate(
       { username: selfUser.username, [`friends.chatId`]: chatId },
       {
         $set: {
-          [`friends.$.lastMsg`]: body.message,
+          [`friends.$.lastMsg`]: lastMsg,
         },
       }
     );
@@ -163,7 +168,7 @@ export async function POST(req, context) {
       { username: pUsername, [`friends.chatId`]: chatId },
       {
         $set: {
-          [`friends.$.lastMsg`]: body.message,
+          [`friends.$.lastMsg`]: lastMsg,
         },
         $inc: {
           [`friends.$.count`]: 1,
