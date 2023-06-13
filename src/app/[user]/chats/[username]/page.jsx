@@ -266,7 +266,12 @@ const ChattingPage = () => {
                       <BiUser className={style.icons} />
                     ) : null}
                   </span>
-                  <span className={style.name_info}>
+                  <span
+                    className={style.name_info}
+                    onClick={() => {
+                      router.push(`/profile/${uName}`);
+                    }}
+                  >
                     <p className={style.name}>{uName}</p>
                     <p className={style.live_status}>
                       {data["onlineStatus"] === true ? "online" : "offline"}
@@ -393,11 +398,7 @@ const ChattingPage = () => {
                       <label
                         htmlFor="attach"
                         className={style.attachBtn}
-                        onClick={
-                          mediaOpt
-                            ? () => set_mediaOpt(0)
-                            : () => set_mediaOpt(1)
-                        }
+                        onClick={() => set_mediaOpt(1)}
                       >
                         <GrAttachment className={style.icons} />
 
