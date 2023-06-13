@@ -5,12 +5,13 @@ import LoadingComponent from "@/components/LoadingComponent";
 import ChatItemComponent from "@/components/ChatItemComponent";
 import storage from "@/Database/firebaseConfig.js";
 
-import { BsArrowLeft } from "react-icons/bs";
 import { BiUser } from "react-icons/bi";
 import { CiMenuKebab } from "react-icons/ci";
 import { MdSend } from "react-icons/md";
 import { GrAttachment } from "react-icons/gr";
+import { CgCloseO } from "react-icons/cg";
 import {
+  BsArrowLeft,
   BsImage,
   BsHeadset,
   BsCameraVideo,
@@ -395,13 +396,18 @@ const ChattingPage = () => {
                     />
 
                     <span className={style.attachment_cover}>
-                      <label
-                        htmlFor="attach"
-                        className={style.attachBtn}
-                        onClick={() => set_mediaOpt(1)}
-                      >
-                        <GrAttachment className={style.icons} />
-
+                      <label htmlFor="attach" className={style.attachBtn}>
+                        {mediaOpt ? (
+                          <CgCloseO
+                            className={style.icons}
+                            onClick={() => set_mediaOpt(0)}
+                          />
+                        ) : (
+                          <GrAttachment
+                            className={style.icons}
+                            onClick={() => set_mediaOpt(1)}
+                          />
+                        )}
                         {mediaOpt ? (
                           <span className={style.opt}>
                             <label>
