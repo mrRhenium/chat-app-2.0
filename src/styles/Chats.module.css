@@ -111,8 +111,8 @@
   position: relative;
   display: flex;
   width: 98%;
-  height: 4rem;
-  min-height: 4rem;
+  height: 3.8rem;
+  min-height: 3.8rem;
   margin: 0.2rem 0;
   border-radius: 2rem;
   border: 0.1rem solid var(--primary_border);
@@ -133,8 +133,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 3.4rem;
-  height: 3.4rem;
+  width: 3.2rem;
+  height: 3.2rem;
   border-radius: 50%;
   background-position: center;
   background-repeat: no-repeat;
@@ -169,7 +169,7 @@
 
 .body .chatList_cover .chat_list_items .chatInfo_cover .chat_name p {
   color: var(--primary_txt2);
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   color: --var(--primary_txt2);
   font-family: var(--text_font);
   white-space: nowrap;
@@ -200,7 +200,7 @@
 
 .body .chatList_cover .chat_list_items .chatInfo_cover .chat_msg_highlight p {
   color: var(--msg_highlight);
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-family: var(--chatting_font);
   white-space: nowrap;
   overflow: hidden;
