@@ -321,10 +321,10 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                   </>
                 ) : item.status === "blocked by you" ? (
                   <>
-                    <strong>Bocked & Report</strong>
+                    <strong>Blocked & Report</strong>
                     <button
                       onClick={() => {
-                        putRequest("Unblock User", item.user, mutateId);
+                        putRequest("Unblock User", item.userId, mutate);
                       }}
                     >
                       <BiBlock className={style.icons} /> Unblock
