@@ -428,7 +428,6 @@
 .chattingPage .footer form .input_cover .attachment_cover .attachBtn > .icons {
   font-size: 1.6rem;
   cursor: pointer;
-  color: var(--primary_txt1);
 }
 
 .attachment_cover .opt {
