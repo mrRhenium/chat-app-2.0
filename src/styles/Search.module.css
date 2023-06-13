@@ -101,8 +101,8 @@
   position: relative;
   display: flex;
   width: 98%;
-  height: 3.3rem;
-  min-height: 3.3rem;
+  height: 4rem;
+  min-height: 4rem;
   margin: 0.2rem 0;
   border-radius: 1rem;
   border: 0.1rem solid var(--primary_border);
@@ -121,8 +121,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 3.4rem;
+  height: 3.4rem;
   border-radius: 50%;
   border: 0.08rem solid rgba(0, 0, 0, 0.7);
   cursor: pointer;
@@ -134,7 +134,7 @@
 
 .body .searchItem_cover .search_items .itemPic_cover .item_pic .icons {
   color: whitesmoke;
-  font-size: 2.3rem;
+  font-size: 2.8rem;
 }
 
 .body .searchItem_cover .search_items .itemName_cover {

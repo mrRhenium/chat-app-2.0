@@ -19,7 +19,7 @@ import {
 //
 //
 
-const putRequest = async (action, targetUserId) => {
+const putRequest = async (action, targetUserId, mutate) => {
   //
 
   const JSONdata = JSON.stringify({
@@ -38,6 +38,7 @@ const putRequest = async (action, targetUserId) => {
   const resData = await res.json();
   if (resData.status === false) alert(`${resData.msg}`);
 
+  mutate();
   //
 };
 
@@ -323,7 +324,7 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                     <strong>Bocked & Report</strong>
                     <button
                       onClick={() => {
-                        putRequest("Unblock User", item.userId);
+                        putRequest("Unblock User", item.user, mutateId);
                       }}
                     >
                       <BiBlock className={style.icons} /> Unblock
@@ -331,17 +332,17 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                   </>
                 ) : (
                   <>
-                    <strong>Bocked & Report</strong>
+                    <strong>Blocked & Report</strong>
                     <button
                       onClick={() => {
-                        putRequest("Block User", item.userId);
+                        putRequest("Block User", item.userId, mutate);
                       }}
                     >
                       <BiBlock className={style.icons} /> Block
                     </button>
                     <button
                       onClick={() => {
-                        putRequest("Block User", item.userId);
+                        putRequest("Block User", item.userId, mutate);
                       }}
                     >
                       <BsShieldExclamation className={style.icons} />

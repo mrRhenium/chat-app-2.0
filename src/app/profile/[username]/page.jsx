@@ -38,7 +38,9 @@ const ProfilePage = () => {
     aboutSection: 0,
   });
 
-  const { data, isLoading, mutate } = useSWR(`${URL}/${uName}`, fetcher);
+  const { data, isLoading, mutate } = useSWR(`${URL}/${uName}`, fetcher, {
+    refreshInterval: 2000,
+  });
 
   const closePopUp = () =>
     set_showPopUP({

@@ -111,8 +111,8 @@
   position: relative;
   display: flex;
   width: 98%;
-  height: 3.5rem;
-  min-height: 3.5rem;
+  height: 4rem;
+  min-height: 4rem;
   margin: 0.2rem 0;
   border-radius: 2rem;
   border: 0.1rem solid var(--primary_border);
@@ -133,8 +133,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 3rem;
-  height: 3rem;
+  width: 3.4rem;
+  height: 3.4rem;
   border-radius: 50%;
   background-position: center;
   background-repeat: no-repeat;
@@ -144,7 +144,7 @@
 
 .body .chatList_cover .chat_list_items .chatPic_cover .chat_pic .icons {
   color: whitesmoke;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
 }
 
 .body .chatList_cover .chat_list_items .chatInfo_cover {
@@ -185,41 +185,6 @@
   height: 50%;
 }
 
-/* .body
-  .chatList_cover
-  .chat_list_items
-  .chatInfo_cover
-  .chat_msg_highlight
-  span:first-child {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 2rem;
-  height: 100%;
-}
-.body
-  .chatList_cover
-  .chat_list_items
-  .chatInfo_cover
-  .chat_msg_highlight
-  span:last-child {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: calc(100% - 3rem);
-  height: 100%;
-}
-.body
-.chatList_cover
-.chat_list_items
-.chatInfo_cover
-.chat_msg_highlight
-.icons {
-  font-size: 1.3rem;
-  color: var(--doubleTick);
-}
-*/
 .body
   .chatList_cover
   .chat_list_items

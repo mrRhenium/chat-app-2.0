@@ -414,11 +414,6 @@
   height: 100%;
   /* border: 0.1rem solid red; */
 }
-.chattingPage .footer form .input_cover .attachment_cover > .icons {
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: var(--primary_txt1);
-}
 
 .attachment_cover .attachBtn {
   position: relative;
@@ -429,21 +424,17 @@
   width: 100%;
   cursor: pointer;
 }
-.attachment_cover .attachBtn input {
-  position: absolute;
+
+.chattingPage .footer form .input_cover .attachment_cover .attachBtn > .icons {
+  font-size: 1.6rem;
   cursor: pointer;
-  opacity: 0;
-}
-.attachment_cover .attachBtn input:focus + .opt {
-  display: flex;
-}
-.attachment_cover .opt:hover {
-  display: flex;
+  color: var(--primary_txt1);
 }
 
 .attachment_cover .opt {
+  cursor: default;
   position: absolute;
-  display: none;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -487,7 +478,7 @@
   font-size: 1.1rem;
 }
 .attachment_cover .opt label:hover {
-  opacity: 0.8;
+  opacity: 0.7;
 }
 .attachment_cover .opt label input {
   cursor: pointer;
