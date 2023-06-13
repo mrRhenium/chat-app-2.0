@@ -403,7 +403,7 @@ const ChattingPage = () => {
 
                         {mediaOpt ? (
                           <span className={style.opt}>
-                            <label onClick={() => set_mediaOpt(0)}>
+                            <label>
                               <input
                                 type="file"
                                 name="attach_img"
@@ -422,11 +422,13 @@ const ChattingPage = () => {
                                     type: "image",
                                     src: window.URL.createObjectURL(file),
                                   }));
+
+                                  set_mediaOpt(0);
                                 }}
                               />
                               <BsImage className={style.icons} />
                             </label>
-                            <label onClick={() => set_mediaOpt(0)}>
+                            <label>
                               <input
                                 type="file"
                                 name="attach_audio"
@@ -445,11 +447,13 @@ const ChattingPage = () => {
                                     type: "audio",
                                     src: window.URL.createObjectURL(file),
                                   }));
+
+                                  set_mediaOpt(0);
                                 }}
                               />
                               <BsHeadset className={style.icons} />
                             </label>
-                            <label onClick={() => set_mediaOpt(0)}>
+                            <label>
                               <input
                                 type="file"
                                 name="attach_video"
@@ -468,11 +472,13 @@ const ChattingPage = () => {
                                     type: "video",
                                     src: window.URL.createObjectURL(file),
                                   }));
+
+                                  set_mediaOpt(0);
                                 }}
                               />
                               <BsCameraVideo className={style.icons} />
                             </label>
-                            <label onClick={() => set_mediaOpt(0)}>
+                            <label>
                               <input
                                 type="file"
                                 name="attach_pdf"
@@ -491,6 +497,8 @@ const ChattingPage = () => {
                                     type: "document",
                                     src: window.URL.createObjectURL(file),
                                   }));
+
+                                  set_mediaOpt(0);
                                 }}
                               />
                               <BsFiletypePdf className={style.icons} />
