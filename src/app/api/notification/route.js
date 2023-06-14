@@ -27,7 +27,7 @@ export async function GET(req, res) {
       _id: user.notifications.notifyId,
     });
 
-    const data = notify.invitation;
+    let data = notify.invitation;
     // console.log(user);
 
     data = { ...data, notifyId: user.notifications.notifyId };
