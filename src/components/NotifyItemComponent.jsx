@@ -28,12 +28,14 @@ const putRequest = async (action, targetUserId, mutate) => {
 
   //
 };
-const updateAvtar = async (action, targetUserId) => {
+const updateAvtar = async (action, targetUserId, notifyId, option) => {
   //
 
   const JSONdata = JSON.stringify({
     action: action,
     targetUserId: targetUserId,
+    notifyId: notifyId,
+    notifySection: option,
   });
 
   const res = await fetch(`/api/profile/targetUser`, {
@@ -52,7 +54,7 @@ const updateAvtar = async (action, targetUserId) => {
   //
 };
 
-const NotifyItemComponent = ({ list, option, mutate }) => {
+const NotifyItemComponent = ({ list, option, mutate, notifyId }) => {
   const router = useRouter();
   return (
     <>
@@ -63,7 +65,12 @@ const NotifyItemComponent = ({ list, option, mutate }) => {
               <span
                 className={style.item_pic}
                 onClick={() => {
-                  updateAvtar("Update Avtar", item.userId);
+                  updateAvtar(
+                    "Update Avtar in notify",
+                    item.userId,
+                    notifyId,
+                    option
+                  );
                   router.push(`/profile/${item.username}`);
                 }}
                 style={

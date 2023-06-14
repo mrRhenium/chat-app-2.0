@@ -1,5 +1,6 @@
 import dbConnect from "@/Database/dbCoonect";
 import UserData from "@/Models/usersData_model";
+import UserNotify from "@/Models/userNotify_model";
 
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
@@ -262,6 +263,33 @@ export async function PUT(req, context) {
         status: true,
         msg: "Successfully! : Update Avtar.",
         avtar: targetUser.avtar,
+      });
+    } //
+    else if (body.action === "Update Avtar in notify") {
+      //
+
+      const targetUser = await UserData.findOne(
+        { userId: body.targetUserId },
+        {
+          avtar: 1,
+        }
+      );
+
+      // console.log(targetUser);
+
+      let section = body.notifySection === "Send" ? "send" : "recieved";
+
+      await UserNotify.findOneAndUpdate(
+        {
+          _id: body.notifyId,
+          [`invitation.${section}.userId`]: body.targetUserId,
+        },
+        { $set: { [`invitation.${section}.$.avtar`]: targetUser.avtar } }
+      );
+
+      return NextResponse.json({
+        status: true,
+        msg: "Successfully! : Update Avtar.",
       });
     } //
     else if (body.action === "Update About") {

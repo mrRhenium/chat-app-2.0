@@ -30,6 +30,7 @@ export async function GET(req, res) {
     const data = notify.invitation;
     // console.log(user);
 
+    data = { ...data, notifyId: user.notifications.notifyId };
     //
     return NextResponse.json({
       status: true,

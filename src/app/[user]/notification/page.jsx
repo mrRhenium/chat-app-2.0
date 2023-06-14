@@ -59,6 +59,7 @@ const Notification = () => {
               }
               option={option}
               mutate={mutate}
+              notifyId={data["data"].notifyId}
             />
           )}
         </div>
