@@ -28,6 +28,29 @@ const putRequest = async (action, targetUserId, mutate) => {
 
   //
 };
+const updateAvtar = async (action, targetUserId) => {
+  //
+
+  const JSONdata = JSON.stringify({
+    action: action,
+    targetUserId: targetUserId,
+  });
+
+  const res = await fetch(`/api/profile/targetUser`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSONdata,
+  });
+
+  const resData = await res.json();
+  if (resData.status === false) alert(`${resData.msg}`);
+
+  // console.log(resData.msg);
+  // mutate();
+  //
+};
 
 const NotifyItemComponent = ({ list, option, mutate }) => {
   const router = useRouter();
@@ -40,6 +63,7 @@ const NotifyItemComponent = ({ list, option, mutate }) => {
               <span
                 className={style.item_pic}
                 onClick={() => {
+                  updateAvtar("Update Avtar", item.userId);
                   router.push(`/profile/${item.username}`);
                 }}
                 style={
@@ -50,7 +74,7 @@ const NotifyItemComponent = ({ list, option, mutate }) => {
                       }
                 }
               >
-                {item.avtar === "image" ? (
+                {item.avtar === "image" || !item.avtar ? (
                   <FaUserCircle className={style.icons} />
                 ) : null}
               </span>

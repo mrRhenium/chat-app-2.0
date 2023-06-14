@@ -249,7 +249,7 @@ export async function PUT(req, context) {
 
       // console.log(targetUser);
 
-      const temp = await UserData.findOneAndUpdate(
+      await UserData.findOneAndUpdate(
         { userId: tokenData._id, [`friends.userId`]: body.targetUserId },
         {
           $set: {
@@ -258,11 +258,10 @@ export async function PUT(req, context) {
         }
       );
 
-      // console.log(temp);
-
       return NextResponse.json({
         status: true,
         msg: "Successfully! : Update Avtar.",
+        avtar: targetUser.avtar,
       });
     } //
     else if (body.action === "Update About") {

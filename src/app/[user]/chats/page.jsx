@@ -23,7 +23,7 @@ const fetcher = async (url) => {
   return data;
 };
 
-const updateAvtar = async (action, targetUserId) => {
+const updateAvtar = async (action, targetUserId, set_friendAvtar) => {
   //
 
   const JSONdata = JSON.stringify({
@@ -42,6 +42,7 @@ const updateAvtar = async (action, targetUserId) => {
   const resData = await res.json();
   if (resData.status === false) alert(`${resData.msg}`);
 
+  set_friendAvtar(resData.avtar);
   // console.log(resData.msg);
   // mutate();
   //
@@ -179,7 +180,7 @@ const Chats = () => {
                     className={style.chatPic_cover}
                     onClick={() => {
                       set_friendAvtar(item.avtar);
-                      updateAvtar("Update Avtar", item.userId);
+                      updateAvtar("Update Avtar", item.userId, set_friendAvtar);
 
                       set_showPopUp({ flag: 1, username: item.username });
                     }}
@@ -194,7 +195,7 @@ const Chats = () => {
                             }
                       }
                     >
-                      {item.avtar === "image" ? (
+                      {item.avtar === "image" || !item.avtar ? (
                         <FaUserCircle className={style.icons} />
                       ) : null}
                     </span>
