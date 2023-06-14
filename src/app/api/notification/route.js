@@ -16,11 +16,11 @@ export async function GET(req, res) {
   dbConnect();
   console.log("Database is Connected");
 
-  const token = req.cookies.get("token")?.value || req.headers.cookies.token;
-  const tokenData = jwt.verify(token, process.env.JWTSECRET);
-
   try {
     //
+
+    const token = req.cookies.get("token")?.value || req.headers.cookies.token;
+    const tokenData = jwt.verify(token, process.env.JWTSECRET);
 
     const user = await UserData.findOne({ userId: tokenData._id });
     const notify = await UserNotify.findById({
@@ -40,6 +40,11 @@ export async function GET(req, res) {
     //
   } catch (err) {
     console.log(err);
+
+    return NextResponse.json({
+      status: false,
+      msg: `ERROR: ${err}`,
+    });
   }
   //
 
@@ -57,11 +62,11 @@ export async function PUT(req, res) {
   dbConnect();
   console.log("Database is Connected");
 
-  const token = req.cookies.get("token")?.value || req.headers.cookies.token;
-  const tokenData = jwt.verify(token, process.env.JWTSECRET);
-
   try {
     //
+
+    const token = req.cookies.get("token")?.value || req.headers.cookies.token;
+    const tokenData = jwt.verify(token, process.env.JWTSECRET);
 
     const body = await req.json();
 

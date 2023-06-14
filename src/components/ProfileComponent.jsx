@@ -141,7 +141,11 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
   return (
     <>
       {status === false ? (
-        (alert(`${msg}`), router.back())
+        msg === "This is Private Account." ? (
+          (alert(`${msg}`), router.back())
+        ) : (
+          router.push("/logIn")
+        )
       ) : (
         <>
           {/* Profil Page Header Part Start */}
@@ -175,10 +179,9 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                 <>
                   <div className={style.upper_cover}>
                     <span className={style.pic_cover}>
-                      <a
-                        href={item.avtar === "image" ? "#" : item.avtar}
-                        target="_blank"
-                      >
+                      {/*  */}
+
+                      {item.avtar === "image" ? (
                         <span
                           className={style.pic}
                           style={
@@ -195,7 +198,26 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                             <FaUserCircle className={style.icons} />
                           ) : null}
                         </span>
-                      </a>
+                      ) : (
+                        <a href={item.avtar} target="_blank">
+                          <span
+                            className={style.pic}
+                            style={
+                              item.avtar === "image"
+                                ? {}
+                                : {
+                                    backgroundImage: `url(
+                                 ${item.avtar}
+                                )`,
+                                  }
+                            }
+                          >
+                            {item.avtar === "image" ? (
+                              <FaUserCircle className={style.icons} />
+                            ) : null}
+                          </span>
+                        </a>
+                      )}
                       {/*  */}
                       {item.status === "self" ? (
                         item.avtar === "image" ? (
@@ -302,55 +324,56 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                   </span>
                 </>
               )}
-
-              <span className={style.logOutBtn_cover}>
-                {item.status === "self" ? (
-                  <>
-                    <strong>LogOut</strong>
-                    <button
-                      onClick={() =>
-                        set_showPopUP({
-                          logOutSection: 1,
-                          aboutSection: 0,
-                        })
-                      }
-                    >
-                      <BiLogOut className={style.icons} />
-                      LogOut
-                    </button>
-                  </>
-                ) : item.status === "blocked by you" ? (
-                  <>
-                    <strong>Blocked & Report</strong>
-                    <button
-                      onClick={() => {
-                        putRequest("Unblock User", item.userId, mutate);
-                      }}
-                    >
-                      <BiBlock className={style.icons} /> Unblock
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <strong>Blocked & Report</strong>
-                    <button
-                      onClick={() => {
-                        putRequest("Block User", item.userId, mutate);
-                      }}
-                    >
-                      <BiBlock className={style.icons} /> Block
-                    </button>
-                    <button
-                      onClick={() => {
-                        putRequest("Block User", item.userId, mutate);
-                      }}
-                    >
-                      <BsShieldExclamation className={style.icons} />
-                      Report
-                    </button>
-                  </>
-                )}
-              </span>
+              {item.status === "Unknown" ? null : (
+                <span className={style.logOutBtn_cover}>
+                  {item.status === "self" ? (
+                    <>
+                      <strong>LogOut</strong>
+                      <button
+                        onClick={() =>
+                          set_showPopUP({
+                            logOutSection: 1,
+                            aboutSection: 0,
+                          })
+                        }
+                      >
+                        <BiLogOut className={style.icons} />
+                        LogOut
+                      </button>
+                    </>
+                  ) : item.status === "blocked by you" ? (
+                    <>
+                      <strong>Unblock the Account</strong>
+                      <button
+                        onClick={() => {
+                          putRequest("Unblock User", item.userId, mutate);
+                        }}
+                      >
+                        <BiBlock className={style.icons} /> Unblock
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <strong>Block & Report</strong>
+                      <button
+                        onClick={() => {
+                          putRequest("Block User", item.userId, mutate);
+                        }}
+                      >
+                        <BiBlock className={style.icons} /> Block
+                      </button>
+                      <button
+                        onClick={() => {
+                          putRequest("Block User", item.userId, mutate);
+                        }}
+                      >
+                        <BsShieldExclamation className={style.icons} />
+                        Report
+                      </button>
+                    </>
+                  )}
+                </span>
+              )}
             </div>
           </section>
           {/* Profil Page Body Part Start */}

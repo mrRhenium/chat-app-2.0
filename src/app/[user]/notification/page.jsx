@@ -6,6 +6,7 @@ import NotifyItemComponent from "@/components/NotifyItemComponent";
 
 import useSWR from "swr";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const URL = "/api/notification";
 const fetcher = async (url) => {
@@ -15,6 +16,8 @@ const fetcher = async (url) => {
 };
 
 const Notification = () => {
+  const router = useRouter();
+
   const [option, set_option] = useState("Send");
   const { data, isLoading, mutate } = useSWR(URL, fetcher, {
     refreshInterval: 2000,
@@ -47,6 +50,8 @@ const Notification = () => {
         <div className={style.notifyItem_cover}>
           {isLoading ? (
             <LoadingComponent />
+          ) : data["status"] === false ? (
+            router.push("/logIn")
           ) : (
             <NotifyItemComponent
               list={

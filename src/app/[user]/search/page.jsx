@@ -8,6 +8,7 @@ import { useState } from "react";
 import useSWR from "swr";
 
 import { BiSearchAlt2 } from "react-icons/bi";
+import { useRouter } from "next/navigation";
 //
 //
 
@@ -20,6 +21,8 @@ const fetcher = async (url) => {
 };
 
 const Search = () => {
+  const router = useRouter();
+
   const { data, isLoading, mutate } = useSWR(URL, fetcher, {
     refreshInterval: 2000,
   });
@@ -80,6 +83,8 @@ const Search = () => {
         <div className={style.searchItem_cover}>
           {isLoading ? (
             <LoadingComponent />
+          ) : data["status"] === false ? (
+            router.push("/logIn")
           ) : (
             <SearchItemComponent
               list={list.length ? list : data["data"]}

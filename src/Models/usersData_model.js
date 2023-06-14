@@ -89,6 +89,11 @@ const userDataSchema = new Schema(
       default: 0,
       required: true,
     },
+    private: {
+      type: Boolean,
+      default: 1,
+      required: true,
+    },
     blockUserId: {
       type: Array,
       default: [],

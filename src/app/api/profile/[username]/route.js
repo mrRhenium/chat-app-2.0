@@ -37,6 +37,7 @@ export async function GET(req, context) {
         following: 1,
         onlineStatus: 1,
         blockUserId: 1,
+        private: 1,
       }
     );
 
@@ -63,7 +64,8 @@ export async function GET(req, context) {
       });
 
       //
-    } else if (user.username === selfUser.username) {
+    } //
+    else if (user.username === selfUser.username) {
       //
 
       data = { ...data, status: "self" };
@@ -75,7 +77,8 @@ export async function GET(req, context) {
       });
 
       //
-    } else if (selfUser.friendsId.includes(user.userId)) {
+    } //
+    else if (selfUser.friendsId.includes(user.userId)) {
       //
 
       if (selfUser.blockUserId.includes(user.userId)) {
@@ -107,7 +110,17 @@ export async function GET(req, context) {
       });
 
       //
-    } else {
+    } //
+    else if (!user.private) {
+      data = { ...data, status: "Unknown" };
+
+      return NextResponse.json({
+        status: true,
+        msg: "Successfully send Unknown profile",
+        data: data,
+      });
+    } //
+    else {
       //
 
       return NextResponse.json({

@@ -162,7 +162,8 @@ const Chats = () => {
       <section className={style.body}>
         <div className={style.chatList_cover}>
           {data["status"] === false ? (
-            alert(`${resMsg}`)
+            // alert(`${resMsg}`),
+            router.push("/logIn")
           ) : chatList.length === 0 ? (
             <>
               <h5>
