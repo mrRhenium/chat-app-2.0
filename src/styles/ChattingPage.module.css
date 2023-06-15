@@ -437,23 +437,23 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: 0.6rem;
-  width: 8rem;
-  min-height: 5rem;
+  gap: 1rem;
+  width: 10rem;
+  min-height: 9rem;
   top: 0;
   right: 0;
   transform: translate(0, -105%);
-  padding: 0.5rem;
-  border-radius: 1rem;
-  background-color: rgba(34, 175, 236, 0.9);
+  padding: 1rem 0.5rem;
+  border-radius: 2rem;
+  background-color: rgba(34, 175, 236, 0.7);
 }
 .attachment_cover .opt label {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
   padding: 0.5rem;
   cursor: pointer;
   outline: none;
@@ -474,13 +474,15 @@
 }
 .attachment_cover .opt label .icons {
   color: #ffffff;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
 }
 .attachment_cover .opt label:hover {
   opacity: 0.7;
 }
 .attachment_cover .opt label input {
-  cursor: pointer;
+  position: absolute;
+  cursor: pointer !important;
+  visibility: hidden;
 }
 
 .chattingPage .footer .sendBtn_cover {
