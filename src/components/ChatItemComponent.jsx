@@ -44,6 +44,8 @@ const removeMsg = async (action, _id, chatId, chatStatus, item, mutate) => {
       });
   }
 
+  console.log(action + " -> " + "Delete this message.");
+
   mutate();
 
   //
@@ -64,6 +66,8 @@ const ChatItemComponent = ({
 
   useEffect(() => {
     if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
+
+    temp_list = list;
   }, [list]);
 
   return (
