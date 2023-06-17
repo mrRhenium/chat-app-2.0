@@ -1,6 +1,7 @@
 import style from "../styles/ChatItemComponent.module.css";
 import storage from "@/Database/firebaseConfig";
 
+import { CiMenuKebab } from "react-icons/ci";
 import { RiCheckDoubleLine, RiCheckLine } from "react-icons/ri";
 import { MdNotInterested, MdDelete } from "react-icons/md";
 import { BsHeadset, BsCameraVideo, BsFiletypePdf } from "react-icons/bs";
@@ -8,7 +9,7 @@ import { BsHeadset, BsCameraVideo, BsFiletypePdf } from "react-icons/bs";
 import { useEffect, useRef } from "react";
 import { ref, deleteObject } from "firebase/storage";
 
-const removeMsg = async (action, _id, chatId, chatStatus, item) => {
+const removeMsg = async (action, _id, chatId, chatStatus, item, mutate) => {
   const JSONdata = JSON.stringify({
     action: action,
     _id: _id,
@@ -43,6 +44,8 @@ const removeMsg = async (action, _id, chatId, chatStatus, item) => {
       });
   }
 
+  mutate();
+
   //
 };
 
@@ -53,6 +56,7 @@ const ChatItemComponent = ({
   uName,
   chatId,
   chatStatus,
+  mutate,
 }) => {
   //
 
@@ -79,18 +83,20 @@ const ChatItemComponent = ({
                       item._id,
                       chatId,
                       chatStatus,
-                      item
+                      item,
+                      mutate
                     )
                   : removeMsg(
                       "Delete self message",
                       item._id,
                       chatId,
                       chatStatus,
-                      item
+                      item,
+                      mutate
                     );
               }}
             >
-              <MdDelete className={style.icons} />
+              <CiMenuKebab className={style.icons} />
             </span>
 
             {item.deleted ? (

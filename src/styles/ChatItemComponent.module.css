@@ -67,7 +67,7 @@
   position: absolute;
   display: flex;
   top: 0.2rem;
-  right: 0.2rem;
+  right: 0.1rem;
   cursor: pointer;
 }
 .chats_cover .deleteBtn_cover .icons {

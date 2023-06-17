@@ -254,7 +254,7 @@ export async function PUT(req, context) {
         }
       );
 
-      await Chat.findOneAndUpdate(
+      await Chat.updateMany(
         {
           _id: body.chatId,
         },
