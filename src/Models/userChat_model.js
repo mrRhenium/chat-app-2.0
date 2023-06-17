@@ -4,9 +4,8 @@ const Schema = mongoose.Schema;
 
 const msgSchema = new Schema(
   {
-    indexId: {
-      type: String,
-      default: new ObjectId().toString(),
+    sendTime: {
+      type: Number,
       required: true,
     },
     userId: {
@@ -40,13 +39,20 @@ const msgSchema = new Schema(
       type: String,
       required: true,
     },
-    backUpMsg: {
-      type: String,
-      required: true,
+    reaction: {
+      type: {
+        type: String,
+      },
+      name: {
+        type: String,
+      },
+      url: {
+        type: String,
+      },
     },
-    msgStatus: {
-      type: String,
-      default: "active",
+    deleted: {
+      type: Boolean,
+      default: false,
       required: true,
     },
     seenStauts: {
@@ -70,6 +76,14 @@ const msgSchema = new Schema(
 
 const userChatSchema = new Schema(
   {
+    messageOne: {
+      type: [msgSchema],
+      required: true,
+    },
+    messageTwo: {
+      type: [msgSchema],
+      required: true,
+    },
     message: {
       type: [msgSchema],
       required: true,

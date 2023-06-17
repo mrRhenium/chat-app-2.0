@@ -49,6 +49,7 @@ export async function GET(req, context) {
     // const onlineStatus = selfUser.friends[0].onlineStatus;
     const chatId = selfUser.friends[0].chatId;
     const chats = await Chat.findOne({ _id: chatId });
+    let messageBox = selfUser.friends[0].chatStatus;
 
     await Chat.updateMany(
       {
@@ -57,6 +58,20 @@ export async function GET(req, context) {
       {
         $set: {
           [`message.$[e].seenStauts`]: true,
+        },
+      },
+      { arrayFilters: [{ [`e.author`]: pUsername }] }
+    );
+
+    await Chat.updateMany(
+      {
+        _id: chatId,
+      },
+      {
+        $set: {
+          [`${
+            messageBox === "messageOne" ? "messageTwo" : "messageOne"
+          }.$[e].seenStauts`]: true,
         },
       },
       { arrayFilters: [{ [`e.author`]: pUsername }] }
@@ -74,9 +89,11 @@ export async function GET(req, context) {
     return NextResponse.json({
       status: true,
       msg: "Successfully! : Send Users chat.",
-      data: chats,
+      data: chats[messageBox],
       avtar: targetUser.avtar,
       selfId: tokenData._id,
+      chatId: chatId,
+      chatStatus: messageBox,
       onlineStatus: targetUser.onlineStatus,
     });
 
@@ -136,19 +153,23 @@ export async function POST(req, context) {
 
     const chats = await Chat.findOne({ _id: chatId });
 
-    let date = new Date();
-    let tarik = date.toLocaleDateString("pt-PT");
+    let tarik = new Date().toLocaleDateString("pt-PT");
 
-    chats.message.push({
+    let chatData = {
+      sendTime: body.sendTime,
       userId: selfUser.userId,
       author: selfUser.username,
       msg: body.message,
-      backUpMsg: body.message,
       msgType: body.msgType,
       mediaInfo: body.mediaInfo,
+      reaction: body.reaction,
       time: body.time,
       date: tarik,
-    });
+    };
+
+    chats.message.push(chatData);
+    chats.messageOne.push(chatData);
+    chats.messageTwo.push(chatData);
 
     let lastMsg =
       body.message === "noCapTiOn9463"
@@ -208,64 +229,82 @@ export async function PUT(req, context) {
   dbConnect();
   console.log("Database is Connected");
 
+  // const token = req.cookies.get("token")?.value || req.headers.cookies.token;
+  // const tokenData = jwt.verify(token, process.env.JWTSECRET);
   // const pUsername = context.searchParams.username;
-  // console.log("Context : ", context);
 
   try {
     //
 
     const body = await req.json();
+    // const chats = await Chat.findOne({ _id: body.chatId });
 
-    if (body.action === "Delete whole chats") {
+    if (body.action === "Delete self message") {
       //
 
-      const chats = await Chat.findOneAndUpdate(
+      // delete from my message box
+      await Chat.findOneAndUpdate(
         { _id: body.chatId },
-        { $set: { message: [] } }
+        {
+          $pull: {
+            [`${body.chatStatus}`]: {
+              _id: body._id,
+            },
+          },
+        }
+      );
+
+      await Chat.findOneAndUpdate(
+        {
+          _id: body.chatId,
+        },
+        {
+          $set: {
+            [`${
+              body.chatStatus === "messageOne" ? "messageTwo" : "messageOne"
+            }.$[e].deleted`]: true,
+          },
+        },
+        { arrayFilters: [{ [`e._id`]: body._id }] }
       );
 
       return NextResponse.json({
         status: true,
-        msg: "Successfully delete whole chats",
+        msg: "Successfully: Delete Self message.",
       });
 
       //
-    } else if (body.action === "Delete particular chats") {
+    } //
+    else if (body.action === "Delete your message") {
       //
 
-      const chats = await Chat.findOne({ _id: body.chatId });
-
-      const updChats = chats.message.map((item) => {
-        if (body.msgArray.includes(item.indexId)) {
-          //
-
-          if (item.msgStatus === "active") {
-            item.msgStatus = "temp del";
-            item.msg = "this message deleted";
-          } else if (item.msgStatus === "temp del") {
-            item.msgStatus = "perm del";
-          }
-
-          //
+      await Chat.findOneAndUpdate(
+        { _id: body.chatId },
+        {
+          $pull: {
+            [`${body.chatStatus}`]: {
+              _id: body._id,
+            },
+          },
         }
-
-        return item;
-      });
-
-      chats.message = updChats;
-      await chats.save();
+      );
 
       return NextResponse.json({
         status: true,
-        msg: "Successfully delete particular chats",
+        msg: "Successfully: Delete your message.",
       });
 
       //
-    }
+    } //
 
     //
   } catch (err) {
     console.log(err);
+
+    return NextResponse.json({
+      status: false,
+      msg: "ERROR : Something went wrong with Chats - > Delete.",
+    });
   }
 
   // End of the API Routes

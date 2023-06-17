@@ -171,7 +171,7 @@ export async function PUT(req, res) {
 
     return NextResponse.json({
       status: false,
-      msg: "ERROR! : Something went wrong with logOut",
+      msg: "ERROR! : Something went wrong with UserPutMethod",
     });
   }
 }

@@ -308,6 +308,7 @@ export async function PUT(req, res) {
         chatId: userChat._id,
         username: friendUser.username,
         invited: 0,
+        chatStatus: "messageOne",
       };
 
       const self = {
@@ -317,6 +318,7 @@ export async function PUT(req, res) {
         chatId: userChat._id,
         username: selfUser.username,
         invited: 1,
+        chatStatus: "messageTwo",
       };
 
       selfUser.follower += 1;

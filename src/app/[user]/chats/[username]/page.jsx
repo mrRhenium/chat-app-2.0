@@ -43,11 +43,11 @@ const ChattingPage = () => {
   const router = useRouter();
   let uName = useParams().username;
 
-  const { data, isLoading } = useSWR(`${URL}/${uName}`, fetcher, {
+  const { data, isLoading, mutate } = useSWR(`${URL}/${uName}`, fetcher, {
     refreshInterval: 1000,
   });
 
-  let temp_list = data && data["status"] ? data["data"]["message"] : [];
+  let temp_list = data && data["status"] ? data["data"] : [];
   let selfId = data && data["status"] && data["selfId"];
   let FriendAvtar = data && data["status"] ? data["avtar"] : "image";
 
@@ -55,6 +55,16 @@ const ChattingPage = () => {
   const [progress, set_progress] = useState(0);
   const [mediaOpt, set_mediaOpt] = useState(0);
   const [msgBox, set_msgBox] = useState("");
+
+  const [reaction, set_reaction] = useState({
+    flag: 0,
+    data: {
+      type: "",
+      name: "",
+      url: "",
+    },
+  });
+
   const [media, set_media] = useState({
     flag: 0,
     file: null,
@@ -143,6 +153,7 @@ const ChattingPage = () => {
             ]);
 
             const JSONdata = JSON.stringify({
+              sendTime: Date.now(),
               message: msg === "" ? "noCapTiOn9463" : msg,
               msgType: "media",
               mediaInfo: {
@@ -202,9 +213,11 @@ const ChattingPage = () => {
       ]);
 
       const JSONdata = JSON.stringify({
+        sendTime: Date.now(),
         message: msg,
         msgType: "text",
         mediaInfo: {},
+        reaction: reaction.flag ? reaction.data : {},
         time: time,
       });
 
@@ -376,6 +389,9 @@ const ChattingPage = () => {
                     temp_list={temp_list}
                     list={list}
                     uName={uName}
+                    chatId={data["chatId"]}
+                    chatStatus={data["chatStatus"]}
+                    mutate={mutate}
                   />
                 )}
               </section>

@@ -33,9 +33,8 @@ const friendSchema = new Schema(
       type: Boolean,
       required: true,
     },
-    blockStatus: {
-      type: Boolean,
-      default: 0,
+    chatStatus: {
+      type: String,
       required: true,
     },
   },

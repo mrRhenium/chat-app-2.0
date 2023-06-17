@@ -1,13 +1,62 @@
 import style from "../styles/ChatItemComponent.module.css";
+import storage from "@/Database/firebaseConfig";
 
 import { RiCheckDoubleLine, RiCheckLine } from "react-icons/ri";
+import { MdNotInterested, MdDelete } from "react-icons/md";
 import { BsHeadset, BsCameraVideo, BsFiletypePdf } from "react-icons/bs";
 
 import { useEffect, useRef } from "react";
+import { ref, deleteObject } from "firebase/storage";
 
-const ChatItemComponent = ({ data, temp_list, list, uName }) => {
+const removeMsg = async (action, _id, chatId, chatStatus, item) => {
+  const JSONdata = JSON.stringify({
+    action: action,
+    _id: _id,
+    chatId: chatId,
+    chatStatus: chatStatus,
+  });
+
+  const res = await fetch(`/api/chats/nitesh`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSONdata,
+  });
+
+  const resData = await res.json();
+
+  if (resData.status === false) {
+    alert(`${resData.msg}`);
+    return;
+  }
+
+  if (action === "Delete self message" && item.msgType === "media") {
+    const path = ref(storage, item.mediaInfo.url);
+
+    deleteObject(path)
+      .then(() => {
+        console.log("Image is deleted");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  //
+};
+
+const ChatItemComponent = ({
+  data,
+  temp_list,
+  list,
+  uName,
+  chatId,
+  chatStatus,
+}) => {
+  //
+
   const chatsCover = useRef();
-  // const [fileType, set]
 
   useEffect(() => {
     if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
@@ -21,7 +70,37 @@ const ChatItemComponent = ({ data, temp_list, list, uName }) => {
             key={item._id}
             className={item.author === uName ? style.msg_left : style.msg_right}
           >
-            {item.msgType === "media" ? (
+            <span
+              className={style.deleteBtn_cover}
+              onClick={() => {
+                item.author === uName
+                  ? removeMsg(
+                      "Delete your message",
+                      item._id,
+                      chatId,
+                      chatStatus,
+                      item
+                    )
+                  : removeMsg(
+                      "Delete self message",
+                      item._id,
+                      chatId,
+                      chatStatus,
+                      item
+                    );
+              }}
+            >
+              <MdDelete className={style.icons} />
+            </span>
+
+            {item.deleted ? (
+              <p className={style.deletedMsg}>
+                <i>
+                  <MdNotInterested className={style.icons} /> This message was
+                  deleted
+                </i>
+              </p>
+            ) : item.msgType === "media" ? (
               item.mediaInfo.type === "image" ? (
                 <>
                   <a href={item.mediaInfo.url} target="_blank">
@@ -111,7 +190,6 @@ const ChatItemComponent = ({ data, temp_list, list, uName }) => {
                 )}
               </>
             )}
-
             <p className={style.msg_time}>
               {`${item.date} - ${item.time}`}
               {item.author != uName ? (

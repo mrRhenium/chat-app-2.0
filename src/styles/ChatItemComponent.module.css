@@ -63,6 +63,18 @@
   margin-top: 1rem;
 }
 
+.chats_cover .deleteBtn_cover {
+  position: absolute;
+  display: flex;
+  top: 0.2rem;
+  right: 0.2rem;
+  cursor: pointer;
+}
+.chats_cover .deleteBtn_cover .icons {
+  color: black;
+  font-size: 1.2rem;
+}
+
 .chats_cover span > p {
   font-size: 1rem;
   color: var(--primary_txt2);
@@ -71,6 +83,14 @@
   word-wrap: break-word;
   line-height: 1.3rem;
   /* word-break: break-all; */
+}
+
+.chats_cover span .deletedMsg i {
+  font-size: 1rem;
+  color: var(--msg_highlight);
+}
+.chats_cover span .deletedMsg i .icons {
+  font-size: 1.3rem;
 }
 
 .chats_cover .msg_time {
