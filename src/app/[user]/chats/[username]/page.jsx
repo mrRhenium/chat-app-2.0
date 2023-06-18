@@ -133,10 +133,13 @@ const ChattingPage = () => {
             mediaUrl = url;
             console.log(url);
 
+            const sendTime = Date.now();
+
             set_list((prev) => [
               ...prev,
               {
                 _id: Date.now() * 28,
+                sendTime: sendTime,
                 author: "SelfHume",
                 msg: msg === "" ? "noCapTiOn9463" : msg,
                 msgType: "media",
@@ -153,7 +156,7 @@ const ChattingPage = () => {
             ]);
 
             const JSONdata = JSON.stringify({
-              sendTime: Date.now(),
+              sendTime: sendTime,
               message: msg === "" ? "noCapTiOn9463" : msg,
               msgType: "media",
               mediaInfo: {
@@ -198,10 +201,13 @@ const ChattingPage = () => {
 
       if (msg === "") return;
 
+      const sendTime = Date.now();
+
       set_list((prev) => [
         ...prev,
         {
           _id: Date.now() * 28,
+          sendTime: sendTime,
           author: "SelfHume",
           msg: msg,
           msgType: "text",
@@ -213,7 +219,7 @@ const ChattingPage = () => {
       ]);
 
       const JSONdata = JSON.stringify({
-        sendTime: Date.now(),
+        sendTime: sendTime,
         message: msg,
         msgType: "text",
         mediaInfo: {},
@@ -388,6 +394,7 @@ const ChattingPage = () => {
                     data={data}
                     temp_list={temp_list}
                     list={list}
+                    set_list={set_list}
                     uName={uName}
                     chatId={data["chatId"]}
                     chatStatus={data["chatStatus"]}

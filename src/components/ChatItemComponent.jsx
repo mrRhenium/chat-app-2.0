@@ -9,52 +9,11 @@ import { BsHeadset, BsCameraVideo, BsFiletypePdf } from "react-icons/bs";
 import { useEffect, useRef } from "react";
 import { ref, deleteObject } from "firebase/storage";
 
-const removeMsg = async (action, _id, chatId, chatStatus, item, mutate) => {
-  const JSONdata = JSON.stringify({
-    action: action,
-    _id: _id,
-    chatId: chatId,
-    chatStatus: chatStatus,
-  });
-
-  const res = await fetch(`/api/chats/nitesh`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSONdata,
-  });
-
-  const resData = await res.json();
-
-  if (resData.status === false) {
-    alert(`${resData.msg}`);
-    return;
-  }
-
-  if (action === "Delete self message" && item.msgType === "media") {
-    const path = ref(storage, item.mediaInfo.url);
-
-    deleteObject(path)
-      .then(() => {
-        console.log("Image is deleted");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
-  console.log(action + " -> " + "Delete this message.");
-
-  mutate();
-
-  //
-};
-
 const ChatItemComponent = ({
   data,
   temp_list,
   list,
+  set_list,
   uName,
   chatId,
   chatStatus,
@@ -66,9 +25,57 @@ const ChatItemComponent = ({
 
   useEffect(() => {
     if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
-
-    temp_list = list;
   }, [list]);
+
+  const removeMsg = async (action, item) => {
+    //
+
+    let newList = list.filter((obj) => {
+      if (obj.sendTime != item.sendTime) return obj;
+    });
+
+    set_list(newList);
+
+    const JSONdata = JSON.stringify({
+      action: action,
+      _id: item._id,
+      chatId: chatId,
+      chatStatus: chatStatus,
+    });
+
+    const res = await fetch(`/api/chats/nitesh`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSONdata,
+    });
+
+    const resData = await res.json();
+
+    if (resData.status === false) {
+      alert(`${resData.msg}`);
+      return;
+    }
+
+    if (action === "Delete self message" && item.msgType === "media") {
+      const path = ref(storage, item.mediaInfo.url);
+
+      deleteObject(path)
+        .then(() => {
+          console.log("Image is deleted");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+    console.log(action + " -> " + "Delete this message.");
+
+    mutate();
+
+    //
+  };
 
   return (
     <div className={style.chats_cover} ref={chatsCover}>
@@ -82,22 +89,8 @@ const ChatItemComponent = ({
               className={style.deleteBtn_cover}
               onClick={() => {
                 item.author === uName
-                  ? removeMsg(
-                      "Delete your message",
-                      item._id,
-                      chatId,
-                      chatStatus,
-                      item,
-                      mutate
-                    )
-                  : removeMsg(
-                      "Delete self message",
-                      item._id,
-                      chatId,
-                      chatStatus,
-                      item,
-                      mutate
-                    );
+                  ? removeMsg("Delete your message", item)
+                  : removeMsg("Delete self message", item);
               }}
             >
               <CiMenuKebab className={style.icons} />
