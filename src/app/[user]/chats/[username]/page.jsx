@@ -135,25 +135,25 @@ const ChattingPage = () => {
 
             const sendTime = Date.now();
 
-            set_list((prev) => [
-              ...prev,
-              {
-                _id: Date.now() * 28,
-                sendTime: sendTime,
-                author: "SelfHume",
-                msg: msg === "" ? "noCapTiOn9463" : msg,
-                msgType: "media",
-                mediaInfo: {
-                  type: media.type,
-                  name: media.name,
-                  size: media.size,
-                  url: mediaUrl,
-                },
-                time: time,
-                date: new Date().toLocaleDateString("pt-PT"),
-                seenStauts: false,
-              },
-            ]);
+            // set_list((prev) => [
+            //   ...prev,
+            //   {
+            //     _id: Date.now() * 28,
+            //     sendTime: sendTime,
+            //     author: "SelfHume",
+            //     msg: msg === "" ? "noCapTiOn9463" : msg,
+            //     msgType: "media",
+            //     mediaInfo: {
+            //       type: media.type,
+            //       name: media.name,
+            //       size: media.size,
+            //       url: mediaUrl,
+            //     },
+            //     time: time,
+            //     date: new Date().toLocaleDateString("pt-PT"),
+            //     seenStauts: false,
+            //   },
+            // ]);
 
             const JSONdata = JSON.stringify({
               sendTime: sendTime,
@@ -203,20 +203,20 @@ const ChattingPage = () => {
 
       const sendTime = Date.now();
 
-      set_list((prev) => [
-        ...prev,
-        {
-          _id: Date.now() * 28,
-          sendTime: sendTime,
-          author: "SelfHume",
-          msg: msg,
-          msgType: "text",
-          mediaInfo: {},
-          time: time,
-          date: new Date().toLocaleDateString("pt-PT"),
-          seenStauts: false,
-        },
-      ]);
+      // set_list((prev) => [
+      //   ...prev,
+      //   {
+      //     _id: Date.now() * 28,
+      //     sendTime: sendTime,
+      //     author: "SelfHume",
+      //     msg: msg,
+      //     msgType: "text",
+      //     mediaInfo: {},
+      //     time: time,
+      //     date: new Date().toLocaleDateString("pt-PT"),
+      //     seenStauts: false,
+      //   },
+      // ]);
 
       const JSONdata = JSON.stringify({
         sendTime: sendTime,

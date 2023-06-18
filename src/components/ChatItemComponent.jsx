@@ -30,12 +30,6 @@ const ChatItemComponent = ({
   const removeMsg = async (action, item) => {
     //
 
-    let newList = list;
-
-    newList.filter((obj) => {
-      if (obj.sendTime != item.sendTime) return obj;
-    });
-
     const JSONdata = JSON.stringify({
       action: action,
       _id: item._id,
@@ -70,8 +64,6 @@ const ChatItemComponent = ({
         });
     }
 
-    set_list(newList);
-
     console.log(action + " -> " + "Delete this message.");
     mutate();
 
@@ -80,7 +72,8 @@ const ChatItemComponent = ({
 
   return (
     <div className={style.chats_cover} ref={chatsCover}>
-      {(temp_list.length >= list.length ? temp_list : list).map((item) => {
+      {/* {(temp_list.length >= list.length ? temp_list : list).map((item) => { */}
+      {temp_list.map((item) => {
         return (
           <span
             key={item._id}
