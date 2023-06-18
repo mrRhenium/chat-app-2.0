@@ -30,11 +30,11 @@ const ChatItemComponent = ({
   const removeMsg = async (action, item) => {
     //
 
-    let newList = list.filter((obj) => {
+    let newList = list;
+
+    newList.filter((obj) => {
       if (obj.sendTime != item.sendTime) return obj;
     });
-
-    set_list(newList);
 
     const JSONdata = JSON.stringify({
       action: action,
@@ -70,8 +70,9 @@ const ChatItemComponent = ({
         });
     }
 
-    console.log(action + " -> " + "Delete this message.");
+    set_list(newList);
 
+    console.log(action + " -> " + "Delete this message.");
     mutate();
 
     //

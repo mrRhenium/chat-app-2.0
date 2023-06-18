@@ -254,7 +254,21 @@ export async function PUT(req, context) {
         }
       );
 
-      await Chat.updateMany(
+      // await Chat.updateMany(
+      //   {
+      //     _id: chatId,
+      //   },
+      //   {
+      //     $set: {
+      //       [`${
+      //         messageBox === "messageOne" ? "messageTwo" : "messageOne"
+      //       }.$[e].seenStauts`]: false,
+      //     },
+      //   },
+      //   { arrayFilters: [{ [`e.author`]: pUsername }] }
+      // );
+
+      const temp = await Chat.updateMany(
         {
           _id: body.chatId,
         },
@@ -267,6 +281,8 @@ export async function PUT(req, context) {
         },
         { arrayFilters: [{ [`e._id`]: body._id }] }
       );
+
+      console.log(temp);
 
       return NextResponse.json({
         status: true,
