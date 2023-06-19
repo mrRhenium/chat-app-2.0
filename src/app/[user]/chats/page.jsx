@@ -179,7 +179,7 @@ const Chats = () => {
                   <span
                     className={style.chatPic_cover}
                     onClick={() => {
-                      item.blockStatus ? set_block(1) : null;
+                      item.blockStatus ? set_block(1) : set_block(0);
                       set_friendAvtar(item.avtar);
                       updateAvtar("Update Avtar", item.userId, set_friendAvtar);
 
