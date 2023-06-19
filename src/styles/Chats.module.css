@@ -171,7 +171,7 @@
 .body .chatList_cover .chat_list_items .chatInfo_cover .chat_name p {
   color: var(--primary_txt2);
   font-size: 1.4rem;
-  color: --var(--primary_txt2);
+  /* color: --var(--primary_txt2); */
   font-family: var(--text_font);
   white-space: nowrap;
   overflow: hidden;

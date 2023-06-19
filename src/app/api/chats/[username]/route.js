@@ -229,17 +229,12 @@ export async function PUT(req, context) {
   dbConnect();
   console.log("Database is Connected");
 
-  // const token = req.cookies.get("token")?.value || req.headers.cookies.token;
-  // const tokenData = jwt.verify(token, process.env.JWTSECRET);
-  // const pUsername = context.searchParams.username;
-
   try {
     //
 
     const body = await req.json();
-    // const chats = await Chat.findOne({ _id: body.chatId });
 
-    if (body.action === "Delete self message") {
+    if (body.action === "Delete self message for self") {
       //
 
       // delete from my message box
@@ -248,27 +243,13 @@ export async function PUT(req, context) {
         {
           $pull: {
             [`${body.chatStatus}`]: {
-              _id: body._id,
+              sendTime: body.sendTime,
             },
           },
         }
       );
 
-      // await Chat.updateMany(
-      //   {
-      //     _id: chatId,
-      //   },
-      //   {
-      //     $set: {
-      //       [`${
-      //         messageBox === "messageOne" ? "messageTwo" : "messageOne"
-      //       }.$[e].seenStauts`]: false,
-      //     },
-      //   },
-      //   { arrayFilters: [{ [`e.author`]: pUsername }] }
-      // );
-
-      const temp = await Chat.updateMany(
+      await Chat.updateMany(
         {
           _id: body.chatId,
         },
@@ -279,14 +260,33 @@ export async function PUT(req, context) {
             }.$[e].deleted`]: true,
           },
         },
-        { arrayFilters: [{ [`e._id`]: body._id }] }
+        { arrayFilters: [{ [`e.sendTime`]: body.sendTime }] }
       );
-
-      console.log(temp);
 
       return NextResponse.json({
         status: true,
-        msg: "Successfully: Delete Self message.",
+        msg: "Successfully: Delete Self message for self.",
+      });
+
+      //
+    } //
+    else if (body.action === "Delete self message for everyone") {
+      //
+
+      await Chat.findOneAndUpdate(
+        { _id: body.chatId },
+        {
+          $pull: {
+            [`${body.chatStatus}`]: {
+              sendTime: body.sendTime,
+            },
+          },
+        }
+      );
+
+      return NextResponse.json({
+        status: true,
+        msg: "Successfully: Delete Self message for everyone.",
       });
 
       //
@@ -299,7 +299,7 @@ export async function PUT(req, context) {
         {
           $pull: {
             [`${body.chatStatus}`]: {
-              _id: body._id,
+              sendTime: body.sendTime,
             },
           },
         }

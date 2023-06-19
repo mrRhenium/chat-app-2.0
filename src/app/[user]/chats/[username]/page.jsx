@@ -4,10 +4,11 @@ import style from "../../../../styles/ChattingPage.module.css";
 import LoadingComponent from "@/components/LoadingComponent";
 import ChatItemComponent from "@/components/ChatItemComponent";
 import storage from "@/Database/firebaseConfig.js";
+import PopUpComponent from "@/components/PopUpComponent";
 
 import { BiUser } from "react-icons/bi";
 import { CiMenuKebab } from "react-icons/ci";
-import { MdSend } from "react-icons/md";
+import { MdSend, MdDelete, MdReplyAll, MdDeleteForever } from "react-icons/md";
 import { GrAttachment } from "react-icons/gr";
 import { CgCloseO } from "react-icons/cg";
 import {
@@ -16,6 +17,7 @@ import {
   BsHeadset,
   BsCameraVideo,
   BsFiletypePdf,
+  BsTextareaT,
   BsFillCloudUploadFill,
 } from "react-icons/bs";
 
@@ -26,7 +28,7 @@ import {
   ref,
   uploadBytesResumable,
   getDownloadURL,
-  // deleteObject,
+  deleteObject,
 } from "firebase/storage";
 
 //
@@ -49,19 +51,25 @@ const ChattingPage = () => {
 
   let temp_list = data && data["status"] ? data["data"] : [];
   let selfId = data && data["status"] && data["selfId"];
+  let chatId = data && data["status"] && data["chatId"];
+  let chatStatus = data && data["status"] && data["chatStatus"];
   let FriendAvtar = data && data["status"] ? data["avtar"] : "image";
 
   const [list, set_list] = useState([]);
   const [progress, set_progress] = useState(0);
   const [mediaOpt, set_mediaOpt] = useState(0);
   const [msgBox, set_msgBox] = useState("");
+  const [showPopUp, set_showPopUp] = useState(0);
+  const [chatItem, set_chatItem] = useState();
+  const [deletedChat, set_deletedChat] = useState([]);
 
   const [reaction, set_reaction] = useState({
     flag: 0,
     data: {
-      type: "",
-      name: "",
-      url: "",
+      type: "none",
+      name: "none",
+      file: "none",
+      url: "none",
     },
   });
 
@@ -76,6 +84,52 @@ const ChattingPage = () => {
 
   temp_list.length > list.length ? set_list(temp_list) : null;
 
+  const closePopUp = () => set_showPopUp(0);
+
+  const removeMsg = async (action, item) => {
+    //
+
+    set_deletedChat((prev) => [...prev, item.sendTime]);
+
+    const JSONdata = JSON.stringify({
+      action: action,
+      sendTime: item.sendTime,
+      chatId: chatId,
+      chatStatus: chatStatus,
+    });
+
+    const res = await fetch(`/api/chats/nitesh`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSONdata,
+    });
+
+    const resData = await res.json();
+
+    if (resData.status === false) {
+      alert(`${resData.msg}`);
+      return;
+    }
+
+    if (action === "Delete self message" && item.msgType === "media") {
+      const path = ref(storage, item.mediaInfo.url);
+
+      deleteObject(path)
+        .then(() => {
+          console.log("Image is deleted");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+
+    console.log(action + " -> " + "Delete this message.");
+
+    //
+  };
+
   const sendChat = async (e) => {
     //
     e.preventDefault();
@@ -87,6 +141,17 @@ const ChattingPage = () => {
       hour12: true,
       hour: "2-digit",
       minute: "2-digit",
+    });
+
+    const reactionData = reaction;
+    set_reaction({
+      flag: 0,
+      data: {
+        type: "none",
+        name: "none",
+        file: "none",
+        url: "none",
+      },
     });
 
     if (media.flag) {
@@ -135,25 +200,26 @@ const ChattingPage = () => {
 
             const sendTime = Date.now();
 
-            // set_list((prev) => [
-            //   ...prev,
-            //   {
-            //     _id: Date.now() * 28,
-            //     sendTime: sendTime,
-            //     author: "SelfHume",
-            //     msg: msg === "" ? "noCapTiOn9463" : msg,
-            //     msgType: "media",
-            //     mediaInfo: {
-            //       type: media.type,
-            //       name: media.name,
-            //       size: media.size,
-            //       url: mediaUrl,
-            //     },
-            //     time: time,
-            //     date: new Date().toLocaleDateString("pt-PT"),
-            //     seenStauts: false,
-            //   },
-            // ]);
+            set_list((prev) => [
+              ...prev,
+              {
+                _id: Date.now() * 28,
+                sendTime: sendTime,
+                author: "SelfHume",
+                msg: msg === "" ? "noCapTiOn9463" : msg,
+                msgType: "media",
+                mediaInfo: {
+                  type: media.type,
+                  name: media.name,
+                  size: media.size,
+                  url: mediaUrl,
+                },
+                reaction: reactionData.data,
+                time: time,
+                date: new Date().toLocaleDateString("pt-PT"),
+                seenStauts: false,
+              },
+            ]);
 
             const JSONdata = JSON.stringify({
               sendTime: sendTime,
@@ -165,6 +231,7 @@ const ChattingPage = () => {
                 size: media.size,
                 url: mediaUrl,
               },
+              reaction: reactionData.data,
               time: time,
             });
 
@@ -203,27 +270,28 @@ const ChattingPage = () => {
 
       const sendTime = Date.now();
 
-      // set_list((prev) => [
-      //   ...prev,
-      //   {
-      //     _id: Date.now() * 28,
-      //     sendTime: sendTime,
-      //     author: "SelfHume",
-      //     msg: msg,
-      //     msgType: "text",
-      //     mediaInfo: {},
-      //     time: time,
-      //     date: new Date().toLocaleDateString("pt-PT"),
-      //     seenStauts: false,
-      //   },
-      // ]);
+      set_list((prev) => [
+        ...prev,
+        {
+          _id: Date.now() * 28,
+          sendTime: sendTime,
+          author: "SelfHume",
+          msg: msg,
+          msgType: "text",
+          mediaInfo: {},
+          reaction: reactionData.data,
+          time: time,
+          date: new Date().toLocaleDateString("pt-PT"),
+          seenStauts: false,
+        },
+      ]);
 
       const JSONdata = JSON.stringify({
         sendTime: sendTime,
         message: msg,
         msgType: "text",
         mediaInfo: {},
-        reaction: reaction.flag ? reaction.data : {},
+        reaction: reactionData.data,
         time: time,
       });
 
@@ -246,8 +314,82 @@ const ChattingPage = () => {
     //
   };
 
+  // console.log(reaction);
+
   return (
     <>
+      {showPopUp ? (
+        <PopUpComponent closePopUp={closePopUp}>
+          <section className={style.chatOptions_cover}>
+            {/*  */}
+
+            <button
+              className={style.optionItem}
+              onClick={() => {
+                set_reaction({
+                  flag: 1,
+                  data: {
+                    type: chatItem.msgType === "text" ? "Text" : "media",
+                    name:
+                      chatItem.msgType === "text"
+                        ? chatItem.msg
+                        : chatItem.mediaInfo.name +
+                          " : " +
+                          chatItem.mediaInfo.size,
+                    file:
+                      chatItem.msgType === "media"
+                        ? chatItem.mediaInfo.type
+                        : "Text",
+                    url:
+                      chatItem.msgType === "media"
+                        ? chatItem.mediaInfo.url
+                        : "none",
+                  },
+                });
+
+                closePopUp();
+              }}
+            >
+              <MdReplyAll className={style.icons} />
+              Reply this message
+            </button>
+
+            <button
+              className={style.optionItem}
+              onClick={() => {
+                chatItem.author === uName
+                  ? removeMsg("Delete your message", chatItem)
+                  : removeMsg("Delete self message for self", chatItem);
+
+                closePopUp();
+              }}
+            >
+              <MdDelete className={style.icons} />
+              Delete for me
+            </button>
+
+            {Date.now() - parseInt(chatItem.sendTime) < 60000 ? (
+              // (console.log(`${Date.now()} - ${parseInt(chatItem.sendTime)} ->
+              // ${Date.now() - parseInt(chatItem.sendTime)}`),
+              <button
+                className={style.optionItem}
+                onClick={() => {
+                  removeMsg("Delete self message for everyone", chatItem);
+
+                  closePopUp();
+                }}
+              >
+                <MdDeleteForever className={style.icons} />
+                Delete for everyone
+              </button>
+            ) : // )
+            null}
+
+            {/*  */}
+          </section>
+        </PopUpComponent>
+      ) : null}
+
       <div className={style.chattingPage}>
         <div className={style.container}>
           {isLoading ? (
@@ -394,11 +536,10 @@ const ChattingPage = () => {
                     data={data}
                     temp_list={temp_list}
                     list={list}
-                    set_list={set_list}
                     uName={uName}
-                    chatId={data["chatId"]}
-                    chatStatus={data["chatStatus"]}
-                    mutate={mutate}
+                    set_chatItem={set_chatItem}
+                    set_showPopUp={set_showPopUp}
+                    deletedChat={deletedChat}
                   />
                 )}
               </section>
@@ -408,6 +549,115 @@ const ChattingPage = () => {
               <section className={style.footer}>
                 <form onSubmit={sendChat}>
                   <span className={style.input_cover}>
+                    {/*  */}
+                    {reaction.flag ? (
+                      <div className={style.reaction_section}>
+                        <span
+                          className={style.closeBtn}
+                          onClick={() => {
+                            set_reaction({
+                              flag: 0,
+                              data: {
+                                type: "none",
+                                name: "none",
+                                file: "none",
+                                url: "none",
+                              },
+                            });
+                          }}
+                        >
+                          <CgCloseO className={style.icons} />
+                        </span>
+
+                        <span
+                          className={style.reaction_cover}
+                          style={
+                            reaction.data.type === "Text"
+                              ? {
+                                  borderLeft: "0.16rem solid #f08080",
+                                  borderRight: "0.16rem solid #f08080",
+                                }
+                              : reaction.data.file === "image"
+                              ? {
+                                  borderLeft: "0.16rem solid #32cd32",
+                                  borderRight: "0.16rem solid #32cd32",
+                                }
+                              : reaction.data.file === "audio"
+                              ? {
+                                  borderLeft: "0.16rem solid #ff8c00",
+                                  borderRight: "0.16rem solid #ff8c00",
+                                }
+                              : reaction.data.file === "video"
+                              ? {
+                                  borderLeft: "0.16rem solid #ff1493",
+                                  borderRight: "0.16rem solid #ff1493",
+                                }
+                              : {
+                                  borderLeft: "0.16rem solid #dc143c",
+                                  borderRight: "0.16rem solid #dc143c",
+                                }
+                          }
+                        >
+                          <span className={style.left_cover}>
+                            <p>{`${reaction.data.file} : ${reaction.data.name}`}</p>
+                          </span>
+                          <span className={style.right_cover}>
+                            {/*  */}
+
+                            {reaction.data.type === "Text" ? (
+                              <span
+                                className={style.item_cover}
+                                style={{
+                                  backgroundColor: "#f08080",
+                                }}
+                              >
+                                <BsTextareaT className={style.icons} />
+                              </span>
+                            ) : reaction.data.file === "image" ? (
+                              <span
+                                className={style.item_cover}
+                                style={{
+                                  backgroundImage: `url(${reaction.data.url})`,
+                                }}
+                              >
+                                {/* <BsImage className={style.icons} /> */}
+                              </span>
+                            ) : reaction.data.file === "audio" ? (
+                              <span
+                                className={style.item_cover}
+                                style={{
+                                  backgroundColor: "#ff8c00",
+                                }}
+                              >
+                                <BsHeadset className={style.icons} />
+                              </span>
+                            ) : reaction.data.file === "video" ? (
+                              <span
+                                className={style.item_cover}
+                                style={{
+                                  backgroundColor: "#ff1493",
+                                }}
+                              >
+                                <BsCameraVideo className={style.icons} />
+                              </span>
+                            ) : (
+                              <span
+                                className={style.item_cover}
+                                style={{
+                                  backgroundColor: "#dc143c",
+                                }}
+                              >
+                                <BsFiletypePdf className={style.icons} />
+                              </span>
+                            )}
+
+                            {/*  */}
+                          </span>
+                        </span>
+                      </div>
+                    ) : null}
+                    {/*  */}
+
                     <input
                       type="text"
                       name="msg"
@@ -540,6 +790,9 @@ const ChattingPage = () => {
                       </label>
                     </span>
                   </span>
+                  {/*  */}
+
+                  {/*  */}
                   <label className={style.sendBtn_cover}>
                     <button type="submit">
                       <MdSend className={style.icons} />

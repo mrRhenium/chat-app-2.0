@@ -99,7 +99,6 @@ const Chats = () => {
     );
   }
 
-  const resMsg = data && data["msg"];
   const chatList =
     data && data["data"] && data["data"]["friends"].length
       ? data["data"]["friends"]

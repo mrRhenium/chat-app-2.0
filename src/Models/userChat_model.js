@@ -46,6 +46,9 @@ const msgSchema = new Schema(
       name: {
         type: String,
       },
+      file: {
+        type: String,
+      },
       url: {
         type: String,
       },
