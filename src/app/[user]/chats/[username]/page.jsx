@@ -137,6 +137,7 @@ const ChattingPage = () => {
 
     if (blockStatus) {
       alert("Access to this user is Prohibited!");
+      return;
     }
 
     let msg = msgBox;
