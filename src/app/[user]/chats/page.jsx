@@ -51,6 +51,7 @@ const updateAvtar = async (action, targetUserId, set_friendAvtar) => {
 const Chats = () => {
   const router = useRouter();
 
+  const [block, set_block] = useState(0);
   const [friendAvtar, set_friendAvtar] = useState("");
   const [showPopUp, set_showPopUp] = useState({ flag: 0, username: "" });
 
@@ -103,11 +104,6 @@ const Chats = () => {
     data && data["data"] && data["data"]["friends"].length
       ? data["data"]["friends"]
       : [];
-  const blockStatus =
-    data &&
-    data["data"] &&
-    data["data"]["friends"].length &&
-    data["data"]["friends"]["blockStatus"];
   const selfUser = data && data["data"];
 
   if (data && data["status"] === false) {
@@ -124,7 +120,7 @@ const Chats = () => {
           <PicComponent
             closePopUp={closePopUp}
             username={showPopUp.username}
-            avtar={blockStatus ? "image" : friendAvtar}
+            avtar={block ? "image" : friendAvtar}
             // mutate={mutate}
           />
         </PopUpComponent>
@@ -183,6 +179,7 @@ const Chats = () => {
                   <span
                     className={style.chatPic_cover}
                     onClick={() => {
+                      item.blockStatus ? set_block(1) : null;
                       set_friendAvtar(item.avtar);
                       updateAvtar("Update Avtar", item.userId, set_friendAvtar);
 
