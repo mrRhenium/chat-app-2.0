@@ -130,7 +130,7 @@
   background-color: rgba(0, 0, 0, 0.6);
   overflow: hidden;
 }
-.chats_cover .reaction_section + p,
+.chats_cover .reaction_section > p,
 .chats_cover a + p {
   margin-top: 0.5rem;
 }

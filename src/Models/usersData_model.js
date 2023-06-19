@@ -37,6 +37,11 @@ const friendSchema = new Schema(
       type: String,
       required: true,
     },
+    blockStatus: {
+      type: Boolean,
+      default: 0,
+      required: true,
+    },
   },
   {
     timestamps: true,
