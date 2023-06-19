@@ -132,7 +132,7 @@ const ChattingPage = () => {
     //
   };
 
-  console.log(chatId);
+  // console.log(chatId);
 
   const sendChat = async (e) => {
     //

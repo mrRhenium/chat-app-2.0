@@ -93,7 +93,7 @@ export async function GET(req, context) {
       data: chats[messageBox],
       avtar: targetUser.avtar,
       selfId: tokenData._id,
-      selfUsername: tokenData._id,
+      selfUsername: tokenData.username,
       chatId: chatId,
       blockStatus: block,
       chatStatus: messageBox,
