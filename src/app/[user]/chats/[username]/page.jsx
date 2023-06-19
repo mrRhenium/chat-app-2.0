@@ -368,7 +368,8 @@ const ChattingPage = () => {
               Delete for me
             </button>
 
-            {Date.now() - parseInt(chatItem.sendTime) < 60000 ? (
+            {Date.now() - parseInt(chatItem.sendTime) < 86400000 &&
+            chatItem.author !== uName ? (
               // (console.log(`${Date.now()} - ${parseInt(chatItem.sendTime)} ->
               // ${Date.now() - parseInt(chatItem.sendTime)}`),
               <button

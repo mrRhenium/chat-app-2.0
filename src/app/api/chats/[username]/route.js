@@ -234,7 +234,7 @@ export async function PUT(req, context) {
 
     const body = await req.json();
 
-    if (body.action === "Delete self message for self") {
+    if (body.action === "Delete self message for everyone") {
       //
 
       // delete from my message box
@@ -270,7 +270,7 @@ export async function PUT(req, context) {
 
       //
     } //
-    else if (body.action === "Delete self message for everyone") {
+    else if (body.action === "Delete self message for self") {
       //
 
       await Chat.findOneAndUpdate(
