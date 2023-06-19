@@ -51,6 +51,7 @@ const ChattingPage = () => {
 
   let temp_list = data && data["status"] ? data["data"] : [];
   let selfId = data && data["status"] && data["selfId"];
+  let selfUsername = data && data["status"] && data["selfUsername"];
   let chatId = data && data["status"] && data["chatId"];
   let blockStatus = data && data["status"] && data["blockStatus"];
   let chatStatus = data && data["status"] && data["chatStatus"];
@@ -131,17 +132,19 @@ const ChattingPage = () => {
     //
   };
 
+  console.log(chatId);
+
   const sendChat = async (e) => {
     //
     e.preventDefault();
+
+    let msg = msgBox;
+    set_msgBox("");
 
     if (blockStatus) {
       alert("Access to this user is Prohibited!");
       return;
     }
-
-    let msg = msgBox;
-    set_msgBox("");
 
     let time = new Date().toLocaleString("en-US", {
       hour12: true,
@@ -240,6 +243,8 @@ const ChattingPage = () => {
               reaction: reactionData.data,
               time: time,
               chatId: chatId,
+              userId: selfId,
+              username: selfUsername,
             });
 
             const res = await fetch(`/api/chats/${uName}`, {
@@ -301,6 +306,8 @@ const ChattingPage = () => {
         reaction: reactionData.data,
         time: time,
         chatId: chatId,
+        userId: selfId,
+        username: selfUsername,
       });
 
       const res = await fetch(`/api/chats/${uName}`, {

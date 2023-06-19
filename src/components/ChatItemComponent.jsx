@@ -30,7 +30,7 @@ const ChatItemComponent = ({
     if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
 
     console.log("new useEffect");
-  }, [list, deletedChat]);
+  }, [list]);
 
   let chatList = temp_list.length >= list.length ? temp_list : list;
 

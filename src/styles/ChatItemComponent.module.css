@@ -93,6 +93,7 @@
   white-space: break-spaces;
   word-wrap: break-word;
   line-height: 1.3rem;
+  word-break: break-all;
 }
 
 .chats_cover span .deletedMsg i {

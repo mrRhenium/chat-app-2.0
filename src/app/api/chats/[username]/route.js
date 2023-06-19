@@ -93,6 +93,7 @@ export async function GET(req, context) {
       data: chats[messageBox],
       avtar: targetUser.avtar,
       selfId: tokenData._id,
+      selfUsername: tokenData._id,
       chatId: chatId,
       blockStatus: block,
       chatStatus: messageBox,
@@ -149,8 +150,8 @@ export async function POST(req, context) {
 
     let chatData = {
       sendTime: body.sendTime,
-      userId: selfUser.userId,
-      author: selfUser.username,
+      userId: body.userId,
+      author: body.username,
       msg: body.message,
       msgType: body.msgType,
       mediaInfo: body.mediaInfo,
@@ -178,7 +179,7 @@ export async function POST(req, context) {
     // );
 
     await UserData.findOneAndUpdate(
-      { username: pUsername, [`friends.chatId`]: chatId },
+      { username: pUsername, [`friends.chatId`]: body.chatId },
       {
         // $set: {
         //   [`friends.$.lastMsg`]: lastMsg,
