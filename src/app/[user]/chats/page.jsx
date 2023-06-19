@@ -103,6 +103,11 @@ const Chats = () => {
     data && data["data"] && data["data"]["friends"].length
       ? data["data"]["friends"]
       : [];
+  const blockStatus =
+    data &&
+    data["data"] &&
+    data["data"]["friends"].length &&
+    data["data"]["friends"]["blockStatus"];
   const selfUser = data && data["data"];
 
   if (data && data["status"] === false) {
@@ -119,7 +124,7 @@ const Chats = () => {
           <PicComponent
             closePopUp={closePopUp}
             username={showPopUp.username}
-            avtar={friendAvtar}
+            avtar={blockStatus ? "image" : friendAvtar}
             // mutate={mutate}
           />
         </PopUpComponent>
@@ -210,7 +215,7 @@ const Chats = () => {
                     </span>
                     <span className={style.chat_msg_highlight}>
                       <span>
-                        <p>{item.name}</p>
+                        <p>{item.username}</p>
                       </span>
                     </span>
                   </span>

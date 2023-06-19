@@ -225,7 +225,7 @@
   align-items: center;
   min-width: 1.5rem;
   min-height: 1.5rem;
-  padding: 0.1rem;
+  padding: 0.3rem;
   border-radius: 50%;
   background-color: var(--badge_color);
   border: 0.05rem solid black;
