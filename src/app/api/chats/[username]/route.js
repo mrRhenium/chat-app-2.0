@@ -49,7 +49,8 @@ export async function GET(req, context) {
     // const onlineStatus = selfUser.friends[0].onlineStatus;
     const chatId = selfUser.friends[0].chatId;
     const chats = await Chat.findOne({ _id: chatId });
-    let messageBox = selfUser.friends[0].chatStatus;
+    const block = selfUser.friends[0].blockStatus;
+    const messageBox = selfUser.friends[0].chatStatus;
 
     await Chat.updateMany(
       {
@@ -93,6 +94,7 @@ export async function GET(req, context) {
       avtar: targetUser.avtar,
       selfId: tokenData._id,
       chatId: chatId,
+      blockStatus: block,
       chatStatus: messageBox,
       onlineStatus: targetUser.onlineStatus,
     });
@@ -122,37 +124,27 @@ export async function POST(req, context) {
   try {
     //
 
-    const token = req.cookies.get("token")?.value || req.headers.cookies.token;
-    const tokenData = jwt.verify(token, process.env.JWTSECRET);
+    // const token = req.cookies.get("token")?.value || req.headers.cookies.token;
+    // const tokenData = jwt.verify(token, process.env.JWTSECRET);
     const pUsername = context.params.username;
+    const body = await req.json();
+
     // console.log("Context : ", context);
 
-    const selfUser = await UserData.findOne(
-      {
-        userId: tokenData._id,
-      },
-      {
-        userId: 1,
-        username: 1,
-        friends: { $elemMatch: { username: pUsername } },
-      }
-    );
+    // const selfUser = await UserData.findOne(
+    //   {
+    //     userId: tokenData._id,
+    //   },
+    //   {
+    //     userId: 1,
+    //     username: 1,
+    //     friends: { $elemMatch: { username: pUsername } },
+    //   }
+    // );
 
     // console.log(selfUser);
 
-    const body = await req.json();
-    const chatId = selfUser.friends[0].chatId;
-    const block = selfUser.friends[0].blockStatus;
-
-    if (block) {
-      return NextResponse.json({
-        status: false,
-        msg: "Access to this user is prohibited.",
-      });
-    }
-
-    const chats = await Chat.findOne({ _id: chatId });
-
+    const chats = await Chat.findOne({ _id: body.chatId });
     let tarik = new Date().toLocaleDateString("pt-PT");
 
     let chatData = {
@@ -171,26 +163,26 @@ export async function POST(req, context) {
     chats.messageOne.push(chatData);
     chats.messageTwo.push(chatData);
 
-    let lastMsg =
-      body.message === "noCapTiOn9463"
-        ? body.mediaInfo.name + " " + body.mediaInfo.size
-        : body.message;
+    // let lastMsg =
+    //   body.message === "noCapTiOn9463"
+    //     ? body.mediaInfo.name + " " + body.mediaInfo.size
+    //     : body.message;
 
-    await UserData.findOneAndUpdate(
-      { username: selfUser.username, [`friends.chatId`]: chatId },
-      {
-        $set: {
-          [`friends.$.lastMsg`]: lastMsg,
-        },
-      }
-    );
+    // await UserData.findOneAndUpdate(
+    //   { username: selfUser.username, [`friends.chatId`]: chatId },
+    //   {
+    //     $set: {
+    //       [`friends.$.lastMsg`]: lastMsg,
+    //     },
+    //   }
+    // );
 
     await UserData.findOneAndUpdate(
       { username: pUsername, [`friends.chatId`]: chatId },
       {
-        $set: {
-          [`friends.$.lastMsg`]: lastMsg,
-        },
+        // $set: {
+        //   [`friends.$.lastMsg`]: lastMsg,
+        // },
         $inc: {
           [`friends.$.count`]: 1,
         },

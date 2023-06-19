@@ -52,6 +52,7 @@ const ChattingPage = () => {
   let temp_list = data && data["status"] ? data["data"] : [];
   let selfId = data && data["status"] && data["selfId"];
   let chatId = data && data["status"] && data["chatId"];
+  let blockStatus = data && data["status"] && data["blockStatus"];
   let chatStatus = data && data["status"] && data["chatStatus"];
   let FriendAvtar = data && data["status"] ? data["avtar"] : "image";
 
@@ -133,6 +134,10 @@ const ChattingPage = () => {
   const sendChat = async (e) => {
     //
     e.preventDefault();
+
+    if (blockStatus) {
+      alert("Access to this user is Prohibited!");
+    }
 
     let msg = msgBox;
     set_msgBox("");
@@ -233,6 +238,7 @@ const ChattingPage = () => {
               },
               reaction: reactionData.data,
               time: time,
+              chatId: chatId,
             });
 
             const res = await fetch(`/api/chats/${uName}`, {
@@ -293,6 +299,7 @@ const ChattingPage = () => {
         mediaInfo: {},
         reaction: reactionData.data,
         time: time,
+        chatId: chatId,
       });
 
       const res = await fetch(`/api/chats/${uName}`, {
@@ -416,7 +423,7 @@ const ChattingPage = () => {
                       router.push(`/profile/${uName}`);
                     }}
                     style={
-                      FriendAvtar === "image"
+                      FriendAvtar === "image" || blockStatus
                         ? {}
                         : {
                             backgroundImage: `url(
@@ -425,7 +432,7 @@ const ChattingPage = () => {
                           }
                     }
                   >
-                    {FriendAvtar === "image" ? (
+                    {FriendAvtar === "image" || blockStatus ? (
                       <BiUser className={style.icons} />
                     ) : null}
                   </span>
@@ -437,7 +444,11 @@ const ChattingPage = () => {
                   >
                     <p className={style.name}>{uName}</p>
                     <p className={style.live_status}>
-                      {data["onlineStatus"] === true ? "online" : "offline"}
+                      {blockStatus
+                        ? "Blocked"
+                        : data["onlineStatus"] === true
+                        ? "online"
+                        : "offline"}
                     </p>
                   </span>
                 </div>

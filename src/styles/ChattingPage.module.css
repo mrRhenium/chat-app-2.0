@@ -78,6 +78,7 @@
 }
 
 .chattingPage .header .left_cover .name_info {
+  cursor: pointer;
   position: relative;
   display: flex;
   flex-direction: column;

@@ -187,14 +187,14 @@ const Chats = () => {
                     <span
                       className={style.chat_pic}
                       style={
-                        item.avtar === "image"
+                        item.avtar === "image" || item.blockStatus
                           ? {}
                           : {
                               backgroundImage: `url(${item.avtar})`,
                             }
                       }
                     >
-                      {item.avtar === "image" || !item.avtar ? (
+                      {item.avtar === "image" || item.blockStatus ? (
                         <FaUserCircle className={style.icons} />
                       ) : null}
                     </span>
@@ -210,7 +210,7 @@ const Chats = () => {
                     </span>
                     <span className={style.chat_msg_highlight}>
                       <span>
-                        <p>{item.lastMsg}</p>
+                        <p>{item.name}</p>
                       </span>
                     </span>
                   </span>
