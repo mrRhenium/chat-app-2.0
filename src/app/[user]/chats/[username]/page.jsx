@@ -687,6 +687,7 @@ const ChattingPage = () => {
                     set_showPopUp={set_showPopUp}
                     deletedChat={deletedChat}
                     clearChat={clearChat}
+                    set_clearChat={set_clearChat}
                   />
                 )}
               </section>
