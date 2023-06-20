@@ -547,7 +547,7 @@ const ChattingPage = () => {
                           }}
                         >
                           <BiBlock className={style.icons} />
-                          Unblock
+                          Unblock User
                         </span>
                       ) : (
                         <span
@@ -556,7 +556,7 @@ const ChattingPage = () => {
                           }}
                         >
                           <BiBlock className={style.icons} />
-                          Block
+                          Block User
                         </span>
                       )}
                       {/*  */}
@@ -577,7 +577,7 @@ const ChattingPage = () => {
                           set_headerOpt(0);
                         }}
                       >
-                        <CgCloseO className={style.icons} /> Close
+                        Close
                       </span>
                     </div>
                   ) : null}
