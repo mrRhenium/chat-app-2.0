@@ -112,14 +112,18 @@
   /* border: 0.1rem solid red; */
 }
 .chattingPage .header .right_cover .opt_cover {
+  z-index: 500;
   position: absolute;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 5rem;
-  height: 15rem;
-  top: 0;
-  right: 0;
+  gap: 0.1em;
+  width: 10rem;
+  top: 1rem;
+  right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.1rem;
   border: 0.05rem solid var(--footer_border);
   background-color: var(--primary_bg1);
 }
@@ -129,8 +133,9 @@
   justify-content: center;
   align-items: center;
   padding: 0.3rem;
-  top: 0.5rem;
-  right: 0.5rem;
+  top: 0;
+  right: 0;
+  transform: translate(-50%, -50%);
 }
 .chattingPage .header .right_cover .opt_cover .headerOptBtn .icons {
   color: #000000;
@@ -138,16 +143,28 @@
 }
 
 .chattingPage .header .right_cover .opt_cover span {
+  cursor: pointer;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0.5rem;
   width: 100%;
   color: #ffffff;
   font-size: 1.1rem;
   font-family: var(--text_font);
-  border: 0.05rem solid var(--footer_border);
+  border-radius: 1rem;
+  border: 0.02rem solid var(--footer_border);
   background-color: var(--primary_bg1);
+}
+.chattingPage .header .right_cover .opt_cover span:hover {
+  color: #000000;
+  background-color: #ffffff;
+  border: 0.02rem solid var(--black_border);
+}
+.chattingPage .header .right_cover .opt_cover span .icons {
+  color: var(--primary_txt2);
+  font-size: 1.3rem;
 }
 
 .chattingPage .header .right_cover .icons {

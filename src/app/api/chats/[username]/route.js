@@ -32,6 +32,11 @@ export async function GET(req, context) {
       }
     );
 
+    const user = await UserData.findOne(
+      { username: tokenData.username },
+      { blockUserId: 1 }
+    );
+
     const targetUser = await UserData.findOne(
       { username: pUsername },
       { onlineStatus: 1, avtar: 1, _id: 0, userId: 1 }
@@ -49,11 +54,10 @@ export async function GET(req, context) {
     // const onlineStatus = selfUser.friends[0].onlineStatus;
     const chatId = selfUser.friends[0].chatId;
     const chats = await Chat.findOne({ _id: chatId });
+
     const block = selfUser.friends[0].blockStatus;
     const messageBox = selfUser.friends[0].chatStatus;
-    let rootBlockStatus = selfUser.blockUserId.includes(targetUser.userId)
-      ? 1
-      : 0;
+    let rootBlockStatus = user.blockUserId.includes(targetUser.userId) ? 1 : 0;
 
     await Chat.updateMany(
       {

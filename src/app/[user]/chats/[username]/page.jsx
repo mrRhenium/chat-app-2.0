@@ -534,6 +534,7 @@ const ChattingPage = () => {
                           router.push(`/profile/${uName}`);
                         }}
                       >
+                        <MdDeleteForever className={style.icons} />
                         View Contact
                       </span>
                       {/*  */}
@@ -543,6 +544,7 @@ const ChattingPage = () => {
                             putRequestBlocked("Unblock User", targetUserId);
                           }}
                         >
+                          <MdDeleteForever className={style.icons} />
                           Unblock
                         </span>
                       ) : (
@@ -551,16 +553,21 @@ const ChattingPage = () => {
                             putRequestBlocked("Block User", targetUserId);
                           }}
                         >
+                          <MdDeleteForever className={style.icons} />
                           Block
                         </span>
                       )}
                       {/*  */}
-                      <span>Wallpaper</span>
+                      <span>
+                        {" "}
+                        <MdDeleteForever className={style.icons} /> Wallpaper
+                      </span>
                       <span
                         onClick={() => {
                           clearAllChats("Clear all chats");
                         }}
                       >
+                        <MdDeleteForever className={style.icons} />
                         Clear chats
                       </span>
                     </div>
