@@ -75,6 +75,7 @@ const ChattingPage = () => {
   const [chatItem, set_chatItem] = useState();
   const [deletedChat, set_deletedChat] = useState([]);
   const [headerOpt, set_headerOpt] = useState(0);
+  const [clearChat, set_clearChat] = useState(0);
 
   const [reaction, set_reaction] = useState({
     flag: 0,
@@ -124,6 +125,8 @@ const ChattingPage = () => {
 
   const clearAllChats = async (action) => {
     //
+
+    set_clearChat(1);
 
     const JSONdata = JSON.stringify({
       action: action,
@@ -388,8 +391,6 @@ const ChattingPage = () => {
     //
   };
 
-  let chatList = temp_list.length >= list.length ? temp_list : list;
-
   // console.log(reaction);
 
   return (
@@ -571,8 +572,6 @@ const ChattingPage = () => {
                       <span
                         onClick={() => {
                           clearAllChats("Clear all chats");
-                          set_list([]);
-                          chatList = [];
                           set_headerOpt(0);
                         }}
                       >
@@ -687,7 +686,7 @@ const ChattingPage = () => {
                     set_chatItem={set_chatItem}
                     set_showPopUp={set_showPopUp}
                     deletedChat={deletedChat}
-                    chatList={chatList}
+                    clearChat={clearChat}
                   />
                 )}
               </section>
