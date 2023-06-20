@@ -214,6 +214,18 @@ export async function PUT(req, context) {
         }
       );
 
+      const targetUser = await UserData.findOne(
+        { userId: body.targetUserId },
+        { blockUserId: 1 }
+      );
+
+      if (targetUser.blockUserId.includes(tokenData._id)) {
+        return NextResponse.json({
+          status: true,
+          msg: "Successfully! : Half Unblock the user",
+        });
+      }
+
       await UserData.findOneAndUpdate(
         { userId: tokenData._id, [`friends.userId`]: body.targetUserId },
         {
@@ -231,6 +243,7 @@ export async function PUT(req, context) {
           },
         }
       );
+
       return NextResponse.json({
         status: true,
         msg: "Successfully! : Unblock the user",
