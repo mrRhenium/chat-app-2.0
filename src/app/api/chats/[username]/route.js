@@ -34,7 +34,7 @@ export async function GET(req, context) {
 
     const targetUser = await UserData.findOne(
       { username: pUsername },
-      { onlineStatus: 1, avtar: 1, _id: 0 }
+      { onlineStatus: 1, avtar: 1, _id: 0, userId: 1 }
     );
 
     // console.log("friend -> " + selfUser);
@@ -51,6 +51,9 @@ export async function GET(req, context) {
     const chats = await Chat.findOne({ _id: chatId });
     const block = selfUser.friends[0].blockStatus;
     const messageBox = selfUser.friends[0].chatStatus;
+    let rootBlockStatus = selfUser.blockUserId.includes(targetUser.userId)
+      ? 1
+      : 0;
 
     await Chat.updateMany(
       {
@@ -93,9 +96,11 @@ export async function GET(req, context) {
       data: chats[messageBox],
       avtar: targetUser.avtar,
       selfId: tokenData._id,
+      targetUserId: targetUser.userId,
       selfUsername: tokenData.username,
       chatId: chatId,
       blockStatus: block,
+      rootBlockStatus: rootBlockStatus,
       chatStatus: messageBox,
       onlineStatus: targetUser.onlineStatus,
     });
@@ -305,6 +310,21 @@ export async function PUT(req, context) {
 
       //
     } //
+    else if (body.action === "Clear all chats") {
+      //
+
+      await Chat.findOneAndUpdate(
+        { _id: body.chatId },
+        { [`${body.chatStatus}`]: [] }
+      );
+
+      return NextResponse.json({
+        status: true,
+        msg: "Successfully: Clear all chats.",
+      });
+
+      //
+    }
 
     //
   } catch (err) {

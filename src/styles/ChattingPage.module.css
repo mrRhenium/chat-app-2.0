@@ -111,6 +111,44 @@
   padding-right: 0.4rem;
   /* border: 0.1rem solid red; */
 }
+.chattingPage .header .right_cover .opt_cover {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5rem;
+  height: 15rem;
+  top: 0;
+  right: 0;
+  border: 0.05rem solid var(--footer_border);
+  background-color: var(--primary_bg1);
+}
+.chattingPage .header .right_cover .opt_cover .headerOptBtn {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.3rem;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+.chattingPage .header .right_cover .opt_cover .headerOptBtn .icons {
+  color: #000000;
+  font-size: 1.3rem;
+}
+
+.chattingPage .header .right_cover .opt_cover span {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-family: var(--text_font);
+  border: 0.05rem solid var(--footer_border);
+  background-color: var(--primary_bg1);
+}
 
 .chattingPage .header .right_cover .icons {
   cursor: pointer;

@@ -51,11 +51,13 @@ const ChattingPage = () => {
 
   let temp_list = data && data["status"] ? data["data"] : [];
   let selfId = data && data["status"] && data["selfId"];
+  let targetUserId = data && data["status"] && data["targetUserId"];
   let selfUsername = data && data["status"] && data["selfUsername"];
   let chatId = data && data["status"] && data["chatId"];
   let blockStatus = data && data["status"] && data["blockStatus"];
   let chatStatus = data && data["status"] && data["chatStatus"];
   let FriendAvtar = data && data["status"] ? data["avtar"] : "image";
+  let rootBlockStatus = data && data["status"] && data["rootBlockStatus"];
 
   const [list, set_list] = useState([]);
   const [progress, set_progress] = useState(0);
@@ -64,6 +66,7 @@ const ChattingPage = () => {
   const [showPopUp, set_showPopUp] = useState(0);
   const [chatItem, set_chatItem] = useState();
   const [deletedChat, set_deletedChat] = useState([]);
+  const [headerOpt, set_headerOpt] = useState(0);
 
   const [reaction, set_reaction] = useState({
     flag: 0,
@@ -87,6 +90,54 @@ const ChattingPage = () => {
   temp_list.length > list.length ? set_list(temp_list) : null;
 
   const closePopUp = () => set_showPopUp(0);
+
+  const putRequestBlocked = async (action, targetUserId) => {
+    //
+
+    const JSONdata = JSON.stringify({
+      action: action,
+      targetUserId: targetUserId,
+    });
+
+    const res = await fetch(`/api/profile/sal`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSONdata,
+    });
+
+    const resData = await res.json();
+    if (resData.status === false) alert(`${resData.msg}`);
+
+    mutate();
+    //
+  };
+
+  const clearAllChats = async (action) => {
+    //
+
+    const JSONdata = JSON.stringify({
+      action: action,
+      chatId: chatId,
+      chatStatus: chatStatus,
+    });
+
+    const res = await fetch(`/api/chats/nitesh`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSONdata,
+    });
+
+    const resData = await res.json();
+
+    if (resData.status === false) {
+      alert(`${resData.msg}`);
+      return;
+    }
+  };
 
   const removeMsg = async (action, item) => {
     //
@@ -131,8 +182,6 @@ const ChattingPage = () => {
 
     //
   };
-
-  // console.log(chatId);
 
   const sendChat = async (e) => {
     //
@@ -461,9 +510,63 @@ const ChattingPage = () => {
                   </span>
                 </div>
                 <div className={style.right_cover}>
-                  <span className={style.opt}>
+                  <span
+                    onClick={() => {
+                      set_headerOpt(1);
+                    }}
+                  >
                     <CiMenuKebab className={style.icons} />
                   </span>
+                  {/*  */}
+
+                  {headerOpt ? (
+                    <div className={style.opt_cover}>
+                      <div
+                        className={style.headerOptBtn}
+                        onClick={() => {
+                          set_headerOpt(0);
+                        }}
+                      >
+                        <CgCloseO className={style.icons} />
+                      </div>
+                      <span
+                        onClick={() => {
+                          router.push(`/profile/${uName}`);
+                        }}
+                      >
+                        View Contact
+                      </span>
+                      {/*  */}
+                      {rootBlockStatus ? (
+                        <span
+                          onClick={() => {
+                            putRequestBlocked("Unblock User", targetUserId);
+                          }}
+                        >
+                          Unblock
+                        </span>
+                      ) : (
+                        <span
+                          onClick={() => {
+                            putRequestBlocked("Block User", targetUserId);
+                          }}
+                        >
+                          Block
+                        </span>
+                      )}
+                      {/*  */}
+                      <span>Wallpaper</span>
+                      <span
+                        onClick={() => {
+                          clearAllChats("Clear all chats");
+                        }}
+                      >
+                        Clear chats
+                      </span>
+                    </div>
+                  ) : null}
+
+                  {/*  */}
                 </div>
               </section>
               {/* Header Part Ends */}
