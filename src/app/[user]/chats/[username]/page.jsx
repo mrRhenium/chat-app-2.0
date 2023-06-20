@@ -6,11 +6,19 @@ import ChatItemComponent from "@/components/ChatItemComponent";
 import storage from "@/Database/firebaseConfig.js";
 import PopUpComponent from "@/components/PopUpComponent";
 
+import { BiBlock } from "react-icons/bi";
+import { FaUserCircle } from "react-icons/fa";
 import { BiUser } from "react-icons/bi";
 import { CiMenuKebab } from "react-icons/ci";
-import { MdSend, MdDelete, MdReplyAll, MdDeleteForever } from "react-icons/md";
 import { GrAttachment } from "react-icons/gr";
 import { CgCloseO } from "react-icons/cg";
+import {
+  MdSend,
+  MdDelete,
+  MdReplyAll,
+  MdDeleteForever,
+  MdWallpaper,
+} from "react-icons/md";
 import {
   BsArrowLeft,
   BsImage,
@@ -137,6 +145,8 @@ const ChattingPage = () => {
       alert(`${resData.msg}`);
       return;
     }
+
+    mutate();
   };
 
   const removeMsg = async (action, item) => {
@@ -521,20 +531,12 @@ const ChattingPage = () => {
 
                   {headerOpt ? (
                     <div className={style.opt_cover}>
-                      <div
-                        className={style.headerOptBtn}
-                        onClick={() => {
-                          set_headerOpt(0);
-                        }}
-                      >
-                        <CgCloseO className={style.icons} />
-                      </div>
                       <span
                         onClick={() => {
                           router.push(`/profile/${uName}`);
                         }}
                       >
-                        <MdDeleteForever className={style.icons} />
+                        <FaUserCircle className={style.icons} />
                         View Contact
                       </span>
                       {/*  */}
@@ -544,7 +546,7 @@ const ChattingPage = () => {
                             putRequestBlocked("Unblock User", targetUserId);
                           }}
                         >
-                          <MdDeleteForever className={style.icons} />
+                          <BiBlock className={style.icons} />
                           Unblock
                         </span>
                       ) : (
@@ -553,14 +555,13 @@ const ChattingPage = () => {
                             putRequestBlocked("Block User", targetUserId);
                           }}
                         >
-                          <MdDeleteForever className={style.icons} />
+                          <BiBlock className={style.icons} />
                           Block
                         </span>
                       )}
                       {/*  */}
                       <span>
-                        {" "}
-                        <MdDeleteForever className={style.icons} /> Wallpaper
+                        <MdWallpaper className={style.icons} /> Wallpaper
                       </span>
                       <span
                         onClick={() => {
@@ -569,6 +570,14 @@ const ChattingPage = () => {
                       >
                         <MdDeleteForever className={style.icons} />
                         Clear chats
+                      </span>
+
+                      <span
+                        onClick={() => {
+                          set_headerOpt(0);
+                        }}
+                      >
+                        <CgCloseO className={style.icons} /> Close
                       </span>
                     </div>
                   ) : null}

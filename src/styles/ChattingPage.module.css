@@ -118,38 +118,25 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.1em;
+  gap: 0.3em;
   width: 10rem;
   top: 1rem;
   right: 1rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.1rem;
+  padding: 0.3rem;
+  border-radius: 1rem;
   border: 0.05rem solid var(--footer_border);
   background-color: var(--primary_bg1);
-}
-.chattingPage .header .right_cover .opt_cover .headerOptBtn {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.3rem;
-  top: 0;
-  right: 0;
-  transform: translate(-50%, -50%);
-}
-.chattingPage .header .right_cover .opt_cover .headerOptBtn .icons {
-  color: #000000;
-  font-size: 1.3rem;
 }
 
 .chattingPage .header .right_cover .opt_cover span {
   cursor: pointer;
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
   gap: 0.5rem;
   width: 100%;
+  padding: 0.2rem 0.5rem;
   color: #ffffff;
   font-size: 1.1rem;
   font-family: var(--text_font);
@@ -160,16 +147,19 @@
 .chattingPage .header .right_cover .opt_cover span:hover {
   color: #000000;
   background-color: #ffffff;
-  border: 0.02rem solid var(--black_border);
+  border: 0.09rem solid var(--black_border);
 }
 .chattingPage .header .right_cover .opt_cover span .icons {
-  color: var(--primary_txt2);
+  color: #ffffff;
   font-size: 1.3rem;
+}
+.chattingPage .header .right_cover .opt_cover span:hover .icons {
+  color: #000000;
 }
 
 .chattingPage .header .right_cover .icons {
   cursor: pointer;
-  color: white;
+  color: #ffffff;
   font-size: 2rem;
   font-weight: bolder;
 }
