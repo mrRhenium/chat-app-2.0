@@ -534,6 +534,7 @@ const ChattingPage = () => {
                       <span
                         onClick={() => {
                           router.push(`/profile/${uName}`);
+                          set_headerOpt(0);
                         }}
                       >
                         <FaUserCircle className={style.icons} />
@@ -544,6 +545,7 @@ const ChattingPage = () => {
                         <span
                           onClick={() => {
                             putRequestBlocked("Unblock User", targetUserId);
+                            set_headerOpt(0);
                           }}
                         >
                           <BiBlock className={style.icons} />
@@ -553,6 +555,7 @@ const ChattingPage = () => {
                         <span
                           onClick={() => {
                             putRequestBlocked("Block User", targetUserId);
+                            set_headerOpt(0);
                           }}
                         >
                           <BiBlock className={style.icons} />
@@ -566,6 +569,8 @@ const ChattingPage = () => {
                       <span
                         onClick={() => {
                           clearAllChats("Clear all chats");
+                          set_list([]);
+                          set_headerOpt(0);
                         }}
                       >
                         <MdDeleteForever className={style.icons} />
