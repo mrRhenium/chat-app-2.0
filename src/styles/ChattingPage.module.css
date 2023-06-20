@@ -120,7 +120,7 @@
   align-items: center;
   gap: 0.3em;
   top: 1rem;
-  width: 15rem;
+  width: 13rem;
   right: 1rem;
   padding: 0.3rem;
   border-radius: 1rem;
@@ -136,7 +136,7 @@
   align-items: center;
   gap: 0.5rem;
   width: 100%;
-  padding: 0.2rem 0.5rem;
+  padding: 0.4rem 0.5rem;
   color: #ffffff;
   font-size: 1.1rem;
   font-family: var(--text_font);

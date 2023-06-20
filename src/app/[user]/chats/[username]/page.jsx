@@ -146,7 +146,7 @@ const ChattingPage = () => {
       return;
     }
 
-    mutate();
+    // mutate();
   };
 
   const removeMsg = async (action, item) => {
@@ -388,6 +388,8 @@ const ChattingPage = () => {
     //
   };
 
+  let chatList = temp_list.length >= list.length ? temp_list : list;
+
   // console.log(reaction);
 
   return (
@@ -570,6 +572,7 @@ const ChattingPage = () => {
                         onClick={() => {
                           clearAllChats("Clear all chats");
                           set_list([]);
+                          chatList = [];
                           set_headerOpt(0);
                         }}
                       >
@@ -684,6 +687,7 @@ const ChattingPage = () => {
                     set_chatItem={set_chatItem}
                     set_showPopUp={set_showPopUp}
                     deletedChat={deletedChat}
+                    chatList={chatList}
                   />
                 )}
               </section>

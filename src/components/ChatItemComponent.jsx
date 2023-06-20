@@ -21,6 +21,7 @@ const ChatItemComponent = ({
   set_chatItem,
   set_showPopUp,
   deletedChat,
+  chatList,
 }) => {
   //
 
@@ -31,8 +32,6 @@ const ChatItemComponent = ({
 
     console.log("new useEffect");
   }, [list]);
-
-  let chatList = temp_list.length >= list.length ? temp_list : list;
 
   return (
     <>
