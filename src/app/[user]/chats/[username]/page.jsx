@@ -98,6 +98,10 @@ const ChattingPage = () => {
   temp_list.length > list.length ? set_list(temp_list) : null;
   let chatList = temp_list.length >= list.length ? temp_list : list;
 
+  console.log(chatList);
+  console.log(list);
+  console.log(temp_list);
+
   const closePopUp = () => set_showPopUp(0);
 
   const putRequestBlocked = async (action, targetUserId) => {
