@@ -126,7 +126,7 @@ const ChattingPage = () => {
     deleteObject(path)
       .then(() => {
         console.log("Wallpaper is deleted");
-        // mutate();
+        set_headerOpt(0);
       })
       .catch((err) => {
         console.log(err);
@@ -191,7 +191,7 @@ const ChattingPage = () => {
           if (resData.status === false) alert(`${resData.msg}`);
 
           console.log("Wallpaper is updated.");
-          // mutate();
+          set_headerOpt(0);
         });
       }
     );
@@ -254,6 +254,7 @@ const ChattingPage = () => {
       return;
     }
 
+    set_list([]);
     router.push("/user/chats");
 
     // mutate();
@@ -497,6 +498,8 @@ const ChattingPage = () => {
 
     //
   };
+
+  console.log(wallpaper);
 
   // console.log(reaction);
 
