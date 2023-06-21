@@ -137,6 +137,7 @@ const ChattingPage = () => {
     });
 
     set_deletedChat(ClearAllChatList);
+    set_list([]);
     console.log(deletedChat);
 
     const JSONdata = JSON.stringify({
