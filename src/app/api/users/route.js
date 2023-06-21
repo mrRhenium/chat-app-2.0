@@ -147,7 +147,7 @@ export async function PUT(req, res) {
         msg: "Successfully! : Avtar is Updated.",
       });
     } //
-    else if (body.action == "Delete Avtar") {
+    else if (body.action === "Delete Avtar") {
       await UserData.findOneAndUpdate(
         {
           userId: tokenData._id,
@@ -163,6 +163,44 @@ export async function PUT(req, res) {
         status: true,
         msg: "Successfully! : Avtar is Deleted.",
       });
+    } //
+    else if (body.action === "Update specific Wallpaper") {
+      //
+
+      await UserData.findOneAndUpdate(
+        { userId: tokenData._id, [`friends.userId`]: body.targetUserId },
+        {
+          $set: {
+            [`friends.$.wallpaper`]: body.imgUrl,
+          },
+        }
+      );
+
+      return NextResponse.json({
+        status: true,
+        msg: "Successfully! : Wallpaper is Updated.",
+      });
+
+      //
+    } //
+    else if (body.action === "Remove specific Wallpaper") {
+      //
+
+      await UserData.findOneAndUpdate(
+        { userId: tokenData._id, [`friends.userId`]: body.targetUserId },
+        {
+          $set: {
+            [`friends.$.wallpaper`]: "image",
+          },
+        }
+      );
+
+      return NextResponse.json({
+        status: true,
+        msg: "Successfully! : Wallpaper is Removed",
+      });
+
+      //
     }
 
     //

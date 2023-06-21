@@ -56,6 +56,7 @@ export async function GET(req, context) {
     const chats = await Chat.findOne({ _id: chatId });
 
     const block = selfUser.friends[0].blockStatus;
+    const wallpaper = selfUser.friends[0].wallpaper;
     const messageBox = selfUser.friends[0].chatStatus;
     let rootBlockStatus = user.blockUserId.includes(targetUser.userId) ? 1 : 0;
 
@@ -106,6 +107,7 @@ export async function GET(req, context) {
       blockStatus: block,
       rootBlockStatus: rootBlockStatus,
       chatStatus: messageBox,
+      wallpaper: wallpaper,
       onlineStatus: targetUser.onlineStatus,
     });
 

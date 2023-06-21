@@ -15,6 +15,11 @@ const friendSchema = new Schema(
       type: String,
       required: true,
     },
+    wallpaper: {
+      type: String,
+      default: "image",
+      required: true,
+    },
     chatId: {
       type: Schema.Types.ObjectId,
       ref: "Chat",
@@ -68,6 +73,11 @@ const userDataSchema = new Schema(
       required: true,
     },
     avtar: {
+      type: String,
+      default: "image",
+      required: true,
+    },
+    wallpaper: {
       type: String,
       default: "image",
       required: true,

@@ -5,7 +5,6 @@ import { MdNotInterested } from "react-icons/md";
 import { RiCheckDoubleLine, RiCheckLine } from "react-icons/ri";
 import {
   BsHeadset,
-  BsImage,
   BsCameraVideo,
   BsFiletypePdf,
   BsTextareaT,
@@ -15,13 +14,13 @@ import { useEffect, useRef } from "react";
 
 const ChatItemComponent = ({
   data,
-  temp_list,
   list,
   uName,
   set_chatItem,
   set_showPopUp,
   deletedChat,
   chatList,
+  wallpaper,
 }) => {
   //
 
@@ -35,7 +34,17 @@ const ChatItemComponent = ({
 
   return (
     <>
-      <div className={style.chats_cover} ref={chatsCover}>
+      <div
+        className={style.chats_cover}
+        ref={chatsCover}
+        style={
+          wallpaper === "image"
+            ? {}
+            : {
+                backgroundImage: `url(${wallpaper})`,
+              }
+        }
+      >
         {chatList.map((item) => {
           // console.log(item);
 

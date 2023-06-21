@@ -30,7 +30,7 @@ import {
 } from "react-icons/bs";
 
 import useSWR from "swr";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import {
   ref,
@@ -61,6 +61,7 @@ const ChattingPage = () => {
   let selfId = data && data["status"] && data["selfId"];
   let targetUserId = data && data["status"] && data["targetUserId"];
   let selfUsername = data && data["status"] && data["selfUsername"];
+  let wallpaper = data && data["status"] && data["wallpaper"];
   let chatId = data && data["status"] && data["chatId"];
   let blockStatus = data && data["status"] && data["blockStatus"];
   let chatStatus = data && data["status"] && data["chatStatus"];
@@ -95,16 +96,108 @@ const ChattingPage = () => {
     src: "",
   });
 
-  useEffect(() => {
-    console.log("main Chat file");
-  }, [list]);
-
   temp_list.length > list.length ? set_list(temp_list) : null;
-  // temp_list.length == 0 ? set_list([]) : null;
 
   let chatList = temp_list.length >= list.length ? temp_list : list;
 
   const closePopUp = () => set_showPopUp(0);
+
+  const removeWallpaper = async (action) => {
+    //
+
+    const JSONdata = JSON.stringify({
+      action: action,
+      targetUserId: targetUserId,
+    });
+
+    const res = await fetch(`/api/users`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSONdata,
+    });
+
+    const resData = await res.json();
+    if (resData.status === false) alert(`kya hai ye, ${resData.msg}`);
+
+    // Delete from firebase
+    const path = ref(storage, wallpaper);
+    deleteObject(path)
+      .then(() => {
+        console.log("Wallpaper is deleted");
+        // mutate();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    //
+  };
+
+  const postWallpaper = async (e, action) => {
+    //
+
+    let imgUrl = "image";
+    let img = e.target.files[0];
+    // let imgName = e.target.files[0].name.split(" ").join("");
+
+    if (!img) {
+      alert("Please upload an image first!");
+    }
+
+    if (img.name.includes(" ")) {
+      alert("Image name should not contain any space.");
+      return;
+    }
+
+    const storageRef = ref(
+      storage,
+      `/assets/${selfId}/${targetUserId}/${img.name}`
+    );
+    const uploadTask = uploadBytesResumable(storageRef, img);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const percent = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+
+        console.log(percent);
+      },
+      (err) => console.log(err),
+      () => {
+        // download url
+        getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
+          imgUrl = url;
+          console.log(url);
+
+          const JSONdata = JSON.stringify({
+            action: action,
+            imgUrl: imgUrl,
+            targetUserId: targetUserId,
+          });
+
+          const res = await fetch(`/api/users`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSONdata,
+          });
+
+          const resData = await res.json();
+          if (resData.status === false) alert(`${resData.msg}`);
+
+          console.log("Wallpaper is updated.");
+          // mutate();
+        });
+      }
+    );
+
+    //
+  };
 
   const putRequestBlocked = async (action, targetUserId) => {
     //
@@ -131,13 +224,14 @@ const ChattingPage = () => {
 
   const clearAllChats = async (action) => {
     //
-    let ClearAllChatList = [...deletedChat];
 
-    chatList.map((item) => {
-      ClearAllChatList.push(item.sendTime);
-    });
+    // let ClearAllChatList = [...deletedChat];
 
-    set_deletedChat(ClearAllChatList);
+    // chatList.map((item) => {
+    //   ClearAllChatList.push(item.sendTime);
+    // });
+
+    // set_deletedChat(ClearAllChatList);
 
     const JSONdata = JSON.stringify({
       action: action,
@@ -159,6 +253,8 @@ const ChattingPage = () => {
       alert(`${resData.msg}`);
       return;
     }
+
+    router.push("/user/chats");
 
     // mutate();
   };
@@ -577,9 +673,32 @@ const ChattingPage = () => {
                         </span>
                       )}
                       {/*  */}
-                      <span>
-                        <MdWallpaper className={style.icons} /> Wallpaper
-                      </span>
+
+                      {wallpaper === "image" ? (
+                        <span>
+                          <label htmlFor="wallpaper">
+                            <input
+                              type="file"
+                              name="wallpaper"
+                              id="wallpaper"
+                              onChange={(e) => {
+                                postWallpaper(e, "Update specific Wallpaper");
+                              }}
+                            />
+                            <MdWallpaper className={style.icons} />
+                            Wallpaper
+                          </label>
+                        </span>
+                      ) : (
+                        <span
+                          onClick={() => {
+                            removeWallpaper("Remove specific Wallpaper");
+                          }}
+                        >
+                          Remove Wallpaper
+                        </span>
+                      )}
+
                       <span
                         onClick={() => {
                           clearAllChats("Clear all chats");
@@ -698,6 +817,7 @@ const ChattingPage = () => {
                     set_showPopUp={set_showPopUp}
                     deletedChat={deletedChat}
                     chatList={chatList}
+                    wallpaper={wallpaper}
                   />
                 )}
               </section>

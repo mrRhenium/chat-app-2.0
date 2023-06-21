@@ -6,9 +6,10 @@
   height: 100%;
   padding: 0.5rem 0.3rem;
   overflow-y: scroll;
-  /* overflow-x: hidden; */
-  /* gap: 0.8rem; */
-  /* border: 0.1rem solid white; */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 .chats_cover::-webkit-scrollbar {
   width: 0.1rem;
