@@ -100,7 +100,7 @@ const ChattingPage = () => {
   }, [list]);
 
   temp_list.length > list.length ? set_list(temp_list) : null;
-  temp_list.length === 0 ? set_list([]) : null;
+  // temp_list.length == 0 ? set_list([]) : null;
 
   let chatList = temp_list.length >= list.length ? temp_list : list;
 
