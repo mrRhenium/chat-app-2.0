@@ -18,6 +18,7 @@ import {
   MdReplyAll,
   MdDeleteForever,
   MdWallpaper,
+  MdOutlineRemoveCircleOutline,
 } from "react-icons/md";
 import {
   BsArrowLeft,
@@ -499,10 +500,6 @@ const ChattingPage = () => {
     //
   };
 
-  console.log(wallpaper);
-
-  // console.log(reaction);
-
   return (
     <>
       {showPopUp ? (
@@ -698,7 +695,10 @@ const ChattingPage = () => {
                             removeWallpaper("Remove specific Wallpaper");
                           }}
                         >
-                          Remove Wallpaper
+                          <MdOutlineRemoveCircleOutline
+                            className={style.icons}
+                          />
+                          Wallpaper
                         </span>
                       )}
 
