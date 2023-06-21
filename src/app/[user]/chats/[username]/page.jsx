@@ -132,7 +132,7 @@ const ChattingPage = () => {
       ClearAllChatList.push(item.sendTime);
     });
 
-    set_deletedChat([ClearAllChatList]);
+    set_deletedChat(ClearAllChatList);
     console.log(deletedChat);
 
     const JSONdata = JSON.stringify({
