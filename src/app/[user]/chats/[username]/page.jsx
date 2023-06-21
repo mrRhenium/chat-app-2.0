@@ -30,7 +30,7 @@ import {
 } from "react-icons/bs";
 
 import useSWR from "swr";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import {
   ref,
@@ -94,6 +94,10 @@ const ChattingPage = () => {
     size: "",
     src: "",
   });
+
+  useEffect(() => {
+    console.log("main Chat file");
+  }, [list]);
 
   temp_list.length > list.length ? set_list(temp_list) : null;
   let chatList = temp_list.length >= list.length ? temp_list : list;
