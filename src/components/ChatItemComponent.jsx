@@ -33,7 +33,7 @@ const ChatItemComponent = ({
 
     // set_clearChat(0);
     console.log("new useEffect");
-  }, [list, clearChat]);
+  }, [list]);
 
   console.log("Clear Chat -> " + clearChat);
   let chatList = temp_list.length >= list.length ? temp_list : list;
