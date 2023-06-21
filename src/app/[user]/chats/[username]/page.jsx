@@ -99,12 +99,13 @@ const ChattingPage = () => {
     console.log("main Chat file");
   }, [list]);
 
-  temp_list.length > list.length ? set_list(temp_list) : null;
-  let chatList = temp_list.length >= list.length ? temp_list : list;
+  temp_list.length === 0
+    ? set_list([])
+    : temp_list.length > list.length
+    ? set_list(temp_list)
+    : null;
 
-  console.log(chatList);
-  console.log(list);
-  console.log(temp_list);
+  let chatList = temp_list.length >= list.length ? temp_list : list;
 
   const closePopUp = () => set_showPopUp(0);
 
@@ -135,14 +136,11 @@ const ChattingPage = () => {
     //
     let ClearAllChatList = [...deletedChat];
 
-    console.log(chatList);
     chatList.map((item) => {
       ClearAllChatList.push(item.sendTime);
     });
 
     set_deletedChat(ClearAllChatList);
-    set_list([]);
-    console.log(deletedChat);
 
     const JSONdata = JSON.stringify({
       action: action,
