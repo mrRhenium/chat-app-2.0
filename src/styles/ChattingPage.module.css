@@ -159,6 +159,7 @@
 }
 
 .chattingPage .header .right_cover .opt_cover span label {
+  cursor: pointer;
   position: relative;
   display: flex;
   justify-content: center;
@@ -169,6 +170,7 @@
   overflow: hidden;
 }
 .chattingPage .header .right_cover .opt_cover span label input {
+  cursor: pointer;
   position: absolute;
   display: flex;
   visibility: hidden;

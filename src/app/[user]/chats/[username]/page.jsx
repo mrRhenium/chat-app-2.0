@@ -97,9 +97,15 @@ const ChattingPage = () => {
     src: "",
   });
 
+  let helpList = [];
+
+  temp_list.length > list.length ? (helpList = temp_list) : null;
   temp_list.length > list.length ? set_list(temp_list) : null;
 
-  let chatList = temp_list.length >= list.length ? temp_list : list;
+  let chatList =
+    temp_list.length >= helpList.length && temp_list.length
+      ? temp_list
+      : helpList;
 
   const closePopUp = () => set_showPopUp(0);
 
@@ -145,6 +151,7 @@ const ChattingPage = () => {
 
     if (!img) {
       alert("Please upload an image first!");
+      return;
     }
 
     if (img.name.includes(" ")) {
@@ -226,6 +233,8 @@ const ChattingPage = () => {
   const clearAllChats = async (action) => {
     //
 
+    helpList = [];
+
     // let ClearAllChatList = [...deletedChat];
 
     // chatList.map((item) => {
@@ -255,7 +264,6 @@ const ChattingPage = () => {
       return;
     }
 
-    set_list([]);
     router.push("/user/chats");
 
     // mutate();
@@ -401,6 +409,24 @@ const ChattingPage = () => {
               },
             ]);
 
+            helpList.push({
+              _id: Date.now() * 28,
+              sendTime: sendTime,
+              author: "SelfHume",
+              msg: msg === "" ? "noCapTiOn9463" : msg,
+              msgType: "media",
+              mediaInfo: {
+                type: media.type,
+                name: media.name,
+                size: media.size,
+                url: mediaUrl,
+              },
+              reaction: reactionData.data,
+              time: time,
+              date: new Date().toLocaleDateString("pt-PT"),
+              seenStauts: false,
+            });
+
             const JSONdata = JSON.stringify({
               sendTime: sendTime,
               message: msg === "" ? "noCapTiOn9463" : msg,
@@ -468,6 +494,19 @@ const ChattingPage = () => {
           seenStauts: false,
         },
       ]);
+
+      helpList.push({
+        _id: Date.now() * 28,
+        sendTime: sendTime,
+        author: "SelfHume",
+        msg: msg,
+        msgType: "text",
+        mediaInfo: {},
+        reaction: reactionData.data,
+        time: time,
+        date: new Date().toLocaleDateString("pt-PT"),
+        seenStauts: false,
+      });
 
       const JSONdata = JSON.stringify({
         sendTime: sendTime,

@@ -83,6 +83,7 @@ const postAvtar = async (e, userId, action, mutate) => {
 
   if (!img) {
     alert("Please upload an image first!");
+    return;
   }
 
   if (img.name.includes(" ")) {
