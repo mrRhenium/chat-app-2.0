@@ -23,6 +23,7 @@ const ChatItemComponent = ({
   deletedChat,
   clearChat,
   set_clearChat,
+  set_list,
 }) => {
   //
 

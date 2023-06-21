@@ -688,6 +688,7 @@ const ChattingPage = () => {
                     deletedChat={deletedChat}
                     clearChat={clearChat}
                     set_clearChat={set_clearChat}
+                    set_list={set_list}
                   />
                 )}
               </section>
