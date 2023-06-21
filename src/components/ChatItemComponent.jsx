@@ -21,9 +21,7 @@ const ChatItemComponent = ({
   set_chatItem,
   set_showPopUp,
   deletedChat,
-  clearChat,
-  set_clearChat,
-  set_list,
+  chatList,
 }) => {
   //
 
@@ -32,13 +30,8 @@ const ChatItemComponent = ({
   useEffect(() => {
     if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
 
-    set_list([]);
-    set_clearChat(0);
     console.log("new useEffect");
   }, [list]);
-
-  console.log("Clear Chat -> " + clearChat);
-  let chatList = temp_list.length >= list.length ? temp_list : list;
 
   return (
     <>
@@ -46,7 +39,7 @@ const ChatItemComponent = ({
         {chatList.map((item) => {
           // console.log(item);
 
-          if (deletedChat.includes(item.sendTime) || clearChat) return null;
+          if (deletedChat.includes(item.sendTime)) return null;
 
           return (
             <span

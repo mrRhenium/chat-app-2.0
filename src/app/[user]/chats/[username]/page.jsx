@@ -75,7 +75,6 @@ const ChattingPage = () => {
   const [chatItem, set_chatItem] = useState();
   const [deletedChat, set_deletedChat] = useState([]);
   const [headerOpt, set_headerOpt] = useState(0);
-  const [clearChat, set_clearChat] = useState(0);
 
   const [reaction, set_reaction] = useState({
     flag: 0,
@@ -97,6 +96,7 @@ const ChattingPage = () => {
   });
 
   temp_list.length > list.length ? set_list(temp_list) : null;
+  let chatList = temp_list.length >= list.length ? temp_list : list;
 
   const closePopUp = () => set_showPopUp(0);
 
@@ -125,8 +125,13 @@ const ChattingPage = () => {
 
   const clearAllChats = async (action) => {
     //
+    let ClearAllChatList = [];
 
-    set_clearChat(1);
+    chatList.map((item) => {
+      ClearAllChatList.push(item.sendTime);
+    });
+
+    set_deletedChat((prev) => [...prev, ClearAllChatList]);
 
     const JSONdata = JSON.stringify({
       action: action,
@@ -686,9 +691,7 @@ const ChattingPage = () => {
                     set_chatItem={set_chatItem}
                     set_showPopUp={set_showPopUp}
                     deletedChat={deletedChat}
-                    clearChat={clearChat}
-                    set_clearChat={set_clearChat}
-                    set_list={set_list}
+                    chatList={chatList}
                   />
                 )}
               </section>
