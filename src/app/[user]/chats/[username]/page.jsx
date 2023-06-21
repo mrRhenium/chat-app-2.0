@@ -125,14 +125,14 @@ const ChattingPage = () => {
 
   const clearAllChats = async (action) => {
     //
-    let ClearAllChatList = [];
+    let ClearAllChatList = [...deletedChat];
 
     console.log(chatList);
     chatList.map((item) => {
       ClearAllChatList.push(item.sendTime);
     });
 
-    set_deletedChat((prev) => [...prev, ClearAllChatList]);
+    set_deletedChat([ClearAllChatList]);
     console.log(deletedChat);
 
     const JSONdata = JSON.stringify({
