@@ -206,6 +206,7 @@
   align-items: center;
   width: 100%;
   height: 3rem;
+  margin-bottom: 1rem;
 }
 
 .reaction_section .reaction_cover {
@@ -249,8 +250,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 2rem;
-  height: 2rem;
+  width: 2.4rem;
+  height: 2.4rem;
   border-radius: 50%;
   padding: 0.5rem;
   border: 0.08rem solid var(--footer_border);
@@ -260,7 +261,7 @@
 }
 .reaction_section .reaction_cover .right_cover .item_cover .icons {
   color: #ffffff;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 
 /* ********************************************* */

@@ -1,6 +1,79 @@
 /* ------------------------------------ */
 /* Privacy Page : Start here */
 /* ------------------------------------ */
+.privacyBtn_cover {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 4rem;
+  padding: 0 1rem;
+  border-bottom: 0.09rem solid var(--setting_border);
+}
+
+.privacyBtn_cover strong {
+  color: var(--primary_txt2);
+  font-size: 1.2rem;
+  font-family: var(--text_font);
+}
+
+.privacyBtn_cover label {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 3.5rem;
+  height: 1.6rem;
+  padding: 0 0rem;
+  border-radius: 10rem;
+  border: 0.09rem solid var(--black_border);
+}
+
+.privacyBtn_cover label:has(> .checkBox:checked) {
+  background-color: #22afec;
+  box-shadow: 0 0 0.5rem #22afec;
+}
+
+.privacyBtn_cover label .checkBox {
+  position: absolute;
+  visibility: hidden;
+}
+
+.privacyBtn_cover label span.btn_ball {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  transform: translateX(-0.06rem);
+  transition: all 0.5s;
+  border: 0.09rem solid white;
+  background-color: var(--primary_bg1);
+}
+
+.privacyBtn_cover label .checkBox:checked ~ span.btn_ball {
+  transform: translateX(1.5rem);
+  background-color: #22afec;
+  box-shadow: 0 0 0.5rem #22afec;
+}
+
+.privacyBtn_cover span.message {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.privacyBtn_cover span.message p {
+  color: var(--primary_txt2);
+  font-family: var(--text_font);
+  font-size: 1rem;
+}
 
 /* ------------------------------------ */
 /* Privacy Page : End here */

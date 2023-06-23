@@ -26,6 +26,7 @@ export async function GET(req, res) {
       { userId: tokenData._id },
       {
         notifications: 1,
+        private: 1,
       }
     );
 
@@ -198,6 +199,25 @@ export async function PUT(req, res) {
       return NextResponse.json({
         status: true,
         msg: "Successfully! : Wallpaper is Removed",
+      });
+
+      //
+    } //
+    else if (body.action === "Toggle private account") {
+      //
+
+      const user = await UserData.findOne(
+        { userId: tokenData._id },
+        { private: 1 }
+      );
+
+      user.private = !user.private;
+
+      await user.save();
+
+      return NextResponse.json({
+        status: true,
+        msg: "Successfully! : Update Private account setting.",
       });
 
       //
