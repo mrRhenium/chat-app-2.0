@@ -2,12 +2,13 @@
 
 import settingStyle from "@/styles/SettingLayout.module.css";
 import style from "@/styles/Privacy.module.css";
-import LoadingComponent from "@/components/LoadingComponent";
+// import LoadingComponent from "@/components/LoadingComponent";
 
 import { BsArrowLeft } from "react-icons/bs";
 
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
+import { useEffect } from "react";
 
 const fetcher = async (url) => {
   const res = await fetch(url);
@@ -19,8 +20,14 @@ const Privacy = () => {
   const router = useRouter();
 
   const { data, isLoading, mutate } = useSWR("/api/users", fetcher);
-
   let privateAccount = data && data["private"];
+
+  useEffect(() => {
+    const privacyBtn = document.querySelector("#privacyBtn");
+    if (data) {
+      privacyBtn.checked = privateAccount ? true : false;
+    }
+  });
 
   const toggleBtn = async (action) => {
     //
@@ -40,9 +47,12 @@ const Privacy = () => {
     const resData = await res.json();
     if (resData.status === false) alert(`${resData.msg}`);
 
+    console.log("toggle Btn");
     mutate();
     //
   };
+
+  console.log(privateAccount);
 
   return (
     <>
@@ -73,43 +83,40 @@ const Privacy = () => {
           <section className={settingStyle.body}>
             <div className={settingStyle.cover}>
               {/*  */}
-              {isLoading ? (
-                <LoadingComponent />
-              ) : (
-                <span className={style.privacyBtn_cover}>
-                  <span className={style.upper_cover}>
-                    <strong>Private account</strong>
-                    <label
-                      htmlFor="privacyBtn"
-                      onClick={() => toggleBtn("Toggle private account")}
-                    >
-                      <input
-                        type="checkbox"
-                        name="privacyBtn"
-                        id="privacyBtn"
-                        className={style.checkBox}
-                        checked={privateAccount ? true : false}
-                      />
-                      <span className={style.btn_ball}></span>
-                    </label>
-                  </span>
-                  <span className={style.lower_cover}>
-                    <span className={style.message}>
-                      <p>
-                        When your account is public, your profile and posts can
-                        be seen by anyone, on or off FS_Chats, even if they
-                        don't have an FS_Chats account.
-                      </p>
-                      <p>
-                        When your account is private only the followers you
-                        approve can see what you share including your photos or
-                        video on hashtag and location pages, and your followers
-                        and following list.
-                      </p>
-                    </span>
+
+              <span className={style.privacyBtn_cover}>
+                <span className={style.upper_cover}>
+                  <strong>Private account</strong>
+                  <label
+                    htmlFor="privacyBtn"
+                    onClick={() => toggleBtn("Toggle private account")}
+                  >
+                    <input
+                      type="checkbox"
+                      name="privacyBtnName"
+                      id="privacyBtn"
+                      className={style.checkBox}
+                    />
+                    <span className={style.btn_ball}></span>
+                  </label>
+                </span>
+                <span className={style.lower_cover}>
+                  <span className={style.message}>
+                    <p>
+                      When your account is public, your profile and posts can be
+                      seen by anyone, on or off FS_Chats, even if they don't
+                      have an FS_Chats account.
+                    </p>
+                    <p>
+                      When your account is private only the followers you
+                      approve can see what you share including your photos or
+                      video on hashtag and location pages, and your followers
+                      and following list.
+                    </p>
                   </span>
                 </span>
-              )}
+              </span>
+
               {/*  */}
             </div>
           </section>

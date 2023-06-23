@@ -30,13 +30,6 @@ export async function GET(req, res) {
       }
     );
 
-    if (!user) {
-      return NextResponse.json({
-        status: false,
-        msg: `User not Found.`,
-      });
-    }
-
     return NextResponse.json({
       status: true,
       msg: "Use is Found.",
