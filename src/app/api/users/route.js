@@ -204,7 +204,9 @@ export async function PUT(req, res) {
         { private: 1 }
       );
 
-      user.private = !user.private;
+      user.private = user.private ? false : true;
+
+      console.log(user.private);
 
       await user.save();
 
