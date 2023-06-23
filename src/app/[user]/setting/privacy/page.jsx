@@ -18,7 +18,7 @@ const fetcher = async (url) => {
 const Privacy = () => {
   const router = useRouter();
 
-  const { data, isLoading, mutate } = useSWR("api/users", fetcher);
+  const { data, isLoading, mutate } = useSWR("/api/users", fetcher);
 
   let privateAccount = data && data["private"];
 
