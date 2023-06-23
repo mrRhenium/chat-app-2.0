@@ -77,32 +77,36 @@ const Privacy = () => {
                 <LoadingComponent />
               ) : (
                 <span className={style.privacyBtn_cover}>
-                  <strong>Private account</strong>
-                  <label
-                    htmlFor="privacyBtn"
-                    onClick={() => toggleBtn("Toggle private account")}
-                  >
-                    <input
-                      type="checkbox"
-                      name="privacyBtn"
-                      id="privacyBtn"
-                      className={style.checkBox}
-                      checked={privateAccount ? true : false}
-                    />
-                    <span className={style.btn_ball}></span>
-                  </label>
-                  <span className={style.message}>
-                    <p>
-                      When your account is public, your profile and posts can be
-                      seen by anyone, on or off FS_Chats, even if they don't
-                      have an FS_Chats account.
-                    </p>
-                    <p>
-                      When your account is private only the followers you
-                      approve can see what you share including your photos or
-                      video on hashtag and location pages, and your followers
-                      and following list.
-                    </p>
+                  <span className={style.upper_cover}>
+                    <strong>Private account</strong>
+                    <label
+                      htmlFor="privacyBtn"
+                      onClick={() => toggleBtn("Toggle private account")}
+                    >
+                      <input
+                        type="checkbox"
+                        name="privacyBtn"
+                        id="privacyBtn"
+                        className={style.checkBox}
+                        checked={privateAccount ? true : false}
+                      />
+                      <span className={style.btn_ball}></span>
+                    </label>
+                  </span>
+                  <span className={style.lower_cover}>
+                    <span className={style.message}>
+                      <p>
+                        When your account is public, your profile and posts can
+                        be seen by anyone, on or off FS_Chats, even if they
+                        don't have an FS_Chats account.
+                      </p>
+                      <p>
+                        When your account is private only the followers you
+                        approve can see what you share including your photos or
+                        video on hashtag and location pages, and your followers
+                        and following list.
+                      </p>
+                    </span>
                   </span>
                 </span>
               )}
