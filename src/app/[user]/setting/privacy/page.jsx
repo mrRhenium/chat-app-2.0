@@ -20,14 +20,14 @@ const Privacy = () => {
   const router = useRouter();
 
   const { data, isLoading, mutate } = useSWR("/api/users", fetcher);
-  let privateAccount = data && data["private"];
+  let privateAccount = data && data["user"]["private"];
 
   useEffect(() => {
     const privacyBtn = document.querySelector("#privacyBtn");
     if (data) {
       privacyBtn.checked = privateAccount ? true : false;
     }
-  });
+  }, []);
 
   const toggleBtn = async (action) => {
     //
