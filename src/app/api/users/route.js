@@ -199,16 +199,12 @@ export async function PUT(req, res) {
     else if (body.action === "Toggle private account") {
       //
 
-      const user = await UserData.findOne(
+      await UserData.findOneAndUpdate(
         { userId: tokenData._id },
-        { private: 1 }
+        {
+          private: body.privateAccount ? false : true,
+        }
       );
-
-      user.private = user.private ? false : true;
-
-      console.log(user.private);
-
-      await user.save();
 
       return NextResponse.json({
         status: true,

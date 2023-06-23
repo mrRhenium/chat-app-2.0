@@ -34,6 +34,7 @@ const Privacy = () => {
 
     const JSONdata = JSON.stringify({
       action: action,
+      privateAccount: privateAccount,
     });
 
     const res = await fetch(`/api/users`, {
