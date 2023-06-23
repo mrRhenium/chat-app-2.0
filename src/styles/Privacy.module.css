@@ -13,7 +13,7 @@
   border-bottom: 0.09rem solid var(--setting_border);
 }
 
-.privacyBtn_cover {
+.upper_cover {
   position: relative;
   display: flex;
   justify-content: space-between;
