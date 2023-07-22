@@ -2,7 +2,6 @@
 
 import settingStyle from "@/styles/SettingLayout.module.css";
 import style from "@/styles/Privacy.module.css";
-// import LoadingComponent from "@/components/LoadingComponent";
 
 import { BsArrowLeft } from "react-icons/bs";
 
@@ -19,7 +18,7 @@ const fetcher = async (url) => {
 const Privacy = () => {
   const router = useRouter();
 
-  const { data, isLoading, mutate } = useSWR("/api/users", fetcher);
+  const { data, mutate } = useSWR("/api/users", fetcher);
   let privateAccount = data && data["user"]["private"];
 
   useEffect(() => {
