@@ -23,7 +23,7 @@ const userSchema = new Schema(
     },
     logInStatus: {
       type: Boolean,
-      default: 0,
+      default: 1,
       required: true,
     },
     private: {

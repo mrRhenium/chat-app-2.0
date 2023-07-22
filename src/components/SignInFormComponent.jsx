@@ -196,7 +196,10 @@ const SignInFormComponent = () => {
         alert(data.msg);
         //
       } else if (data.status === true) {
-        router.push("/logIn");
+        document.cookie = `token=${data.token};expire;max-age=86000`;
+        router.push("/user/chats");
+        // router.push("/logIn");
+
         //
       }
 

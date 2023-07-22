@@ -4,6 +4,7 @@ import UserData from "@/Models/usersData_model";
 import UserNotify from "@/Models/userNotify_model";
 
 import { NextResponse } from "next/server";
+import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
 // *****************************
@@ -63,9 +64,18 @@ export async function POST(req, res) {
         notifications: { notifyId: notify._id, count: 0 },
       });
 
+      const token = jwt.sign(
+        { _id: user._id, username: user.username },
+        process.env.JWTSECRET,
+        {
+          expiresIn: "1d",
+        }
+      );
+
       return NextResponse.json({
         status: true,
         msg: "Successfully SignIn",
+        token: token,
       });
       //
     }

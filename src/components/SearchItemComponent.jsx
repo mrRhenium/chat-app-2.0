@@ -86,6 +86,7 @@ const SearchItemComponent = ({ list, mutate }) => {
                     <span>
                       <button
                         onClick={() => {
+                          item.invitation = "Send";
                           putRequest("Invite User", `${item.userId}`, mutate);
                         }}
                       >
@@ -103,6 +104,7 @@ const SearchItemComponent = ({ list, mutate }) => {
                     <button
                       className={style.secondBtn}
                       onClick={() => {
+                        item.invitation = "none";
                         putRequest(
                           "Send-Invitation Cancelled",
                           `${item.userId}`,
@@ -119,6 +121,8 @@ const SearchItemComponent = ({ list, mutate }) => {
                   <span>
                     <button
                       onClick={() => {
+                        item.invitation = "none";
+                        item.friend = 1;
                         putRequest(
                           "Recieved-Invitation Accepted",
                           `${item.userId}`,
@@ -133,6 +137,7 @@ const SearchItemComponent = ({ list, mutate }) => {
                     <button
                       className={style.secondBtn}
                       onClick={() => {
+                        item.invitation = "none";
                         putRequest(
                           "Recieved-Invitation Rejected",
                           `${item.userId}`,
