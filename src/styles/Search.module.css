@@ -107,6 +107,11 @@
   border-radius: 1rem;
   border: 0.1rem solid var(--primary_border);
   background-color: rgba(34, 175, 236, 0.3);
+  overflow: hidden;
+}
+
+.body .searchItem_cover .search_items {
+  border: 0.1rem solid black;
 }
 
 .body .searchItem_cover .search_items .itemPic_cover {
