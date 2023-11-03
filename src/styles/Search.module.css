@@ -110,7 +110,7 @@
   overflow: hidden;
 }
 
-.body .searchItem_cover .search_items {
+.body .searchItem_cover .search_items span {
   border: 0.1rem solid black;
 }
 
@@ -188,6 +188,7 @@
 .body .searchItem_cover .search_items .itemBtn_cover {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-end;
   align-items: center;
   gap: 0.2rem;
