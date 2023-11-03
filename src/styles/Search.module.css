@@ -143,7 +143,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: calc(60% - 2.5rem);
+  width: calc(55% - 2.5rem);
   height: 100%;
   padding: 0 0.3rem;
   /* border: 0.1rem solid red; */
@@ -185,12 +185,12 @@
   position: relative;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   gap: 0.4rem;
-  width: 40%;
+  width: 45%;
   height: 100%;
-  padding: 0 0.3rem;
+  padding: 0 0.6rem;
   /* border: 0.1rem solid red; */
 }
 
