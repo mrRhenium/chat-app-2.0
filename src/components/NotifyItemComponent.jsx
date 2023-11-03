@@ -1,5 +1,7 @@
 import style from "../styles/Notification.module.css";
+
 import { FaUserCircle } from "react-icons/fa";
+import { CgCloseO } from "react-icons/cg";
 
 import { useRouter } from "next/navigation";
 import { MdOutlineDeleteOutline } from "react-icons/md";
@@ -111,7 +113,7 @@ const NotifyItemComponent = ({ list, option, mutate, notifyId }) => {
                       );
                     }}
                   >
-                    Cancel
+                    <CgCloseO className={style.icons} />
                   </button>
                 </span>
               ) : (
@@ -127,7 +129,7 @@ const NotifyItemComponent = ({ list, option, mutate, notifyId }) => {
                       );
                     }}
                   >
-                    <MdOutlineDeleteOutline />
+                    <MdOutlineDeleteOutline className={style.icons} />
                   </button>
                 </span>
               )
@@ -155,7 +157,7 @@ const NotifyItemComponent = ({ list, option, mutate, notifyId }) => {
                     );
                   }}
                 >
-                  Cancel
+                  <CgCloseO className={style.icons} />
                 </button>
               </span>
             ) : (
@@ -171,7 +173,7 @@ const NotifyItemComponent = ({ list, option, mutate, notifyId }) => {
                     );
                   }}
                 >
-                  <MdOutlineDeleteOutline />
+                  <MdOutlineDeleteOutline className={style.icons} />
                 </button>
               </span>
             )}
