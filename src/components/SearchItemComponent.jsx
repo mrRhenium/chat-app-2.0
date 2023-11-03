@@ -1,6 +1,7 @@
 import style from "../styles/Search.module.css";
 import { useRouter } from "next/navigation";
 import { FaUserCircle } from "react-icons/fa";
+import { CgCloseO } from "react-icons/cg";
 
 const putRequest = async (action, targetUserId, mutate) => {
   //
@@ -112,7 +113,7 @@ const SearchItemComponent = ({ list, mutate }) => {
                         );
                       }}
                     >
-                      Cancel
+                      <CgCloseO className={style.icons} />
                     </button>
                   </span>
                 </>
@@ -145,7 +146,7 @@ const SearchItemComponent = ({ list, mutate }) => {
                         );
                       }}
                     >
-                      Cancel
+                      <CgCloseO className={style.icons} />
                     </button>
                   </span>
                 </>

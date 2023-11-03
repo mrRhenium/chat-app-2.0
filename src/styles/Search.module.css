@@ -187,10 +187,10 @@
   flex-wrap: wrap;
   justify-content: flex-end;
   align-items: center;
-  gap: 0.2rem;
+  /* gap: 0.2rem; */
   width: 40%;
   height: 100%;
-  padding: 0 0.3rem;
+  padding: 0 0.6rem;
   /* border: 0.1rem solid red; */
 }
 
@@ -209,6 +209,7 @@
   background-color: var(--primary_bg1);
 }
 .body .searchItem_cover .search_items .itemBtn_cover button.secondBtn {
+  margin-left: 0.2rem;
   color: var(--primary_txt2);
   border: 0.08rem solid var(--primary_border);
   background-color: var(--badge_color);
