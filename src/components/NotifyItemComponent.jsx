@@ -1,10 +1,11 @@
 import style from "../styles/Notification.module.css";
 
+import { MdOutlineDeleteOutline } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 import { CgCloseO } from "react-icons/cg";
 
 import { useRouter } from "next/navigation";
-import { MdOutlineDeleteOutline } from "react-icons/md";
+import { useEffect, useState } from "react";
 //
 //
 
@@ -58,6 +59,12 @@ const updateAvtar = async (action, targetUserId, notifyId, option) => {
 
 const NotifyItemComponent = ({ list, option, mutate, notifyId }) => {
   const router = useRouter();
+  const [changeId, set_changeId] = useState([]);
+
+  useEffect(() => {
+    set_changeId([]);
+  }, [list]);
+
   return (
     <>
       {list.map((item) => {
@@ -99,15 +106,70 @@ const NotifyItemComponent = ({ list, option, mutate, notifyId }) => {
             <span className={style.info_cover}>
               <strong>{`${item.date} - ${item.time}`}</strong>
             </span>
-            {option === "Send" ? (
-              item.active ? (
-                <span className={style.itemBtn_cover}>
-                  <strong className={style.readOnly}>Pending..</strong>
+            <span className={style.itemBtn_cover}>
+              {changeId.includes(item.userId) ? (
+                <strong className={style.readOnly}>Loading...</strong>
+              ) : option === "Send" ? (
+                item.active ? (
+                  <>
+                    <strong className={style.readOnly}>Pending..</strong>
+                    <button
+                      className={style.reject_btn}
+                      onClick={() => {
+                        set_changeId((prev) => [...prev, item.userId]);
+
+                        putRequest(
+                          "Send-Invitation Cancelled",
+                          item.userId,
+                          mutate
+                        );
+                      }}
+                    >
+                      <CgCloseO className={style.icons} />
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <strong className={style.readOnly}>Rejected</strong>
+                    <button
+                      className={style.reject_btn}
+                      onClick={() => {
+                        set_changeId((prev) => [...prev, item.userId]);
+
+                        putRequest(
+                          "Rejected-Invitation Deleted",
+                          item.userId,
+                          mutate
+                        );
+                      }}
+                    >
+                      <MdOutlineDeleteOutline className={style.icons} />
+                    </button>
+                  </>
+                )
+              ) : item.active ? (
+                <>
+                  <button
+                    className={style.accept_btn}
+                    onClick={() => {
+                      set_changeId((prev) => [...prev, item.userId]);
+
+                      putRequest(
+                        "Recieved-Invitation Accepted",
+                        item.userId,
+                        mutate
+                      );
+                    }}
+                  >
+                    Confirm
+                  </button>
                   <button
                     className={style.reject_btn}
                     onClick={() => {
+                      set_changeId((prev) => [...prev, item.userId]);
+
                       putRequest(
-                        "Send-Invitation Cancelled",
+                        "Recieved-Invitation Rejected",
                         item.userId,
                         mutate
                       );
@@ -115,15 +177,17 @@ const NotifyItemComponent = ({ list, option, mutate, notifyId }) => {
                   >
                     <CgCloseO className={style.icons} />
                   </button>
-                </span>
+                </>
               ) : (
-                <span className={style.itemBtn_cover}>
-                  <strong className={style.readOnly}>Rejected</strong>
+                <>
+                  <strong className={style.readOnly}>Cancelled</strong>
                   <button
                     className={style.reject_btn}
                     onClick={() => {
+                      set_changeId((prev) => [...prev, item.userId]);
+
                       putRequest(
-                        "Rejected-Invitation Deleted",
+                        "Cancel-Invitation Deleted",
                         item.userId,
                         mutate
                       );
@@ -131,52 +195,9 @@ const NotifyItemComponent = ({ list, option, mutate, notifyId }) => {
                   >
                     <MdOutlineDeleteOutline className={style.icons} />
                   </button>
-                </span>
-              )
-            ) : item.active ? (
-              <span className={style.itemBtn_cover}>
-                <button
-                  className={style.accept_btn}
-                  onClick={() => {
-                    putRequest(
-                      "Recieved-Invitation Accepted",
-                      item.userId,
-                      mutate
-                    );
-                  }}
-                >
-                  Confirm
-                </button>
-                <button
-                  className={style.reject_btn}
-                  onClick={() => {
-                    putRequest(
-                      "Recieved-Invitation Rejected",
-                      item.userId,
-                      mutate
-                    );
-                  }}
-                >
-                  <CgCloseO className={style.icons} />
-                </button>
-              </span>
-            ) : (
-              <span className={style.itemBtn_cover}>
-                <strong className={style.readOnly}>Cancelled</strong>
-                <button
-                  className={style.reject_btn}
-                  onClick={() => {
-                    putRequest(
-                      "Cancel-Invitation Deleted",
-                      item.userId,
-                      mutate
-                    );
-                  }}
-                >
-                  <MdOutlineDeleteOutline className={style.icons} />
-                </button>
-              </span>
-            )}
+                </>
+              )}
+            </span>
           </div>
         );
       })}
