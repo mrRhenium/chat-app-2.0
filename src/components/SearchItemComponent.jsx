@@ -4,6 +4,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { CgCloseO } from "react-icons/cg";
 
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const putRequest = async (action, targetUserId, mutate) => {
   //
@@ -37,10 +38,11 @@ const putRequest = async (action, targetUserId, mutate) => {
 
 const SearchItemComponent = ({ list, mutate }) => {
   const router = useRouter();
+  const [List, setList] = useState(list);
 
   return (
     <>
-      {list.map((item) => {
+      {List.map((item) => {
         return (
           <div key={item.userId} className={style.search_items}>
             <span className={style.itemPic_cover}>
@@ -89,8 +91,14 @@ const SearchItemComponent = ({ list, mutate }) => {
                     <span>
                       <button
                         onClick={() => {
-                          item.invitation = "Send";
                           putRequest("Invite User", `${item.userId}`, mutate);
+                          setList((prev) => {
+                            prev.map((i) => {
+                              if (item.userId == i.userId)
+                                i.invitation = "Send";
+                            });
+                            return prev;
+                          });
                         }}
                       >
                         Invite
@@ -107,7 +115,6 @@ const SearchItemComponent = ({ list, mutate }) => {
                     <button
                       className={style.secondBtn}
                       onClick={() => {
-                        item.invitation = "none";
                         putRequest(
                           "Send-Invitation Cancelled",
                           `${item.userId}`,
@@ -124,8 +131,6 @@ const SearchItemComponent = ({ list, mutate }) => {
                   <span>
                     <button
                       onClick={() => {
-                        item.invitation = "none";
-                        item.friend = 1;
                         putRequest(
                           "Recieved-Invitation Accepted",
                           `${item.userId}`,
@@ -140,7 +145,6 @@ const SearchItemComponent = ({ list, mutate }) => {
                     <button
                       className={style.secondBtn}
                       onClick={() => {
-                        item.invitation = "none";
                         putRequest(
                           "Recieved-Invitation Rejected",
                           `${item.userId}`,
