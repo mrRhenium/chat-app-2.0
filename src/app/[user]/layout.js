@@ -84,14 +84,20 @@ const UserLayout = ({ children }) => {
 
     if (document.readyState === "complete") putMethod("User is online");
     window.addEventListener("beforeunload", () => putMethod("User is offline"));
+    window.addEventListener("offline", () => putMethod("User is offline"));
+    window.addEventListener("online", () => putMethod("User is online"));
+
     document.addEventListener("visibilitychange", pageVisibility);
 
     // CleanUp function
     return () => {
-      document.removeEventListener("visibilitychange", pageVisibility);
+      window.removeEventListener("offline", () => putMethod("User is offline"));
+      window.removeEventListener("online", () => putMethod("User is online"));
       window.removeEventListener("beforeunload", () =>
         putMethod("User is offline")
       );
+
+      document.removeEventListener("visibilitychange", pageVisibility);
     };
 
     //
