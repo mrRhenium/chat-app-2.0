@@ -11,9 +11,12 @@ import { useRouter } from "next/navigation";
 const LogInFormComponent = () => {
   const router = useRouter();
   const [passwordIcon, set_passwordIcon] = useState(1);
+  const [btnText, set_btnText] = useState("Log In");
 
   const submitForm = async (e) => {
     e.preventDefault();
+
+    set_btnText("Loading...");
 
     let final_username = username.value.trim();
     let final_password = password.value.trim();
@@ -99,7 +102,7 @@ const LogInFormComponent = () => {
         </label>
         <label className={style.input_cover}>
           <button type="submit" className={style.signIn_page_btn}>
-            Log In
+            {btnText}
           </button>
         </label>
       </form>

@@ -14,6 +14,7 @@ const SignInFormComponent = () => {
   const router = useRouter();
   // console.log("hello", window.location.host);
 
+  const [btnText, set_btnText] = useState("Sign In");
   const [passwordIcon, set_passwordIcon] = useState(1);
   const [MSG, set_MSG] = useState({
     fullnameMSG: "",
@@ -139,6 +140,8 @@ const SignInFormComponent = () => {
 
   const submitForm = async (e) => {
     e.preventDefault();
+
+    set_btnText("Loading...");
 
     let final_fullname = fullname.value.trim();
     let final_username = username.value.trim();
@@ -340,7 +343,7 @@ const SignInFormComponent = () => {
 
         <label className={style.input_cover}>
           <button type="submit" className={style.signIn_page_btn}>
-            Sign In
+            {btnText}
           </button>
         </label>
       </form>
