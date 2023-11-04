@@ -83,16 +83,33 @@ const UserLayout = ({ children }) => {
     //
 
     if (document.readyState === "complete") putMethod("User is online");
+
     window.addEventListener("beforeunload", () => putMethod("User is offline"));
-    window.addEventListener("offline", () => putMethod("User is offline"));
-    window.addEventListener("online", () => putMethod("User is online"));
+
+    window.addEventListener("offline", () => {
+      console.log("Offline");
+      putMethod("User is offline");
+    });
+
+    window.addEventListener("online", () => {
+      console.log("Online");
+      putMethod("User is online");
+    });
 
     document.addEventListener("visibilitychange", pageVisibility);
 
     // CleanUp function
     return () => {
-      window.removeEventListener("offline", () => putMethod("User is offline"));
-      window.removeEventListener("online", () => putMethod("User is online"));
+      window.removeEventListener("offline", () => {
+        console.log("Offline");
+        putMethod("User is offline");
+      });
+
+      window.removeEventListener("online", () => {
+        console.log("Online");
+        putMethod("User is online");
+      });
+
       window.removeEventListener("beforeunload", () =>
         putMethod("User is offline")
       );

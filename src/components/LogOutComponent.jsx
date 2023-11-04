@@ -24,7 +24,8 @@ const LogOutComponent = ({ closePopUp }) => {
     if (resData.status) alert(`${resData.msg}`);
 
     if (resData.status) {
-      document.cookie = "token=;Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+      document.cookie =
+        "token=;expires=Thu, 01 Jan 1970 00:00:01 GMT;max-age=86000";
       router.push("/logIn");
     }
     //
