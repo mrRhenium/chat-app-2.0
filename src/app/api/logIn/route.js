@@ -1,5 +1,6 @@
 import dbConnect from "@/Database/dbCoonect";
 import User from "@/Models/users_model";
+import UserData from "@/Models/usersData_model";
 
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
@@ -97,6 +98,13 @@ export async function PUT(req, res) {
       { _id: tokenData._id },
       {
         $set: { logInStatus: false },
+      }
+    );
+
+    await UserData.findOneAndUpdate(
+      { userId: tokenData._id },
+      {
+        $set: { onlineStatus: false },
       }
     );
 
