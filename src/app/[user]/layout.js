@@ -42,8 +42,27 @@ const putMethod = async (action) => {
 };
 
 const UserLayout = ({ children }) => {
-  const [menuIndex, set_menuIndex] = useState(0);
   const pathname = usePathname();
+  const [menuIndex, set_menuIndex] = useState(() => {
+    let index = 0;
+
+    switch (pathname) {
+      case "/user/chats":
+        index = 0;
+        break;
+      case "/user/search":
+        index = 1;
+        break;
+      case "/user/notification":
+        index = 2;
+        break;
+      case "/user/setting":
+        index = 3;
+        break;
+    }
+
+    return index;
+  });
 
   const { data } = useSWR(URL, fetcher, {
     refreshInterval: 30000,

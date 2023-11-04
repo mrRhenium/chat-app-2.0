@@ -29,7 +29,7 @@ const ChatItemComponent = ({
   useEffect(() => {
     if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
 
-    console.log("new useEffect");
+    // console.log("new useEffect");
   }, [list]);
 
   return (
