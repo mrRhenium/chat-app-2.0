@@ -4,7 +4,6 @@ import { FaUserCircle } from "react-icons/fa";
 import { CgCloseO } from "react-icons/cg";
 
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 const putRequest = async (action, targetUserId, mutate) => {
   //
@@ -38,11 +37,10 @@ const putRequest = async (action, targetUserId, mutate) => {
 
 const SearchItemComponent = ({ list, mutate }) => {
   const router = useRouter();
-  const [List, setList] = useState(list);
 
   return (
     <>
-      {List.map((item) => {
+      {list.map((item) => {
         return (
           <div key={item.userId} className={style.search_items}>
             <span className={style.itemPic_cover}>
@@ -92,13 +90,6 @@ const SearchItemComponent = ({ list, mutate }) => {
                       <button
                         onClick={() => {
                           putRequest("Invite User", `${item.userId}`, mutate);
-                          setList((prev) => {
-                            prev.map((i) => {
-                              if (item.userId == i.userId)
-                                i.invitation = "Send";
-                            });
-                            return prev;
-                          });
                         }}
                       >
                         Invite

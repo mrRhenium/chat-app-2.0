@@ -11,7 +11,8 @@
   height: 4rem;
   max-height: 4rem;
   padding: 0 0.5rem;
-  background-color: var(--primary_bg1);
+  background-color: black;
+  /* background-color: var(--primary_bg1); */
   /* border: 0.1rem solid black; */
 }
 .header form {
