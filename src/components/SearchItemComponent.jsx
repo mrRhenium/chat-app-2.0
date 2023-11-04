@@ -1,7 +1,9 @@
 import style from "../styles/Search.module.css";
-import { useRouter } from "next/navigation";
+
 import { FaUserCircle } from "react-icons/fa";
 import { CgCloseO } from "react-icons/cg";
+
+import { useRouter } from "next/navigation";
 
 const putRequest = async (action, targetUserId, mutate) => {
   //
