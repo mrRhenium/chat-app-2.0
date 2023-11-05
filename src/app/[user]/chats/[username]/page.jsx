@@ -371,6 +371,31 @@ const ChattingPage = () => {
 
       const uploadTask = uploadBytesResumable(storageRef, media.file);
 
+      // ******************************************************
+      const sendTime = Date.now();
+
+      set_list((prev) => [
+        ...prev,
+        {
+          _id: Date.now() * 28,
+          sendTime: sendTime,
+          author: "SelfHume",
+          msg: msg === "" ? "noCapTiOn9463" : msg,
+          msgType: "media",
+          mediaInfo: {
+            type: media.type,
+            name: media.name,
+            size: media.size,
+            url: media.src,
+          },
+          reaction: reactionData.data,
+          time: time,
+          date: new Date().toLocaleDateString("pt-PT"),
+          seenStauts: false,
+        },
+      ]);
+      // ******************************************************
+
       uploadTask.on(
         "state_changed",
         (snapshot) => {
@@ -387,29 +412,30 @@ const ChattingPage = () => {
             mediaUrl = url;
             // console.log(url);
 
-            const sendTime = Date.now();
+            //
+            // deleted
+            // set_list((prev) => [
+            //   ...prev,
+            //   {
+            //     _id: Date.now() * 28,
+            //     sendTime: sendTime,
+            //     author: "SelfHume",
+            //     msg: msg === "" ? "noCapTiOn9463" : msg,
+            //     msgType: "media",
+            //     mediaInfo: {
+            //       type: media.type,
+            //       name: media.name,
+            //       size: media.size,
+            //       url: mediaUrl,
+            //     },
+            //     reaction: reactionData.data,
+            //     time: time,
+            //     date: new Date().toLocaleDateString("pt-PT"),
+            //     seenStauts: false,
+            //   },
+            // ]);
 
-            set_list((prev) => [
-              ...prev,
-              {
-                _id: Date.now() * 28,
-                sendTime: sendTime,
-                author: "SelfHume",
-                msg: msg === "" ? "noCapTiOn9463" : msg,
-                msgType: "media",
-                mediaInfo: {
-                  type: media.type,
-                  name: media.name,
-                  size: media.size,
-                  url: mediaUrl,
-                },
-                reaction: reactionData.data,
-                time: time,
-                date: new Date().toLocaleDateString("pt-PT"),
-                seenStauts: false,
-              },
-            ]);
-
+            //
             const JSONdata = JSON.stringify({
               sendTime: sendTime,
               message: msg === "" ? "noCapTiOn9463" : msg,

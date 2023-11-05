@@ -264,11 +264,13 @@ const ChatItemComponent = ({
               <p className={style.msg_time}>
                 {`${item.date} - ${item.time}`}
                 {item.author != uName ? (
-                  item.seenStauts ? (
-                    <RiCheckDoubleLine className={style.icons} />
-                  ) : (
-                    <RiCheckLine className={style.icons} />
-                  )
+                  item.chatId ? (
+                    item.seenStauts ? (
+                      <RiCheckDoubleLine className={style.icons} />
+                    ) : (
+                      <RiCheckLine className={style.icons} />
+                    )
+                  ) : null
                 ) : null}
               </p>
             </span>
