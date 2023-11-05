@@ -79,7 +79,9 @@ const ChattingPage = () => {
   const [deletedChat, set_deletedChat] = useState([]);
   const [headerOpt, set_headerOpt] = useState(0);
   const [uploadCancel, set_uploadCancel] = useState(() => {
-    console.log("Cancel");
+    return () => {
+      console.log("Cancel");
+    };
   });
 
   const [reaction, set_reaction] = useState({
@@ -376,21 +378,23 @@ const ChattingPage = () => {
 
       // Defining the upload Cancel function here.
       set_uploadCancel(() => {
-        uploadTask.cancel();
+        return () => {
+          uploadTask.cancel();
 
-        set_media({
-          flag: 0,
-          file: null,
-          type: "",
-          name: "",
-          size: "",
-          src: "",
-        });
+          set_media({
+            flag: 0,
+            file: null,
+            type: "",
+            name: "",
+            size: "",
+            src: "",
+          });
 
-        set_uploadStart(0);
-        set_progress(0);
+          set_uploadStart(0);
+          set_progress(0);
 
-        console.log("Proper cancel");
+          console.log("Proper cancel");
+        };
       });
 
       // ******************************************************
