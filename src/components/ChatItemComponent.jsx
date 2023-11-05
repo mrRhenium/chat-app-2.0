@@ -2,6 +2,7 @@ import style from "../styles/ChatItemComponent.module.css";
 
 import { CiMenuKebab } from "react-icons/ci";
 import { MdNotInterested } from "react-icons/md";
+import { BsCloudUploadFill } from "react-icons/bs";
 import { RiCheckDoubleLine, RiCheckLine } from "react-icons/ri";
 import {
   BsHeadset,
