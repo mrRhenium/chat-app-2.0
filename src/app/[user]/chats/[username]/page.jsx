@@ -785,6 +785,7 @@ const ChattingPage = () => {
                           <span
                             className={style.backBtn}
                             onClick={() => {
+                              set_uploadStart(0);
                               set_media({
                                 flag: 0,
                                 file: null,
