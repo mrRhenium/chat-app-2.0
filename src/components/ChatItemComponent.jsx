@@ -171,7 +171,8 @@ const ChatItemComponent = ({
                 <span
                   className={style.deleteBtn_cover}
                   onClick={() => {
-                    uploadCancel.action();
+                    item.action();
+                    // uploadCancel.action();
                   }}
                 >
                   <MdDeleteForever
