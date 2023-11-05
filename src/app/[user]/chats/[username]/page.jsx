@@ -378,6 +378,7 @@ const ChattingPage = () => {
 
       // ******************************************************
       const sendTime = Date.now();
+      set_media((prev) => ({ ...prev, flag: 0 }));
 
       set_list((prev) => [
         ...prev,
