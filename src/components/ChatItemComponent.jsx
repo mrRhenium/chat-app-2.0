@@ -175,7 +175,10 @@ const ChatItemComponent = ({
                 >
                   <MdDeleteForever
                     className={style.icons2}
-                    style={{ color: `var(--primary_txt1)` }}
+                    style={{
+                      color: `var(--primary_txt1)`,
+                      fontSize: "1.6rem",
+                    }}
                   />
                 </span>
               ) : (

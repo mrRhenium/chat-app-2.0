@@ -31,6 +31,7 @@
   width: fit-content;
   height: fit-content;
   padding: 0.5rem 0.8rem;
+  padding-right: 1.6rem;
   padding-bottom: 0rem;
   border: 0.08rem solid rgba(0, 0, 0, 0.4);
 }
@@ -69,7 +70,7 @@
   position: absolute;
   display: flex;
   top: 0.5rem;
-  right: -0.1rem;
+  right: 0.2rem;
   cursor: pointer;
 }
 .chats_cover .deleteBtn_cover .icons {
@@ -111,8 +112,7 @@
 .chats_cover .msg_time {
   position: relative;
   display: flex;
-  margin: 0.2rem;
-  margin-left: auto;
+  margin: 0.2rem -0.5rem 0.2rem auto;
   font-size: 0.9rem;
   color: #000000;
   font-family: var(--chatting_font);
@@ -120,8 +120,8 @@
 
 .chats_cover .msg_time .icons {
   color: var(--doubleTick);
-  font-size: 1.1rem;
-  margin-left: 0.5rem;
+  font-size: 1.2rem;
+  margin-left: 0.6rem;
   transform: translateY(0.2rem);
 }
 
