@@ -987,10 +987,10 @@ const ChattingPage = () => {
                       autoComplete="off"
                       value={msgBox}
                       onChange={(e) => set_msgBox(e.target.value)}
-                      readOnly={uploadStart ? true : false}
+                      readOnly={uploadStart && media.flag ? true : false}
                     />
 
-                    {uploadStart ? null : (
+                    {uploadStart && media.flag ? null : (
                       <span className={style.attachment_cover}>
                         <label htmlFor="attach" className={style.attachBtn}>
                           {mediaOpt ? (
@@ -1130,7 +1130,7 @@ const ChattingPage = () => {
 
                   {/*  */}
                   <label className={style.sendBtn_cover}>
-                    {uploadStart ? (
+                    {uploadStart && media.flag ? (
                       <span
                         onClick={() => {
                           alert("This feature is under working.");

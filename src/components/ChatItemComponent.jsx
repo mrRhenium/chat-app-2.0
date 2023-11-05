@@ -3,6 +3,7 @@ import style from "../styles/ChatItemComponent.module.css";
 import { CiMenuKebab } from "react-icons/ci";
 import { MdNotInterested } from "react-icons/md";
 import { BsCloudUploadFill } from "react-icons/bs";
+import { MdDeleteForever } from "react-icons/md";
 import { RiCheckDoubleLine, RiCheckLine } from "react-icons/ri";
 import {
   BsHeadset,
@@ -65,8 +66,9 @@ const ChatItemComponent = ({
                 <span className={style.uploadStatus_cover}>
                   <strong>
                     <BsCloudUploadFill className={style.icons} />
-                    {progress == 0 ? 100 : progress + "%"}
-                    Uploading..
+                    {progress == 0
+                      ? 100 + "% Uploaded"
+                      : progress + "% Uploading.."}
                   </strong>
                 </span>
               ) : null}
@@ -163,16 +165,30 @@ const ChatItemComponent = ({
               ) : null}
 
               {/*  */}
-              <span
-                className={style.deleteBtn_cover}
-                onClick={() => {
-                  set_chatItem(item);
-                  set_showPopUp(1);
-                }}
-              >
-                <CiMenuKebab className={style.icons} />
-              </span>
 
+              {item.temp && item.msgType === "media" ? (
+                <span
+                  className={style.deleteBtn_cover}
+                  onClick={() => {
+                    alert("This feature is temporary unavailable.");
+                  }}
+                >
+                  <MdDeleteForever
+                    className={style.icons2}
+                    style={{ color: `var(--primary_txt1)` }}
+                  />
+                </span>
+              ) : (
+                <span
+                  className={style.deleteBtn_cover}
+                  onClick={() => {
+                    set_chatItem(item);
+                    set_showPopUp(1);
+                  }}
+                >
+                  <CiMenuKebab className={style.icons} />
+                </span>
+              )}
               {/*  */}
               {item.deleted ? (
                 <p className={style.deletedMsg}>
