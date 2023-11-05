@@ -65,8 +65,8 @@ const ChatItemComponent = ({
                 <span className={style.uploadStatus_cover}>
                   <strong>
                     <BsCloudUploadFill className={style.icons} />
-                    {progress + "%"}
-                    Uploading...
+                    {progress == 0 ? 100 : progress + "%"}
+                    Uploading..
                   </strong>
                 </span>
               ) : null}
@@ -276,7 +276,7 @@ const ChatItemComponent = ({
               <p className={style.msg_time}>
                 {`${item.date} - ${item.time}`}
                 {item.author != uName ? (
-                  item.temp ? null : item.seenStauts ? (
+                  item.seenStauts ? (
                     <RiCheckDoubleLine className={style.icons} />
                   ) : (
                     <RiCheckLine className={style.icons} />

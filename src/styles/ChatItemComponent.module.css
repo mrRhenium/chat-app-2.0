@@ -204,6 +204,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 0.5rem;
   width: 100%;
   height: fit-content;
   margin-bottom: 0.5rem;
@@ -220,13 +221,15 @@
 
 .uploadStatus_cover strong {
   color: var(--primary_txt2);
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: bolder;
   font-family: var(--text_font);
   letter-spacing: 0.03rem;
 }
 .uploadStatus_cover strong .icons {
+  color: var(--primary_txt1);
   font-size: 1.3rem;
+  margin-right: 0.7rem;
   animation: updloadIconMove 4s infinite;
 }
 @keyframes updloadIconMove {
