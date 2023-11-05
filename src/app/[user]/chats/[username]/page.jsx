@@ -72,6 +72,7 @@ const ChattingPage = () => {
   const [list, set_list] = useState([]);
   const [progress, set_progress] = useState(0);
   const [mediaOpt, set_mediaOpt] = useState(0);
+  const [uploadStart, set_uploadStart] = useState(0);
   const [msgBox, set_msgBox] = useState("");
   const [showPopUp, set_showPopUp] = useState(0);
   const [chatItem, set_chatItem] = useState();
@@ -354,12 +355,20 @@ const ChattingPage = () => {
         return;
       }
 
+      if (media.size > 2048) {
+        alert("File size should be less than 2 GB");
+        return;
+      }
+
+      set_uploadStart(1);
+
       let mediaUrl = "";
 
       const storageRef = ref(
         storage,
         `/assets/${selfId}/${uName}/${media.name}`
       );
+
       const uploadTask = uploadBytesResumable(storageRef, media.file);
 
       uploadTask.on(
@@ -369,14 +378,14 @@ const ChattingPage = () => {
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
           );
           set_progress(percent);
-          console.log(percent);
+          // console.log(percent);
         },
         (err) => console.log(err),
         () => {
           // download url
           getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
             mediaUrl = url;
-            console.log(url);
+            // console.log(url);
 
             const sendTime = Date.now();
 
@@ -438,6 +447,7 @@ const ChattingPage = () => {
               src: "",
             });
 
+            set_uploadStart(0);
             set_progress(0);
           });
         }
@@ -507,36 +517,38 @@ const ChattingPage = () => {
           <section className={style.chatOptions_cover}>
             {/*  */}
 
-            <button
-              className={style.optionItem}
-              onClick={() => {
-                set_reaction({
-                  flag: 1,
-                  data: {
-                    type: chatItem.msgType === "text" ? "Text" : "media",
-                    name:
-                      chatItem.msgType === "text"
-                        ? chatItem.msg
-                        : chatItem.mediaInfo.name +
-                          " : " +
-                          chatItem.mediaInfo.size,
-                    file:
-                      chatItem.msgType === "media"
-                        ? chatItem.mediaInfo.type
-                        : "Text",
-                    url:
-                      chatItem.msgType === "media"
-                        ? chatItem.mediaInfo.url
-                        : "none",
-                  },
-                });
+            {chatItem.deleted ? null : (
+              <button
+                className={style.optionItem}
+                onClick={() => {
+                  set_reaction({
+                    flag: 1,
+                    data: {
+                      type: chatItem.msgType === "text" ? "Text" : "media",
+                      name:
+                        chatItem.msgType === "text"
+                          ? chatItem.msg
+                          : chatItem.mediaInfo.name +
+                            " : " +
+                            chatItem.mediaInfo.size,
+                      file:
+                        chatItem.msgType === "media"
+                          ? chatItem.mediaInfo.type
+                          : "Text",
+                      url:
+                        chatItem.msgType === "media"
+                          ? chatItem.mediaInfo.url
+                          : "none",
+                    },
+                  });
 
-                closePopUp();
-              }}
-            >
-              <MdReplyAll className={style.icons} />
-              Reply this message
-            </button>
+                  closePopUp();
+                }}
+              >
+                <MdReplyAll className={style.icons} />
+                Reply this message
+              </button>
+            )}
 
             <button
               className={style.optionItem}
@@ -747,7 +759,7 @@ const ChattingPage = () => {
                               });
                             }}
                           >
-                            <BsArrowLeft className={style.icons} /> Back
+                            <CgCloseO className={style.icons} />
                           </span>
 
                           {/* Image */}
@@ -947,6 +959,7 @@ const ChattingPage = () => {
                       autoComplete="off"
                       value={msgBox}
                       onChange={(e) => set_msgBox(e.target.value)}
+                      readOnly={uploadStart ? true : false}
                     />
 
                     <span className={style.attachment_cover}>
@@ -978,7 +991,8 @@ const ChattingPage = () => {
                                     ...prev,
                                     flag: 1,
                                     file: file,
-                                    size: Math.round(file.size / 1024) + " KB",
+                                    size:
+                                      Math.round(file.size / 1048576) + " MB",
                                     name: file.name,
                                     type: "image",
                                     src: window.URL.createObjectURL(file),
@@ -1003,7 +1017,8 @@ const ChattingPage = () => {
                                     ...prev,
                                     flag: 1,
                                     file: file,
-                                    size: Math.round(file.size / 1024) + " KB",
+                                    size:
+                                      Math.round(file.size / 1048576) + " MB",
                                     name: file.name,
                                     type: "audio",
                                     src: window.URL.createObjectURL(file),
@@ -1028,7 +1043,8 @@ const ChattingPage = () => {
                                     ...prev,
                                     flag: 1,
                                     file: file,
-                                    size: Math.round(file.size / 1024) + " KB",
+                                    size:
+                                      Math.round(file.size / 1048576) + " MB",
                                     name: file.name,
                                     type: "video",
                                     src: window.URL.createObjectURL(file),
@@ -1053,7 +1069,8 @@ const ChattingPage = () => {
                                     ...prev,
                                     flag: 1,
                                     file: file,
-                                    size: Math.round(file.size / 1024) + " KB",
+                                    size:
+                                      Math.round(file.size / 1048576) + " MB",
                                     name: file.name,
                                     type: "document",
                                     src: window.URL.createObjectURL(file),
@@ -1075,9 +1092,19 @@ const ChattingPage = () => {
 
                   {/*  */}
                   <label className={style.sendBtn_cover}>
-                    <button type="submit">
-                      <MdSend className={style.icons} />
-                    </button>
+                    {uploadStart ? (
+                      <button
+                        onClick={() => {
+                          alert("This feature is under working.");
+                        }}
+                      >
+                        <CgCloseO className={style.icons} />
+                      </button>
+                    ) : (
+                      <button type="submit">
+                        <MdSend className={style.icons} />
+                      </button>
+                    )}
                   </label>
                 </form>
               </section>
