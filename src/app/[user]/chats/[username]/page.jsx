@@ -392,6 +392,7 @@ const ChattingPage = () => {
           time: time,
           date: new Date().toLocaleDateString("pt-PT"),
           seenStauts: false,
+          temp: true,
         },
       ]);
       // ******************************************************
