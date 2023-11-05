@@ -78,11 +78,7 @@ const ChattingPage = () => {
   const [chatItem, set_chatItem] = useState();
   const [deletedChat, set_deletedChat] = useState([]);
   const [headerOpt, set_headerOpt] = useState(0);
-  const [uploadCancel, set_uploadCancel] = useState(() => {
-    return () => {
-      console.log("Cancel");
-    };
-  });
+  const [uploadCancel, set_uploadCancel] = useState({ action: null });
 
   const [reaction, set_reaction] = useState({
     flag: 0,
@@ -377,8 +373,8 @@ const ChattingPage = () => {
       const uploadTask = uploadBytesResumable(storageRef, media.file);
 
       // Defining the upload Cancel function here.
-      set_uploadCancel(() => {
-        return () => {
+      set_uploadCancel({
+        action: () => {
           uploadTask.cancel();
 
           set_media({
@@ -394,7 +390,7 @@ const ChattingPage = () => {
           set_progress(0);
 
           console.log("Proper cancel");
-        };
+        },
       });
 
       // ******************************************************
@@ -1140,7 +1136,7 @@ const ChattingPage = () => {
                       <span
                         onClick={() => {
                           {
-                            uploadCancel;
+                            uploadCancel.action();
                           }
                         }}
                       >
