@@ -962,144 +962,154 @@ const ChattingPage = () => {
                       readOnly={uploadStart ? true : false}
                     />
 
-                    <span className={style.attachment_cover}>
-                      <label htmlFor="attach" className={style.attachBtn}>
-                        {mediaOpt ? (
-                          <CgCloseO
-                            className={style.icons}
-                            onClick={() => set_mediaOpt(0)}
-                          />
-                        ) : (
-                          <GrAttachment
-                            className={style.icons}
-                            onClick={() => set_mediaOpt(1)}
-                          />
-                        )}
-                        {mediaOpt ? (
-                          <span className={style.opt}>
-                            <label>
-                              <input
-                                type="file"
-                                name="attach_img"
-                                id="attach_img"
-                                accept="image/*"
-                                onChange={(e) => {
-                                  let file = e.target.files[0];
+                    {uploadStart ? null : (
+                      <span className={style.attachment_cover}>
+                        <label htmlFor="attach" className={style.attachBtn}>
+                          {mediaOpt ? (
+                            <CgCloseO
+                              className={style.icons}
+                              onClick={() => set_mediaOpt(0)}
+                            />
+                          ) : (
+                            <GrAttachment
+                              className={style.icons}
+                              onClick={() => set_mediaOpt(1)}
+                            />
+                          )}
+                          {mediaOpt ? (
+                            <span className={style.opt}>
+                              <label>
+                                <input
+                                  type="file"
+                                  name="attach_img"
+                                  id="attach_img"
+                                  accept="image/*"
+                                  onChange={(e) => {
+                                    let file = e.target.files[0];
 
-                                  if (!file) return;
-                                  set_media((prev) => ({
-                                    ...prev,
-                                    flag: 1,
-                                    file: file,
-                                    size:
-                                      Math.round(file.size / 1048576) + " MB",
-                                    name: file.name,
-                                    type: "image",
-                                    src: window.URL.createObjectURL(file),
-                                  }));
+                                    if (!file) return;
+                                    set_media((prev) => ({
+                                      ...prev,
+                                      flag: 1,
+                                      file: file,
+                                      size:
+                                        Math.round(file.size / 1048576).toFixed(
+                                          3
+                                        ) + " MB",
+                                      name: file.name,
+                                      type: "image",
+                                      src: window.URL.createObjectURL(file),
+                                    }));
 
-                                  set_mediaOpt(0);
-                                }}
-                              />
-                              <BsImage className={style.icons} />
-                            </label>
-                            <label>
-                              <input
-                                type="file"
-                                name="attach_audio"
-                                id="attach_audio"
-                                accept="audio/*"
-                                onChange={(e) => {
-                                  let file = e.target.files[0];
+                                    set_mediaOpt(0);
+                                  }}
+                                />
+                                <BsImage className={style.icons} />
+                              </label>
+                              <label>
+                                <input
+                                  type="file"
+                                  name="attach_audio"
+                                  id="attach_audio"
+                                  accept="audio/*"
+                                  onChange={(e) => {
+                                    let file = e.target.files[0];
 
-                                  if (!file) return;
-                                  set_media((prev) => ({
-                                    ...prev,
-                                    flag: 1,
-                                    file: file,
-                                    size:
-                                      Math.round(file.size / 1048576) + " MB",
-                                    name: file.name,
-                                    type: "audio",
-                                    src: window.URL.createObjectURL(file),
-                                  }));
+                                    if (!file) return;
+                                    set_media((prev) => ({
+                                      ...prev,
+                                      flag: 1,
+                                      file: file,
+                                      size:
+                                        Math.round(file.size / 1048576).toFixed(
+                                          3
+                                        ) + " MB",
+                                      name: file.name,
+                                      type: "audio",
+                                      src: window.URL.createObjectURL(file),
+                                    }));
 
-                                  set_mediaOpt(0);
-                                }}
-                              />
-                              <BsHeadset className={style.icons} />
-                            </label>
-                            <label>
-                              <input
-                                type="file"
-                                name="attach_video"
-                                id="attach_video"
-                                accept="video/*"
-                                onChange={(e) => {
-                                  let file = e.target.files[0];
+                                    set_mediaOpt(0);
+                                  }}
+                                />
+                                <BsHeadset className={style.icons} />
+                              </label>
+                              <label>
+                                <input
+                                  type="file"
+                                  name="attach_video"
+                                  id="attach_video"
+                                  accept="video/*"
+                                  onChange={(e) => {
+                                    let file = e.target.files[0];
 
-                                  if (!file) return;
-                                  set_media((prev) => ({
-                                    ...prev,
-                                    flag: 1,
-                                    file: file,
-                                    size:
-                                      Math.round(file.size / 1048576) + " MB",
-                                    name: file.name,
-                                    type: "video",
-                                    src: window.URL.createObjectURL(file),
-                                  }));
+                                    if (!file) return;
+                                    set_media((prev) => ({
+                                      ...prev,
+                                      flag: 1,
+                                      file: file,
+                                      size:
+                                        Math.round(file.size / 1048576).toFixed(
+                                          3
+                                        ) + " MB",
+                                      name: file.name,
+                                      type: "video",
+                                      src: window.URL.createObjectURL(file),
+                                    }));
 
-                                  set_mediaOpt(0);
-                                }}
-                              />
-                              <BsCameraVideo className={style.icons} />
-                            </label>
-                            <label>
-                              <input
-                                type="file"
-                                name="attach_pdf"
-                                id="attach_pdf"
-                                accept="application/pdf"
-                                onChange={(e) => {
-                                  let file = e.target.files[0];
+                                    set_mediaOpt(0);
+                                  }}
+                                />
+                                <BsCameraVideo className={style.icons} />
+                              </label>
+                              <label>
+                                <input
+                                  type="file"
+                                  name="attach_pdf"
+                                  id="attach_pdf"
+                                  accept="application/pdf"
+                                  onChange={(e) => {
+                                    let file = e.target.files[0];
 
-                                  if (!file) return;
-                                  set_media((prev) => ({
-                                    ...prev,
-                                    flag: 1,
-                                    file: file,
-                                    size:
-                                      Math.round(file.size / 1048576) + " MB",
-                                    name: file.name,
-                                    type: "document",
-                                    src: window.URL.createObjectURL(file),
-                                  }));
+                                    if (!file) return;
+                                    set_media((prev) => ({
+                                      ...prev,
+                                      flag: 1,
+                                      file: file,
+                                      size:
+                                        Math.round(file.size / 1048576).toFixed(
+                                          3
+                                        ) + " MB",
+                                      name: file.name,
+                                      type: "document",
+                                      src: window.URL.createObjectURL(file),
+                                    }));
 
-                                  set_mediaOpt(0);
-                                }}
-                              />
-                              <BsFiletypePdf className={style.icons} />
-                            </label>
-                          </span>
-                        ) : null}
+                                    set_mediaOpt(0);
+                                  }}
+                                />
+                                <BsFiletypePdf className={style.icons} />
+                              </label>
+                            </span>
+                          ) : null}
 
-                        {/*  */}
-                      </label>
-                    </span>
+                          {/*  */}
+                        </label>
+                      </span>
+                    )}
                   </span>
                   {/*  */}
 
                   {/*  */}
                   <label className={style.sendBtn_cover}>
                     {uploadStart ? (
-                      <button
+                      <span
                         onClick={() => {
                           alert("This feature is under working.");
                         }}
                       >
                         <CgCloseO className={style.icons} />
-                      </button>
+                      </span>
                     ) : (
                       <button type="submit">
                         <MdSend className={style.icons} />

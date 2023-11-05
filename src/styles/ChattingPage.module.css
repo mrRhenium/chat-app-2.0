@@ -274,7 +274,7 @@
   top: 0.2rem;
   left: 0.2rem;
   padding: 0.3rem;
-  font-size: 0.9rem;
+  font-size: 1.5rem;
   font-family: var(--text_font);
   background-color: #ffffff;
   border-radius: 50%;
@@ -685,7 +685,7 @@
   height: 100%;
   padding: 0 0.3rem;
 }
-.chattingPage .footer .sendBtn_cover button {
+.chattingPage .footer .sendBtn_cover :is(button, span) {
   cursor: pointer;
   position: relative;
   display: flex;
@@ -697,10 +697,10 @@
   border: 0.05rem solid var(--primary_txt2);
   background-color: rgba(34, 175, 236, 0.8);
 }
-.chattingPage .footer .sendBtn_cover button:hover {
+.chattingPage .footer .sendBtn_cover :is(button, span):hover {
   background-color: rgba(34, 175, 236, 1);
 }
-.chattingPage .footer .sendBtn_cover button .icons {
+.chattingPage .footer .sendBtn_cover :is(button, span) .icons {
   color: white;
   font-size: 1.8rem;
 }
