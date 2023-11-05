@@ -376,7 +376,7 @@ const ChattingPage = () => {
 
       // Defining the upload Cancel function here.
       set_uploadCancel(() => {
-        // uploadTask.cancel();
+        uploadTask.cancel();
 
         set_media({
           flag: 0,
@@ -389,6 +389,8 @@ const ChattingPage = () => {
 
         set_uploadStart(0);
         set_progress(0);
+
+        console.log("Proper cancel");
       });
 
       // ******************************************************
