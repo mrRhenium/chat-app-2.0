@@ -123,7 +123,7 @@
   color: var(--doubleTick);
   font-size: 1.2rem;
   /* margin-left: 0.3rem; */
-  transform: translateX(0.8rem);
+  transform: translateX(1.5rem);
 }
 
 .chats_cover .mediaMsg_img {

@@ -1133,7 +1133,9 @@ const ChattingPage = () => {
                     {uploadStart && media.flag ? (
                       <span
                         onClick={() => {
-                          uploadCancel();
+                          {
+                            uploadCancel;
+                          }
                         }}
                       >
                         <CgCloseO className={style.icons} />
