@@ -78,6 +78,7 @@ const ChattingPage = () => {
   const [chatItem, set_chatItem] = useState();
   const [deletedChat, set_deletedChat] = useState([]);
   const [headerOpt, set_headerOpt] = useState(0);
+  const [uploadCancel, set_uploadCancel] = useState(() => {});
 
   const [reaction, set_reaction] = useState({
     flag: 0,
@@ -103,8 +104,6 @@ const ChattingPage = () => {
   let chatList = temp_list.length >= list.length ? temp_list : list;
 
   const closePopUp = () => set_showPopUp(0);
-
-  let uploadCancel;
 
   const removeWallpaper = async (action) => {
     //
@@ -374,7 +373,7 @@ const ChattingPage = () => {
       const uploadTask = uploadBytesResumable(storageRef, media.file);
 
       // Defining the upload Cancel function here.
-      uploadCancel = () => {
+      set_uploadCancel(() => {
         uploadTask.cancel();
 
         set_media({
@@ -385,9 +384,10 @@ const ChattingPage = () => {
           size: "",
           src: "",
         });
+
         set_uploadStart(0);
         set_progress(0);
-      };
+      });
 
       // ******************************************************
       const sendTime = Date.now();

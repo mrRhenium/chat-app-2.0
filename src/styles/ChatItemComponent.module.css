@@ -113,7 +113,7 @@
   position: relative;
   display: flex;
   margin: 0.2rem 0.2rem 0.2rem auto;
-  /* transform: translateX(1.5rem); */
+  transform: translateX(1.5rem);
   font-size: 0.9rem;
   color: #000000;
   font-family: var(--chatting_font);
@@ -122,7 +122,8 @@
 .chats_cover .msg_time .icons {
   color: var(--doubleTick);
   font-size: 1.2rem;
-  margin-left: 0.6rem;
+  margin-left: 0.3rem;
+  transform: translateX(0.3rem);
 }
 
 .chats_cover .mediaMsg_img {
