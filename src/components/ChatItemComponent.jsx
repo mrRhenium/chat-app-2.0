@@ -24,6 +24,7 @@ const ChatItemComponent = ({
   chatList,
   wallpaper,
   progress,
+  uploadCancel,
 }) => {
   //
 
@@ -170,7 +171,7 @@ const ChatItemComponent = ({
                 <span
                   className={style.deleteBtn_cover}
                   onClick={() => {
-                    alert("This feature is temporary unavailable.");
+                    uploadCancel();
                   }}
                 >
                   <MdDeleteForever

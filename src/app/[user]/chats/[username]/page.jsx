@@ -104,6 +104,8 @@ const ChattingPage = () => {
 
   const closePopUp = () => set_showPopUp(0);
 
+  let uploadCancel;
+
   const removeWallpaper = async (action) => {
     //
 
@@ -370,6 +372,7 @@ const ChattingPage = () => {
       );
 
       const uploadTask = uploadBytesResumable(storageRef, media.file);
+      uploadCancel = uploadTask.cancel();
 
       // ******************************************************
       const sendTime = Date.now();
@@ -414,27 +417,6 @@ const ChattingPage = () => {
             // console.log(url);
 
             //
-            // deleted
-            // set_list((prev) => [
-            //   ...prev,
-            //   {
-            //     _id: Date.now() * 28,
-            //     sendTime: sendTime,
-            //     author: "SelfHume",
-            //     msg: msg === "" ? "noCapTiOn9463" : msg,
-            //     msgType: "media",
-            //     mediaInfo: {
-            //       type: media.type,
-            //       name: media.name,
-            //       size: media.size,
-            //       url: mediaUrl,
-            //     },
-            //     reaction: reactionData.data,
-            //     time: time,
-            //     date: new Date().toLocaleDateString("pt-PT"),
-            //     seenStauts: false,
-            //   },
-            // ]);
 
             //
             const JSONdata = JSON.stringify({
@@ -861,6 +843,7 @@ const ChattingPage = () => {
                     chatList={chatList}
                     wallpaper={wallpaper}
                     progress={progress}
+                    uploadCancel={uploadCancel}
                   />
                 )}
               </section>
@@ -1133,7 +1116,7 @@ const ChattingPage = () => {
                     {uploadStart && media.flag ? (
                       <span
                         onClick={() => {
-                          alert("This feature is under working.");
+                          uploadCancel();
                         }}
                       >
                         <CgCloseO className={style.icons} />
