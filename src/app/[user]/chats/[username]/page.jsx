@@ -372,7 +372,22 @@ const ChattingPage = () => {
       );
 
       const uploadTask = uploadBytesResumable(storageRef, media.file);
-      uploadCancel = uploadTask.cancel();
+
+      // Defining the upload Cancel function here.
+      uploadCancel = () => {
+        uploadTask.cancel();
+
+        set_media({
+          flag: 0,
+          file: null,
+          type: "",
+          name: "",
+          size: "",
+          src: "",
+        });
+        set_uploadStart(0);
+        set_progress(0);
+      };
 
       // ******************************************************
       const sendTime = Date.now();
