@@ -860,6 +860,7 @@ const ChattingPage = () => {
                     deletedChat={deletedChat}
                     chatList={chatList}
                     wallpaper={wallpaper}
+                    progress={progress}
                   />
                 )}
               </section>

@@ -199,6 +199,57 @@
 /* ********************************************* */
 /* ********************************************* */
 
+.uploadStatus_cover {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: fit-content;
+  margin-bottom: 0.5rem;
+  animation: blinkUploading 0.5s infinite;
+}
+@keyframes blinkUploading {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.uploadStatus_cover strong {
+  color: var(--primary_txt2);
+  font-size: 1.2rem;
+  font-weight: bolder;
+  font-family: var(--text_font);
+  letter-spacing: 0.03rem;
+}
+.uploadStatus_cover strong .icons {
+  font-size: 1.3rem;
+  animation: updloadIconMove 4s infinite;
+}
+@keyframes updloadIconMove {
+  0% {
+    transform: translateY(-0.3rem) rotate(-10deg);
+  }
+  25% {
+    transform: translateY(0) rotate(10deg);
+  }
+  50% {
+    transform: translateY(0.3rem) rotate(-10deg);
+  }
+  75% {
+    transform: translateY(0) rotate(10deg);
+  }
+  100% {
+    transform: translateY(-0.3rem) rotate(-10deg);
+  }
+}
+
+/* ********************************************* */
+/* ********************************************* */
+
 .reaction_section {
   position: relative;
   display: flex;

@@ -21,6 +21,7 @@ const ChatItemComponent = ({
   deletedChat,
   chatList,
   wallpaper,
+  progress,
 }) => {
   //
 
@@ -58,6 +59,16 @@ const ChatItemComponent = ({
               }
             >
               {/*  */}
+
+              {item.temp ? (
+                <span className={style.uploadStatus_cover}>
+                  <strong>
+                    <BsCloudUploadFill className={style.icons} />
+                    {progress + "%"}
+                    Uploading...
+                  </strong>
+                </span>
+              ) : null}
 
               {/*  */}
               {item.reaction.type !== "none" ? (
