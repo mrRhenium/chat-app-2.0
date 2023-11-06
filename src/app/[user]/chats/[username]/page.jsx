@@ -78,6 +78,7 @@ const ChattingPage = () => {
   const [chatItem, set_chatItem] = useState();
   const [deletedChat, set_deletedChat] = useState([]);
   const [headerOpt, set_headerOpt] = useState(0);
+
   const [uploadCancel, set_uploadCancel] = useState({
     action: () => {
       console.log("Cancel");
@@ -378,7 +379,6 @@ const ChattingPage = () => {
 
       // ******************************************************
       const sendTime = Date.now();
-      set_media((prev) => ({ ...prev, flag: 0 }));
 
       set_list((prev) => [
         ...prev,
@@ -891,7 +891,7 @@ const ChattingPage = () => {
                     chatList={chatList}
                     wallpaper={wallpaper}
                     progress={progress}
-                    uploadCancel={uploadCancel}
+                    uploadStart={uploadStart}
                   />
                 )}
               </section>
@@ -1161,7 +1161,9 @@ const ChattingPage = () => {
 
                   {/*  */}
                   <label className={style.sendBtn_cover}>
-                    {uploadStart && media.flag ? (
+                    {/*  */}
+
+                    {/* {uploadStart && media.flag ? (
                       <span
                         onClick={() => {
                           {
@@ -1175,7 +1177,13 @@ const ChattingPage = () => {
                       <button type="submit">
                         <MdSend className={style.icons} />
                       </button>
-                    )}
+                    )} */}
+
+                    <button type="submit">
+                      <MdSend className={style.icons} />
+                    </button>
+
+                    {/*  */}
                   </label>
                 </form>
               </section>

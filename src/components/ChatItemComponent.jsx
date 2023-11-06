@@ -24,7 +24,7 @@ const ChatItemComponent = ({
   chatList,
   wallpaper,
   progress,
-  uploadCancel,
+  uploadStart,
 }) => {
   //
 
@@ -63,7 +63,7 @@ const ChatItemComponent = ({
             >
               {/*  */}
 
-              {item.temp ? (
+              {item.temp && uploadStart ? (
                 <span className={style.uploadStatus_cover}>
                   <strong>
                     <BsCloudUploadFill className={style.icons} />
