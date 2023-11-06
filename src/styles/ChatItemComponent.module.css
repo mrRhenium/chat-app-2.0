@@ -145,6 +145,7 @@
 
 .chats_cover span > a {
   text-decoration: none;
+  overflow: hidden;
 }
 
 .chats_cover .mediaMsg {
