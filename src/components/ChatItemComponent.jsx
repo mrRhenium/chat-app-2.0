@@ -67,9 +67,8 @@ const ChatItemComponent = ({
                 <span className={style.uploadStatus_cover}>
                   <strong>
                     <BsCloudUploadFill className={style.icons} />
-                    {progress == 0
-                      ? 100 + "% Uploaded"
-                      : progress + "% Uploading.."}
+                    {progress +
+                      (progress == 100 ? "% Uploaded" : "% Uploading..")}
                   </strong>
                 </span>
               ) : null}
@@ -167,7 +166,7 @@ const ChatItemComponent = ({
 
               {/*  */}
 
-              {item.temp && item.msgType === "media" ? (
+              {item.msgType === "media" && item.temp && uploadStart ? (
                 <span
                   className={style.deleteBtn_cover}
                   onClick={() => {

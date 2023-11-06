@@ -373,6 +373,7 @@ const ChattingPage = () => {
       }
 
       set_uploadStart(1);
+      set_media((prev) => ({ ...prev, flag: 0 }));
 
       let mediaUrl = "";
 
@@ -813,7 +814,7 @@ const ChattingPage = () => {
 
               {/* Body Part Starts */}
               <section className={style.body}>
-                {media.flag && uploadStart === 0 ? (
+                {media.flag ? (
                   <>
                     <div className={style.mediaSection}>
                       <div className={style.upper_part}>
