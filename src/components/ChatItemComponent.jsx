@@ -25,6 +25,7 @@ const ChatItemComponent = ({
   wallpaper,
   progress,
   uploadStart,
+  tempWallpaperSrc,
 }) => {
   //
 
@@ -45,7 +46,9 @@ const ChatItemComponent = ({
           wallpaper === "image"
             ? {}
             : {
-                backgroundImage: `url(${wallpaper})`,
+                backgroundImage: `url(${
+                  tempWallpaperSrc === "" ? wallpaper : tempWallpaperSrc
+                })`,
               }
         }
       >
