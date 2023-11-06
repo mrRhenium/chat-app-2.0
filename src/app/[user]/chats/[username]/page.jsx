@@ -62,7 +62,7 @@ const ChattingPage = () => {
   let selfId = data && data["status"] && data["selfId"];
   let targetUserId = data && data["status"] && data["targetUserId"];
   let selfUsername = data && data["status"] && data["selfUsername"];
-  let wallpaper = data && data["status"] && data["wallpaper"];
+  // let wallpaper = data && data["status"] && data["wallpaper"];
   let chatId = data && data["status"] && data["chatId"];
   let blockStatus = data && data["status"] && data["blockStatus"];
   let chatStatus = data && data["status"] && data["chatStatus"];
@@ -78,13 +78,18 @@ const ChattingPage = () => {
   const [chatItem, set_chatItem] = useState();
   const [deletedChat, set_deletedChat] = useState([]);
   const [headerOpt, set_headerOpt] = useState(0);
-  const [tempWallpaperSrc, set_tempWallpaperSrc] = useState("");
 
   // const [uploadCancel, set_uploadCancel] = useState({
   //   action: () => {
   //     console.log("Cancel");
   //   },
   // });
+
+  const [wallpaper, set_wallpaper] = useState(() => {
+    return data && data["status"] && data["wallpaper"]
+      ? data["wallpaper"]
+      : "image";
+  });
 
   const [reaction, set_reaction] = useState({
     flag: 0,
@@ -752,11 +757,12 @@ const ChattingPage = () => {
                               id="wallpaper"
                               onChange={(e) => {
                                 let file = e.target.files[0];
-                                set_tempWallpaperSrc(
-                                  window.URL.createObjectURL(file)
-                                );
+
+                                set_wallpaper(window.URL.createObjectURL(file));
 
                                 postWallpaper(e, "Update specific Wallpaper");
+
+                                set_headerOpt(0);
                               }}
                             />
                             <MdWallpaper className={style.icons} />
@@ -766,8 +772,11 @@ const ChattingPage = () => {
                       ) : (
                         <span
                           onClick={() => {
-                            wallpaper = "image";
+                            set_wallpaper("image");
+
                             removeWallpaper("Remove specific Wallpaper");
+
+                            set_headerOpt(0);
                           }}
                         >
                           <MdOutlineRemoveCircleOutline
@@ -804,7 +813,7 @@ const ChattingPage = () => {
 
               {/* Body Part Starts */}
               <section className={style.body}>
-                {media.flag ? (
+                {media.flag && uploadStart === 0 ? (
                   <>
                     <div className={style.mediaSection}>
                       <div className={style.upper_part}>
@@ -812,7 +821,6 @@ const ChattingPage = () => {
                           <span
                             className={style.backBtn}
                             onClick={() => {
-                              set_uploadStart(0);
                               set_media({
                                 flag: 0,
                                 file: null,
@@ -899,7 +907,6 @@ const ChattingPage = () => {
                     wallpaper={wallpaper}
                     progress={progress}
                     uploadStart={uploadStart}
-                    tempWallpaperSrc={tempWallpaperSrc}
                   />
                 )}
               </section>
