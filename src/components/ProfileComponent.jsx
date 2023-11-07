@@ -9,6 +9,7 @@ import { BsShieldExclamation, BsArrowLeft, BsQrCodeScan } from "react-icons/bs";
 
 // import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import {
   ref,
   uploadBytesResumable,
@@ -137,6 +138,9 @@ const postAvtar = async (e, userId, action, mutate) => {
 
 const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
   const router = useRouter();
+
+  const [avtar, set_avtar] = useState(item.avtar);
+
   // console.log(item);
 
   return (
@@ -182,46 +186,26 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                     <span className={style.pic_cover}>
                       {/*  */}
 
-                      {item.avtar === "image" ? (
-                        <span
-                          className={style.pic}
-                          style={
-                            item.avtar === "image"
-                              ? {}
-                              : {
-                                  backgroundImage: `url(
-                                 ${item.avtar}
-                                )`,
-                                }
-                          }
-                        >
-                          {item.avtar === "image" ? (
-                            <FaUserCircle className={style.icons} />
-                          ) : null}
+                      {avtar === "image" ? (
+                        <span className={style.pic}>
+                          <FaUserCircle className={style.icons} />
                         </span>
                       ) : (
-                        <a href={item.avtar} target="_blank">
+                        <a href={avtar} target="_blank">
                           <span
                             className={style.pic}
-                            style={
-                              item.avtar === "image"
-                                ? {}
-                                : {
-                                    backgroundImage: `url(
-                                 ${item.avtar}
+                            style={{
+                              backgroundImage: `url(
+                                 ${avtar}
                                 )`,
-                                  }
-                            }
-                          >
-                            {item.avtar === "image" ? (
-                              <FaUserCircle className={style.icons} />
-                            ) : null}
-                          </span>
+                            }}
+                          ></span>
                         </a>
                       )}
                       {/*  */}
+
                       {item.status === "self" ? (
-                        item.avtar === "image" ? (
+                        avtar === "image" ? (
                           <label htmlFor="profilePic" className={style.editBtn}>
                             <input
                               type="file"
@@ -229,14 +213,17 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                               id="profilePic"
                               accept="image/*"
                               hidden
-                              onChange={(e) =>
+                              onChange={(e) => {
+                                let file = e.target.files[0];
+                                set_avtar(window.URL.createObjectURL(file));
+
                                 postAvtar(
                                   e,
                                   item.userId,
                                   "Update Avtar",
                                   mutate
-                                )
-                              }
+                                );
+                              }}
                             />
                             <CiEdit className={style.icons} />
                           </label>
@@ -244,7 +231,8 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                           <label
                             className={style.removeBtn}
                             onClick={() => {
-                              removeAvtar("Delete Avtar", mutate, item.avtar);
+                              set_avtar("image");
+                              removeAvtar("Delete Avtar", mutate, avtar);
                             }}
                           >
                             <MdDeleteForever className={style.icons} />
