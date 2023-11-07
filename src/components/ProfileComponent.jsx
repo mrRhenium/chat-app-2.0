@@ -65,7 +65,7 @@ const removeAvtar = async (action, mutate, set_avtar, imgUrl) => {
   const path = ref(storage, imgUrl);
   deleteObject(path)
     .then(() => {
-      set_avtar("image");
+      set_avtar({ flag: 0, img: "image" });
 
       console.log("Profile Image is deleted");
       mutate();
@@ -94,7 +94,7 @@ const postAvtar = async (e, userId, action, set_avtar, mutate) => {
     return;
   }
 
-  set_avtar(window.URL.createObjectURL(img));
+  set_avtar({ flag: 0, img: window.URL.createObjectURL(img) });
 
   const storageRef = ref(storage, `/assets/${userId}/profile/${img.name}`);
   const uploadTask = uploadBytesResumable(storageRef, img);
@@ -102,7 +102,7 @@ const postAvtar = async (e, userId, action, set_avtar, mutate) => {
   uploadTask.on(
     "state_changed",
     (snapshot) => {
-      const percent = Math.round(
+      let percent = Math.round(
         (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       );
 
@@ -114,6 +114,8 @@ const postAvtar = async (e, userId, action, set_avtar, mutate) => {
       getDownloadURL(uploadTask.snapshot.ref).then(async (url) => {
         imgUrl = url;
         console.log(url);
+
+        set_avtar({ flag: 1, img: url });
 
         const JSONdata = JSON.stringify({
           action: action,
@@ -143,7 +145,7 @@ const postAvtar = async (e, userId, action, set_avtar, mutate) => {
 const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
   const router = useRouter();
 
-  const [avtar, set_avtar] = useState(item.avtar);
+  const [avtar, set_avtar] = useState({ flag: 0, img: item.avtar });
 
   // console.log(item);
 
@@ -190,17 +192,17 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                     <span className={style.pic_cover}>
                       {/*  */}
 
-                      {avtar === "image" ? (
+                      {avtar.img === "image" ? (
                         <span className={style.pic}>
                           <FaUserCircle className={style.icons} />
                         </span>
                       ) : (
-                        <a href={avtar} target="_blank">
+                        <a href={avtar.img} target="_blank">
                           <span
                             className={style.pic}
                             style={{
                               backgroundImage: `url(
-                                 ${avtar}
+                                 ${avtar.img}
                                 )`,
                             }}
                           ></span>
@@ -209,7 +211,7 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                       {/*  */}
 
                       {item.status === "self" ? (
-                        avtar === "image" ? (
+                        avtar.img === "image" ? (
                           <label htmlFor="profilePic" className={style.editBtn}>
                             <input
                               type="file"
@@ -229,7 +231,7 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                             />
                             <CiEdit className={style.icons} />
                           </label>
-                        ) : (
+                        ) : avtar.flag === 0 ? null : (
                           <label
                             className={style.removeBtn}
                             onClick={() => {
@@ -237,7 +239,7 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                                 "Delete Avtar",
                                 mutate,
                                 set_avtar,
-                                avtar
+                                avtar.img
                               );
                             }}
                           >
