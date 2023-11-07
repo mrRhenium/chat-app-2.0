@@ -43,8 +43,10 @@ const putRequest = async (action, targetUserId, mutate) => {
   //
 };
 
-const removeAvtar = async (action, mutate, imgUrl) => {
+const removeAvtar = async (action, mutate, set_avtar, imgUrl) => {
   //
+
+  set_avtar("image");
 
   const JSONdata = JSON.stringify({
     action: action,
@@ -75,7 +77,7 @@ const removeAvtar = async (action, mutate, imgUrl) => {
   //
 };
 
-const postAvtar = async (e, userId, action, mutate) => {
+const postAvtar = async (e, userId, action, set_avtar, mutate) => {
   //
 
   let imgUrl = "image";
@@ -220,6 +222,7 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                                   e,
                                   item.userId,
                                   "Update Avtar",
+                                  set_avtar,
                                   mutate
                                 );
                               }}
@@ -230,8 +233,12 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                           <label
                             className={style.removeBtn}
                             onClick={() => {
-                              removeAvtar("Delete Avtar", mutate, avtar);
-                              set_avtar("image");
+                              removeAvtar(
+                                "Delete Avtar",
+                                mutate,
+                                set_avtar,
+                                avtar
+                              );
                             }}
                           >
                             <MdDeleteForever className={style.icons} />
