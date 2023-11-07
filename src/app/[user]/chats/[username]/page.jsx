@@ -110,6 +110,9 @@ const ChattingPage = () => {
     src: "",
   });
 
+  // newlly added -> 114
+  // temp_list.length === list.length ? set_list([]) : null;
+
   temp_list.length > list.length ? set_list(temp_list) : null;
 
   let chatList = temp_list.length >= list.length ? temp_list : list;
@@ -411,17 +414,17 @@ const ChattingPage = () => {
 
             set_deletedChat((prev) => [...prev, sendTime]);
 
-            set_media({
-              flag: 0,
-              file: null,
-              type: "",
-              name: "",
-              size: "",
-              src: "",
-            });
+            // set_media({
+            //   flag: 0,
+            //   file: null,
+            //   type: "",
+            //   name: "",
+            //   size: "",
+            //   src: "",
+            // });
 
-            set_uploadStart(0);
-            set_progress(0);
+            // set_uploadStart(0);
+            // set_progress(0);
 
             console.log("Proper cancel");
           },
@@ -898,7 +901,6 @@ const ChattingPage = () => {
                 ) : (
                   <ChatItemComponent
                     data={data}
-                    temp_list={temp_list}
                     list={list}
                     uName={uName}
                     set_chatItem={set_chatItem}

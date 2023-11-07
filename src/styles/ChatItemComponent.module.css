@@ -129,7 +129,7 @@
 .chats_cover .mediaMsg_img {
   position: relative;
   display: flex;
-  min-width: 11rem;
+  min-width: 10rem;
   min-height: 15rem;
   border-radius: 1rem;
   background-position: center;
