@@ -69,7 +69,7 @@ const ChattingPage = () => {
   let FriendAvtar = data && data["status"] ? data["avtar"] : "image";
   let rootBlockStatus = data && data["status"] && data["rootBlockStatus"];
 
-  const [list, set_list] = useState([]);
+  const [list, set_list] = useState(temp_list);
   const [progress, set_progress] = useState(0);
   const [mediaOpt, set_mediaOpt] = useState(0);
   const [uploadStart, set_uploadStart] = useState(0);
@@ -111,9 +111,9 @@ const ChattingPage = () => {
   });
 
   // newlly added -> 114
-  // temp_list.length === list.length ? set_list([]) : null;
+  temp_list.length === list.length ? set_list([]) : null;
 
-  temp_list.length > list.length ? set_list(temp_list) : null;
+  // temp_list.length > list.length ? set_list(temp_list) : null;
 
   let chatList = temp_list.length >= list.length ? temp_list : list;
 
@@ -424,7 +424,7 @@ const ChattingPage = () => {
             // });
 
             // set_uploadStart(0);
-            // set_progress(0);
+            set_progress(0);
 
             console.log("Proper cancel");
           },
@@ -460,7 +460,7 @@ const ChattingPage = () => {
       uploadTask.on(
         "state_changed",
         (snapshot) => {
-          const percent = Math.round(
+          let percent = Math.round(
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100
           );
           set_progress(percent);
