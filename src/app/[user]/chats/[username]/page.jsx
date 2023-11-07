@@ -111,7 +111,7 @@ const ChattingPage = () => {
   });
 
   // newlly added -> 114
-  temp_list.length === list.length ? set_list([]) : null;
+  // temp_list.length === list.length ? set_list([]) : null;
 
   // temp_list.length > list.length ? set_list(temp_list) : null;
 
@@ -544,6 +544,19 @@ const ChattingPage = () => {
           seenStauts: false,
         },
       ]);
+
+      chatList.push({
+        _id: Date.now() * 28,
+        sendTime: sendTime,
+        author: "SelfHume",
+        msg: msg,
+        msgType: "text",
+        mediaInfo: {},
+        reaction: reactionData.data,
+        time: time,
+        date: new Date().toLocaleDateString("pt-PT"),
+        seenStauts: false,
+      });
 
       const JSONdata = JSON.stringify({
         sendTime: sendTime,
