@@ -46,8 +46,6 @@ const putRequest = async (action, targetUserId, mutate) => {
 const removeAvtar = async (action, mutate, set_avtar, imgUrl) => {
   //
 
-  set_avtar("image");
-
   const JSONdata = JSON.stringify({
     action: action,
   });
@@ -67,6 +65,8 @@ const removeAvtar = async (action, mutate, set_avtar, imgUrl) => {
   const path = ref(storage, imgUrl);
   deleteObject(path)
     .then(() => {
+      set_avtar("image");
+
       console.log("Profile Image is deleted");
       mutate();
     })
