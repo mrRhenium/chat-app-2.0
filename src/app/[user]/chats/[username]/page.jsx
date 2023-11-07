@@ -69,9 +69,7 @@ const ChattingPage = () => {
   let FriendAvtar = data && data["status"] ? data["avtar"] : "image";
   let rootBlockStatus = data && data["status"] && data["rootBlockStatus"];
 
-  const [list, set_list] = useState(() => {
-    return data && data["status"] ? data["data"] : [];
-  });
+  const [list, set_list] = useState([]);
   const [progress, set_progress] = useState(0);
   const [mediaOpt, set_mediaOpt] = useState(0);
   const [uploadStart, set_uploadStart] = useState(0);
