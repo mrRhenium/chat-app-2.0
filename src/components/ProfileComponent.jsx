@@ -92,6 +92,8 @@ const postAvtar = async (e, userId, action, mutate) => {
     return;
   }
 
+  set_avtar(window.URL.createObjectURL(img));
+
   const storageRef = ref(storage, `/assets/${userId}/profile/${img.name}`);
   const uploadTask = uploadBytesResumable(storageRef, img);
 
@@ -102,7 +104,7 @@ const postAvtar = async (e, userId, action, mutate) => {
         (snapshot.bytesTransferred / snapshot.totalBytes) * 100
       );
 
-      console.log(percent);
+      // console.log(percent);
     },
     (err) => console.log(err),
     () => {
@@ -214,9 +216,6 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                               accept="image/*"
                               hidden
                               onChange={(e) => {
-                                let file = e.target.files[0];
-                                set_avtar(window.URL.createObjectURL(file));
-
                                 postAvtar(
                                   e,
                                   item.userId,
@@ -231,8 +230,8 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
                           <label
                             className={style.removeBtn}
                             onClick={() => {
-                              set_avtar("image");
                               removeAvtar("Delete Avtar", mutate, avtar);
+                              set_avtar("image");
                             }}
                           >
                             <MdDeleteForever className={style.icons} />
