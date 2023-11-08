@@ -110,13 +110,13 @@ const ChattingPage = () => {
     src: "",
   });
 
-  // newlly added -> 114
-  // temp_list.length === list.length ? set_list([]) : null;
-
   temp_list.length > list.length ? set_list(temp_list) : null;
 
   let chatList = temp_list.length >= list.length ? temp_list : list;
 
+  // *******************************************************
+  //  Define the functions
+  // *******************************************************
   const closePopUp = () => set_showPopUp(0);
 
   const removeWallpaper = async (action) => {

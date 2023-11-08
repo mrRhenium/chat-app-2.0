@@ -145,7 +145,10 @@ const postAvtar = async (e, userId, action, set_avtar, mutate) => {
 const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
   const router = useRouter();
 
-  const [avtar, set_avtar] = useState({ flag: 0, img: item.avtar });
+  const [avtar, set_avtar] = useState({
+    flag: item.avtar === "image" ? 0 : 1,
+    img: item.avtar,
+  });
 
   // console.log(item);
 
