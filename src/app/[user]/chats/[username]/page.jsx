@@ -122,17 +122,18 @@ const ChattingPage = () => {
       else if (list[i].sendTime > temp[j].sendTime) {
         newList.push(temp[j++]);
       } //
-      else {
-        set_list((prev) => {
-          return prev.filter((item) => {
-            return item.sendTime != list[i].sendTime;
-          });
-        });
 
-        newList.push(list[i]);
-        i++;
-        j++;
-      }
+      // else {
+      //   set_list((prev) => {
+      //     return prev.filter((item) => {
+      //       return item.sendTime != list[i].sendTime;
+      //     });
+      //   });
+
+      //   newList.push(list[i]);
+      //   i++;
+      //   j++;
+      // }
     }
 
     while (i < list.length) {
