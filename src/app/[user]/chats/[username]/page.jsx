@@ -110,9 +110,47 @@ const ChattingPage = () => {
     src: "",
   });
 
-  temp_list.length > list.length ? set_list(temp_list) : null;
+  const mergeTwoList = (list, temp) => {
+    let newList = [];
+    let i = 0;
+    let j = 0;
 
-  let chatList = temp_list.length >= list.length ? temp_list : list;
+    while (i < list.length && j < temp.length) {
+      if (list[i].sendTime < temp[j].sendTime) {
+        newList.push(list[i++]);
+      } //
+      else if (list[i].sendTime > temp[j].sendTime) {
+        newList.push(temp[j++]);
+      } //
+      else {
+        set_list((prev) => {
+          return prev.filter((item) => {
+            return item.sendTime != list[i].sendTime;
+          });
+        });
+
+        newList.push(list[i]);
+        i++;
+        j++;
+      }
+    }
+
+    while (i < list.length) {
+      newList.push(list[i++]);
+    }
+
+    while (j < temp.length) {
+      newList.push(temp[j++]);
+    }
+
+    return newList;
+    //
+  };
+
+  // temp_list.length > list.length ? set_list(temp_list) : null;
+  // let chatList = temp_list.length >= list.length ? temp_list : list;
+
+  let chatList = mergeTwoList(temp_list, list);
 
   // *******************************************************
   //  Define the functions
