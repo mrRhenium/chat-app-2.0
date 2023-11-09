@@ -31,7 +31,7 @@ import {
 } from "react-icons/bs";
 
 import useSWR from "swr";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import {
   ref,
@@ -58,6 +58,14 @@ const ChattingPage = () => {
     refreshInterval: 1000,
   });
 
+  useEffect(() => {
+    return () => {
+      localStorage.setItem(`${uName}`, tempChats);
+    };
+  }, []);
+
+  let tempChats = JSON.parse(localStorage.getItem(`${uName}`)) || [];
+
   let temp_list = data && data["status"] ? data["data"] : [];
   let selfId = data && data["status"] && data["selfId"];
   let targetUserId = data && data["status"] && data["targetUserId"];
@@ -72,7 +80,7 @@ const ChattingPage = () => {
   const [list, set_list] = useState([]);
   const [progress, set_progress] = useState(0);
   const [mediaOpt, set_mediaOpt] = useState(0);
-  const [uploadStart, set_uploadStart] = useState(0);
+  // const [uploadStart, set_uploadStart] = useState(0);
   const [msgBox, set_msgBox] = useState("");
   const [showPopUp, set_showPopUp] = useState(0);
   const [chatItem, set_chatItem] = useState();
@@ -110,46 +118,8 @@ const ChattingPage = () => {
     src: "",
   });
 
-  // const mergeTwoList = (list, temp) => {
-  //   let newList = [];
-  //   let i = 0;
-  //   let j = 0;
-
-  //   while (i < list.length && j < temp.length) {
-  //     if (list[i].sendTime < temp[j].sendTime) {
-  //       newList.push(list[i++]);
-  //     } //
-  //     else if (list[i].sendTime > temp[j].sendTime) {
-  //       newList.push(temp[j++]);
-  //     } //
-
-  //     // else {
-  //     //   set_list((prev) => {
-  //     //     return prev.filter((item) => {
-  //     //       return item.sendTime != list[i].sendTime;
-  //     //     });
-  //     //   });
-
-  //     //   newList.push(list[i]);
-  //     //   i++;
-  //     //   j++;
-  //     // }
-  //   }
-
-  //   while (i < list.length) {
-  //     newList.push(list[i++]);
-  //   }
-
-  //   while (j < temp.length) {
-  //     newList.push(temp[j++]);
-  //   }
-
-  //   return newList;
-  //   //
-  // };
-  // let chatList = mergeTwoList(temp_list, list);
-
   temp_list.length > list.length ? set_list(temp_list) : null;
+
   let chatList = temp_list.length >= list.length ? temp_list : list;
 
   // *******************************************************
@@ -413,7 +383,6 @@ const ChattingPage = () => {
         return;
       }
 
-      set_uploadStart(1);
       set_media((prev) => ({ ...prev, flag: 0 }));
 
       let mediaUrl = "";
@@ -451,23 +420,46 @@ const ChattingPage = () => {
             uploadTask.cancel();
 
             set_deletedChat((prev) => [...prev, sendTime]);
-
-            // set_media({
-            //   flag: 0,
-            //   file: null,
-            //   type: "",
-            //   name: "",
-            //   size: "",
-            //   src: "",
-            // });
-
-            // set_uploadStart(0);
-            set_progress(0);
+            // set_progress(0);
+            tempChats = tempChats.filter((item) => {
+              return item.sendTime != sendTime;
+            });
 
             console.log("Proper cancel");
           },
         },
       ]);
+
+      tempChats.push({
+        _id: Date.now() * 28,
+        sendTime: sendTime,
+        author: "SelfHume",
+        msg: msg === "" ? "noCapTiOn9463" : msg,
+        msgType: "media",
+        mediaInfo: {
+          type: media.type,
+          name: media.name,
+          size: media.size,
+          url: media.src,
+        },
+        reaction: reactionData.data,
+        time: time,
+        date: new Date().toLocaleDateString("pt-PT"),
+        seenStauts: false,
+        temp: true,
+        action: () => {
+          uploadTask.cancel();
+
+          set_deletedChat((prev) => [...prev, sendTime]);
+          // set_progress(0);
+          tempChats = tempChats.filter((item) => {
+            return item.sendTime != sendTime;
+          });
+
+          console.log("Proper cancel");
+        },
+      });
+
       // ******************************************************
 
       // Defining the upload Cancel function here.
@@ -551,8 +543,11 @@ const ChattingPage = () => {
               src: "",
             });
 
-            set_uploadStart(0);
-            set_progress(0);
+            tempChats = tempChats.filter((item) => {
+              return item.sendTime != sendTime;
+            });
+
+            // set_progress(0);
           });
         }
       );
@@ -947,7 +942,7 @@ const ChattingPage = () => {
                     chatList={chatList}
                     wallpaper={wallpaper}
                     progress={progress}
-                    uploadStart={uploadStart}
+                    tempChats={tempChats}
                   />
                 )}
               </section>

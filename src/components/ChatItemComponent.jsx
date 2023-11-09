@@ -24,7 +24,7 @@ const ChatItemComponent = ({
   chatList,
   wallpaper,
   progress,
-  uploadStart,
+  tempChats,
 }) => {
   //
 
@@ -32,6 +32,10 @@ const ChatItemComponent = ({
 
   useEffect(() => {
     if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
+
+    tempChats.map((item) => {
+      chatList.push(item);
+    });
 
     // console.log("new useEffect");
   }, [list]);
@@ -63,7 +67,7 @@ const ChatItemComponent = ({
             >
               {/*  */}
 
-              {item.temp && uploadStart ? (
+              {item.temp && item.msgType === "media" ? (
                 <span className={style.uploadStatus_cover}>
                   <strong>
                     <BsCloudUploadFill className={style.icons} />
@@ -166,7 +170,7 @@ const ChatItemComponent = ({
 
               {/*  */}
 
-              {item.msgType === "media" && item.temp && uploadStart ? (
+              {item.msgType === "media" && item.temp ? (
                 <span
                   className={style.deleteBtn_cover}
                   onClick={() => {
