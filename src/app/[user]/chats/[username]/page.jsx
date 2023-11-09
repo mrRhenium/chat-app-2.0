@@ -57,15 +57,14 @@ const ChattingPage = () => {
   const { data, isLoading, mutate } = useSWR(`${URL}/${uName}`, fetcher, {
     refreshInterval: 1000,
   });
-  
+
   let tempChats = JSON.parse(localStorage.getItem(`${uName}`)) || [];
 
   useEffect(() => {
     return () => {
-      localStorage.setItem(`${uName}`, tempChats);
+      localStorage.setItem(`${uName}`, JSON.stringify(tempChats));
     };
   }, []);
-
 
   let temp_list = data && data["status"] ? data["data"] : [];
   let selfId = data && data["status"] && data["selfId"];
