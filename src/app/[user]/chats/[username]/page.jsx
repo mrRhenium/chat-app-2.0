@@ -58,7 +58,7 @@ const ChattingPage = () => {
     refreshInterval: 1000,
   });
 
-  let localData = localStorage.get(`${uName}`);
+  let localData = localStorage.getItem(`${uName}`);
 
   let temp_list = data && data["status"] ? data["data"] : [];
   let selfId = data && data["status"] && data["selfId"];
@@ -111,7 +111,7 @@ const ChattingPage = () => {
   });
 
   const [tempChats, set_tempChats] = useState(() => {
-    if (localData) localData = JSON.parse(localData);
+    if (localData) localData = [JSON.parse(localData)];
     else localData = [];
 
     return localData;
