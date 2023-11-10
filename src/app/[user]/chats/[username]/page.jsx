@@ -108,15 +108,6 @@ const ChattingPage = () => {
     src: "",
   });
 
-  const [tempChats, set_tempChats] = useState(() => {
-    let data = localStorage.getItem(`${uName}`);
-
-    if (data) data = [JSON.parse(data)];
-    else data = [];
-
-    return data;
-  });
-
   temp_list.length > list.length ? set_list(temp_list) : null;
 
   let chatList = temp_list.length >= list.length ? temp_list : list;
@@ -397,35 +388,6 @@ const ChattingPage = () => {
       const sendTime = Date.now();
 
       set_list((prev) => [
-        ...prev,
-        {
-          _id: Date.now() * 28,
-          sendTime: sendTime,
-          author: "SelfHume",
-          msg: msg === "" ? "noCapTiOn9463" : msg,
-          msgType: "media",
-          mediaInfo: {
-            type: media.type,
-            name: media.name,
-            size: media.size,
-            url: media.src,
-          },
-          reaction: reactionData.data,
-          time: time,
-          date: new Date().toLocaleDateString("pt-PT"),
-          seenStauts: false,
-          temp: true,
-          action: () => {
-            uploadTask.cancel();
-
-            set_deletedChat((prev) => [...prev, sendTime]);
-
-            console.log("Proper cancel");
-          },
-        },
-      ]);
-
-      set_tempChats((prev) => [
         ...prev,
         {
           _id: Date.now() * 28,
@@ -930,7 +892,6 @@ const ChattingPage = () => {
                     chatList={chatList}
                     wallpaper={wallpaper}
                     progress={progress}
-                    tempChats={tempChats}
                   />
                 )}
               </section>
