@@ -24,10 +24,34 @@ const ChatItemComponent = ({
   chatList,
   wallpaper,
   progress,
+  tempChats,
 }) => {
   //
 
   const chatsCover = useRef();
+
+  useEffect(() => {
+    if (temp != []) {
+      tempChats.map((item) => {
+        //
+
+        let temp = {
+          ...item,
+          delStatus: 1,
+          action: () => {
+            console.log("temp action");
+          },
+        };
+
+        return chatList.push(temp);
+      });
+    }
+
+    return () => {
+      localStorage.setItem(`${uName}`, JSON.stringify(tempChats));
+      console.log("abort");
+    };
+  }, [tempChats]);
 
   useEffect(() => {
     if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
@@ -165,7 +189,8 @@ const ChatItemComponent = ({
 
               {/*  */}
 
-              {item.msgType === "media" && item.temp ? (
+              {!item.delStatus ? null : item.msgType === "media" &&
+                item.temp ? (
                 <span
                   className={style.deleteBtn_cover}
                   onClick={() => {
@@ -191,6 +216,7 @@ const ChatItemComponent = ({
                   <CiMenuKebab className={style.icons} />
                 </span>
               )}
+
               {/*  */}
               {item.deleted ? (
                 <p className={style.deletedMsg}>

@@ -58,6 +58,8 @@ const ChattingPage = () => {
     refreshInterval: 1000,
   });
 
+  let localData = localStorage.get(`${uName}`);
+
   let temp_list = data && data["status"] ? data["data"] : [];
   let selfId = data && data["status"] && data["selfId"];
   let targetUserId = data && data["status"] && data["targetUserId"];
@@ -106,6 +108,13 @@ const ChattingPage = () => {
     name: "",
     size: "",
     src: "",
+  });
+
+  const [tempChats, set_tempChats] = useState(() => {
+    if (localData) localData = JSON.parse(localData);
+    else localData = [];
+
+    return localData;
   });
 
   temp_list.length > list.length ? set_list(temp_list) : null;
@@ -892,6 +901,7 @@ const ChattingPage = () => {
                     chatList={chatList}
                     wallpaper={wallpaper}
                     progress={progress}
+                    tempChats={tempChats}
                   />
                 )}
               </section>
