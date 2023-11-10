@@ -81,7 +81,7 @@ const ChattingPage = () => {
   const [list, set_list] = useState([]);
   const [progress, set_progress] = useState(0);
   const [mediaOpt, set_mediaOpt] = useState(0);
-  // const [uploadStart, set_uploadStart] = useState(0);
+  const [uploadStart, set_uploadStart] = useState(0);
   const [msgBox, set_msgBox] = useState("");
   const [showPopUp, set_showPopUp] = useState(0);
   const [chatItem, set_chatItem] = useState();
@@ -422,9 +422,9 @@ const ChattingPage = () => {
 
             set_deletedChat((prev) => [...prev, sendTime]);
             // set_progress(0);
-            tempChats = tempChats.filter((item) => {
-              return item.sendTime != sendTime;
-            });
+            // tempChats = tempChats.filter((item) => {
+            //   return item.sendTime != sendTime;
+            // });
 
             console.log("Proper cancel");
           },
@@ -453,9 +453,9 @@ const ChattingPage = () => {
 
           set_deletedChat((prev) => [...prev, sendTime]);
           // set_progress(0);
-          tempChats = tempChats.filter((item) => {
-            return item.sendTime != sendTime;
-          });
+          // tempChats = tempChats.filter((item) => {
+          //   return item.sendTime != sendTime;
+          // });
 
           console.log("Proper cancel");
         },
