@@ -36,18 +36,18 @@ const ChatItemComponent = ({
     // console.log("new useEffect");
   }, [list]);
 
-  useEffect(() => {
-    tempChats.map((item) => {
-      return chatList.push(item);
-    });
+  // useEffect(() => {
+  //   tempChats.map((item) => {
+  //     return chatList.push(item);
+  //   });
 
-    console.log("temp Updated");
+  //   console.log("temp Updated");
 
-    return () => {
-      localStorage.setItem(`${uName}`, JSON.stringify(tempChats));
-      console.log("Component Abolish");
-    };
-  }, []);
+  //   return () => {
+  //     localStorage.setItem(`${uName}`, JSON.stringify(tempChats));
+  //     console.log("Component Abolish");
+  //   };
+  // }, []);
 
   return (
     <>
