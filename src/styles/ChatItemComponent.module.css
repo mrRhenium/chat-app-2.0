@@ -115,7 +115,7 @@
   margin: 0.2rem 0 0.2rem auto;
   /* transform: translateX(1.5rem); */
   font-size: 0.9rem;
-  color: #000000;
+  color: rgb(0, 0, 0, 0.8);
   font-family: var(--chatting_font);
 }
 

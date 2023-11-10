@@ -65,7 +65,7 @@ const UserLayout = ({ children }) => {
   });
 
   const { data } = useSWR(URL, fetcher, {
-    refreshInterval: 30000,
+    refreshInterval: 1000,
   });
 
   const pageVisibility = () => {

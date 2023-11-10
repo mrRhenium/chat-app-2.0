@@ -146,8 +146,8 @@ const ProfileComponent = ({ item, set_showPopUP, msg, status, mutate }) => {
   const router = useRouter();
 
   const [avtar, set_avtar] = useState({
-    flag: item.avtar === "image" ? 0 : 1,
-    img: item.avtar,
+    flag: item && item.avtar === "image" ? 0 : 1,
+    img: item && item.avtar ? item.avtar : "image",
   });
 
   // console.log(item);
