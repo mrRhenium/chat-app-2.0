@@ -110,19 +110,19 @@ const ChattingPage = () => {
     src: "",
   });
 
-  const [tempChats, set_tempChats] = useState(() => {
-    if (localData) {
-      //
+  // const [tempChats, set_tempChats] = useState(() => {
+  //   if (localData) {
+  //     //
 
-      localData = JSON.parse(localData);
-      if (Array.isArray(localData) === 0) localData = [localData];
+  //     localData = JSON.parse(localData);
+  //     if (Array.isArray(localData) === 0) localData = [localData];
 
-      //
-    } //
-    else localData = [];
+  //     //
+  //   } //
+  //   else localData = [];
 
-    return localData;
-  });
+  //   return localData;
+  // });
 
   temp_list.length > list.length ? set_list(temp_list) : null;
 
@@ -403,36 +403,7 @@ const ChattingPage = () => {
       // ******************************************************
       const sendTime = Date.now();
 
-      // set_list((prev) => [
-      //   ...prev,
-      //   {
-      //     _id: Date.now() * 28,
-      //     sendTime: sendTime,
-      //     author: "SelfHume",
-      //     msg: msg === "" ? "noCapTiOn9463" : msg,
-      //     msgType: "media",
-      //     mediaInfo: {
-      //       type: media.type,
-      //       name: media.name,
-      //       size: media.size,
-      //       url: media.src,
-      //     },
-      //     reaction: reactionData.data,
-      //     time: time,
-      //     date: new Date().toLocaleDateString("pt-PT"),
-      //     seenStauts: false,
-      //     temp: true,
-      //     action: () => {
-      //       uploadTask.cancel();
-
-      //       set_deletedChat((prev) => [...prev, sendTime]);
-
-      //       console.log("Proper cancel");
-      //     },
-      //   },
-      // ]);
-
-      set_tempChats((prev) => [
+      set_list((prev) => [
         ...prev,
         {
           _id: Date.now() * 28,
@@ -460,6 +431,35 @@ const ChattingPage = () => {
           },
         },
       ]);
+
+      // set_tempChats((prev) => [
+      //   ...prev,
+      //   {
+      //     _id: Date.now() * 28,
+      //     sendTime: sendTime,
+      //     author: "SelfHume",
+      //     msg: msg === "" ? "noCapTiOn9463" : msg,
+      //     msgType: "media",
+      //     mediaInfo: {
+      //       type: media.type,
+      //       name: media.name,
+      //       size: media.size,
+      //       url: media.src,
+      //     },
+      //     reaction: reactionData.data,
+      //     time: time,
+      //     date: new Date().toLocaleDateString("pt-PT"),
+      //     seenStauts: false,
+      //     temp: true,
+      //     action: () => {
+      //       uploadTask.cancel();
+
+      //       set_deletedChat((prev) => [...prev, sendTime]);
+
+      //       console.log("Proper cancel");
+      //     },
+      //   },
+      // ]);
 
       // ******************************************************
 
@@ -937,7 +937,7 @@ const ChattingPage = () => {
                     chatList={chatList}
                     wallpaper={wallpaper}
                     progress={progress}
-                    tempChats={tempChats}
+                    // tempChats={tempChats}
                   />
                 )}
               </section>

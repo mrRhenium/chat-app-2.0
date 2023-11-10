@@ -24,38 +24,35 @@ const ChatItemComponent = ({
   chatList,
   wallpaper,
   progress,
-  tempChats,
+  // tempChats,
 }) => {
   //
 
   const chatsCover = useRef();
 
   useEffect(() => {
-    if (tempChats != []) {
-      tempChats.map((item) => {
-        //
+    // if (tempChats != []) {
+    //   tempChats.map((item) => {
+    //     //
 
-        let temp = {
-          ...item,
-          delStatus: 1,
-          action: () => {
-            console.log("temp action");
-          },
-        };
+    //     let temp = {
+    //       ...item,
+    //       delStatus: 1,
+    //     };
 
-        return chatList.push(temp);
-      });
-    }
+    //     return chatList.push(temp);
+    //   });
+    // }
 
     if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
 
-    return () => {
-      localStorage.setItem(`${uName}`, JSON.stringify(tempChats));
-      console.log("abort");
-    };
+    // return () => {
+    //   localStorage.setItem(`${uName}`, JSON.stringify(tempChats));
+    //   console.log("abort");
+    // };
 
     // console.log("new useEffect");
-  }, [list, tempChats]);
+  }, [list]);
 
   return (
     <>
