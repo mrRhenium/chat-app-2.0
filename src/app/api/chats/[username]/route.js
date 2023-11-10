@@ -202,7 +202,7 @@ export async function POST(req, context) {
     );
 
     await UserData.findOneAndUpdate(
-      { username: tokenData._id, [`friends.chatId`]: body.chatId },
+      { userId: tokenData._id, [`friends.chatId`]: body.chatId },
       {
         $inc: {
           [`friends.$.timer`]: 1,
