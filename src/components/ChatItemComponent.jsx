@@ -34,10 +34,10 @@ const ChatItemComponent = ({
     if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
 
     tempChats.map((item) => {
-      chatList.push(item);
+      return chatList.push(item);
     });
 
-    // console.log("new useEffect");
+    console.log("new useEffect");
   }, [list]);
 
   return (

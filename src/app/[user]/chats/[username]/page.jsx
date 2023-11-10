@@ -58,10 +58,11 @@ const ChattingPage = () => {
     refreshInterval: 1000,
   });
 
-  let tempChats = JSON.parse(localStorage.getItem(`${uName}`)) || [];
+  let tempChats = localStorage.getItem(`${uName}`) || [];
 
   useEffect(() => {
     return () => {
+      console.log("After hai.");
       localStorage.setItem(`${uName}`, JSON.stringify(tempChats));
     };
   }, []);
