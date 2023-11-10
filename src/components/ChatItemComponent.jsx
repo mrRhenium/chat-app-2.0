@@ -24,6 +24,7 @@ const ChatItemComponent = ({
   chatList,
   wallpaper,
   progress,
+  tempChats,
 }) => {
   //
 
@@ -31,6 +32,11 @@ const ChatItemComponent = ({
 
   useEffect(() => {
     if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
+
+    temp.map((item) => {
+      chatList.push(item);
+      return;
+    });
 
     console.log("new useEffect");
   }, [list]);

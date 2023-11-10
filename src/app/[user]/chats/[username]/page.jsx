@@ -31,7 +31,7 @@ import {
 } from "react-icons/bs";
 
 import useSWR from "swr";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import {
   ref,
@@ -57,6 +57,15 @@ const ChattingPage = () => {
   const { data, isLoading, mutate } = useSWR(`${URL}/${uName}`, fetcher, {
     refreshInterval: 1000,
   });
+
+  let tempChats = JSON.parse(localStorage.getItem(`${uName}`)) || [];
+
+  useEffect(() => {
+    return () => {
+      localStorage.setItem(`${uName}`, tempChats);
+      console.log("Component Abolish");
+    };
+  }, []);
 
   let temp_list = data && data["status"] ? data["data"] : [];
   let selfId = data && data["status"] && data["selfId"];
@@ -415,6 +424,32 @@ const ChattingPage = () => {
           },
         },
       ]);
+
+      temp.push({
+        _id: Date.now() * 28,
+        sendTime: sendTime,
+        author: "SelfHume",
+        msg: msg === "" ? "noCapTiOn9463" : msg,
+        msgType: "media",
+        mediaInfo: {
+          type: media.type,
+          name: media.name,
+          size: media.size,
+          url: media.src,
+        },
+        reaction: reactionData.data,
+        time: time,
+        date: new Date().toLocaleDateString("pt-PT"),
+        seenStauts: false,
+        temp: true,
+        action: () => {
+          uploadTask.cancel();
+
+          set_deletedChat((prev) => [...prev, sendTime]);
+
+          console.log("Proper cancel");
+        },
+      });
 
       // ******************************************************
 
@@ -892,7 +927,7 @@ const ChattingPage = () => {
                     chatList={chatList}
                     wallpaper={wallpaper}
                     progress={progress}
-                    // tempChats={tempChats}
+                    tempChats={tempChats}
                   />
                 )}
               </section>
