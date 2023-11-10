@@ -136,8 +136,8 @@ export async function POST(req, context) {
   try {
     //
 
-    // const token = req.cookies.get("token")?.value || req.headers.cookies.token;
-    // const tokenData = jwt.verify(token, process.env.JWTSECRET);
+    const token = req.cookies.get("token")?.value || req.headers.cookies.token;
+    const tokenData = jwt.verify(token, process.env.JWTSECRET);
     const pUsername = context.params.username;
     const body = await req.json();
 
@@ -200,8 +200,9 @@ export async function POST(req, context) {
         },
       }
     );
+
     await UserData.findOneAndUpdate(
-      { username: pUsername, [`friends.chatId`]: body.chatId },
+      { username: tokenData._id, [`friends.chatId`]: body.chatId },
       {
         $inc: {
           [`friends.$.timer`]: 1,
