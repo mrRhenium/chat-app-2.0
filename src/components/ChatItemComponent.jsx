@@ -44,7 +44,7 @@ const ChatItemComponent = ({
     console.log("temp Updated");
 
     return () => {
-      localStorage.setItem(`${uName}`, tempChats);
+      localStorage.setItem(`${uName}`, JSON.stringify(tempChats));
       console.log("Component Abolish");
     };
   }, []);
