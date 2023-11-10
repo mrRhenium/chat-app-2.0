@@ -31,7 +31,7 @@ import {
 } from "react-icons/bs";
 
 import useSWR from "swr";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import {
   ref,
@@ -58,20 +58,10 @@ const ChattingPage = () => {
     refreshInterval: 1000,
   });
 
-  let tempChats = localStorage.getItem(`${uName}`) || [];
-
-  // useEffect(() => {
-  //   return () => {
-  //     console.log("After hai.");
-  //     localStorage.setItem(`${uName}`, JSON.stringify(tempChats));
-  //   };
-  // }, []);
-
   let temp_list = data && data["status"] ? data["data"] : [];
   let selfId = data && data["status"] && data["selfId"];
   let targetUserId = data && data["status"] && data["targetUserId"];
   let selfUsername = data && data["status"] && data["selfUsername"];
-  // let wallpaper = data && data["status"] && data["wallpaper"];
   let chatId = data && data["status"] && data["chatId"];
   let blockStatus = data && data["status"] && data["blockStatus"];
   let chatStatus = data && data["status"] && data["chatStatus"];
@@ -81,7 +71,6 @@ const ChattingPage = () => {
   const [list, set_list] = useState([]);
   const [progress, set_progress] = useState(0);
   const [mediaOpt, set_mediaOpt] = useState(0);
-  const [uploadStart, set_uploadStart] = useState(0);
   const [msgBox, set_msgBox] = useState("");
   const [showPopUp, set_showPopUp] = useState(0);
   const [chatItem, set_chatItem] = useState();
@@ -421,45 +410,11 @@ const ChattingPage = () => {
             uploadTask.cancel();
 
             set_deletedChat((prev) => [...prev, sendTime]);
-            // set_progress(0);
-            // tempChats = tempChats.filter((item) => {
-            //   return item.sendTime != sendTime;
-            // });
 
             console.log("Proper cancel");
           },
         },
       ]);
-
-      tempChats.push({
-        _id: Date.now() * 28,
-        sendTime: sendTime,
-        author: "SelfHume",
-        msg: msg === "" ? "noCapTiOn9463" : msg,
-        msgType: "media",
-        mediaInfo: {
-          type: media.type,
-          name: media.name,
-          size: media.size,
-          url: media.src,
-        },
-        reaction: reactionData.data,
-        time: time,
-        date: new Date().toLocaleDateString("pt-PT"),
-        seenStauts: false,
-        temp: true,
-        action: () => {
-          uploadTask.cancel();
-
-          set_deletedChat((prev) => [...prev, sendTime]);
-          // set_progress(0);
-          // tempChats = tempChats.filter((item) => {
-          //   return item.sendTime != sendTime;
-          // });
-
-          console.log("Proper cancel");
-        },
-      });
 
       // ******************************************************
 
@@ -543,12 +498,6 @@ const ChattingPage = () => {
               size: "",
               src: "",
             });
-
-            tempChats = tempChats.filter((item) => {
-              return item.sendTime != sendTime;
-            });
-
-            // set_progress(0);
           });
         }
       );
@@ -943,7 +892,7 @@ const ChattingPage = () => {
                     chatList={chatList}
                     wallpaper={wallpaper}
                     progress={progress}
-                    tempChats={tempChats}
+                    // tempChats={tempChats}
                   />
                 )}
               </section>
