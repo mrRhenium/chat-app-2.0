@@ -34,6 +34,11 @@ const friendSchema = new Schema(
       default: 0,
       required: true,
     },
+    timer: {
+      type: Number,
+      default: 0,
+      required: true,
+    },
     invited: {
       type: Boolean,
       required: true,

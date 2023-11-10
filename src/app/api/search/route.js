@@ -137,7 +137,7 @@ export async function POST(req, res) {
         username: 1,
         avtar: 1,
       }
-    );
+    ).sort({ name: 1 });
 
     const data = [];
 

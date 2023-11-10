@@ -29,7 +29,8 @@ export async function GET(req, res) {
           friends: {
             $sortArray: {
               input: "$friends",
-              sortBy: { updatedAt: -1 },
+              // sortBy: { updatedAt: -1 },
+              sortBy: { timer: -1 },
             },
           },
         },
