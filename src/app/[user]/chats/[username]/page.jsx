@@ -111,7 +111,14 @@ const ChattingPage = () => {
   });
 
   const [tempChats, set_tempChats] = useState(() => {
-    if (localData) localData = [JSON.parse(localData)];
+    if (localData) {
+      //
+
+      localData = JSON.parse(localData);
+      if (Array.isArray(localData) === 0) localData = [localData];
+
+      //
+    } //
     else localData = [];
 
     return localData;

@@ -47,17 +47,15 @@ const ChatItemComponent = ({
       });
     }
 
+    if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
+
     return () => {
       localStorage.setItem(`${uName}`, JSON.stringify(tempChats));
       console.log("abort");
     };
-  }, [tempChats]);
-
-  useEffect(() => {
-    if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
 
     // console.log("new useEffect");
-  }, [list]);
+  }, [list, tempChats]);
 
   return (
     <>
@@ -189,33 +187,34 @@ const ChatItemComponent = ({
 
               {/*  */}
 
-              {!item.delStatus ? null : item.msgType === "media" &&
-                item.temp ? (
-                <span
-                  className={style.deleteBtn_cover}
-                  onClick={() => {
-                    item.action();
-                  }}
-                >
-                  <MdDeleteForever
-                    className={style.icons2}
-                    style={{
-                      color: `var(--primary_txt1)`,
-                      fontSize: "1.6rem",
+              {!item.delStatus ? (
+                item.msgType === "media" && item.temp ? (
+                  <span
+                    className={style.deleteBtn_cover}
+                    onClick={() => {
+                      item.action();
                     }}
-                  />
-                </span>
-              ) : (
-                <span
-                  className={style.deleteBtn_cover}
-                  onClick={() => {
-                    set_chatItem(item);
-                    set_showPopUp(1);
-                  }}
-                >
-                  <CiMenuKebab className={style.icons} />
-                </span>
-              )}
+                  >
+                    <MdDeleteForever
+                      className={style.icons2}
+                      style={{
+                        color: `var(--primary_txt1)`,
+                        fontSize: "1.6rem",
+                      }}
+                    />
+                  </span>
+                ) : (
+                  <span
+                    className={style.deleteBtn_cover}
+                    onClick={() => {
+                      set_chatItem(item);
+                      set_showPopUp(1);
+                    }}
+                  >
+                    <CiMenuKebab className={style.icons} />
+                  </span>
+                )
+              ) : null}
 
               {/*  */}
               {item.deleted ? (
