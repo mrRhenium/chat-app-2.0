@@ -198,6 +198,11 @@ export async function POST(req, context) {
         $inc: {
           [`friends.$.count`]: 1,
         },
+      }
+    );
+    await UserData.findOneAndUpdate(
+      { username: pUsername, [`friends.chatId`]: body.chatId },
+      {
         $inc: {
           [`friends.$.timer`]: 1,
         },
