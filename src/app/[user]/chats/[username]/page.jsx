@@ -111,8 +111,8 @@ const ChattingPage = () => {
   const [tempChats, set_tempChats] = useState(() => {
     let data = localStorage.getItem(`${uName}`);
 
-    if (tempChats) JSON.parse(tempChats);
-    else tempChats = [];
+    if (data) JSON.parse(data);
+    else data = [];
 
     return data;
   });
