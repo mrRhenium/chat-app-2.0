@@ -58,8 +58,10 @@ const ChattingPage = () => {
     refreshInterval: 1000,
   });
 
-  let tempChats = localStorage.getItem(`${uName}`) || [];
+  let tempChats = localStorage.getItem(`${uName}`);
+
   if (tempChats) JSON.parse(tempChats);
+  else tempChats = [];
 
   useEffect(() => {
     return () => {
