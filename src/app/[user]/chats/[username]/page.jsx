@@ -425,7 +425,7 @@ const ChattingPage = () => {
         },
       ]);
 
-      temp.push({
+      tempChats.push({
         _id: Date.now() * 28,
         sendTime: sendTime,
         author: "SelfHume",
