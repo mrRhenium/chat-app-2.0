@@ -60,12 +60,12 @@ const ChattingPage = () => {
 
   let tempChats = localStorage.getItem(`${uName}`) || [];
 
-  useEffect(() => {
-    return () => {
-      console.log("After hai.");
-      localStorage.setItem(`${uName}`, JSON.stringify(tempChats));
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     console.log("After hai.");
+  //     localStorage.setItem(`${uName}`, JSON.stringify(tempChats));
+  //   };
+  // }, []);
 
   let temp_list = data && data["status"] ? data["data"] : [];
   let selfId = data && data["status"] && data["selfId"];

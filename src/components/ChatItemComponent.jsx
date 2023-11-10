@@ -33,9 +33,9 @@ const ChatItemComponent = ({
   useEffect(() => {
     if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
 
-    tempChats.map((item) => {
-      return chatList.push(item);
-    });
+    // tempChats.map((item) => {
+    //   return chatList.push(item);
+    // });
 
     console.log("new useEffect");
   }, [list]);
