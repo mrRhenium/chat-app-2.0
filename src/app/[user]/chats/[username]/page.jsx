@@ -63,13 +63,6 @@ const ChattingPage = () => {
   if (tempChats) JSON.parse(tempChats);
   else tempChats = [];
 
-  useEffect(() => {
-    return () => {
-      localStorage.setItem(`${uName}`, tempChats);
-      console.log("Component Abolish");
-    };
-  }, []);
-
   let temp_list = data && data["status"] ? data["data"] : [];
   let selfId = data && data["status"] && data["selfId"];
   let targetUserId = data && data["status"] && data["targetUserId"];

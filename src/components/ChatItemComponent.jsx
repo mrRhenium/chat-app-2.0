@@ -33,13 +33,21 @@ const ChatItemComponent = ({
   useEffect(() => {
     if (data) chatsCover.current.scrollTop = chatsCover.current.scrollHeight;
 
-    temp.map((item) => {
+    console.log("new useEffect");
+  }, [list]);
+
+  useEffect(() => {
+    tempChats.map((item) => {
       chatList.push(item);
       return;
     });
+    console.log("temp Updated");
 
-    console.log("new useEffect");
-  }, [list]);
+    return () => {
+      localStorage.setItem(`${uName}`, tempChats);
+      console.log("Component Abolish");
+    };
+  }, []);
 
   return (
     <>
