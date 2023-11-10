@@ -30,6 +30,7 @@ export async function GET(req, res) {
         reqRecievedId: 1,
       }
     );
+
     const allUsers = await UserData.find(
       {},
       {
@@ -39,7 +40,7 @@ export async function GET(req, res) {
         userId: 1,
         avtar: 1,
       }
-    );
+    ).sort({ name: 1 });
 
     const data = [];
 
