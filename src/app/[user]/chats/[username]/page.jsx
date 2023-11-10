@@ -396,7 +396,36 @@ const ChattingPage = () => {
       // ******************************************************
       const sendTime = Date.now();
 
-      set_list((prev) => [
+      // set_list((prev) => [
+      //   ...prev,
+      //   {
+      //     _id: Date.now() * 28,
+      //     sendTime: sendTime,
+      //     author: "SelfHume",
+      //     msg: msg === "" ? "noCapTiOn9463" : msg,
+      //     msgType: "media",
+      //     mediaInfo: {
+      //       type: media.type,
+      //       name: media.name,
+      //       size: media.size,
+      //       url: media.src,
+      //     },
+      //     reaction: reactionData.data,
+      //     time: time,
+      //     date: new Date().toLocaleDateString("pt-PT"),
+      //     seenStauts: false,
+      //     temp: true,
+      //     action: () => {
+      //       uploadTask.cancel();
+
+      //       set_deletedChat((prev) => [...prev, sendTime]);
+
+      //       console.log("Proper cancel");
+      //     },
+      //   },
+      // ]);
+
+      set_tempChats((prev) => [
         ...prev,
         {
           _id: Date.now() * 28,

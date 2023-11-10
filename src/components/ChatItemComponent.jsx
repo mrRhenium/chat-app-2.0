@@ -31,7 +31,7 @@ const ChatItemComponent = ({
   const chatsCover = useRef();
 
   useEffect(() => {
-    if (temp != []) {
+    if (tempChats != []) {
       tempChats.map((item) => {
         //
 
