@@ -21,11 +21,7 @@ const Notification = () => {
   const { data, isLoading, mutate } = useSWR(URL, fetcher, {
     refreshInterval: 1000,
   });
-  const [option, set_option] = useState(() => {
-    return data && data["data"].send.length >= data["data"].recieved.length
-      ? "Send"
-      : "Recieved";
-  });
+  const [option, set_option] = useState("Send");
 
   return (
     <>
