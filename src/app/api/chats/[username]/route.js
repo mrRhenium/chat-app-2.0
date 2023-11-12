@@ -198,6 +198,9 @@ export async function POST(req, context) {
         $inc: {
           [`friends.$.count`]: 1,
         },
+        $set: {
+          [`friends.$.timer`]: body.sendTime,
+        },
       }
     );
 
