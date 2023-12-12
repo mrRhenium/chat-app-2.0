@@ -14,7 +14,7 @@ const SignInFormComponent = () => {
   const router = useRouter();
   // console.log("hello", window.location.host);
 
-  const [btnText, set_btnText] = useState("Sign In");
+  const [btnText, set_btnText] = useState("Sign Up");
   const [passwordIcon, set_passwordIcon] = useState(1);
   const [MSG, set_MSG] = useState({
     fullnameMSG: "",
@@ -79,7 +79,7 @@ const SignInFormComponent = () => {
           usernameMSG: "this username is arleady exist!",
         }));
       }
-    }, 1000);
+    }, 500);
   };
 
   const emailChangeHandler = () => {
